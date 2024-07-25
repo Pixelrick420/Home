@@ -61,8 +61,8 @@ body{
 }
 
 .projects{
-    margin-top: 10vh;
-    margin-bottom: 10vh;
+    margin-top: 15vh;
+    height: 75vh;
 }
 
 a{
@@ -78,7 +78,7 @@ a{
 }
 
 hr{
-    width: 80%; 
+    width: 90%; 
     margin: 0 auto; 
     border: none; 
 }
@@ -114,6 +114,7 @@ h1{
 }
 
 .hr2{
+    margin-top: 5vh;
     border-top: 2px solid rgb(255, 105, 180);
 }
 

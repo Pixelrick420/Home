@@ -120,6 +120,9 @@ const cols = 10;
 const gameOfLife = document.querySelector('.gameoflife');
 let grid = [];
 
+gameOfLife.addEventListener('click', function() {
+    window.open('https://pixelrick420.github.io/GameOfLife');
+});
 function initializeGrid() {
     gameOfLife.innerHTML = ''; 
     grid = [];
