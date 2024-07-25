@@ -69,6 +69,10 @@ document.getElementById('linkedin').addEventListener('click', function() {
     window.open('https://www.linkedin.com/in/harikrishnan-r-41b1a3291/');
 });
 
+document.getElementById('leetcode').addEventListener('click', function() {
+    window.open('https://leetcode.com/u/Pixelrick420/');
+});
+
 function createAndSort() {
     sortproject.innerHTML = '';
     const array = [];
@@ -122,6 +126,10 @@ let grid = [];
 
 gameOfLife.addEventListener('click', function() {
     window.open('https://pixelrick420.github.io/GameOfLife');
+});
+
+document.getElementById('mazegen').addEventListener('click', function() {
+    window.open('https://pixelrick420.github.io/Maze-Generator');
 });
 function initializeGrid() {
     gameOfLife.innerHTML = ''; 
@@ -211,3 +219,4 @@ function startGame(delay, generations) {
 }
 
 startGame(1000, 30);
+
