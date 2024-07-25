@@ -211,6 +211,7 @@ function startGame(delay, generations) {
     const interval = setInterval(() => {
         if (generationCount >= generations) {
             clearInterval(interval);
+            startGame(300, 10);
         } else {
             updateGrid();
             generationCount++;
@@ -218,7 +219,7 @@ function startGame(delay, generations) {
     }, delay);
 }
 
-startGame(300, 30);
+startGame(300, 20);
 const maze = document.getElementById('mazegen');
 var gridmaze = [];
 
