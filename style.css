@@ -1,0 +1,391 @@
+html{
+    overflow-x: hidden;
+}
+body{
+    background-color: rgb(19, 19, 19);
+    color: aliceblue;
+    font-family: "Source Code Pro", monospace;
+    font-style: normal;
+    scroll-behavior: smooth;
+    line-height: 1.8; 
+    font-size: 20px;
+}
+
+.navbar{
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width:100%;
+    font-size: 3vh;
+    padding:4vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    font-weight: 500;  
+    background-color: rgb(19, 19, 19);
+    z-index: 1000;
+}
+
+.grid-container{
+    margin-left: 23%;
+    width:120vh;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    gap:10vh;
+    grid-column-gap:10vh;
+
+}
+
+.gothfont{
+    font-family: "MedievalSharp", cursive;
+    font-weight: 900;
+    font-style: normal;
+    margin: 5vh;
+    margin-left: 10%;
+}
+
+.name{
+    margin-top: 12vh;
+    margin-left: 20vh;
+    font-size: 9vh;
+    margin-bottom: 1vh;
+}
+
+.headline{
+    margin-left: 24vh;
+    width: 80vh;
+}
+
+.projects{
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+a{
+    text-decoration: none; 
+    color: inherit; 
+    border: none; 
+    background: none; 
+    outline: none; 
+}
+  
+.opener{
+    margin-bottom: 15vh;
+}
+
+hr{
+    width: 80%; 
+    margin: 0 auto; 
+    border: none; 
+}
+
+.project{
+    height:40vh;
+    width:40vh;
+    border:3px solid aliceblue;
+    border-radius: 2px;
+    cursor:pointer;
+    padding: 2vh;
+}
+
+#sort:hover{
+    box-shadow: 4px 4px 0px rgb(255, 105, 180);
+}
+
+.intro{
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+.introduction{
+    width: 50%;
+}
+
+h1{
+    font-size: 5vh;
+}
+
+.hr1{
+    border-top: 2px solid rgb(247, 218, 33);
+}
+
+.hr2{
+    border-top: 2px solid rgb(255, 105, 180);
+}
+
+.hr3{
+    border-top: 2px solid rgb(57, 255, 20);
+}
+
+.hr4{
+    border-top: 2px solid rgb(247, 218, 33);
+}
+
+
+#photo{
+    border:3px solid aliceblue;
+    border-radius: 2px;
+    height:50vh;
+    width:50vh;
+    margin:5vh;
+    float: right;
+    border-radius: 5vh;
+    background-position: 0px 0px;
+    background-image: url('chullan.jpg');
+    background-size:120%;
+    transition: all 0.5s ease;
+}
+
+#photo:hover{
+    box-shadow: 4px 4px 0px aliceblue;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:5vh;
+}
+
+#downloadresume{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:20vh;
+    height:10vh;
+    border-radius:3vh;
+    border:3px solid aliceblue;
+    padding:2vh;
+    text-align: center;
+    margin: 10vh;
+    margin-left: 40%;
+    cursor: pointer;
+}
+
+.skills{
+    margin: 10vh;
+    margin-left: 20%;
+}
+
+.icon{
+    font-size: 48px;
+    margin-left: 5vh;
+}
+
+.icons{
+    margin-left: 20%;
+}
+
+.socials{
+    margin: 10vh;
+    margin-left: 0;
+}
+
+.nav-item{
+    background: linear-gradient(to right, aliceblue, aliceblue); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.5s ease;
+    background-position: left bottom;
+}
+
+.nav-item:hover{
+    background: linear-gradient(70deg, 
+                rgb(247, 218, 33) 0%,   
+                rgb(247, 218, 33) 33%,  
+                rgb(255, 105, 180) 33%, 
+                rgb(255, 105, 180) 66%, 
+                rgb(57, 255, 20) 66%,   
+                rgb(57, 255, 20) 100%   
+            );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-position:right bottom;
+}
+
+#sort{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: center;
+    align-items: flex-end;
+    transition: box-shadow 0.5s ease;
+}
+.arraymember{
+    background-color: aliceblue;
+    width: 20vh;
+    border-radius: 2vh;
+    padding-bottom: 3vh;
+}
+
+.selected{
+    background-color: rgb(255, 105, 180);
+}
+
+#gameoflife {
+    position: relative; 
+}
+
+canvas {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+}
+
+.gameoflife {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    transition: box-shadow 0.5s ease;
+    /* z-index: -100; */
+    
+}
+
+.gameoflife:hover{
+    box-shadow: 4px 4px 0px rgb(57, 255, 20);
+}
+
+.gameoflife div {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(19, 19, 19);
+    border-radius: 1vh;
+    /* z-index: -100; */
+    cursor: pointer;
+}
+
+.gameoflife .alive {
+    background-color: rgb(57, 255, 20);
+}
+
+@media (max-width: 760px) {
+    .navbar {
+        overflow: hidden;
+        display: flex; 
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 2vh;
+        gap: 5vh;
+        row-gap: 0;
+        position: fixed;
+        top: 0; 
+        left: 0; 
+        width:100%;
+        align-items: flex-end;
+        justify-content: space-evenly;
+        z-index: 1000;
+        left:-3%;
+        height: 12vh;
+    }
+
+    .nav-item{
+        padding: 0;
+        margin-top: 1vh;
+        margin-right: 10%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .grid-container {
+        margin-left: 5%;
+        width: 90%;
+        grid-template-columns: 1fr;
+        gap: 5vh;
+    }
+
+    .gothfont {
+        margin-left: 2%;
+        margin-right: 10%;
+        font-size: 4vh;
+        margin-bottom: 2vh;
+    }
+
+    .opener{
+        height:20vh;
+    }
+
+    .name {
+        margin-top: 20vh;
+        margin-left: 7%;
+        font-size: 5vh;
+    }
+
+    .headline {
+        margin-left: 9%;
+        width: 80%;
+        font-size: 2vh;
+        margin-bottom: 2vh;
+    }
+
+    .projects, .intro, .resume, .socials {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        margin-left: 20%;
+        width:60%;
+    }
+
+    .intro{
+        width:90%;
+        margin-right: 40%;
+    }
+
+    .introduction {
+        width: 95%;
+        margin-left: -25%;
+        font-size: 1rem;
+        margin-top: 0vh;
+    }
+
+    #photo {
+        height: 40vh;
+        width: 90%;
+        margin: 2vh auto;
+        margin-left: -12%;
+        margin-right: 20%;
+    }
+
+    .flex {
+        flex-direction: column;
+        gap: 2vh;
+    }
+
+    #downloadresume {
+        margin: 5vh auto;
+        margin-right: 30%;
+        margin-left: 20%;
+        width: 50%;
+    }
+
+    .skillhead{
+        margin-left: 19%;
+    }
+
+    .skills {
+        font-size: 1rem;
+        margin: 5vh;
+        width:160%;
+        margin-left: -30%;
+    }
+
+    .icon {
+        font-size: 36px;
+        margin-left: 0;
+    }
+
+    .icons {
+        flex-direction: column;
+        margin-left: 10%;
+        align-items: center;
+    }
+
+    .arraymember {
+        width: 10vh;
+        padding-bottom: 1.5vh;
+    }
+}
