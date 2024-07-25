@@ -218,7 +218,7 @@ function startGame(delay, generations) {
     }, delay);
 }
 
-startGame(1000, 30);
+startGame(300, 30);
 const maze = document.getElementById('mazegen');
 var gridmaze = [];
 
