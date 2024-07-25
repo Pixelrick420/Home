@@ -219,4 +219,95 @@ function startGame(delay, generations) {
 }
 
 startGame(1000, 30);
+const maze = document.getElementById('mazegen');
+var gridmaze = [];
 
+function mazegrid() {
+    maze.innerHTML = ''; 
+    gridmaze = [];
+    for (let i = 0; i < 10; i++) {
+        const mazeRow = [];
+        for (let j = 0; j < 10; j++) {
+            const mazeCell = document.createElement('div');
+            mazeCell.classList.add('wall'); 
+            maze.appendChild(mazeCell);
+            mazeRow.push(mazeCell);
+        }
+        gridmaze.push(mazeRow);
+    }
+}
+
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function generateMazeDFS(mazeStartX = 0, mazeStartY = 0) {
+    const mazeRows = 10;
+    const mazeCols = 10;
+    const mazeStack = [];
+    const mazeDirections = [
+        [0, 1],  
+        [1, 0],  
+        [0, -1], 
+        [-1, 0]  
+    ];
+    const mazeVisited = Array.from({ length: mazeRows }, () => Array(mazeCols).fill(false));
+
+    if (gridmaze.length !== mazeRows || gridmaze.some(row => row.length !== mazeCols)) {
+        console.error('Gridmaze is not properly initialized.');
+        return;
+    }
+
+    mazeStack.push([mazeStartX, mazeStartY]);
+    mazeVisited[mazeStartX][mazeStartY] = true;
+
+    while (mazeStack.length > 0) {
+        const [mazeX, mazeY] = mazeStack.pop();
+
+        if (mazeX < 0 || mazeX >= mazeRows || mazeY < 0 || mazeY >= mazeCols) {
+            continue;
+        }
+
+        const mazeCurrentCell = gridmaze[mazeX][mazeY];
+
+        const mazeShuffledDirections = mazeDirections.sort(() => Math.random() - 0.5);
+
+        let mazeHasUnvisitedNeighbor = false;
+
+        for (const [mazeDx, mazeDy] of mazeShuffledDirections) {
+            const mazeNewX = mazeX + 2 * mazeDx;
+            const mazeNewY = mazeY + 2 * mazeDy;
+
+            if (
+                mazeNewX >= 0 && mazeNewX < mazeRows &&
+                mazeNewY >= 0 && mazeNewY < mazeCols &&
+                !mazeVisited[mazeNewX][mazeNewY]
+            ) {
+                mazeVisited[mazeNewX][mazeNewY] = true;
+                gridmaze[mazeX + mazeDx][mazeY + mazeDy].classList.remove('wall');
+                gridmaze[mazeNewX][mazeNewY].classList.remove('wall');
+                gridmaze[mazeX + mazeDx][mazeY + mazeDy].classList.add('path');
+                gridmaze[mazeNewX][mazeNewY].classList.add('path');
+                
+                mazeStack.push([mazeNewX, mazeNewY]);
+                mazeHasUnvisitedNeighbor = true;
+                break; 
+            }
+        }
+
+        if (!mazeHasUnvisitedNeighbor) {
+            mazeCurrentCell.classList.add('path');
+        }
+        await delay(50); 
+    }
+
+    await delay(1000); 
+    mazegrid(); 
+    await delay(500); 
+    generateMazeDFS(); 
+}
+
+
+mazegrid(); 
+generateMazeDFS();

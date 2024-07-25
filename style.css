@@ -81,12 +81,18 @@ a{
 }
 
 .maze:hover{
-    box-shadow: 4px 4px 0px rgb(247, 218, 33);;
+    box-shadow: 4px 4px 0px rgb(247, 218, 33);
 }
 
 .maze div{
+    background-color: black; 
     height: 100%;
     width:100%;
+    border-radius: 5px;
+}
+
+.path{
+    background-color: rgb(247, 218, 33)!important;
 }
 .opener{
     margin-bottom: 15vh;
