@@ -114,6 +114,12 @@ hr{
     padding: 2vh;
 }
 
+#leetcode{
+    fill: aliceblue;
+    height:42px;
+    width:42px;
+}
+
 #sort:hover{
     box-shadow: 4px 4px 0px rgb(255, 105, 180);
 }
@@ -195,6 +201,8 @@ h1{
 }
 
 .icon{
+    height:48px;
+    width: auto;
     font-size: 48px;
     margin-left: 5vh;
     cursor: pointer;
@@ -417,6 +425,11 @@ canvas {
         flex-direction: column;
         margin-left: 10%;
         align-items: center;
+    }
+
+    #leetcode{
+        height:30px;
+        width:30px;
     }
 
     .arraymember {
