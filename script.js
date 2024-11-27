@@ -129,7 +129,7 @@ gameOfLife.addEventListener('click', function() {
 });
 
 document.getElementById('mazegen').addEventListener('click', function() {
-    window.open('https://pixelrick420.github.io/MazeGenerator');
+    window.open('https://pixelrick420.github.io/MazeGenerator/');
 });
 function initializeGrid() {
     gameOfLife.innerHTML = ''; 
