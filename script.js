@@ -129,7 +129,7 @@ gameOfLife.addEventListener('click', function() {
 });
 
 document.getElementById('mazegen').addEventListener('click', function() {
-    window.open('https://pixelrick420.github.io/Maze-Generator');
+    window.open('https://pixelrick420.github.io/MazeGenerator');
 });
 function initializeGrid() {
     gameOfLife.innerHTML = ''; 
@@ -265,7 +265,6 @@ async function generateMazeDFS(mazeStartX = 0, mazeStartY = 0) {
 
     while (mazeStack.length > 0) {
         const [mazeX, mazeY] = mazeStack.pop();
-
         if (mazeX < 0 || mazeX >= mazeRows || mazeY < 0 || mazeY >= mazeCols) {
             continue;
         }
