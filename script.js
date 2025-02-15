@@ -295,6 +295,7 @@ async function generateMazeDFS(mazeStartX = 0, mazeStartY = 0) {
                 break; 
             }
         }
+
         if (!mazeHasUnvisitedNeighbor) {
             mazeCurrentCell.classList.add('path');
         }
