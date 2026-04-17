@@ -233,45 +233,6 @@ export default function Hero() {
           </motion.a>
         </motion.div>
       </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: visible ? 1 : 0 }}
-        transition={{ delay: 1.8, duration: 0.8 }}
-        style={{
-          position: "absolute",
-          bottom: "48px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "12px",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: fonts.sans,
-            fontSize: "10px",
-            fontWeight: 500,
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            color: t.textMuted,
-          }}
-        >
-          Scroll
-        </span>
-        <motion.div
-          animate={{ y: [0, 12, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-          style={{
-            width: "1px",
-            height: "48px",
-            background: `linear-gradient(to bottom, ${t.border}, transparent)`,
-          }}
-        />
-      </motion.div>
-
       <style>{`
         @media (max-width: 1024px) {
           section[style*="padding: 0 80px"] {
