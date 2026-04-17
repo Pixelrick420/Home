@@ -149,15 +149,6 @@ export default function Contact() {
               }}
             >
               <s.icon size={20} />
-              <span
-                style={{
-                  fontFamily: fonts.sans,
-                  fontSize: "15px",
-                  fontWeight: 600,
-                }}
-              >
-                {s.label}
-              </span>
             </motion.a>
           ))}
         </motion.div>
