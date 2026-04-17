@@ -40,12 +40,10 @@ export default function WaveBackground() {
     resizeCanvas();
 
     const gridSize = 20;
-    const levels = [-0.8, 0, 0.8];
+    const levels = [-0.8, -0.2, 0.2, 0.8];
 
     let time = 0;
     let animationId: number | null = null;
-    let lastFrameTime = 0;
-    const FRAME_INTERVAL = 1000 / 30;
 
     function handleScroll() {
       scrollYRef.current = window.scrollY;
@@ -58,13 +56,7 @@ export default function WaveBackground() {
       ctx.lineTo(b[0], b[1]);
     }
 
-    function draw(now = 0) {
-      if (now - lastFrameTime < FRAME_INTERVAL) {
-        animationId = requestAnimationFrame(draw);
-        return;
-      }
-      lastFrameTime = now;
-
+    function draw() {
       const currentScroll = scrollYRef.current;
       const currentTime = time;
       const currentWidth = width;
