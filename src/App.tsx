@@ -1,4 +1,5 @@
 import { ThemeProvider } from "./context/ThemeContext";
+import { Analytics } from "@vercel/analytics/next";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
@@ -17,6 +18,7 @@ function Layout() {
         overflowX: "hidden",
       }}
     >
+      <Analytics />
       <SEO />
       <WaveBackground />
       <div style={{ position: "relative", zIndex: 1 }}>
