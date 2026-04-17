@@ -126,7 +126,7 @@ export default function About() {
               }}
             >
               I'm a Computer Science undergraduate at Government Engineering
-              College, Thrissur. With my solid foundation in programming, I'm
+              College, Thrissur. With a solid foundation in programming, I'm
               looking to explore new technologies, work on meaningful projects,
               and connect with others in the field.
             </p>
@@ -142,7 +142,7 @@ export default function About() {
             >
               My work spans machine learning, web development, systems
               programming, and the occasional satirical VS Code extension.{" "}
-              <br />I like reinventing the wheel from time to time.
+              <br />I like experimenting and breaking things.
             </p>
 
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
