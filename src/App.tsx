@@ -1,29 +1,32 @@
-import { ThemeProvider } from './context/ThemeContext';
-import { useTheme } from './context/ThemeContext';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Projects from './components/Projects';
-import About from './components/About';
-import Skills from './components/Skills';
-import Contact from './components/Contact';
+import { ThemeProvider } from "./context/ThemeContext";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Projects from "./components/Projects";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Contact from "./components/Contact";
+import WaveBackground from "./components/Waves";
 
 function Layout() {
-  const { t } = useTheme();
   return (
-    <div style={{
-      backgroundColor: t.bg,
-      minHeight: '100vh',
-      overflowX: 'hidden',
-      transition: 'background-color 0.3s ease',
-    }}>
-      <Navbar />
-      <main>
-        <Hero />
-        <Projects />
-        <About />
-        <Skills />
-        <Contact />
-      </main>
+    <div
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+        overflowX: "hidden",
+      }}
+    >
+      <WaveBackground />
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <Navbar />
+        <main>
+          <Hero />
+          <Projects />
+          <About />
+          <Skills />
+          <Contact />
+        </main>
+      </div>
     </div>
   );
 }

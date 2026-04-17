@@ -29,12 +29,22 @@ export default function Projects() {
       ref={sectionRef}
       style={{
         position: "relative",
-        backgroundColor: t.bg,
         padding: "120px 80px",
         transition: "background-color 0.4s ease",
         overflow: "hidden",
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: t.bgAlt,
+          opacity: 0.5,
+          zIndex: 0,
+          transition: "background-color 0.4s ease",
+        }}
+      />
+
       <motion.div
         style={{
           position: "absolute",
@@ -51,17 +61,30 @@ export default function Projects() {
         }}
       />
 
-      <div style={{ position: "relative", zIndex: 1, maxWidth: "1200px", margin: "0 auto" }}>
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
         <motion.div
           ref={headerRef}
           initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: headerVisible ? 1 : 0, y: headerVisible ? 0 : 40 }}
+          animate={{
+            opacity: headerVisible ? 1 : 0,
+            y: headerVisible ? 0 : 40,
+          }}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           className="section-header"
         >
           <motion.span
             initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: headerVisible ? 1 : 0, x: headerVisible ? 0 : -20 }}
+            animate={{
+              opacity: headerVisible ? 1 : 0,
+              x: headerVisible ? 0 : -20,
+            }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="section-label"
           >
@@ -82,7 +105,12 @@ export default function Projects() {
           }}
         >
           {projects.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} visible={gridVisible} />
+            <ProjectCard
+              key={p.id}
+              project={p}
+              index={i}
+              visible={gridVisible}
+            />
           ))}
         </motion.div>
       </div>

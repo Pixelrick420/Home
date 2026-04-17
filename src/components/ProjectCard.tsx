@@ -1394,8 +1394,6 @@ export default function ProjectCard({ project, index, visible }: Props) {
   };
 
   const pal = bgPalettes[project.id] || { bg: "#0a0a0a", fg: "#FF8C42" };
-  console.log(project.id);
-
   return (
     <motion.article
       onMouseEnter={() => setHov(true)}

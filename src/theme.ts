@@ -52,3 +52,18 @@ export const coverPalettes = [
   { bg: "#0A0A0A", fg: "#FFFFFF" },
   { bg: "#FAFAFA", fg: "#666666" },
 ] as const;
+
+export interface ThemeTokens {
+  bg: string;
+  bgAlt: string;
+  bgCard: string;
+  text: string;
+  textSub: string;
+  textMuted: string;
+  textFaint: string;
+  accent: string;
+  accentHover: string;
+  border: string;
+  borderHover: string;
+  white: string;
+}

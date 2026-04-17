@@ -33,12 +33,22 @@ export default function About() {
       ref={sectionRef}
       style={{
         position: "relative",
-        backgroundColor: t.bgAlt,
         padding: "120px 80px",
         transition: "background-color 0.4s ease",
         overflow: "hidden",
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: t.bgAlt,
+          opacity: 0.5,
+          zIndex: 0,
+          transition: "background-color 0.4s ease",
+        }}
+      />
+
       <motion.div
         style={{
           position: "absolute",
@@ -58,7 +68,7 @@ export default function About() {
         ref={contentRef}
         style={{
           position: "relative",
-          zIndex: 1,
+          zIndex: 2,
           maxWidth: "1200px",
           margin: "0 auto",
         }}

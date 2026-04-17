@@ -1,0 +1,181 @@
+import { useEffect, useRef } from "react";
+import { useTheme } from "../context/ThemeContext";
+
+function noise(x: number, y: number, t: number) {
+  return (
+    Math.sin(x * 0.008 + t) +
+    Math.sin(y * 0.008 + t * 0.9) +
+    Math.sin((x + y) * 0.006 + t * 0.7)
+  );
+}
+
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t;
+}
+
+export default function WaveBackground() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const { t } = useTheme();
+  const scrollYRef = useRef(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current!;
+    const ctx = canvas.getContext("2d")!;
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    const dpr = window.devicePixelRatio || 1;
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      ctx.scale(dpr, dpr);
+    }
+    resizeCanvas();
+
+    const gridSize = 28;
+
+    const levels = [-0.8, 0, 0.8];
+
+    let time = 0;
+    let animationId: number;
+
+    function handleScroll() {
+      scrollYRef.current = window.scrollY;
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    function draw() {
+      ctx.fillStyle = t.bg;
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = t.accent;
+
+      const cols = Math.ceil(width / gridSize) + 1;
+      const rows = Math.ceil(height / gridSize) + 1;
+
+      const scrollOffset = scrollYRef.current * 0.6;
+
+      const field: number[][] = [];
+      for (let i = 0; i < cols; i++) {
+        field[i] = [];
+        for (let j = 0; j < rows; j++) {
+          const yWorld = j * gridSize + scrollOffset;
+          field[i][j] = noise(i * gridSize, yWorld, time);
+        }
+      }
+
+      for (const level of levels) {
+        ctx.beginPath();
+
+        for (let i = 0; i < cols - 1; i++) {
+          for (let j = 0; j < rows - 1; j++) {
+            const x = i * gridSize;
+            const y = j * gridSize;
+
+            const v1 = field[i][j];
+            const v2 = field[i + 1][j];
+            const v3 = field[i + 1][j + 1];
+            const v4 = field[i][j + 1];
+
+            let caseIndex = 0;
+            if (v1 > level) caseIndex |= 1;
+            if (v2 > level) caseIndex |= 2;
+            if (v3 > level) caseIndex |= 4;
+            if (v4 > level) caseIndex |= 8;
+
+            if (caseIndex === 0 || caseIndex === 15) continue;
+
+            const topT = (level - v1) / (v2 - v1);
+            const rightT = (level - v2) / (v3 - v2);
+            const bottomT = (level - v4) / (v3 - v4);
+            const leftT = (level - v1) / (v4 - v1);
+
+            const top = [lerp(x, x + gridSize, topT), y];
+            const right = [x + gridSize, lerp(y, y + gridSize, rightT)];
+            const bottom = [lerp(x, x + gridSize, bottomT), y + gridSize];
+            const left = [x, lerp(y, y + gridSize, leftT)];
+
+            switch (caseIndex) {
+              case 1:
+              case 14:
+                drawLine(ctx, left, top);
+                break;
+              case 2:
+              case 13:
+                drawLine(ctx, top, right);
+                break;
+              case 3:
+              case 12:
+                drawLine(ctx, left, right);
+                break;
+              case 4:
+              case 11:
+                drawLine(ctx, right, bottom);
+                break;
+              case 5:
+                drawLine(ctx, left, top);
+                drawLine(ctx, right, bottom);
+                break;
+              case 6:
+              case 9:
+                drawLine(ctx, top, bottom);
+                break;
+              case 7:
+              case 8:
+                drawLine(ctx, left, bottom);
+                break;
+              case 10:
+                drawLine(ctx, top, right);
+                drawLine(ctx, left, bottom);
+                break;
+            }
+          }
+        }
+        ctx.stroke();
+      }
+
+      time += 0.008;
+      animationId = requestAnimationFrame(draw);
+    }
+
+    function drawLine(ctx: CanvasRenderingContext2D, a: number[], b: number[]) {
+      ctx.moveTo(a[0], a[1]);
+      ctx.lineTo(b[0], b[1]);
+    }
+
+    draw();
+
+    window.addEventListener("resize", () => {
+      resizeCanvas();
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", resizeCanvas);
+      cancelAnimationFrame(animationId);
+    };
+  }, [t.bg, t.accent]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: -1,
+        pointerEvents: "none",
+      }}
+    />
+  );
+}

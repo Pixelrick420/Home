@@ -30,11 +30,21 @@ export default function Hero() {
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
-        backgroundColor: t.bg,
         padding: "0 80px",
         transition: "background-color 0.4s ease",
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: t.bgAlt,
+          opacity: 0.5,
+          zIndex: 0,
+          transition: "background-color 0.4s ease",
+        }}
+      />
+
       <motion.div
         style={{
           position: "absolute",
@@ -75,7 +85,7 @@ export default function Hero() {
       <motion.div
         style={{
           position: "relative",
-          zIndex: 1,
+          zIndex: 2,
           maxWidth: "1000px",
           y,
           opacity,

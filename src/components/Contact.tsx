@@ -38,18 +38,29 @@ export default function Contact() {
 
   const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
+  // Contact.tsx - return part only
   return (
     <section
       id="contact"
       ref={sectionRef}
       style={{
         position: "relative",
-        backgroundColor: t.bgAlt,
         padding: "120px 80px 100px",
         transition: "background-color 0.4s ease",
         overflow: "hidden",
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: t.bgAlt,
+          opacity: 0.5,
+          zIndex: 0,
+          transition: "background-color 0.4s ease",
+        }}
+      />
+
       <motion.div
         style={{
           position: "absolute",
@@ -69,7 +80,7 @@ export default function Contact() {
         ref={contentRef}
         style={{
           position: "relative",
-          zIndex: 1,
+          zIndex: 2,
           maxWidth: "1200px",
           margin: "0 auto",
         }}
