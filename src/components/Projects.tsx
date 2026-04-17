@@ -115,10 +115,22 @@ export default function Projects() {
             }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="section-label"
+            style={{
+              color: t.accentHover,
+            }}
           >
             01 — Selected Work
           </motion.span>
-          <h2 className="section-title">Things I've Built</h2>
+          <h2 className="section-title">
+            Things I've{" "}
+            <span
+              style={{
+                color: t.accent,
+              }}
+            >
+              Built
+            </span>
+          </h2>
         </motion.div>
 
         <motion.div
@@ -142,7 +154,6 @@ export default function Projects() {
           ))}
         </motion.div>
 
-        {/* Show All / Show Less Button */}
         {hasMoreProjects && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -10,9 +10,9 @@ export const lightTokens = {
   bgCard: "#FFFFFF",
 
   text: "#1A1A1A",
-  textSub: "#333333",
-  textMuted: "#999999",
-  textFaint: "#BBBBBB",
+  textSub: "#222222",
+  textMuted: "#555555",
+  textFaint: "#999999",
 
   accent: "#A3E635",
   accentHover: "#B8F05A",
@@ -29,9 +29,9 @@ export const darkTokens = {
   bgCard: "#1A1A1A",
 
   text: "#F5F5F5",
-  textSub: "#A5A5A5",
-  textMuted: "#707070",
-  textFaint: "#505050",
+  textSub: "#CCCCCC",
+  textMuted: "#AAAAAA",
+  textFaint: "#888888",
 
   accent: "#A3E635",
   accentHover: "#B8F05A",

@@ -78,8 +78,24 @@ export default function Skills() {
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           className="section-header"
         >
-          <span className="section-label">03 — Skills</span>
-          <h2 className="section-title">Toolkit</h2>
+          <span
+            className="section-label"
+            style={{
+              color: t.accentHover,
+            }}
+          >
+            03 — Skills
+          </span>
+          <h2 className="section-title">
+            My{" "}
+            <span
+              style={{
+                color: t.accent,
+              }}
+            >
+              Toolkit
+            </span>
+          </h2>
         </motion.div>
 
         <motion.div

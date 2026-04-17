@@ -38,7 +38,6 @@ export default function Contact() {
 
   const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
-  // Contact.tsx - return part only
   return (
     <section
       id="contact"
@@ -91,7 +90,14 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           className="section-header"
         >
-          <span className="section-label">04 — Contact</span>
+          <span
+            className="section-label"
+            style={{
+              color: t.accentHover,
+            }}
+          >
+            04 — Contact
+          </span>
           <motion.h2
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
@@ -112,6 +118,7 @@ export default function Contact() {
             color: t.textSub,
             margin: "0 0 56px 0",
             lineHeight: 1.6,
+            fontWeight: 800,
           }}
         >
           Open to collaborations, interesting problems, and good conversation.
@@ -182,6 +189,7 @@ export default function Contact() {
             style={{
               fontFamily: fonts.sans,
               fontSize: "13px",
+              fontWeight: 700,
               color: t.textMuted,
             }}
           >
@@ -191,6 +199,7 @@ export default function Contact() {
             style={{
               fontFamily: fonts.sans,
               fontSize: "13px",
+              fontWeight: 700,
               color: t.textMuted,
             }}
           >

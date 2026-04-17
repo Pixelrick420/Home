@@ -93,12 +93,12 @@ export default function Hero() {
               letterSpacing: "0.2em",
               textTransform: "uppercase",
               color: t.accent,
-              backgroundColor: mode === "light" ? "#F5F5DC" : "#1A1A1A",
+              backgroundColor: mode === "light" ? "#FAFAFA" : "#1A1A1A",
               borderRadius: "50px",
               display: "inline-block",
             }}
           >
-            CS Undergrad · Builder · Pixelrick
+            CS Undergrad · Programmer · Pixelrick
           </span>
         </motion.div>
 

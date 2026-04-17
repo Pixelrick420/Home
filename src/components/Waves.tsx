@@ -2,11 +2,12 @@ import { useEffect, useRef } from "react";
 import { useTheme } from "../context/ThemeContext";
 
 function noise(x: number, y: number, t: number) {
-  return (
-    Math.sin(x * 0.008 + t) +
-    Math.sin(y * 0.008 + t * 0.9) +
-    Math.sin((x + y) * 0.006 + t * 0.7)
-  );
+  const freq = 0.012;
+  const tf = t * 0.7;
+  const a = Math.sin(x * freq + tf);
+  const b = Math.sin(y * freq + tf * 0.9);
+  const c = Math.sin((x + y) * 0.008 + tf * 0.8);
+  return (a + b + c) / 2.2;
 }
 
 function lerp(a: number, b: number, t: number) {
@@ -38,9 +39,9 @@ export default function WaveBackground() {
     }
     resizeCanvas();
 
-    const gridSize = 28;
+    const gridSize = 18;
 
-    const levels = [-0.8, 0, 0.8];
+    const levels = [-0.8, -0.2, 0.2, 0.8];
 
     let time = 0;
     let animationId: number;

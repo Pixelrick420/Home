@@ -79,8 +79,24 @@ export default function About() {
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           className="section-header"
         >
-          <span className="section-label">02 — About</span>
-          <h2 className="section-title">Hello :D</h2>
+          <span
+            className="section-label"
+            style={{
+              color: t.accentHover,
+            }}
+          >
+            02 — About
+          </span>
+          <h2 className="section-title">
+            Hello{" "}
+            <span
+              style={{
+                color: t.accent,
+              }}
+            >
+              :D
+            </span>
+          </h2>
         </motion.div>
 
         <div
@@ -103,6 +119,7 @@ export default function About() {
               style={{
                 fontFamily: fonts.sans,
                 fontSize: "17px",
+                fontWeight: 800,
                 color: t.textSub,
                 lineHeight: 1.8,
                 margin: "0 0 20px 0",
@@ -117,6 +134,7 @@ export default function About() {
               style={{
                 fontFamily: fonts.sans,
                 fontSize: "17px",
+                fontWeight: 800,
                 color: t.textSub,
                 lineHeight: 1.8,
                 margin: "0 0 32px 0",

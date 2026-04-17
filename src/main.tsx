@@ -1,17 +1,17 @@
-import '@fontsource/playfair-display/400.css';
-import '@fontsource/playfair-display/400-italic.css';
-import '@fontsource/playfair-display/700.css';
-import '@fontsource/jetbrains-mono/400.css';
-import '@fontsource/space-grotesk/400.css';
-import '@fontsource/space-grotesk/500.css';
-import '@fontsource/space-grotesk/700.css';
+import "@fontsource/playfair-display/400.css";
+import "@fontsource/playfair-display/400-italic.css";
+import "@fontsource/playfair-display/700.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/space-grotesk/400.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/700.css";
 
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { AnimatePresence } from 'framer-motion';
-import App from './App';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { AnimatePresence } from "framer-motion";
+import App from "./App";
 
-const style = document.createElement('style');
+const style = document.createElement("style");
 style.textContent = `
   *, *::before, *::after {
     box-sizing: border-box;
@@ -93,7 +93,6 @@ style.textContent = `
     font-weight: 600;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: #A3E635;
     display: inline-block;
     margin-bottom: 16px;
   }
@@ -120,10 +119,10 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AnimatePresence mode="wait">
       <App />
     </AnimatePresence>
-  </StrictMode>
+  </StrictMode>,
 );
