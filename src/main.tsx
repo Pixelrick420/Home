@@ -9,6 +9,7 @@ import "@fontsource/space-grotesk/700.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { AnimatePresence } from "framer-motion";
+import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 
 const style = document.createElement("style");
@@ -121,8 +122,10 @@ document.head.appendChild(style);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AnimatePresence mode="wait">
-      <App />
-    </AnimatePresence>
+    <HelmetProvider>
+      <AnimatePresence mode="wait">
+        <App />
+      </AnimatePresence>
+    </HelmetProvider>
   </StrictMode>,
 );

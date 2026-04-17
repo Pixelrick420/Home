@@ -2,8 +2,9 @@ import { useRef } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
 import { useTheme } from "../context/ThemeContext";
 import { fonts } from "../theme";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { SiLeetcode } from "react-icons/si";
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
+import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
+import { SiLeetcode } from "@react-icons/all-files/si/SiLeetcode";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const socials = [
@@ -143,6 +144,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 20 }}
               transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
+              aria-label={s.label}
               style={{
                 display: "flex",
                 alignItems: "center",

@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { fonts } from "../theme";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
+import { FaMoon } from "@react-icons/all-files/fa/FaMoon";
+import { FaSun } from "@react-icons/all-files/fa/FaSun";
+import { FaBars } from "@react-icons/all-files/fa/FaBars";
+import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 
 const navLinks = [
   { label: "work", href: "#work" },
@@ -48,7 +51,8 @@ export default function Navbar() {
           backdropFilter: scrolled ? "blur(12px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
           borderBottom: `1px solid ${scrolled ? t.border : "transparent"}`,
-          transition: "background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease",
+          transition:
+            "background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease",
         }}
       >
         <motion.a
@@ -73,6 +77,7 @@ export default function Navbar() {
 
         <div
           className="desk-nav"
+          aria-label={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
           style={{ display: "flex", alignItems: "center", gap: "32px" }}
         >
           {navLinks.map((link) => (
@@ -136,11 +141,13 @@ export default function Navbar() {
 
         <div
           className="mob-controls"
+          aria-label={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
           style={{ display: "none", alignItems: "center", gap: "16px" }}
         >
           <motion.button
             onClick={toggle}
             whileTap={{ scale: 0.9 }}
+            aria-label={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
             style={{
               display: "flex",
               alignItems: "center",
@@ -153,7 +160,11 @@ export default function Navbar() {
               cursor: "pointer",
             }}
           >
-            {mode === "light" ? <FaMoon size={18} /> : <FaSun size={18} />}
+            {mode === "light" ? (
+              <FaMoon size={18} aria-hidden="true" />
+            ) : (
+              <FaSun size={18} aria-hidden="true" />
+            )}
           </motion.button>
           <motion.button
             onClick={() => setMenuOpen((o: boolean) => !o)}

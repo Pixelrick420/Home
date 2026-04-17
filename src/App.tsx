@@ -6,6 +6,7 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import WaveBackground from "./components/Waves";
+import SEO from "./components/SEO";
 
 function Layout() {
   return (
@@ -16,6 +17,7 @@ function Layout() {
         overflowX: "hidden",
       }}
     >
+      <SEO />
       <WaveBackground />
       <div style={{ position: "relative", zIndex: 1 }}>
         <Navbar />

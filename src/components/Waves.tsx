@@ -39,12 +39,13 @@ export default function WaveBackground() {
     }
     resizeCanvas();
 
-    const gridSize = 18;
-
-    const levels = [-0.8, -0.2, 0.2, 0.8];
+    const gridSize = 20;
+    const levels = [-0.8, 0, 0.8];
 
     let time = 0;
-    let animationId: number;
+    let animationId: number | null = null;
+    let lastFrameTime = 0;
+    const FRAME_INTERVAL = 1000 / 30;
 
     function handleScroll() {
       scrollYRef.current = window.scrollY;
@@ -52,35 +53,52 @@ export default function WaveBackground() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
-    function draw() {
+    function drawLine(ctx: CanvasRenderingContext2D, a: number[], b: number[]) {
+      ctx.moveTo(a[0], a[1]);
+      ctx.lineTo(b[0], b[1]);
+    }
+
+    function draw(now = 0) {
+      if (now - lastFrameTime < FRAME_INTERVAL) {
+        animationId = requestAnimationFrame(draw);
+        return;
+      }
+      lastFrameTime = now;
+
+      const currentScroll = scrollYRef.current;
+      const currentTime = time;
+      const currentWidth = width;
+      const currentHeight = height;
+
       ctx.fillStyle = t.bg;
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 0, currentWidth, currentHeight);
 
       ctx.lineWidth = 3;
       ctx.strokeStyle = t.accent;
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
 
-      const cols = Math.ceil(width / gridSize) + 1;
-      const rows = Math.ceil(height / gridSize) + 1;
+      const scrollOffset = currentScroll * 0.6;
 
-      const scrollOffset = scrollYRef.current * 0.6;
+      const cols = Math.ceil(currentWidth / gridSize) + 1;
+      const rows = Math.ceil(currentHeight / gridSize) + 1;
 
-      const field: number[][] = [];
+      const field: number[][] = Array(cols);
       for (let i = 0; i < cols; i++) {
-        field[i] = [];
+        field[i] = Array(rows);
+        const xPos = i * gridSize;
         for (let j = 0; j < rows; j++) {
           const yWorld = j * gridSize + scrollOffset;
-          field[i][j] = noise(i * gridSize, yWorld, time);
+          field[i][j] = noise(xPos, yWorld, currentTime);
         }
       }
 
       for (const level of levels) {
         ctx.beginPath();
-
         for (let i = 0; i < cols - 1; i++) {
           for (let j = 0; j < rows - 1; j++) {
             const x = i * gridSize;
             const y = j * gridSize;
-
             const v1 = field[i][j];
             const v2 = field[i + 1][j];
             const v3 = field[i + 1][j + 1];
@@ -91,7 +109,6 @@ export default function WaveBackground() {
             if (v2 > level) caseIndex |= 2;
             if (v3 > level) caseIndex |= 4;
             if (v4 > level) caseIndex |= 8;
-
             if (caseIndex === 0 || caseIndex === 15) continue;
 
             const topT = (level - v1) / (v2 - v1);
@@ -99,10 +116,22 @@ export default function WaveBackground() {
             const bottomT = (level - v4) / (v3 - v4);
             const leftT = (level - v1) / (v4 - v1);
 
-            const top = [lerp(x, x + gridSize, topT), y];
-            const right = [x + gridSize, lerp(y, y + gridSize, rightT)];
-            const bottom = [lerp(x, x + gridSize, bottomT), y + gridSize];
-            const left = [x, lerp(y, y + gridSize, leftT)];
+            const top = [
+              Math.floor(lerp(x, x + gridSize, topT)),
+              Math.floor(y),
+            ];
+            const right = [
+              Math.floor(x + gridSize),
+              Math.floor(lerp(y, y + gridSize, rightT)),
+            ];
+            const bottom = [
+              Math.floor(lerp(x, x + gridSize, bottomT)),
+              Math.floor(y + gridSize),
+            ];
+            const left = [
+              Math.floor(x),
+              Math.floor(lerp(y, y + gridSize, leftT)),
+            ];
 
             switch (caseIndex) {
               case 1:
@@ -147,21 +176,15 @@ export default function WaveBackground() {
       animationId = requestAnimationFrame(draw);
     }
 
-    function drawLine(ctx: CanvasRenderingContext2D, a: number[], b: number[]) {
-      ctx.moveTo(a[0], a[1]);
-      ctx.lineTo(b[0], b[1]);
-    }
-
-    draw();
-
-    window.addEventListener("resize", () => {
-      resizeCanvas();
-    });
+    animationId = requestAnimationFrame(draw);
+    window.addEventListener("resize", resizeCanvas);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", resizeCanvas);
-      cancelAnimationFrame(animationId);
+      if (animationId !== null) {
+        cancelAnimationFrame(animationId);
+      }
     };
   }, [t.bg, t.accent]);
 
@@ -176,6 +199,7 @@ export default function WaveBackground() {
         height: "100%",
         zIndex: -1,
         pointerEvents: "none",
+        willChange: "transform",
       }}
     />
   );
