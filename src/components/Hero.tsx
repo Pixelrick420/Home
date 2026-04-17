@@ -153,8 +153,7 @@ export default function Hero() {
             margin: "0 0 48px 0",
           }}
         >
-          Making things that feel alive — compilers, canvases, and everything
-          between.
+          Building things from the ground up.
         </motion.p>
 
         <motion.div
@@ -165,7 +164,9 @@ export default function Hero() {
         >
           <motion.button
             onClick={() =>
-              document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" })
+              document
+                .querySelector("#work")
+                ?.scrollIntoView({ behavior: "smooth" })
             }
             whileHover={{ y: -4, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -188,7 +189,11 @@ export default function Hero() {
             View Work
             <motion.span
               animate={{ x: [0, 4, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.5,
+                ease: "easeInOut",
+              }}
             >
               →
             </motion.span>

@@ -1,22 +1,24 @@
 import { useRef } from "react";
-import { useScrollFade } from '../hooks/useScrollFade';
-import { useTheme } from '../context/ThemeContext';
-import { fonts } from '../theme';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useScrollFade } from "../hooks/useScrollFade";
+import { useTheme } from "../context/ThemeContext";
+import { fonts } from "../theme";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const currently = [
-  { label: 'Studying',  value: 'B.Tech CS @ GEC Thrissur' },
-  { label: 'Exploring', value: 'Compilers, PL theory, Systems' },
-  { label: 'Building',  value: 'Whatever seems interesting' },
-  { label: 'Located',   value: 'Kerala, India' },
+  { label: "Studying", value: "B.Tech CS @ GEC Thrissur" },
+  { label: "Exploring", value: "Compilers, PL theory, Systems" },
+  { label: "Building", value: "Whatever seems interesting" },
+  { label: "Located", value: "Kerala, India" },
 ];
 
-const languages = ['English', 'Malayalam', 'Hindi'];
+const languages = ["English", "Malayalam", "Hindi"];
 
 export default function About() {
   const { t } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
-  const [contentRef, visible] = useScrollFade<HTMLDivElement>({ threshold: 0.08 });
+  const [contentRef, visible] = useScrollFade<HTMLDivElement>({
+    threshold: 0.08,
+  });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -30,29 +32,37 @@ export default function About() {
       id="about"
       ref={sectionRef}
       style={{
-        position: 'relative',
+        position: "relative",
         backgroundColor: t.bgAlt,
-        padding: '120px 80px',
-        transition: 'background-color 0.4s ease',
-        overflow: 'hidden',
+        padding: "120px 80px",
+        transition: "background-color 0.4s ease",
+        overflow: "hidden",
       }}
     >
       <motion.div
         style={{
-          position: 'absolute',
-          top: '20%',
-          right: '10%',
-          width: '400px',
-          height: '400px',
+          position: "absolute",
+          top: "20%",
+          right: "10%",
+          width: "400px",
+          height: "400px",
           background: `radial-gradient(circle, ${t.accent}10 0%, transparent 60%)`,
-          borderRadius: '50%',
-          filter: 'blur(80px)',
-          pointerEvents: 'none',
+          borderRadius: "50%",
+          filter: "blur(80px)",
+          pointerEvents: "none",
           y,
         }}
       />
 
-      <div ref={contentRef} style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+      <div
+        ref={contentRef}
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 40 }}
@@ -63,55 +73,68 @@ export default function About() {
           <h2 className="section-title">Hello :D</h2>
         </motion.div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '80px',
-        }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "80px",
+          }}
+        >
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{
+              duration: 0.8,
+              delay: 0.15,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
           >
-            <p style={{
-              fontFamily: fonts.sans,
-              fontSize: '17px',
-              color: t.textSub,
-              lineHeight: 1.8,
-              margin: '0 0 20px 0',
-            }}>
-              I'm an undergraduate student pursuing my B.Tech in Computer Science at
-              Govt. Engineering College, Thrissur. I have a strong foundation in
-              programming and a deep interest in how languages, compilers, and
-              systems work at a fundamental level.
+            <p
+              style={{
+                fontFamily: fonts.sans,
+                fontSize: "17px",
+                color: t.textSub,
+                lineHeight: 1.8,
+                margin: "0 0 20px 0",
+              }}
+            >
+              I'm a Computer Science undergraduate at Government Engineering
+              College, Thrissur. With my solid foundation in programming, I'm
+              looking to explore new technologies, work on meaningful projects,
+              and connect with others in the field.
             </p>
-            <p style={{
-              fontFamily: fonts.sans,
-              fontSize: '17px',
-              color: t.textSub,
-              lineHeight: 1.8,
-              margin: '0 0 32px 0',
-            }}>
-              My work spans machine learning, web development, systems programming,
-              and the occasional satirical VS Code extension. I like building things
-              that feel intentional — even the weird ones.
+            <p
+              style={{
+                fontFamily: fonts.sans,
+                fontSize: "17px",
+                color: t.textSub,
+                lineHeight: 1.8,
+                margin: "0 0 32px 0",
+              }}
+            >
+              My work spans machine learning, web development, systems
+              programming, and the occasional satirical VS Code extension.{" "}
+              <br />I like reinventing the wheel from time to time.
             </p>
 
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
               {languages.map((lang, i) => (
                 <motion.span
                   key={lang}
                   initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.8 }}
+                  animate={{
+                    opacity: visible ? 1 : 0,
+                    scale: visible ? 1 : 0.8,
+                  }}
                   transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
                   style={{
                     fontFamily: fonts.sans,
-                    fontSize: '12px',
+                    fontSize: "12px",
                     fontWeight: 500,
                     color: t.textSub,
                     backgroundColor: t.bg,
-                    padding: '8px 16px',
-                    borderRadius: '50px',
+                    padding: "8px 16px",
+                    borderRadius: "50px",
                     border: `1px solid ${t.border}`,
                   }}
                 >
@@ -124,21 +147,29 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{
+              duration: 0.8,
+              delay: 0.25,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
           >
-            <h3 style={{
-              fontFamily: fonts.sans,
-              fontSize: '12px',
-              fontWeight: 600,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: t.textMuted,
-              marginBottom: '28px',
-            }}>
+            <h3
+              style={{
+                fontFamily: fonts.sans,
+                fontSize: "12px",
+                fontWeight: 600,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: t.textMuted,
+                marginBottom: "28px",
+              }}
+            >
               Currently
             </h3>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+            >
               {currently.map(({ label, value }, i) => (
                 <motion.div
                   key={label}
@@ -146,28 +177,32 @@ export default function About() {
                   animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : -30 }}
                   transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
                   style={{
-                    display: 'grid',
-                    gridTemplateColumns: '100px 1fr',
-                    gap: '20px',
-                    padding: '20px 0',
+                    display: "grid",
+                    gridTemplateColumns: "100px 1fr",
+                    gap: "20px",
+                    padding: "20px 0",
                     borderBottom: `1px solid ${t.border}`,
                   }}
                 >
-                  <span style={{
-                    fontFamily: fonts.sans,
-                    fontSize: '12px',
-                    fontWeight: 500,
-                    color: t.textMuted,
-                  }}>
+                  <span
+                    style={{
+                      fontFamily: fonts.sans,
+                      fontSize: "12px",
+                      fontWeight: 500,
+                      color: t.textMuted,
+                    }}
+                  >
                     {label}
                   </span>
-                  <span style={{
-                    fontFamily: fonts.sans,
-                    fontSize: '16px',
-                    fontWeight: 500,
-                    color: t.text,
-                    lineHeight: 1.4,
-                  }}>
+                  <span
+                    style={{
+                      fontFamily: fonts.sans,
+                      fontSize: "16px",
+                      fontWeight: 500,
+                      color: t.text,
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {value}
                   </span>
                 </motion.div>

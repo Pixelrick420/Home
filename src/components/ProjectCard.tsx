@@ -1373,22 +1373,21 @@ export default function ProjectCard({ project, index, visible }: Props) {
   const [hov, setHov] = useState(false);
 
   const bgPalettes: Record<string, { bg: string; fg: string }> = {
-    // Green group
     chatsocket: { bg: "#0A0A0A", fg: "#A3E635" },
     mesh: { bg: "#0A0A0A", fg: "#A3E635" },
     gameoflife: { bg: "#0A0A0A", fg: "#A3E635" },
     portfolio: { bg: "#0A0A0A", fg: "#A3E635" },
-    // Blue group
+
     ascii: { bg: "#0A0A0A", fg: "#38BDF8" },
     sort: { bg: "#0A0A0A", fg: "#38BDF8" },
     tetris: { bg: "#0A0A0A", fg: "#38BDF8" },
     "below-c-level": { bg: "#0A0A0A", fg: "#38BDF8" },
-    // Keep original colors for the rest
+
     fractal: { bg: "#0D1117", fg: "#A3E635" },
     election: { bg: "#1a2332", fg: "#4ECDC4" },
     automata: { bg: "#1C1C1C", fg: "#E8B931" },
     asteroids: { bg: "#0a0a0a", fg: "#FF8C42" },
-    // New projects
+
     shell: { bg: "#0A0A0A", fg: "#FF8C42" },
     leaderboard: { bg: "#0A0A0A", fg: "#A3E635" },
     "handwritten-digits": { bg: "#0A0A0A", fg: "#38BDF8" },
