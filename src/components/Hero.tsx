@@ -93,13 +93,17 @@ export default function Hero() {
           <span
             style={{
               fontFamily: fonts.sans,
-              fontSize: "12px",
+              fontSize: "clamp(5px, 2.5vw, 12px)",
+              padding: "clamp(6px, 2vw, 10px) clamp(12px, 4vw, 20px)",
+              maxWidth: "100%",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
               fontWeight: 600,
               letterSpacing: "0.2em",
               textTransform: "uppercase",
               color: t.accent,
               backgroundColor: mode === "light" ? "#F5F5DC" : "#1A1A1A",
-              padding: "10px 20px",
               borderRadius: "50px",
               display: "inline-block",
             }}
@@ -114,12 +118,16 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
           style={{
             fontFamily: fonts.serif,
-            fontSize: "clamp(56px, 10vw, 140px)",
+            fontSize: "clamp(42px, 8vw, 140px)",
             fontWeight: 700,
             color: t.text,
             lineHeight: 0.92,
             margin: "0 0 16px 0",
             letterSpacing: "-0.03em",
+
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "clip",
           }}
         >
           Harikrishnan R
