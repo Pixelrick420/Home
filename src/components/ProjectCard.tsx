@@ -225,7 +225,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           fontWeight="bold"
           opacity="0.9"
         >
-          H
+          P
         </text>
 
         <rect x="55" y="168" width="90" height="6" fill={p.fg} opacity="0.25" />
@@ -1408,7 +1408,7 @@ export default function ProjectCard({ project, index, visible }: Props) {
         delay: index * 0.1,
         ease: [0.25, 0.1, 0.25, 1],
       }}
-      className="card-hover"
+      className="project-card card-hover"
       style={{
         backgroundColor: t.bgCard,
         border: `1px solid ${hov ? t.accent : t.border}`,
@@ -1488,6 +1488,7 @@ export default function ProjectCard({ project, index, visible }: Props) {
           }}
         >
           <h3
+            className="project-title"
             style={{
               fontFamily: fonts.serif,
               fontSize: "22px",
@@ -1514,6 +1515,7 @@ export default function ProjectCard({ project, index, visible }: Props) {
         </div>
 
         <p
+          className="project-description"
           style={{
             fontFamily: fonts.sans,
             fontSize: "15px",
@@ -1525,10 +1527,14 @@ export default function ProjectCard({ project, index, visible }: Props) {
           {project.description}
         </p>
 
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+        <div
+          className="project-tags"
+          style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}
+        >
           {project.tags.map((tag) => (
             <span
               key={tag}
+              className="project-tag"
               style={{
                 fontFamily: fonts.sans,
                 fontSize: "11px",

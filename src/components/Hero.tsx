@@ -64,26 +64,6 @@ export default function Hero() {
 
       <motion.div
         style={{
-          position: "absolute",
-          top: "20%",
-          right: "15%",
-          fontSize: "clamp(200px, 25vw, 400px)",
-          fontFamily: fonts.serif,
-          fontWeight: 700,
-          color: t.border,
-          opacity: 0.15,
-          pointerEvents: "none",
-          userSelect: "none",
-        }}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 0.15, scale: 1 }}
-        transition={{ duration: 1.2, delay: 0.3 }}
-      >
-        H
-      </motion.div>
-
-      <motion.div
-        style={{
           position: "relative",
           zIndex: 2,
           maxWidth: "1000px",
