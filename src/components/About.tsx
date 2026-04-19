@@ -5,8 +5,8 @@ import { fonts } from "../theme";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const currently = [
-  { label: "Studying", value: "B.Tech CS @ GEC Thrissur" },
-  { label: "Exploring", value: "Compilers, PL theory, Systems" },
+  { label: "Studying", value: "B.Tech CSE @ GEC Thrissur" },
+  { label: "Exploring", value: "Compilers, Web Design, Systems" },
   { label: "Building", value: "Whatever seems interesting" },
   { label: "Located", value: "Kerala, India" },
 ];
@@ -85,7 +85,7 @@ export default function About() {
               color: t.accentHover,
             }}
           >
-            02 — About
+            02 - About
           </span>
           <h2 className="section-title">
             Hello{" "}

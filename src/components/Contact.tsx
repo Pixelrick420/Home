@@ -97,7 +97,7 @@ export default function Contact() {
               color: t.accentHover,
             }}
           >
-            04 — Contact
+            04 - Contact
           </span>
           <motion.h2
             initial={{ opacity: 0, y: 50 }}
@@ -182,7 +182,7 @@ export default function Contact() {
             paddingTop: "32px",
             borderTop: `1px solid ${t.border}`,
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
             flexWrap: "wrap",
             gap: "16px",
           }}
@@ -190,22 +190,13 @@ export default function Contact() {
           <span
             style={{
               fontFamily: fonts.sans,
-              fontSize: "13px",
+              fontSize: "clamp(8px, 2vh, 13px)",
               fontWeight: 700,
               color: t.textMuted,
+              textAlign: "left",
             }}
           >
-            Harikrishnan R · GEC Thrissur
-          </span>
-          <span
-            style={{
-              fontFamily: fonts.sans,
-              fontSize: "13px",
-              fontWeight: 700,
-              color: t.textMuted,
-            }}
-          >
-            {new Date().getFullYear()} · Built with Vite + React
+            Harikrishnan R · Wayanad
           </span>
         </motion.div>
       </div>

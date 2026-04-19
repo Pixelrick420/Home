@@ -13,7 +13,30 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 
 const style = document.createElement("style");
+
 style.textContent = `
+  :root {
+    --bg: #FFFFFF;
+    --bgAlt: #FAFAFA;
+    --bgCard: #FFFFFF;
+
+    --text: #1A1A1A;
+    --textSub: #222222;
+    --textMuted: #555555;
+    --textFaint: #999999;
+
+    --accent: #FF69B4;
+    --accentHover: #E30B5C;
+
+    --border: #E5E5E5;
+    --borderHover: #CCCCCC;
+
+    --white: #FFFFFF;
+
+    --scrollbar: #CCCCCC;
+    --selection-text: #FFFFFF;
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -28,11 +51,13 @@ style.textContent = `
 
   body {
     overflow-x: hidden;
+    background: var(--bg);
+    color: var(--text);
   }
 
   ::selection {
-    background-color: #A3E635;
-    color: #1A1A1A;
+    background-color: var(--accent);
+    color: var(--selection-text);
   }
 
   ::-webkit-scrollbar {
@@ -44,18 +69,12 @@ style.textContent = `
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #CCCCCC;
+    background: var(--scrollbar);
     border-radius: 3px;
   }
 
-  @media (prefers-color-scheme: dark) {
-    ::-webkit-scrollbar-thumb {
-      background: #404040;
-    }
-  }
-
   ::-webkit-scrollbar-thumb:hover {
-    background: #AAAAAA;
+    background: var(--accent);
   }
 
   section {
@@ -102,7 +121,7 @@ style.textContent = `
     font-family: 'Playfair Display', serif;
     font-size: clamp(40px, 6vw, 72px);
     font-weight: 700;
-    color: var(--text-color);
+    color: var(--text);
     margin: 0;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -114,8 +133,8 @@ style.textContent = `
   }
 
   .card-hover:hover {
-    border-color: #A3E635;
-    box-shadow: 0 8px 40px rgba(163, 228, 53, 0.15);
+    border-color: var(--accent);
+    box-shadow: 0 8px 40px color-mix(in srgb, var(--accent) 30%, transparent);
   }
 `;
 document.head.appendChild(style);

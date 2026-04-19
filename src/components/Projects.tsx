@@ -119,7 +119,7 @@ export default function Projects() {
               color: t.accentHover,
             }}
           >
-            01 — Selected Work
+            01 - Selected Work
           </motion.span>
           <h2 className="section-title">
             Things I've{" "}

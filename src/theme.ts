@@ -14,8 +14,8 @@ export const lightTokens = {
   textMuted: "#555555",
   textFaint: "#999999",
 
-  accent: "#A3E635",
-  accentHover: "#B8F05A",
+  accent: "#38BDF8",
+  accentHover: "#60A5FA",
 
   border: "#E5E5E5",
   borderHover: "#CCCCCC",
@@ -66,4 +66,44 @@ export interface ThemeTokens {
   border: string;
   borderHover: string;
   white: string;
+}
+
+const PALETTES = {
+  p1: { bg: "#0A0A0A", fg: "#A3E635", accent: "#A3E635" },
+  p2: { bg: "#0A0A0A", fg: "#FAFAFA", accent: "#BBBBBB" },
+  p3: { bg: "#0A0A0A", fg: "#38BDF8", accent: "#38BDF8" },
+};
+
+const projectPaletteConfig: Record<
+  string,
+  {
+    palette: keyof typeof PALETTES;
+    overrides?: Partial<{ bg: string; fg: string; accent: string }>;
+  }
+> = {
+  chatsocket: { palette: "p1" },
+  mesh: { palette: "p1" },
+  gameoflife: { palette: "p1" },
+  portfolio: { palette: "p1" },
+  ascii: { palette: "p2" },
+  sort: { palette: "p2" },
+  tetris: { palette: "p2" },
+  "below-c-level": { palette: "p2" },
+  fractal: { palette: "p3" },
+  election: { palette: "p3" },
+  automata: { palette: "p3" },
+  asteroids: { palette: "p3" },
+  shell: { palette: "p3" },
+  leaderboard: { palette: "p1" },
+  "handwritten-digits": { palette: "p2" },
+};
+
+export const projectPalettes: Record<
+  string,
+  { bg: string; fg: string; accent: string }
+> = {};
+for (const [id, { palette, overrides }] of Object.entries(
+  projectPaletteConfig,
+)) {
+  projectPalettes[id] = { ...PALETTES[palette], ...overrides };
 }

@@ -34,11 +34,19 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     localStorage.setItem("portfolio-theme", mode);
-    document.body.style.backgroundColor = t.bg;
-    document.body.style.setProperty("--text-color", t.text);
-    document.body.style.transition =
-      "background-color 0.3s ease, color 0.3s ease";
-  }, [mode, t.bg, t.text]);
+    const root = document.documentElement;
+
+    Object.entries(t).forEach(([key, value]) => {
+      root.style.setProperty(`--${key}`, value);
+    });
+
+    root.style.setProperty(
+      "--selection-text",
+      mode === "light" ? "#FFFFFF" : "#1A1A1A",
+    );
+
+    root.style.setProperty("--scrollbar", t.borderHover);
+  }, [mode, t]);
 
   return (
     <ThemeContext.Provider

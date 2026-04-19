@@ -4,6 +4,7 @@ import { useTheme } from "../context/ThemeContext";
 import { fonts } from "../theme";
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
+import { projectPalettes } from "../theme";
 
 interface Props {
   project: Project;
@@ -12,25 +13,7 @@ interface Props {
 }
 
 function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
-  const palettes: Record<string, { bg: string; fg: string }> = {
-    chatsocket: { bg: "#0A0A0A", fg: "#A3E635" },
-    mesh: { bg: "#0A0A0A", fg: "#A3E635" },
-    gameoflife: { bg: "#0A0A0A", fg: "#A3E635" },
-    portfolio: { bg: "#0A0A0A", fg: "#A3E635" },
-    ascii: { bg: "#0A0A0A", fg: "#38BDF8" },
-    sort: { bg: "#0A0A0A", fg: "#38BDF8" },
-    tetris: { bg: "#0A0A0A", fg: "#38BDF8" },
-    "below-c-level": { bg: "#0A0A0A", fg: "#38BDF8" },
-    fractal: { bg: "#0A0A0A", fg: "#A3E635" },
-    election: { bg: "#0A0A0A", fg: "#4ECDC4" },
-    automata: { bg: "#0A0A0A", fg: "#E8B931" },
-    asteroids: { bg: "#0A0A0A", fg: "#FF8C42" },
-    shell: { bg: "#0A0A0A", fg: "#FF8C42" },
-    leaderboard: { bg: "#0A0A0A", fg: "#A3E635" },
-    "handwritten-digits": { bg: "#0A0A0A", fg: "#38BDF8" },
-  };
-
-  const p = palettes[id] || { bg, fg };
+  const p = projectPalettes[id] ?? { bg, fg, accent: fg };
 
   const covers: Record<string, ReactNode> = {
     fractal: (
@@ -43,26 +26,19 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           height="200"
           rx="8"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="1.5"
         />
-        <rect
-          x="20"
-          y="40"
-          width="240"
-          height="30"
-          fill="#FF8C42"
-          opacity="0.1"
-        />
-        <circle cx="38" cy="55" r="5" fill="#FF5F57" />
-        <circle cx="56" cy="55" r="5" fill="#FEBC2E" />
-        <circle cx="74" cy="55" r="5" fill="#28C840" />
+        <rect x="20" y="40" width="240" height="30" fill={p.fg} opacity="0.1" />
+        <circle cx="38" cy="55" r="5" fill={p.accent} />
+        <circle cx="56" cy="55" r="5" fill={p.accent} />
+        <circle cx="74" cy="55" r="5" fill={p.accent} />
         <text
           x="120"
           y="59"
           fontFamily="monospace"
           fontSize="9"
-          fill="#FF8C42"
+          fill={p.fg}
           opacity="0.4"
           textAnchor="middle"
         >
@@ -73,7 +49,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y="95"
           fontFamily="monospace"
           fontSize="11"
-          fill="#FF8C42"
+          fill={p.fg}
           opacity="0.9"
         >
           !func main() -&gt; :void &#123;
@@ -83,7 +59,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y="115"
           fontFamily="monospace"
           fontSize="10"
-          fill="#FF8C42"
+          fill={p.fg}
           opacity="0.9"
         >
           {" "}
@@ -94,7 +70,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y="135"
           fontFamily="monospace"
           fontSize="10"
-          fill="#FF8C42"
+          fill={p.fg}
           opacity="0.9"
         >
           {" "}
@@ -105,7 +81,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y="155"
           fontFamily="monospace"
           fontSize="11"
-          fill="#FF8C42"
+          fill={p.fg}
           opacity="0.9"
         >
           &#125;
@@ -115,7 +91,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y1="170"
           x2="250"
           y2="170"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="1"
           opacity="0.4"
         />
@@ -124,18 +100,18 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y="186"
           fontFamily="monospace"
           fontSize="9"
-          fill="#FF8C42"
+          fill={p.fg}
           opacity="0.9"
         >
           42
         </text>
-        <rect x="225" y="175" width="20" height="15" rx="4" fill="#FF8C42" />
+        <rect x="225" y="175" width="20" height="15" rx="4" fill={p.accent} />
         <text
           x="235"
           y="185"
           fontFamily="sans-serif"
           fontSize="9"
-          fill="#0D1117"
+          fill={p.bg}
           textAnchor="middle"
           fontWeight="bold"
         >
@@ -338,7 +314,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           height="220"
           rx="10"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="2"
         />
         <text
@@ -346,7 +322,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y="70"
           fontFamily="sans-serif"
           fontSize="14"
-          fill="#FF8C42"
+          fill={p.fg}
           textAnchor="middle"
           fontWeight="bold"
           letterSpacing="4"
@@ -360,22 +336,16 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           height="18"
           rx="3"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="2"
         />
         <polyline
           points="53,109 58,115 65,103"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="2.5"
         />
-        <text
-          x="78"
-          y="113"
-          fontFamily="sans-serif"
-          fontSize="12"
-          fill="#FF8C42"
-        >
+        <text x="78" y="113" fontFamily="sans-serif" fontSize="12" fill={p.fg}>
           Candidate A
         </text>
         <rect
@@ -385,16 +355,10 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           height="18"
           rx="3"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="2"
         />
-        <text
-          x="78"
-          y="148"
-          fontFamily="sans-serif"
-          fontSize="12"
-          fill="#FF8C42"
-        >
+        <text x="78" y="148" fontFamily="sans-serif" fontSize="12" fill={p.fg}>
           Candidate B
         </text>
         <rect
@@ -404,16 +368,10 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           height="18"
           rx="3"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="2"
         />
-        <text
-          x="78"
-          y="183"
-          fontFamily="sans-serif"
-          fontSize="12"
-          fill="#FF8C42"
-        >
+        <text x="78" y="183" fontFamily="sans-serif" fontSize="12" fill={p.fg}>
           NOTA
         </text>
       </svg>
@@ -467,7 +425,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           cy="140"
           r="22"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="2"
         />
         <circle
@@ -475,7 +433,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           cy="80"
           r="22"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="2"
         />
         <circle
@@ -483,7 +441,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           cy="200"
           r="22"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="2"
         />
         <circle
@@ -491,7 +449,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           cy="140"
           r="22"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="2.5"
         />
         <circle
@@ -499,24 +457,17 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           cy="140"
           r="27"
           fill="none"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="1"
         />
-        <line
-          x1="22"
-          y1="140"
-          x2="38"
-          y2="140"
-          stroke="#FF8C42"
-          strokeWidth="2"
-        />
-        <polygon points="38,136 38,144 46,140" fill="#FF8C42" />
+        <line x1="22" y1="140" x2="38" y2="140" stroke={p.fg} strokeWidth="2" />
+        <polygon points="38,136 38,144 46,140" fill={p.fg} />
         <line
           x1="82"
           y1="128"
           x2="118"
           y2="92"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="1.5"
           opacity="0.7"
         />
@@ -525,7 +476,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y1="152"
           x2="118"
           y2="188"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="1.5"
           opacity="0.7"
         />
@@ -534,7 +485,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y1="90"
           x2="198"
           y2="128"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="1.5"
           opacity="0.7"
         />
@@ -543,7 +494,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y1="190"
           x2="198"
           y2="152"
-          stroke="#FF8C42"
+          stroke={p.fg}
           strokeWidth="1.5"
           opacity="0.7"
         />
@@ -552,7 +503,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y="145"
           fontFamily="monospace"
           fontSize="11"
-          fill="#FF8C42"
+          fill={p.fg}
           textAnchor="middle"
         >
           q0
@@ -562,7 +513,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y="85"
           fontFamily="monospace"
           fontSize="11"
-          fill="#FF8C42"
+          fill={p.fg}
           textAnchor="middle"
         >
           q1
@@ -572,7 +523,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y="205"
           fontFamily="monospace"
           fontSize="11"
-          fill="#FF8C42"
+          fill={p.fg}
           textAnchor="middle"
         >
           q2
@@ -582,7 +533,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           y="145"
           fontFamily="monospace"
           fontSize="11"
-          fill="#FF8C42"
+          fill={p.fg}
           textAnchor="middle"
         >
           q3
@@ -595,15 +546,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
         <rect width="280" height="280" fill={p.bg} />
         {Array.from({ length: 14 }, (_, r) =>
           Array.from({ length: 18 }, (_, c) => {
-            const shades = [
-              "#A3E635",
-              "#A3E635",
-              "#A3E635",
-              "#222222",
-              "#0a0a0a",
-            ];
             if (Math.random() > 0.3) return null;
-            const color = shades[Math.floor(Math.random() * shades.length)];
             const op = 0.3 + Math.random() * 0.6;
             return (
               <rect
@@ -612,7 +555,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
                 y={r * 16 + 25}
                 width="13"
                 height="14"
-                fill={color}
+                fill={p.fg}
                 opacity={op}
               />
             );
@@ -977,7 +920,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
           width="15"
           height="15"
           rx="3"
-          fill="#CCCCCC"
+          fill={p.accent}
           opacity="0.85"
         />
       </svg>
@@ -986,7 +929,6 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
     shell: (
       <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
         <rect width="280" height="280" fill={p.bg} />
-        {/* Terminal frame */}
         <rect
           x="20"
           y="40"
@@ -1008,7 +950,6 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
         <circle cx="38" cy="54" r="5" fill="#FF5F57" />
         <circle cx="56" cy="54" r="5" fill="#FEBC2E" />
         <circle cx="74" cy="54" r="5" fill="#28C840" />
-        {/* Prompt lines */}
         <text
           x="34"
           y="92"
@@ -1099,7 +1040,6 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
         >
           cd ~
         </text>
-        {/* Blinking cursor */}
         <text
           x="34"
           y="207"
@@ -1125,8 +1065,6 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
     leaderboard: (
       <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
         <rect width="280" height="280" fill={p.bg} />
-        {/* Trophy podium bars */}
-        {/* 2nd place */}
         <rect
           x="40"
           y="130"
@@ -1148,7 +1086,6 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
         >
           2
         </text>
-        {/* 1st place */}
         <rect
           x="110"
           y="90"
@@ -1170,7 +1107,6 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
         >
           1
         </text>
-        {/* Crown above 1st */}
         <polygon
           points="140,44 128,60 140,54 152,60"
           fill={p.fg}
@@ -1179,7 +1115,6 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
         <circle cx="128" cy="62" r="4" fill={p.fg} opacity="0.9" />
         <circle cx="140" cy="56" r="4" fill={p.fg} opacity="0.9" />
         <circle cx="152" cy="62" r="4" fill={p.fg} opacity="0.9" />
-        {/* 3rd place */}
         <rect
           x="180"
           y="160"
@@ -1201,7 +1136,6 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
         >
           3
         </text>
-        {/* Base line */}
         <line
           x1="30"
           y1="242"
@@ -1217,7 +1151,6 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
     "handwritten-digits": (
       <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
         <rect width="280" height="280" fill={p.bg} />
-        {/* 28x28-style pixel grid showing digit "5" — sampled cells */}
         {(() => {
           const cellSize = 9;
           const cols = 28;
@@ -1372,28 +1305,12 @@ export default function ProjectCard({ project, index, visible }: Props) {
   const { t } = useTheme();
   const [hov, setHov] = useState(false);
 
-  const bgPalettes: Record<string, { bg: string; fg: string }> = {
-    chatsocket: { bg: "#0A0A0A", fg: "#A3E635" },
-    mesh: { bg: "#0A0A0A", fg: "#A3E635" },
-    gameoflife: { bg: "#0A0A0A", fg: "#A3E635" },
-    portfolio: { bg: "#0A0A0A", fg: "#A3E635" },
-
-    ascii: { bg: "#0A0A0A", fg: "#38BDF8" },
-    sort: { bg: "#0A0A0A", fg: "#38BDF8" },
-    tetris: { bg: "#0A0A0A", fg: "#38BDF8" },
-    "below-c-level": { bg: "#0A0A0A", fg: "#38BDF8" },
-
-    fractal: { bg: "#0D1117", fg: "#A3E635" },
-    election: { bg: "#1a2332", fg: "#4ECDC4" },
-    automata: { bg: "#1C1C1C", fg: "#E8B931" },
-    asteroids: { bg: "#0a0a0a", fg: "#FF8C42" },
-
-    shell: { bg: "#0A0A0A", fg: "#FF8C42" },
-    leaderboard: { bg: "#0A0A0A", fg: "#A3E635" },
-    "handwritten-digits": { bg: "#0A0A0A", fg: "#38BDF8" },
+  const pal = projectPalettes[project.id] ?? {
+    bg: "#0A0A0A",
+    fg: "#FF8C42",
+    accent: "#FF8C42",
   };
 
-  const pal = bgPalettes[project.id] || { bg: "#0a0a0a", fg: "#FF8C42" };
   return (
     <motion.article
       onMouseEnter={() => setHov(true)}
