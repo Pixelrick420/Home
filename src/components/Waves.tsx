@@ -54,10 +54,16 @@ export default function WaveBackground() {
       const tf = time * 0.7;
 
       for (let i = 0; i < cols; i++) {
-        xComp[i] = Math.sin(i * gridSize * 0.012 + tf);
+        xComp[i] =
+          (Math.sin(i * gridSize * 0.007 + tf * 0.01) +
+            Math.sin(i * gridSize * 0.013 + tf * 0.01)) *
+          0.5;
       }
       for (let j = 0; j < rows; j++) {
-        yComp[j] = Math.sin((j * gridSize + scrollOffset) * 0.012 + tf * 0.9);
+        yComp[j] =
+          (Math.sin((j * gridSize + scrollOffset) * 0.011 + tf * 0.01) +
+            Math.sin((j * gridSize + scrollOffset) * 0.017 + tf * 0.01)) *
+          0.5;
       }
 
       for (let i = 0; i < cols; i++) {

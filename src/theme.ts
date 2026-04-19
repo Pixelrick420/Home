@@ -14,8 +14,8 @@ export const lightTokens = {
   textMuted: "#555555",
   textFaint: "#999999",
 
-  accent: "#333333",
-  accentHover: "#555555",
+  accent: "#444444",
+  accentHover: "#111111",
 
   border: "#222222",
   borderHover: "#AAAAAA",
