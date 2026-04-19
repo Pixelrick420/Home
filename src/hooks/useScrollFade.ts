@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 interface UseScrollFadeOptions {
   threshold?: number;
@@ -6,7 +6,7 @@ interface UseScrollFadeOptions {
 }
 
 export function useScrollFade<T extends HTMLElement>(
-  options: UseScrollFadeOptions = {}
+  options: UseScrollFadeOptions = {},
 ): [React.RefObject<T>, boolean] {
   const ref = useRef<T>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -24,8 +24,8 @@ export function useScrollFade<T extends HTMLElement>(
       },
       {
         threshold: options.threshold ?? 0.1,
-        rootMargin: options.rootMargin ?? '0px 0px -60px 0px',
-      }
+        rootMargin: options.rootMargin ?? "0px 0px -60px 0px",
+      },
     );
 
     observer.observe(element);

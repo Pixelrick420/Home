@@ -25,9 +25,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<Mode>(() => {
     const saved = localStorage.getItem("portfolio-theme");
     if (saved === "dark" || saved === "light") return saved;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
+    return "dark";
   });
 
   const t = mode === "light" ? lightTokens : darkTokens;
