@@ -70,8 +70,8 @@ export interface ThemeTokens {
 
 const PALETTES = {
   p1: { bg: "#0A0A0A", fg: "#A3E635", accent: "#A3E635" },
-  p2: { bg: "#0A0A0A", fg: "#FAFAFA", accent: "#BBBBBB" },
-  p3: { bg: "#0A0A0A", fg: "#38BDF8", accent: "#38BDF8" },
+  p2: { bg: "#0A0A0A", fg: "#38BDF8", accent: "#38BDF8" },
+  p3: { bg: "#0A0A0A", fg: "#FF8C42", accent: "#FF8C42" },
 };
 
 const projectPaletteConfig: Record<

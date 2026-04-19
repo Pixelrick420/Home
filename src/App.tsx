@@ -1,12 +1,13 @@
+import { lazy, Suspense } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Projects from "./components/Projects";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Contact from "./components/Contact";
 import WaveBackground from "./components/Waves";
+const Projects = lazy(() => import("./components/Projects"));
+const About = lazy(() => import("./components/About"));
+const Skills = lazy(() => import("./components/Skills"));
+const Contact = lazy(() => import("./components/Contact"));
 import SEO from "./components/SEO";
 
 function Layout() {
@@ -25,10 +26,12 @@ function Layout() {
         <Navbar />
         <main>
           <Hero />
-          <Projects />
-          <About />
-          <Skills />
-          <Contact />
+          <Suspense fallback={<div style={{ height: "100vh" }} />}>
+            <Projects />
+            <About />
+            <Skills />
+            <Contact />
+          </Suspense>
         </main>
       </div>
     </div>
