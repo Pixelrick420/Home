@@ -79,7 +79,7 @@ export default function WaveBackground() {
 
       ctx.fillStyle = t.bg;
       ctx.fillRect(0, 0, width, height);
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 4;
       ctx.strokeStyle = t.accent;
       ctx.lineJoin = "round";
       ctx.lineCap = "round";
