@@ -14,7 +14,8 @@ export const projects: Project[] = [
   {
     id: "handwritten-digits",
     title: "Handwritten Digits",
-    description: "Neural net for handwritten digit recognition on MNIST.",
+    description:
+      "Neural net built from scratch for handwritten digit recognition on MNIST.",
     longDescription:
       "A fully connected neural network trained from scratch with NumPy on the MNIST dataset, achieving ~98% test accuracy. Includes a Tkinter GUI for real-time digit drawing and prediction.",
     tags: ["Python", "NumPy", "Neural Networks", "MNIST"],
@@ -44,7 +45,7 @@ export const projects: Project[] = [
   {
     id: "ascii",
     title: "Ascii",
-    description: "A tool for converting images and videos to ascii to art.",
+    description: "A tool for converting images and videos to ascii art.",
     longDescription:
       "A tool for converting images and videos to ascii to be displayed on the terminal. Includes support for realtime video display and a small accompanying GUI app.",
     tags: ["Python", "Ascii Art", "Real-time"],
@@ -54,7 +55,8 @@ export const projects: Project[] = [
   {
     id: "mesh",
     title: "mesh",
-    description: "Collaborative pixel art canvas, one pixel at a time.",
+    description:
+      "Collaborative pixel art canvas, one pixel at a time similar to r/place.",
     longDescription:
       "A real-time collaborative canvas where multiple users paint pixels together. Built with Firebase for live sync and a clean browser-based interface.",
     tags: ["JavaScript", "Firebase", "Real-time", "Canvas"],
@@ -64,7 +66,8 @@ export const projects: Project[] = [
   {
     id: "election",
     title: "Election",
-    description: "Electronic voting system for school elections.",
+    description:
+      "Electronic voting system for school elections currently deployed at GHSS panamaram.",
     longDescription:
       "A secure, Python-based electronic voting system designed for school use. Handles voter authentication, ballot casting, and real-time result tallying.",
     tags: ["Python", "Flask", "MySQL", "Auth"],
@@ -84,9 +87,10 @@ export const projects: Project[] = [
   {
     id: "leaderboard",
     title: "Leaderboard",
-    description: "HackQuest leaderboard - live rankings for a hackathon.",
+    description:
+      "A real-time leaderboard tracking team scores and rankings live during a tech event",
     longDescription:
-      "A real-time leaderboard tracking team scores and rankings live during a hackathon event. Includes admin panel to provide live updates. Deployed on Vercel.",
+      "A real-time leaderboard tracking team scores and rankings live during a tech event. Includes admin panel to provide live updates.",
     tags: ["TypeScript", "React", "Real-time"],
     github: "https://github.com/Pixelrick420/Leaderboard",
     live: "https://hackquest-leaderboard.vercel.app",
