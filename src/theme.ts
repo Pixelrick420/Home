@@ -14,11 +14,11 @@ export const lightTokens = {
   textMuted: "#555555",
   textFaint: "#999999",
 
-  accent: "#38BDF8",
-  accentHover: "#60A5FA",
+  accent: "#333333",
+  accentHover: "#555555",
 
-  border: "#E5E5E5",
-  borderHover: "#CCCCCC",
+  border: "#222222",
+  borderHover: "#AAAAAA",
 
   white: "#FFFFFF",
 } as const;

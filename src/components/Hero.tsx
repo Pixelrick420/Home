@@ -166,22 +166,26 @@ export default function Hero() {
                 .querySelector("#work")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
-            whileHover={{ y: -4, scale: 1.02 }}
+            whileHover={{
+              scale: 1.02,
+            }}
             whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2 }}
             style={{
               fontFamily: fonts.sans,
               fontSize: "14px",
               fontWeight: 600,
               letterSpacing: "0.05em",
-              color: "#1A1A1A",
+              color: t.bg,
               backgroundColor: t.accent,
-              border: "none",
+              border: `1px solid ${t.accent}`,
               padding: "16px 32px",
               cursor: "pointer",
               borderRadius: "50px",
               display: "flex",
               alignItems: "center",
               gap: "8px",
+              transition: "background-color 0.2s, box-shadow 0.2s",
             }}
           >
             View Work
@@ -200,8 +204,11 @@ export default function Hero() {
           <motion.a
             href="/resume.pdf"
             download
-            whileHover={{ y: -4, scale: 1.02 }}
+            whileHover={{
+              scale: 1.02,
+            }}
             whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2 }}
             style={{
               fontFamily: fonts.sans,
               fontSize: "14px",
@@ -210,13 +217,14 @@ export default function Hero() {
               color: t.text,
               textDecoration: "none",
               backgroundColor: "transparent",
-              border: `1px solid ${t.border}`,
+              border: `1px solid ${t.accent}`,
               padding: "16px 32px",
               borderRadius: "50px",
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              transition: "border-color 0.3s, background-color 0.3s",
+              transition:
+                "background-color 0.2s, border-color 0.2s, color 0.2s",
             }}
           >
             Resume ↗
