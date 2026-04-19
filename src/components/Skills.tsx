@@ -84,7 +84,7 @@ export default function Skills() {
               color: t.accentHover,
             }}
           >
-            03 - Skills
+            04 - Skills
           </span>
           <h2 className="section-title">
             My{" "}

@@ -8,6 +8,7 @@ const Projects = lazy(() => import("./components/Projects"));
 const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
 const Contact = lazy(() => import("./components/Contact"));
+const Experience = lazy(() => import("./components/Experience"));
 import SEO from "./components/SEO";
 
 function Layout() {
@@ -28,6 +29,7 @@ function Layout() {
           <Hero />
           <Suspense fallback={<div style={{ height: "100vh" }} />}>
             <Projects />
+            <Experience />
             <About />
             <Skills />
             <Contact />

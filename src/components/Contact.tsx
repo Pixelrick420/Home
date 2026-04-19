@@ -97,7 +97,7 @@ export default function Contact() {
               color: t.accentHover,
             }}
           >
-            04 - Contact
+            05 - Contact
           </span>
           <motion.h2
             initial={{ opacity: 0, y: 50 }}

@@ -9,6 +9,7 @@ import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 
 const navLinks = [
   { label: "work", href: "#work" },
+  { label: "experience", href: "#experience" },
   { label: "about", href: "#about" },
   { label: "skills", href: "#skills" },
   { label: "contact", href: "#contact" },

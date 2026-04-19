@@ -85,7 +85,7 @@ export default function About() {
               color: t.accentHover,
             }}
           >
-            02 - About
+            03 - About
           </span>
           <h2 className="section-title">
             Hello{" "}
