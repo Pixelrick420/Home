@@ -18,7 +18,7 @@ interface ThemeCtx {
 const ThemeContext = createContext<ThemeCtx>({
   mode: "dark",
   toggle: () => {},
-  t: lightTokens,
+  t: darkTokens,
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
