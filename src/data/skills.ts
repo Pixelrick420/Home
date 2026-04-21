@@ -33,14 +33,4 @@ export const skills: SkillGroup[] = [
     category: "Tools",
     items: ["Git", "Postman", "Kali Linux", "Figma"],
   },
-  {
-    category: "Domains",
-    items: [
-      "Machine Learning",
-      "Compilers",
-      "Networking",
-      "Ethical Hacking",
-      "Data Structures",
-    ],
-  },
 ];

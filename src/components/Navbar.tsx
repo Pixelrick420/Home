@@ -26,6 +26,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const showSolidBg = scrolled || menuOpen;
+
   const handleNav = (href: string) => {
     setMenuOpen(false);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
@@ -48,10 +50,10 @@ export default function Navbar() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          backgroundColor: scrolled ? t.bg : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: `1px solid ${scrolled ? t.border : "transparent"}`,
+          backgroundColor: showSolidBg ? t.bgAlt : "transparent",
+          backdropFilter: showSolidBg ? "blur(12px)" : "none",
+          WebkitBackdropFilter: showSolidBg ? "blur(12px)" : "none",
+          borderBottom: `1px solid ${showSolidBg ? t.border : "transparent"}`,
           transition:
             "background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease",
         }}
@@ -191,46 +193,62 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             style={{
               position: "fixed",
               top: "72px",
               left: 0,
               right: 0,
+              bottom: 0,
               zIndex: 99,
               backgroundColor: t.bg,
-              borderBottom: `1px solid ${t.border}`,
               padding: "0 80px",
+              overflow: "auto",
             }}
           >
-            <div style={{ padding: "24px 0" }}>
+            <div style={{ padding: "48px 0 24px" }}>
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.href}
                   onClick={() => handleNav(link.href)}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
+                  transition={{
+                    delay: i * 0.08,
+                    duration: 0.4,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  }}
                   style={{
-                    display: "block",
+                    display: "flex",
+                    alignItems: "baseline",
                     width: "100%",
                     textAlign: "left",
                     fontFamily: fonts.sans,
-                    fontSize: "18px",
+                    fontSize: "28px",
                     fontWeight: 500,
-                    letterSpacing: "0.08em",
+                    letterSpacing: "0.04em",
                     textTransform: "uppercase",
                     color: t.text,
                     background: "none",
                     border: "none",
                     cursor: "pointer",
                     padding: "16px 0",
-                    borderBottom: `1px solid ${t.border}`,
                   }}
                 >
+                  <span
+                    style={{
+                      fontFamily: fonts.mono,
+                      fontSize: "12px",
+                      color: t.accent,
+                      marginRight: "16px",
+                      opacity: 0.8,
+                    }}
+                  >
+                    0{i + 1}
+                  </span>
                   {link.label}
                 </motion.button>
               ))}

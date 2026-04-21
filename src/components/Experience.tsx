@@ -162,6 +162,8 @@ function ExperienceCard({
           style={{
             display: "flex",
             flexWrap: "wrap",
+            justifyContent: "flex-end",
+            alignItems: "end",
             gap: "8px",
           }}
         >
@@ -176,7 +178,7 @@ function ExperienceCard({
                 color: t.textMuted,
                 backgroundColor: `${t.bgAlt}`,
                 border: `1px solid ${t.border}`,
-                padding: "5px 12px",
+                padding: "5px 5px",
                 borderRadius: "6px",
               }}
             >

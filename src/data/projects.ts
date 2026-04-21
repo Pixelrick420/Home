@@ -35,7 +35,8 @@ export const projects: Project[] = [
   {
     id: "automata",
     title: "Automata",
-    description: "Convert regular expressions to NFA visually.",
+    description:
+      "A tool that converts regex to NFA, rendered as an interactive graph.",
     longDescription:
       "A JavaScript tool that takes a regular expression and constructs the equivalent Non-deterministic Finite Automaton, rendered as an interactive graph.",
     tags: ["JavaScript", "Automata Theory", "Visualization"],
@@ -45,7 +46,8 @@ export const projects: Project[] = [
   {
     id: "ascii",
     title: "Ascii",
-    description: "A tool for converting images and videos to ascii art.",
+    description:
+      "A tool that converts visual media to ascii art with support for realtime video.",
     longDescription:
       "A tool for converting images and videos to ascii to be displayed on the terminal. Includes support for realtime video display and a small accompanying GUI app.",
     tags: ["Python", "Ascii Art", "Real-time"],
@@ -56,7 +58,7 @@ export const projects: Project[] = [
     id: "mesh",
     title: "mesh",
     description:
-      "Collaborative pixel art canvas, one pixel at a time similar to r/place.",
+      "Collaborative pixel art canvas, one pixel at a time; similar to r/place.",
     longDescription:
       "A real-time collaborative canvas where multiple users paint pixels together. Built with Firebase for live sync and a clean browser-based interface.",
     tags: ["JavaScript", "Firebase", "Real-time", "Canvas"],
@@ -67,7 +69,7 @@ export const projects: Project[] = [
     id: "election",
     title: "Election",
     description:
-      "Electronic voting system for school elections currently deployed at GHSS panamaram.",
+      "Electronic voting interface for school elections; deployed at GHSS panamaram.",
     longDescription:
       "A secure, Python-based electronic voting system designed for school use. Handles voter authentication, ballot casting, and real-time result tallying.",
     tags: ["Python", "Flask", "MySQL", "Auth"],
@@ -109,9 +111,10 @@ export const projects: Project[] = [
   {
     id: "sort",
     title: "Sort",
-    description: "A sorting algorithm visualisation project",
-    longDescription: "A sorting algorithm visualisation project",
-    tags: ["Sorting", "Algorithms", "Visualization"],
+    description:
+      "A sorting algorithm visualisation project. Built using plain Javscript",
+    longDescription: "A sorting algorithm visualisation project.",
+    tags: ["Algorithms", "Visualization", "Javascript"],
     github: "https://github.com/Pixelrick420/Sort",
     year: "2023",
   },
@@ -121,7 +124,7 @@ export const projects: Project[] = [
     description: "John Conway's Game of Life",
     longDescription:
       "John Conway's Game of Life, implemented using HTML canvas showcasing minimalistic css and an attempt at writing a funny blogpost",
-    tags: ["HTML", "CSS", "Cellular Automata"],
+    tags: ["HTML", "Canvas", "Cellular Automata"],
     github: "https://github.com/Pixelrick420/GameOfLife",
     year: "",
   },
