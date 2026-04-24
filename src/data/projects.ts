@@ -126,7 +126,7 @@ export const projects: Project[] = [
       "John Conway's Game of Life, implemented using HTML canvas showcasing minimalistic css and an attempt at writing a funny blogpost",
     tags: ["HTML", "Canvas", "Cellular Automata"],
     github: "https://github.com/Pixelrick420/GameOfLife",
-    year: "",
+    year: "2023",
   },
   {
     id: "shell",
