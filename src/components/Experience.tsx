@@ -272,21 +272,20 @@ export default function Experience() {
             <ExperienceCard key={exp.id} exp={exp} i={i} t={t} />
           ))}
         </div>
-
         <style>{`
           .experience-grid {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 32px;
           }
 
           .experience-card {
-            flex: 1;
-            min-width: 300px;
+            min-width: 0;
           }
 
-          @media (max-width: 768px) {
+          @media (max-width: 900px) {
             .experience-grid {
-              flex-direction: column;
+              grid-template-columns: 1fr;
             }
           }
         `}</style>

@@ -17,11 +17,23 @@ export const experiences: Experience[] = [
     role: "Full Stack Developer",
     company: "10xMinds",
     type: "Internship",
-    period: "Jan 2026 - Present",
+    period: "Jan 2026 - April 2026",
     duration: "3 months",
     location: "Remote",
     description:
       "Contributed across multiple active projects at 10xMinds including NimbusMobile.",
     stack: ["TypeScript", "SvelteKit", "Node.js"],
+  },
+  {
+    id: 3,
+    role: "Project Intern",
+    company: "Oracle",
+    type: "Internship",
+    period: "May 2026 - Jul 2026",
+    duration: "2 months",
+    location: "Bengaluru",
+    description:
+      "Engineered CSS Assist, a support assistant collaborating with a team of four.",
+    stack: ["Rust", "Tauri", "FastAPI", "OCI"],
   },
 ];
