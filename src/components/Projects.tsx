@@ -74,6 +74,7 @@ export default function Projects() {
       />
 
       <motion.div
+        className="blob"
         style={{
           position: "absolute",
           top: "50%",
@@ -83,7 +84,6 @@ export default function Projects() {
           height: "600px",
           background: `radial-gradient(circle, ${t.accent}08 0%, transparent 60%)`,
           borderRadius: "50%",
-          filter: "blur(100px)",
           pointerEvents: "none",
           y: bgY,
         }}

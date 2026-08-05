@@ -51,12 +51,9 @@ export default function Navbar() {
           alignItems: "center",
           justifyContent: "space-between",
           backgroundColor: showSolidBg ? t.bgAlt : "transparent",
-          backdropFilter: showSolidBg ? "blur(12px)" : "none",
-          WebkitBackdropFilter: showSolidBg ? "blur(12px)" : "none",
           borderBottom: `1px solid ${showSolidBg ? t.border : "transparent"}`,
-          transition:
-            "background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease",
         }}
+        className={showSolidBg ? "nav-blur" : undefined}
       >
         <motion.a
           href="#"
@@ -138,7 +135,19 @@ export default function Navbar() {
               transition: "color 0.2s",
             }}
           >
-            {mode === "light" ? <FaMoon size={18} /> : <FaSun size={18} />}
+            {mode === "light" ? (
+              <FaMoon
+                size={20}
+                viewBox="-32 -32 576 576"
+                style={{ display: "block", overflow: "visible" }}
+              />
+            ) : (
+              <FaSun
+                size={20}
+                viewBox="-32 -32 576 576"
+                style={{ display: "block", overflow: "visible" }}
+              />
+            )}
           </motion.button>
         </div>
 
@@ -164,9 +173,19 @@ export default function Navbar() {
             }}
           >
             {mode === "light" ? (
-              <FaMoon size={18} aria-hidden="true" />
+              <FaMoon
+                size={20}
+                viewBox="-32 -32 576 576"
+                style={{ display: "block", overflow: "visible" }}
+                aria-hidden="true"
+              />
             ) : (
-              <FaSun size={18} aria-hidden="true" />
+              <FaSun
+                size={20}
+                viewBox="-32 -32 576 576"
+                style={{ display: "block", overflow: "visible" }}
+                aria-hidden="true"
+              />
             )}
           </motion.button>
           <motion.button
@@ -185,7 +204,19 @@ export default function Navbar() {
             }}
             aria-label="Toggle menu"
           >
-            {menuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+            {menuOpen ? (
+              <FaTimes
+                size={20}
+                viewBox="-22 -32 396 576"
+                style={{ display: "block", overflow: "visible" }}
+              />
+            ) : (
+              <FaBars
+                size={20}
+                viewBox="-28 -32 504 576"
+                style={{ display: "block", overflow: "visible" }}
+              />
+            )}
           </motion.button>
         </div>
       </motion.nav>

@@ -227,6 +227,7 @@ export default function Experience() {
       />
 
       <motion.div
+        className="blob"
         style={{
           position: "absolute",
           top: "10%",
@@ -235,7 +236,6 @@ export default function Experience() {
           height: "600px",
           background: `radial-gradient(circle, ${t.accent}10 0%, transparent 50%)`,
           borderRadius: "50%",
-          filter: "blur(120px)",
           pointerEvents: "none",
           y: bgY,
         }}

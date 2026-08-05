@@ -62,6 +62,7 @@ export default function Contact() {
       />
 
       <motion.div
+        className="blob"
         style={{
           position: "absolute",
           top: "20%",
@@ -70,7 +71,6 @@ export default function Contact() {
           height: "500px",
           background: `radial-gradient(circle, ${t.accent}12 0%, transparent 60%)`,
           borderRadius: "50%",
-          filter: "blur(100px)",
           pointerEvents: "none",
           y,
         }}

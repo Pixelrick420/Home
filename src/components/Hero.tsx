@@ -46,6 +46,7 @@ export default function Hero() {
       />
 
       <motion.div
+        className="blob"
         style={{
           position: "absolute",
           top: "10%",
@@ -54,7 +55,6 @@ export default function Hero() {
           height: "clamp(300px, 40vw, 600px)",
           background: `radial-gradient(circle, ${t.accent}15 0%, transparent 70%)`,
           borderRadius: "50%",
-          filter: "blur(80px)",
           pointerEvents: "none",
         }}
         initial={{ scale: 0.8, opacity: 0 }}

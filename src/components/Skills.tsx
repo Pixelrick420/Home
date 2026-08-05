@@ -46,6 +46,7 @@ export default function Skills() {
       />
 
       <motion.div
+        className="blob"
         style={{
           position: "absolute",
           bottom: "10%",
@@ -54,7 +55,6 @@ export default function Skills() {
           height: "500px",
           background: `radial-gradient(circle, ${t.accent}08 0%, transparent 60%)`,
           borderRadius: "50%",
-          filter: "blur(100px)",
           pointerEvents: "none",
           y,
         }}

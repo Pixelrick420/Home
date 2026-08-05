@@ -13,14 +13,16 @@ export default function WaveBackground() {
     let width = 0;
     let height = 0;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const gridSize = 12;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 2);
+    const gridSize = isMobile ? 24 : 12;
     const levels = [-0.8, -0.2, 0.2, 0.8];
 
     let animationId: number;
     let time = 0;
     let cols = 0;
     let rows = 0;
+    let last = 0;
 
     let field: Float32Array;
     let xComp: Float32Array;
@@ -33,7 +35,7 @@ export default function WaveBackground() {
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       cols = Math.ceil(width / gridSize) + 1;
       rows = Math.ceil(height / gridSize) + 1;
@@ -49,7 +51,12 @@ export default function WaveBackground() {
     window.addEventListener("resize", resize);
     resize();
 
-    const draw = () => {
+    const draw = (now: number) => {
+      animationId = requestAnimationFrame(draw);
+      if (now - last < 33) return;
+      const dt = Math.min(now - last, 50) / 16.666;
+      last = now;
+
       const scrollOffset = scrollYRef.current * 0.6;
       const tf = time * 0.7;
 
@@ -159,15 +166,26 @@ export default function WaveBackground() {
         ctx.stroke();
       }
 
-      time += 0.012;
-      animationId = requestAnimationFrame(draw);
+      time += 0.012 * dt;
     };
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationId);
+      } else {
+        last = 0;
+        animationId = requestAnimationFrame(draw);
+      }
+    };
+
+    document.addEventListener("visibilitychange", onVisibility);
 
     animationId = requestAnimationFrame(draw);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVisibility);
       cancelAnimationFrame(animationId);
     };
   }, [t.bg, t.accent]);
@@ -180,7 +198,6 @@ export default function WaveBackground() {
         inset: 0,
         zIndex: -1,
         pointerEvents: "none",
-        willChange: "transform",
       }}
     />
   );
