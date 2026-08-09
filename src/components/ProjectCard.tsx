@@ -1289,7 +1289,7 @@ export default function ProjectCard({ project, index, visible }: Props) {
       style={{
         backgroundColor: t.bgCard,
         border: `1px solid ${hov ? t.accent : t.border}`,
-        borderRadius: "20px",
+        borderRadius: "12px",
         overflow: "hidden",
         cursor: "pointer",
       }}

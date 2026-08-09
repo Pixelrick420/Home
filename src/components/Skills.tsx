@@ -127,7 +127,7 @@ export default function Skills() {
                 padding: "32px 28px",
                 backgroundColor: t.bgCard,
                 border: `1px solid ${t.border}`,
-                borderRadius: "16px",
+                borderRadius: "12px",
               }}
             >
               <div

@@ -35,7 +35,7 @@ function ExperienceCard({
       style={{
         backgroundColor: t.bgCard,
         border: `1px solid ${t.border}`,
-        borderRadius: "20px",
+        borderRadius: "12px",
         overflow: "hidden",
         position: "relative",
         willChange: "transform, opacity",

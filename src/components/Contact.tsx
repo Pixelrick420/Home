@@ -152,7 +152,7 @@ export default function Contact() {
                 padding: "18px 28px",
                 backgroundColor: t.bg,
                 border: `1px solid ${t.border}`,
-                borderRadius: "16px",
+                borderRadius: "12px",
                 textDecoration: "none",
                 color: t.text,
                 transition: "border-color 0.3s, box-shadow 0.3s",
@@ -180,7 +180,6 @@ export default function Contact() {
           style={{
             marginTop: "100px",
             paddingTop: "32px",
-            borderTop: `1px solid ${t.border}`,
             display: "flex",
             justifyContent: "flex-end",
             flexWrap: "wrap",
