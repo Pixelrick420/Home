@@ -52,10 +52,12 @@ style.textContent = `
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior-y: none;
   }
 
   body {
     overflow-x: hidden;
+    overscroll-behavior-y: none;
     background: var(--bg);
     color: var(--text);
   }

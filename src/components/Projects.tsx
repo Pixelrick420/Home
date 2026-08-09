@@ -60,7 +60,7 @@ export default function Projects() {
           position: "absolute",
           inset: 0,
           backgroundColor: t.bgAlt,
-          opacity: 0.5,
+          opacity: 0.75,
           zIndex: 0,
           transition: "background-color 0.4s ease",
         }}

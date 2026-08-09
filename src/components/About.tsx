@@ -36,7 +36,7 @@ export default function About() {
           position: "absolute",
           inset: 0,
           backgroundColor: t.bgAlt,
-          opacity: 0.5,
+          opacity: 0.75,
           zIndex: 0,
           transition: "background-color 0.4s ease",
         }}
@@ -81,18 +81,39 @@ export default function About() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "80px",
+            gap: "32px",
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
-            transition={{
-              duration: 0.8,
-              delay: 0.15,
-              ease: [0.25, 0.1, 0.25, 1],
+          <div
+            className="about-card card-hover"
+            style={{
+              backgroundColor: t.bgCard,
+              border: `1px solid ${t.border}`,
+              borderRadius: "12px",
+              padding: "48px",
+              position: "relative",
+              overflow: "hidden",
             }}
           >
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                bottom: 0,
+                width: "10px",
+                backgroundColor: t.accent,
+              }}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.15,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
             <p
               style={{
                 fontFamily: fonts.sans,
@@ -135,13 +156,14 @@ export default function About() {
                   transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
                   style={{
                     fontFamily: fonts.sans,
-                    fontSize: "12px",
+                    fontSize: "11px",
                     fontWeight: 500,
-                    color: t.textSub,
-                    backgroundColor: t.bg,
-                    padding: "8px 16px",
-                    borderRadius: "50px",
+                    letterSpacing: "0.05em",
+                    color: t.textMuted,
+                    backgroundColor: t.bgAlt,
                     border: `1px solid ${t.border}`,
+                    padding: "5px",
+                    borderRadius: "6px",
                   }}
                 >
                   {lang}
@@ -149,29 +171,69 @@ export default function About() {
               ))}
             </div>
           </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
-            transition={{
-              duration: 0.8,
-              delay: 0.25,
-              ease: [0.25, 0.1, 0.25, 1],
+          <div
+            className="about-card card-hover"
+            style={{
+              backgroundColor: t.bgCard,
+              border: `1px solid ${t.border}`,
+              borderRadius: "12px",
+              padding: "48px",
+              position: "relative",
+              overflow: "hidden",
             }}
           >
-            <h3
+            <div
               style={{
-                fontFamily: fonts.sans,
-                fontSize: "12px",
-                fontWeight: 600,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: t.textMuted,
+                position: "absolute",
+                top: 0,
+                left: 0,
+                bottom: 0,
+                width: "10px",
+                backgroundColor: t.accent,
+              }}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.25,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
                 marginBottom: "28px",
               }}
             >
-              Currently
-            </h3>
+              <div
+                style={{
+                  width: "4px",
+                  height: "20px",
+                  backgroundColor: t.accent,
+                  borderRadius: "2px",
+                  flexShrink: 0,
+                }}
+              />
+              <h3
+                style={{
+                  fontFamily: fonts.sans,
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: t.textMuted,
+                  margin: 0,
+                }}
+              >
+                Currently
+              </h3>
+            </div>
 
             <div
               style={{ display: "flex", flexDirection: "column", gap: "4px" }}
@@ -215,6 +277,7 @@ export default function About() {
               ))}
             </div>
           </motion.div>
+          </div>
         </div>
       </div>
 
@@ -232,6 +295,11 @@ export default function About() {
         @media (max-width: 480px) {
           section#about {
             padding: 60px 20px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .about-card {
+            padding: 28px 20px !important;
           }
         }
       `}</style>

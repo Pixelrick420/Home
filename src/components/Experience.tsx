@@ -213,7 +213,7 @@ export default function Experience() {
           position: "absolute",
           inset: 0,
           backgroundColor: t.bgAlt,
-          opacity: 0.5,
+          opacity: 0.75,
           zIndex: 0,
         }}
       />
