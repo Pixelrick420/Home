@@ -102,74 +102,36 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
       </svg>
     ),
 
-    portfolio: (
+    sharewave: (
       <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
         <rect width="280" height="280" fill={p.bg} />
-        <rect
-          x="30"
-          y="30"
-          width="220"
-          height="220"
-          rx="10"
-          fill="none"
-          stroke={p.fg}
-          strokeWidth="2"
-        />
-        <rect
-          x="30"
-          y="30"
-          width="220"
-          height="36"
-          fill={p.fg}
-          opacity="0.08"
-        />
-        <circle cx="50" cy="48" r="5" fill={p.fg} />
-        <circle cx="65" cy="48" r="5" fill={p.fg} opacity="0.6" />
-        <circle cx="80" cy="48" r="5" fill={p.fg} opacity="0.3" />
+
         <line
-          x1="30"
-          y1="86"
-          x2="250"
-          y2="86"
+          x1="53"
+          y1="140"
+          x2="228"
+          y2="140"
           stroke={p.fg}
           strokeWidth="1"
-          opacity="0.15"
+          opacity="0.08"
         />
 
-        <text
-          x="55"
-          y="155"
-          fontFamily="serif"
-          fontSize="56"
-          fill={p.fg}
-          fontWeight="bold"
-          opacity="0.9"
-        >
-          P
-        </text>
-
-        <rect x="55" y="168" width="90" height="6" fill={p.fg} opacity="0.25" />
-        <rect
-          x="55"
-          y="180"
-          width="110"
-          height="6"
-          fill={p.fg}
-          opacity="0.15"
-        />
-        <rect x="55" y="192" width="70" height="6" fill={p.fg} opacity="0.1" />
-
-        <circle cx="210" cy="155" r="30" fill={p.fg} opacity="0.08" />
-        <circle cx="210" cy="155" r="18" fill={p.fg} opacity="0.18" />
-        <circle cx="210" cy="155" r="6" fill={p.fg} />
-        <rect
-          x="192"
-          y="198"
-          width="36"
-          height="3"
-          fill={p.fg}
-          opacity="0.25"
-        />
+        {Array.from({ length: 22 }, (_, i) => {
+          const amp = 12 + 62 * Math.abs(Math.sin(i * 0.55 + 0.3));
+          const x = 53 + i * 8;
+          return (
+            <rect
+              key={i}
+              x={x}
+              y={140 - amp}
+              width="6.5"
+              height={amp * 2}
+              rx="3"
+              fill={p.fg}
+              opacity={0.35 + (amp / 75) * 0.6}
+            />
+          );
+        })}
       </svg>
     ),
 
@@ -1067,14 +1029,6 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
         >
           1
         </text>
-        <polygon
-          points="140,44 128,60 140,54 152,60"
-          fill={p.fg}
-          opacity="0.9"
-        />
-        <circle cx="128" cy="62" r="4" fill={p.fg} opacity="0.9" />
-        <circle cx="140" cy="56" r="4" fill={p.fg} opacity="0.9" />
-        <circle cx="152" cy="62" r="4" fill={p.fg} opacity="0.9" />
         <rect
           x="180"
           y="160"

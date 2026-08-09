@@ -123,11 +123,12 @@ export const projects: Project[] = [
     year: "2023",
   },
   {
-    id: "portfolio",
-    title: "Portfolio",
-    description: "This site - built with Vite, React, and TypeScript.",
-    tags: ["React", "TypeScript", "Vite", "Design"],
-    github: "https://github.com/Pixelrick420/Home",
+    id: "sharewave",
+    title: "ShareWave",
+    description:
+      "A mobile app that can share files through sound.",
+    tags: ["Flutter", "Dart", "Audroid"],
+    github: "https://github.com/Pixelrick420/ShareWave",
     year: "2026",
   },
 ];
