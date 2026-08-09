@@ -3,7 +3,7 @@ import { useScrollFade } from "../hooks/useScrollFade";
 import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard";
 import { useTheme } from "../context/ThemeContext";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { fonts } from "../theme";
 
 function useColumns(): number {
@@ -38,13 +38,6 @@ export default function Projects() {
     threshold: 0.04,
   });
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
   const displayLimit = columns * 3;
   const displayedProjects = showAll
     ? projects
@@ -70,22 +63,6 @@ export default function Projects() {
           opacity: 0.5,
           zIndex: 0,
           transition: "background-color 0.4s ease",
-        }}
-      />
-
-      <motion.div
-        className="blob"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "600px",
-          height: "600px",
-          background: `radial-gradient(circle, ${t.accent}08 0%, transparent 60%)`,
-          borderRadius: "50%",
-          pointerEvents: "none",
-          y: bgY,
         }}
       />
 

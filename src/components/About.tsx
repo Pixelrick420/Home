@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
 import { useTheme } from "../context/ThemeContext";
 import { fonts } from "../theme";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 const currently = [
   { label: "Studying", value: "B.Tech CSE @ GEC Thrissur" },
@@ -19,13 +19,6 @@ export default function About() {
   const [contentRef, visible] = useScrollFade<HTMLDivElement>({
     threshold: 0.08,
   });
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
     <section
@@ -46,21 +39,6 @@ export default function About() {
           opacity: 0.5,
           zIndex: 0,
           transition: "background-color 0.4s ease",
-        }}
-      />
-
-      <motion.div
-        className="blob"
-        style={{
-          position: "absolute",
-          top: "20%",
-          right: "10%",
-          width: "400px",
-          height: "400px",
-          background: `radial-gradient(circle, ${t.accent}10 0%, transparent 60%)`,
-          borderRadius: "50%",
-          pointerEvents: "none",
-          y,
         }}
       />
 

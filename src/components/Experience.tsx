@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
 import { useTheme } from "../context/ThemeContext";
 import { fonts, type ThemeTokens } from "../theme";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { experiences } from "../data/experience";
 import type { Experience } from "../types";
 
@@ -198,13 +198,6 @@ export default function Experience() {
     threshold: 0.2,
   });
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
-
   return (
     <section
       id="experience"
@@ -222,21 +215,6 @@ export default function Experience() {
           backgroundColor: t.bgAlt,
           opacity: 0.5,
           zIndex: 0,
-        }}
-      />
-
-      <motion.div
-        className="blob"
-        style={{
-          position: "absolute",
-          top: "10%",
-          right: "-10%",
-          width: "600px",
-          height: "600px",
-          background: `radial-gradient(circle, ${t.accent}10 0%, transparent 50%)`,
-          borderRadius: "50%",
-          pointerEvents: "none",
-          y: bgY,
         }}
       />
 

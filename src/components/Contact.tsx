@@ -5,7 +5,7 @@ import { fonts } from "../theme";
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
 import { SiLeetcode } from "@react-icons/all-files/si/SiLeetcode";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 const socials = [
   {
@@ -32,13 +32,6 @@ export default function Contact() {
     threshold: 0.08,
   });
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
   return (
     <section
       id="contact"
@@ -58,21 +51,6 @@ export default function Contact() {
           opacity: 0.5,
           zIndex: 0,
           transition: "background-color 0.4s ease",
-        }}
-      />
-
-      <motion.div
-        className="blob"
-        style={{
-          position: "absolute",
-          top: "20%",
-          right: "15%",
-          width: "500px",
-          height: "500px",
-          background: `radial-gradient(circle, ${t.accent}12 0%, transparent 60%)`,
-          borderRadius: "50%",
-          pointerEvents: "none",
-          y,
         }}
       />
 
@@ -105,7 +83,7 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="section-title"
           >
-            Let's build <span style={{ color: t.accent }}>something.</span>
+            Let's build <span style={{ color: t.accent }}>something</span>
           </motion.h2>
         </motion.div>
 

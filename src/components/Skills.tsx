@@ -3,7 +3,7 @@ import { useScrollFade } from "../hooks/useScrollFade";
 import { skills } from "../data/skills";
 import { useTheme } from "../context/ThemeContext";
 import { fonts } from "../theme";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function Skills() {
   const { t } = useTheme();
@@ -15,13 +15,6 @@ export default function Skills() {
   const [gridRef, gridVisible] = useScrollFade<HTMLDivElement>({
     threshold: 0.04,
   });
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
     <section
@@ -42,21 +35,6 @@ export default function Skills() {
           opacity: 0.5,
           zIndex: 0,
           transition: "background-color 0.4s ease",
-        }}
-      />
-
-      <motion.div
-        className="blob"
-        style={{
-          position: "absolute",
-          bottom: "10%",
-          left: "5%",
-          width: "500px",
-          height: "500px",
-          background: `radial-gradient(circle, ${t.accent}08 0%, transparent 60%)`,
-          borderRadius: "50%",
-          pointerEvents: "none",
-          y,
         }}
       />
 

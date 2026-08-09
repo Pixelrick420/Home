@@ -44,24 +44,6 @@ export default function Hero() {
           transition: "background-color 0.4s ease",
         }}
       />
-
-      <motion.div
-        className="blob"
-        style={{
-          position: "absolute",
-          top: "10%",
-          right: "5%",
-          width: "clamp(300px, 40vw, 600px)",
-          height: "clamp(300px, 40vw, 600px)",
-          background: `radial-gradient(circle, ${t.accent}15 0%, transparent 70%)`,
-          borderRadius: "50%",
-          pointerEvents: "none",
-        }}
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.5, delay: 0.5 }}
-      />
-
       <motion.div
         style={{
           position: "relative",

@@ -132,6 +132,12 @@ style.textContent = `
     letter-spacing: -0.02em;
   }
 
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: clamp(24px, 8vw, 34px);
+    }
+  }
+
   .card-hover {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
@@ -142,20 +148,12 @@ style.textContent = `
     box-shadow: 0 8px 40px color-mix(in srgb, var(--accent) 30%, transparent);
   }
 
-  .blob {
-    filter: blur(80px);
-  }
-
   .nav-blur {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
 
   @media (max-width: 768px) {
-    .blob {
-      filter: none;
-    }
-
     .nav-blur {
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
