@@ -1,5 +1,4 @@
 import "@fontsource/playfair-display/400.css";
-import "@fontsource/playfair-display/400-italic.css";
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/space-grotesk/400.css";
@@ -38,8 +37,6 @@ style.textContent = `
 
     --border: #E5E5E5;
     --borderHover: #CCCCCC;
-
-    --white: #FFFFFF;
 
     --scrollbar: #CCCCCC;
     --selection-text: #FFFFFF;

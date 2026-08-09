@@ -5,7 +5,6 @@ export const experiences: Experience[] = [
     role: "Mobile App Developer",
     company: "Auvieo",
     type: "Internship",
-    period: "Aug 2025 - Oct 2025",
     duration: "3 months",
     location: "Remote",
     description:
@@ -17,7 +16,6 @@ export const experiences: Experience[] = [
     role: "Full Stack Developer",
     company: "10xMinds",
     type: "Internship",
-    period: "Jan 2026 - April 2026",
     duration: "3 months",
     location: "Remote",
     description:
@@ -29,7 +27,6 @@ export const experiences: Experience[] = [
     role: "Project Intern",
     company: "Oracle",
     type: "Internship",
-    period: "May 2026 - Jul 2026",
     duration: "2 months",
     location: "Bengaluru",
     description:

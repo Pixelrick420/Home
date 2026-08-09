@@ -2,10 +2,8 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  longDescription: string;
   tags: string[];
   github: string;
-  live?: string;
   year: string;
 }
 
@@ -19,7 +17,6 @@ export interface Experience {
   role: string;
   company: string;
   type: string;
-  period: string;
   duration: string;
   location: string;
   description: string;

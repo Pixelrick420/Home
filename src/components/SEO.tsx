@@ -4,14 +4,12 @@ import { projects } from "../data/projects";
 interface SEOProps {
   title?: string;
   description?: string;
-  image?: string;
   url?: string;
 }
 
 export default function SEO({
   title = "Hari Krishnan R | Portfolio",
   description = "Creative developer portfolio showcasing projects in web, algorithms, and interactive art.",
-  image = "/og-image.png",
   url = "https://pixelrick-resume.vercel.app/",
 }: SEOProps) {
   return (
@@ -24,13 +22,11 @@ export default function SEO({
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
 
-      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:card" content="summary" />
       <meta property="twitter:url" content={url} />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={image} />
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",

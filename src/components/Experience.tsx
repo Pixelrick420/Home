@@ -25,7 +25,6 @@ function ExperienceCard({
     <motion.div
       ref={ref}
       className="experience-card card-hover"
-      layout={false}
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{

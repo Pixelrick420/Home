@@ -204,7 +204,6 @@ export default function Projects() {
             padding: 60px 20px !important;
           }
 
-          /* Responsive card styling for mobile */
           .project-card > div:last-child {
             padding: 20px !important;
           }

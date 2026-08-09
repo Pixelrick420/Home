@@ -19,8 +19,6 @@ export const lightTokens = {
 
   border: "#222222",
   borderHover: "#AAAAAA",
-
-  white: "#FFFFFF",
 } as const;
 
 export const darkTokens = {
@@ -38,20 +36,7 @@ export const darkTokens = {
 
   border: "#2A2A2A",
   borderHover: "#3A3A3A",
-
-  white: "#FFFFFF",
 } as const;
-
-export const coverPalettes = [
-  { bg: "#1A1A1A", fg: "#A3E635" },
-  { bg: "#0A0A0A", fg: "#A3E635" },
-  { bg: "#FAFAFA", fg: "#1A1A1A" },
-  { bg: "#A3E635", fg: "#1A1A1A" },
-  { bg: "#1A1A1A", fg: "#FF6B6B" },
-  { bg: "#FAFAFA", fg: "#A3E635" },
-  { bg: "#0A0A0A", fg: "#FFFFFF" },
-  { bg: "#FAFAFA", fg: "#666666" },
-] as const;
 
 export interface ThemeTokens {
   bg: string;
@@ -65,7 +50,6 @@ export interface ThemeTokens {
   accentHover: string;
   border: string;
   borderHover: string;
-  white: string;
 }
 
 const PALETTES = {

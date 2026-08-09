@@ -126,8 +126,8 @@ export default function About() {
               }}
             >
               I'm a Computer Science undergraduate at Government Engineering
-              College, Thrissur. With a solid foundation in programming, I'm
-              looking to explore new technologies, work on meaningful projects,
+              College, Thrissur. Having completed multiple internships and projects,
+              I'm looking to apply what i have learnt so far, explore new technologies,
               and connect with others in the field.
             </p>
             <p
