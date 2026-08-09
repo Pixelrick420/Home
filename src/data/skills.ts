@@ -11,7 +11,6 @@ export const skills: SkillGroup[] = [
       "React",
       "Sveltekit",
       "Node.js",
-      "Express.js",
       "Tailwind",
     ],
   },
@@ -20,8 +19,8 @@ export const skills: SkillGroup[] = [
     items: ["PostgreSQL", "Firestore"],
   },
   {
-    category: "Deployment",
-    items: ["Firebase", "Supabase", "Render", "Vercel"],
+    category: "DevOps",
+    items: ["Docker", "Podman"],
   },
   {
     category: "Apps",
@@ -29,6 +28,6 @@ export const skills: SkillGroup[] = [
   },
   {
     category: "Tools",
-    items: ["Git", "Postman", "Kali Linux", "Figma"],
+    items: ["Git", "Postman", "Figma"],
   },
 ];

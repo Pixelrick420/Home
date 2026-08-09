@@ -19,103 +19,47 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
     fractal: (
       <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
         <rect width="280" height="280" fill={p.bg} />
-        <rect
-          x="20"
-          y="40"
-          width="240"
-          height="200"
-          rx="8"
-          fill="none"
-          stroke={p.fg}
-          strokeWidth="1.5"
-        />
-        <rect x="20" y="40" width="240" height="30" fill={p.fg} opacity="0.1" />
-        <circle cx="38" cy="55" r="5" fill={p.accent} />
-        <circle cx="56" cy="55" r="5" fill={p.accent} />
-        <circle cx="74" cy="55" r="5" fill={p.accent} />
         <text
-          x="120"
-          y="59"
+          x="32"
+          y="94"
           fontFamily="monospace"
-          fontSize="9"
-          fill={p.fg}
-          opacity="0.4"
-          textAnchor="middle"
-        >
-          main.fr
-        </text>
-        <text
-          x="38"
-          y="95"
-          fontFamily="monospace"
-          fontSize="11"
-          fill={p.fg}
-          opacity="0.9"
-        >
-          !func main() -&gt; :void &#123;
-        </text>
-        <text
-          x="48"
-          y="115"
-          fontFamily="monospace"
-          fontSize="10"
-          fill={p.fg}
-          opacity="0.9"
-        >
-          {" "}
-          :int x = 42;
-        </text>
-        <text
-          x="48"
-          y="135"
-          fontFamily="monospace"
-          fontSize="10"
-          fill={p.fg}
-          opacity="0.9"
-        >
-          {" "}
-          print(x);
-        </text>
-        <text
-          x="38"
-          y="155"
-          fontFamily="monospace"
-          fontSize="11"
-          fill={p.fg}
-          opacity="0.9"
-        >
-          &#125;
-        </text>
-        <line
-          x1="30"
-          y1="170"
-          x2="250"
-          y2="170"
-          stroke={p.fg}
-          strokeWidth="1"
-          opacity="0.4"
-        />
-        <text
-          x="38"
-          y="186"
-          fontFamily="monospace"
-          fontSize="9"
-          fill={p.fg}
-          opacity="0.9"
-        >
-          42
-        </text>
-        <rect x="225" y="175" width="20" height="15" rx="4" fill={p.accent} />
-        <text
-          x="235"
-          y="185"
-          fontFamily="sans-serif"
-          fontSize="9"
-          fill={p.bg}
-          textAnchor="middle"
+          fontSize="14"
+          fill={p.accent}
           fontWeight="bold"
         >
-          &gt;_
+          !start
+        </text>
+        <text x="32" y="128" fontFamily="monospace" fontSize="14">
+          <tspan fill={p.accent} fontWeight="bold">
+            :int{" "}
+          </tspan>
+          <tspan fill={p.fg} opacity="0.85">
+            age ={" "}
+          </tspan>
+          <tspan fill={p.fg} opacity="0.7">
+            25;
+          </tspan>
+        </text>
+        <text x="32" y="162" fontFamily="monospace" fontSize="14">
+          <tspan fill={p.fg} opacity="0.85">
+            print(
+          </tspan>
+          <tspan fill={p.fg} opacity="0.95">
+            "Hello World!"
+          </tspan>
+          <tspan fill={p.fg} opacity="0.85">
+            );
+          </tspan>
+        </text>
+        <text
+          x="32"
+          y="196"
+          fontFamily="monospace"
+          fontSize="14"
+          fill={p.accent}
+          fontWeight="bold"
+        >
+          !end
         </text>
       </svg>
     ),
@@ -309,71 +253,99 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
         <rect width="280" height="280" fill={p.bg} />
         <rect
           x="30"
-          y="30"
+          y="34"
           width="220"
-          height="220"
-          rx="10"
-          fill="none"
+          height="212"
+          rx="14"
+          fill={p.fg}
+          fillOpacity="0.03"
           stroke={p.fg}
-          strokeWidth="2"
+          strokeWidth="1.5"
+          strokeOpacity="0.5"
         />
         <text
           x="140"
-          y="70"
-          fontFamily="sans-serif"
-          fontSize="14"
+          y="66"
+          fontFamily="monospace"
+          fontSize="12"
           fill={p.fg}
           textAnchor="middle"
           fontWeight="bold"
           letterSpacing="4"
+          opacity="0.9"
         >
           BALLOT
         </text>
+        <line
+          x1="50"
+          y1="80"
+          x2="230"
+          y2="80"
+          stroke={p.fg}
+          strokeWidth="1"
+          opacity="0.15"
+        />
         <rect
-          x="50"
-          y="100"
-          width="18"
-          height="18"
-          rx="3"
+          x="44"
+          y="92"
+          width="192"
+          height="28"
+          rx="8"
+          fill={p.accent}
+          opacity="0.1"
+        />
+        <circle cx="58" cy="106" r="8" fill={p.accent} />
+        <circle cx="58" cy="106" r="3" fill={p.bg} />
+        <circle
+          cx="58"
+          cy="142"
+          r="8"
           fill="none"
           stroke={p.fg}
           strokeWidth="2"
+          opacity="0.4"
         />
-        <polyline
-          points="53,109 58,115 65,103"
-          fill="none"
-          stroke={p.fg}
-          strokeWidth="2.5"
-        />
-        <text x="78" y="113" fontFamily="sans-serif" fontSize="12" fill={p.fg}>
-          Candidate A
-        </text>
-        <rect
-          x="50"
-          y="135"
-          width="18"
-          height="18"
-          rx="3"
+        <circle
+          cx="58"
+          cy="178"
+          r="8"
           fill="none"
           stroke={p.fg}
           strokeWidth="2"
+          opacity="0.4"
         />
-        <text x="78" y="148" fontFamily="sans-serif" fontSize="12" fill={p.fg}>
-          Candidate B
-        </text>
-        <rect
-          x="50"
-          y="170"
-          width="18"
-          height="18"
-          rx="3"
-          fill="none"
-          stroke={p.fg}
-          strokeWidth="2"
-        />
-        <text x="78" y="183" fontFamily="sans-serif" fontSize="12" fill={p.fg}>
-          NOTA
-        </text>
+        {(() => {
+          const rows = [
+            { cy: 106, pattern: ["d", "h", "d", "h", "d"], op: 0.95 },
+            { cy: 142, pattern: ["h", "d", "h", "d", "h"], op: 0.6 },
+            { cy: 178, pattern: ["d", "d", "d"], op: 0.6 },
+          ];
+          return rows.map(({ cy, pattern, op }) =>
+            pattern.map((cell, i) =>
+              cell === "d" ? (
+                <circle
+                  key={`${cy}-${i}`}
+                  cx={82 + i * 20}
+                  cy={cy}
+                  r="3"
+                  fill={p.fg}
+                  opacity={op}
+                />
+              ) : (
+                <rect
+                  key={`${cy}-${i}`}
+                  x={82 + i * 20 - 6}
+                  y={cy - 1.4}
+                  width="12"
+                  height="2.8"
+                  rx="1.4"
+                  fill={p.fg}
+                  opacity={op}
+                />
+              ),
+            ),
+          );
+        })()}
       </svg>
     ),
 
@@ -421,88 +393,64 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
       <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
         <rect width="280" height="280" fill={p.bg} />
         <circle
-          cx="60"
+          cx="62"
           cy="140"
-          r="22"
+          r="24"
           fill="none"
           stroke={p.fg}
           strokeWidth="2"
         />
         <circle
           cx="140"
-          cy="80"
-          r="22"
+          cy="140"
+          r="24"
           fill="none"
           stroke={p.fg}
           strokeWidth="2"
         />
         <circle
-          cx="140"
-          cy="200"
-          r="22"
+          cx="218"
+          cy="140"
+          r="24"
           fill="none"
           stroke={p.fg}
           strokeWidth="2"
         />
         <circle
-          cx="220"
+          cx="218"
           cy="140"
-          r="22"
+          r="29"
           fill="none"
           stroke={p.fg}
-          strokeWidth="2.5"
+          strokeWidth="2"
         />
-        <circle
-          cx="220"
-          cy="140"
-          r="27"
-          fill="none"
-          stroke={p.fg}
-          strokeWidth="1"
-        />
-        <line x1="22" y1="140" x2="38" y2="140" stroke={p.fg} strokeWidth="2" />
-        <polygon points="38,136 38,144 46,140" fill={p.fg} />
+        <line x1="16" y1="140" x2="32" y2="140" stroke={p.fg} strokeWidth="2" />
+        <polygon points="32,136 32,144 38,140" fill={p.fg} />
         <line
-          x1="82"
-          y1="128"
-          x2="118"
-          y2="92"
+          x1="86"
+          y1="140"
+          x2="108"
+          y2="140"
           stroke={p.fg}
           strokeWidth="1.5"
-          opacity="0.7"
+          opacity="0.8"
         />
+        <polygon points="108,136 108,144 116,140" fill={p.fg} opacity="0.8" />
         <line
-          x1="82"
-          y1="152"
-          x2="118"
-          y2="188"
+          x1="164"
+          y1="140"
+          x2="186"
+          y2="140"
           stroke={p.fg}
           strokeWidth="1.5"
-          opacity="0.7"
+          opacity="0.8"
         />
-        <line
-          x1="162"
-          y1="90"
-          x2="198"
-          y2="128"
-          stroke={p.fg}
-          strokeWidth="1.5"
-          opacity="0.7"
-        />
-        <line
-          x1="162"
-          y1="190"
-          x2="198"
-          y2="152"
-          stroke={p.fg}
-          strokeWidth="1.5"
-          opacity="0.7"
-        />
+        <polygon points="186,136 186,144 194,140" fill={p.fg} opacity="0.8" />
         <text
-          x="60"
+          x="62"
           y="145"
           fontFamily="monospace"
-          fontSize="11"
+          fontSize="12"
           fill={p.fg}
           textAnchor="middle"
         >
@@ -510,33 +458,45 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
         </text>
         <text
           x="140"
-          y="85"
+          y="145"
           fontFamily="monospace"
-          fontSize="11"
+          fontSize="12"
           fill={p.fg}
           textAnchor="middle"
         >
           q1
         </text>
         <text
-          x="140"
-          y="205"
+          x="218"
+          y="145"
           fontFamily="monospace"
-          fontSize="11"
+          fontSize="12"
           fill={p.fg}
           textAnchor="middle"
         >
           q2
         </text>
         <text
-          x="220"
-          y="145"
+          x="101"
+          y="130"
           fontFamily="monospace"
           fontSize="11"
           fill={p.fg}
+          opacity="0.9"
           textAnchor="middle"
         >
-          q3
+          0
+        </text>
+        <text
+          x="179"
+          y="130"
+          fontFamily="monospace"
+          fontSize="11"
+          fill={p.fg}
+          opacity="0.9"
+          textAnchor="middle"
+        >
+          1
         </text>
       </svg>
     ),
@@ -1380,7 +1340,7 @@ export default function ProjectCard({ project, index, visible }: Props) {
                 letterSpacing: "0.05em",
                 color: "#1A1A1A",
                 textDecoration: "none",
-                backgroundColor: t.accent,
+                backgroundColor: "#aaaaaa",
                 padding: "14px 24px",
                 borderRadius: "50px",
                 display: "inline-flex",
