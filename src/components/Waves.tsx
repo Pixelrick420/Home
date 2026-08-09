@@ -15,7 +15,7 @@ export default function WaveBackground() {
 
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 2);
-    const gridSize = isMobile ? 24 : 12;
+    const gridSize = isMobile ? 30 : 12;
     const levels = [-0.8, -0.2, 0.2, 0.8];
 
     let animationId: number;
@@ -27,6 +27,12 @@ export default function WaveBackground() {
     let field: Float32Array;
     let xComp: Float32Array;
     let yComp: Float32Array;
+    let xBase1: Float32Array;
+    let xBase2: Float32Array;
+    let diagI: Float32Array;
+    let yBase1: Float32Array;
+    let yBase2: Float32Array;
+    let diagJ: Float32Array;
 
     function resize() {
       width = window.innerWidth;
@@ -42,6 +48,24 @@ export default function WaveBackground() {
       field = new Float32Array(cols * rows);
       xComp = new Float32Array(cols);
       yComp = new Float32Array(rows);
+      xBase1 = new Float32Array(cols);
+      xBase2 = new Float32Array(cols);
+      diagI = new Float32Array(cols);
+      yBase1 = new Float32Array(rows);
+      yBase2 = new Float32Array(rows);
+      diagJ = new Float32Array(rows);
+      for (let i = 0; i < cols; i++) {
+        const g = i * gridSize;
+        xBase1[i] = g * 0.007;
+        xBase2[i] = g * 0.013;
+        diagI[i] = g * 0.008;
+      }
+      for (let j = 0; j < rows; j++) {
+        const g = j * gridSize;
+        yBase1[j] = g * 0.011;
+        yBase2[j] = g * 0.017;
+        diagJ[j] = g * 0.008;
+      }
     }
 
     const handleScroll = () => {
@@ -53,34 +77,37 @@ export default function WaveBackground() {
 
     const draw = (now: number) => {
       animationId = requestAnimationFrame(draw);
-      if (now - last < 33) return;
+      if (now - last < 20) return;
       const dt = Math.min(now - last, 50) / 16.666;
       last = now;
 
       const scrollOffset = scrollYRef.current * 0.6;
       const tf = time * 0.7;
+      const tfA = tf * 0.01;
+      const tfB = tf * 0.8;
+      const s1 = scrollOffset * 0.011;
+      const s2 = scrollOffset * 0.017;
+      const s3 = scrollOffset * 0.008;
+      const invRange = 1 / 2.2;
 
       for (let i = 0; i < cols; i++) {
         xComp[i] =
-          (Math.sin(i * gridSize * 0.007 + tf * 0.01) +
-            Math.sin(i * gridSize * 0.013 + tf * 0.01)) *
-          0.5;
+          (Math.sin(xBase1[i] + tfA) + Math.sin(xBase2[i] + tfA)) * 0.5;
       }
       for (let j = 0; j < rows; j++) {
         yComp[j] =
-          (Math.sin((j * gridSize + scrollOffset) * 0.011 + tf * 0.01) +
-            Math.sin((j * gridSize + scrollOffset) * 0.017 + tf * 0.01)) *
+          (Math.sin(yBase1[j] + s1 + tfA) +
+            Math.sin(yBase2[j] + s2 + tfA)) *
           0.5;
       }
 
       for (let i = 0; i < cols; i++) {
         const offset = i * rows;
         const xc = xComp[i];
+        const di = diagI[i];
         for (let j = 0; j < rows; j++) {
-          const diag = Math.sin(
-            (i + j) * gridSize * 0.008 + scrollOffset * 0.008 + tf * 0.8,
-          );
-          field[offset + j] = (xc + yComp[j] + diag) / 2.2;
+          const diag = Math.sin(di + diagJ[j] + s3 + tfB);
+          field[offset + j] = (xc + yComp[j] + diag) * invRange;
         }
       }
 
@@ -88,8 +115,8 @@ export default function WaveBackground() {
       ctx.fillRect(0, 0, width, height);
       ctx.lineWidth = 4;
       ctx.strokeStyle = t.accent;
-      ctx.lineJoin = "round";
-      ctx.lineCap = "round";
+      ctx.lineJoin = isMobile ? "miter" : "round";
+      ctx.lineCap = isMobile ? "butt" : "round";
 
       for (const level of levels) {
         ctx.beginPath();
