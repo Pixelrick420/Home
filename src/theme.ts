@@ -22,20 +22,20 @@ export const lightTokens = {
 } as const;
 
 export const darkTokens = {
-  bg: "#0A0A0A",
-  bgAlt: "#141414",
-  bgCard: "#1A1A1A",
+  bg: "#000000",
+  bgAlt: "#0A0A0A",
+  bgCard: "#141414",
 
-  text: "#F5F5F5",
-  textSub: "#CCCCCC",
-  textMuted: "#AAAAAA",
-  textFaint: "#888888",
+  text: "#E8E8E8",
+  textSub: "#D0D0D0",
+  textMuted: "#999999",
+  textFaint: "#707070",
 
-  accent: "#A3E635",
-  accentHover: "#B8F05A",
+  accent: "#E8E8E8",
+  accentHover: "#F2F2F2",
 
-  border: "#2A2A2A",
-  borderHover: "#3A3A3A",
+  border: "#BDBDBD",
+  borderHover: "#666666",
 } as const;
 
 export interface ThemeTokens {

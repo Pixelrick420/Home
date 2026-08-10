@@ -3,7 +3,12 @@ import { darkTokens, lightTokens, type ThemeTokens } from "../theme";
 
 export type Mode = "light" | "dark";
 
-export const DEFAULT_MODE: Mode = "light";
+export const DEFAULT_MODE: Mode = "dark";
+
+const tokensByMode: Record<Mode, ThemeTokens> = {
+  light: lightTokens,
+  dark: darkTokens,
+};
 
 interface ThemeCtx {
   mode: Mode;
@@ -14,7 +19,7 @@ interface ThemeCtx {
 export const ThemeContext = createContext<ThemeCtx>({
   mode: DEFAULT_MODE,
   toggle: () => {},
-  t: DEFAULT_MODE === "light" ? lightTokens : darkTokens,
+  t: tokensByMode[DEFAULT_MODE],
 });
 
 export function useTheme() {
