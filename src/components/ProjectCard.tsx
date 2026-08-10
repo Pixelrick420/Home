@@ -3,13 +3,13 @@ import type { Project } from "../types";
 import { useTheme } from "../context/ThemeContext";
 import { fonts } from "../theme";
 import { motion } from "framer-motion";
-import { FaGithub } from "react-icons/fa";
 import { projectPalettes } from "../theme";
 
 interface Props {
   project: Project;
   index: number;
   visible: boolean;
+  onSelect: () => void;
 }
 
 function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
@@ -1215,7 +1215,12 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
   return <div style={{ width: "100%", height: "100%" }}>{content}</div>;
 }
 
-export default function ProjectCard({ project, index, visible }: Props) {
+export default function ProjectCard({
+  project,
+  index,
+  visible,
+  onSelect,
+}: Props) {
   const { t } = useTheme();
   const [hov, setHov] = useState(false);
 
@@ -1229,6 +1234,15 @@ export default function ProjectCard({ project, index, visible }: Props) {
     <motion.article
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
+      onClick={onSelect}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSelect();
+        }
+      }}
+      role="button"
+      tabIndex={0}
       initial={{ opacity: 0, y: 40 }}
       animate={{
         opacity: visible ? 1 : 0,
@@ -1280,20 +1294,14 @@ export default function ProjectCard({ project, index, visible }: Props) {
               justifyContent: "center",
             }}
           >
-            <motion.a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
+            <motion.span
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               style={{
                 fontFamily: fonts.sans,
                 fontSize: "14px",
                 fontWeight: 600,
                 letterSpacing: "0.05em",
                 color: "#1A1A1A",
-                textDecoration: "none",
                 backgroundColor: "#aaaaaa",
                 padding: "14px 24px",
                 borderRadius: "50px",
@@ -1302,9 +1310,8 @@ export default function ProjectCard({ project, index, visible }: Props) {
                 gap: "8px",
               }}
             >
-              <FaGithub size={18} />
-              View on GitHub
-            </motion.a>
+              Learn More
+            </motion.span>
           </motion.div>
         </div>
       </div>

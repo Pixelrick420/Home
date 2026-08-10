@@ -5,6 +5,10 @@ export interface Project {
   tags: string[];
   github: string;
   year: string;
+  what: string;
+  problem: string;
+  stack: string;
+  demo?: string;
 }
 
 export interface SkillGroup {

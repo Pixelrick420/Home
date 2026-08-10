@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
 import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard";
+import ProjectModal from "./ProjectModal";
 import { useTheme } from "../context/ThemeContext";
 import { motion } from "framer-motion";
 import { fonts } from "../theme";
@@ -29,6 +30,9 @@ export default function Projects() {
   const { t } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const [showAll, setShowAll] = useState(false);
+  const [selected, setSelected] = useState<(typeof projects)[number] | null>(
+    null,
+  );
   const columns = useColumns();
 
   const [headerRef, headerVisible] = useScrollFade<HTMLDivElement>({
@@ -127,9 +131,12 @@ export default function Projects() {
               project={p}
               index={i}
               visible={gridVisible}
+              onSelect={() => setSelected(p)}
             />
           ))}
         </motion.div>
+
+        <ProjectModal project={selected} onClose={() => setSelected(null)} />
 
         {hasMoreProjects && (
           <motion.div
