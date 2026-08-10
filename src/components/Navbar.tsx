@@ -1,11 +1,23 @@
 import { useState, useEffect } from "react";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/useTheme";
 import { fonts } from "../theme";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaMoon } from "@react-icons/all-files/fa/FaMoon";
 import { FaSun } from "@react-icons/all-files/fa/FaSun";
 import { FaBars } from "@react-icons/all-files/fa/FaBars";
 import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
+import {
+  alpha,
+  duration,
+  ease,
+  fontSize,
+  offset,
+  pagePadding,
+  spacing,
+  stagger,
+  transitions,
+  zIndex,
+} from "../constants";
 
 const navLinks = [
   { label: "work", href: "#work" },
@@ -38,14 +50,14 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={{ duration: duration.medium, ease }}
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 100,
-          padding: "0 80px",
+          zIndex: zIndex.nav,
+          padding: `0 ${pagePadding.desktop}`,
           height: "72px",
           display: "flex",
           alignItems: "center",
@@ -64,7 +76,7 @@ export default function Navbar() {
           whileHover={{ scale: 1.02 }}
           style={{
             fontFamily: fonts.serif,
-            fontSize: "18px",
+            fontSize: fontSize.lg,
             fontWeight: 700,
             color: t.text,
             textDecoration: "none",
@@ -78,7 +90,7 @@ export default function Navbar() {
         <div
           className="desk-nav"
           aria-label={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
-          style={{ display: "flex", alignItems: "center", gap: "32px" }}
+          style={{ display: "flex", alignItems: "center", gap: spacing.xxl }}
         >
           {navLinks.map((link) => (
             <motion.button
@@ -86,7 +98,7 @@ export default function Navbar() {
               onClick={() => handleNav(link.href)}
               style={{
                 fontFamily: fonts.sans,
-                fontSize: "13px",
+                fontSize: fontSize.sm,
                 fontWeight: 500,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
@@ -94,7 +106,7 @@ export default function Navbar() {
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                padding: "4px 0",
+                padding: `${spacing.xs} 0`,
                 position: "relative",
               }}
               whileHover="hover"
@@ -113,7 +125,7 @@ export default function Navbar() {
                 variants={{
                   hover: { scaleX: 1 },
                 }}
-                transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                transition={{ duration: duration.fast, ease }}
               />
             </motion.button>
           ))}
@@ -132,7 +144,7 @@ export default function Navbar() {
               color: t.text,
               border: "none",
               cursor: "pointer",
-              transition: "color 0.2s",
+              transition: transitions.color,
             }}
           >
             {mode === "light" ? (
@@ -154,7 +166,7 @@ export default function Navbar() {
         <div
           className="mob-controls"
           aria-label={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
-          style={{ display: "none", alignItems: "center", gap: "16px" }}
+          style={{ display: "none", alignItems: "center", gap: spacing.lg }}
         >
           <motion.button
             onClick={toggle}
@@ -227,30 +239,30 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: duration.fast }}
             style={{
               position: "fixed",
               top: "72px",
               left: 0,
               right: 0,
               bottom: 0,
-              zIndex: 99,
+              zIndex: zIndex.navMenu,
               backgroundColor: t.bg,
-              padding: "0 80px",
+              padding: `0 ${pagePadding.desktop}`,
               overflow: "auto",
             }}
           >
-            <div style={{ padding: "48px 0 24px" }}>
+            <div style={{ padding: `${spacing.huge} 0 ${spacing.xl}` }}>
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.href}
                   onClick={() => handleNav(link.href)}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -offset.x }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
-                    delay: i * 0.08,
-                    duration: 0.4,
-                    ease: [0.25, 0.1, 0.25, 1],
+                    delay: i * stagger,
+                    duration: duration.fast,
+                    ease,
                   }}
                   style={{
                     display: "flex",
@@ -258,7 +270,7 @@ export default function Navbar() {
                     width: "100%",
                     textAlign: "left",
                     fontFamily: fonts.sans,
-                    fontSize: "28px",
+                    fontSize: fontSize.heading,
                     fontWeight: 500,
                     letterSpacing: "0.04em",
                     textTransform: "uppercase",
@@ -266,16 +278,16 @@ export default function Navbar() {
                     background: "none",
                     border: "none",
                     cursor: "pointer",
-                    padding: "16px 0",
+                    padding: `${spacing.lg} 0`,
                   }}
                 >
                   <span
                     style={{
                       fontFamily: fonts.mono,
-                      fontSize: "12px",
+                      fontSize: fontSize.xs,
                       color: t.accent,
-                      marginRight: "16px",
-                      opacity: 0.8,
+                      marginRight: spacing.lg,
+                      opacity: alpha.navNumber,
                     }}
                   >
                     0{i + 1}
@@ -290,18 +302,18 @@ export default function Navbar() {
 
       <style>{`
         @media (max-width: 1024px) {
-          nav { padding-left: 48px !important; padding-right: 48px !important; }
-          [style*="padding: 0 80px"] { padding: 0 48px !important; }
+          nav { padding-left: ${pagePadding.laptop} !important; padding-right: ${pagePadding.laptop} !important; }
+          [style*="padding: 0 80px"] { padding: 0 ${pagePadding.laptop} !important; }
         }
         @media (max-width: 768px) {
           .desk-nav { display: none !important; }
           .mob-controls { display: flex !important; }
-          nav { padding-left: 32px !important; padding-right: 32px !important; }
-          [style*="padding: 0 80px"] { padding: 0 32px !important; }
+          nav { padding-left: ${pagePadding.tablet} !important; padding-right: ${pagePadding.tablet} !important; }
+          [style*="padding: 0 80px"] { padding: 0 ${pagePadding.tablet} !important; }
         }
         @media (max-width: 480px) {
-          nav { padding-left: 20px !important; padding-right: 20px !important; }
-          [style*="padding: 0 80px"] { padding: 0 20px !important; }
+          nav { padding-left: ${pagePadding.mobile} !important; padding-right: ${pagePadding.mobile} !important; }
+          [style*="padding: 0 80px"] { padding: 0 ${pagePadding.mobile} !important; }
         }
       `}</style>
     </>

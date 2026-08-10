@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/useTheme";
+import { zIndex } from "../constants";
 
 export default function WaveBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -223,7 +224,7 @@ export default function WaveBackground() {
       style={{
         position: "fixed",
         inset: 0,
-        zIndex: -1,
+        zIndex: zIndex.waves,
         pointerEvents: "none",
       }}
     />

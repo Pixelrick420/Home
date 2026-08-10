@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import WaveBackground from "./components/Waves";
+import { zIndex, layout } from "./constants";
 const Projects = lazy(() => import("./components/Projects"));
 const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
@@ -16,18 +17,18 @@ function Layout() {
     <div
       style={{
         position: "relative",
-        minHeight: "100vh",
+        minHeight: layout.minHeight,
         overflowX: "hidden",
       }}
     >
       <Analytics />
       <SEO />
       <WaveBackground />
-      <div style={{ position: "relative", zIndex: 1 }}>
+      <div style={{ position: "relative", zIndex: zIndex.app }}>
         <Navbar />
         <main>
           <Hero />
-          <Suspense fallback={<div style={{ height: "100vh" }} />}>
+          <Suspense fallback={<div style={{ height: layout.minHeight }} />}>
             <Projects />
             <Experience />
             <About />

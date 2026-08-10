@@ -1,9 +1,22 @@
 import { useRef } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
 import { skills } from "../data/skills";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/useTheme";
 import { fonts } from "../theme";
 import { motion } from "framer-motion";
+import {
+  duration,
+  ease,
+  fontSize,
+  offset,
+  radius,
+  section,
+  sectionInner,
+  sectionOverlay,
+  sectionStyle,
+  spacing,
+  stagger,
+} from "../constants";
 
 export default function Skills() {
   const { t } = useTheme();
@@ -17,43 +30,18 @@ export default function Skills() {
   });
 
   return (
-    <section
-      id="skills"
-      ref={sectionRef}
-      style={{
-        position: "relative",
-        padding: "120px 80px",
-        transition: "background-color 0.4s ease",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: t.bgAlt,
-          opacity: 0.75,
-          zIndex: 0,
-          transition: "background-color 0.4s ease",
-        }}
-      />
+    <section id="skills" ref={sectionRef} style={sectionStyle}>
+      <div style={sectionOverlay(t.bgAlt)} />
 
-      <div
-        style={{
-          position: "relative",
-          zIndex: 2,
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
+      <div style={sectionInner}>
         <motion.div
           ref={headerRef}
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: offset.y }}
           animate={{
             opacity: headerVisible ? 1 : 0,
-            y: headerVisible ? 0 : 40,
+            y: headerVisible ? 0 : offset.y,
           }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: duration.slow, ease }}
           className="section-header"
         >
           <span
@@ -80,40 +68,40 @@ export default function Skills() {
           ref={gridRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: gridVisible ? 1 : 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: duration.medium }}
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-            gap: "20px",
+            gap: spacing.lgPlus,
           }}
         >
           {skills.map((group, i) => (
             <motion.div
               key={group.category}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: offset.y }}
               animate={{
                 opacity: gridVisible ? 1 : 0,
-                y: gridVisible ? 0 : 40,
+                y: gridVisible ? 0 : offset.y,
               }}
               transition={{
-                duration: 0.6,
-                delay: i * 0.08,
-                ease: [0.25, 0.1, 0.25, 1],
+                duration: duration.medium,
+                delay: i * stagger,
+                ease,
               }}
               className="card-hover"
               style={{
-                padding: "32px 28px",
+                padding: `${spacing.xxl} ${spacing.xlPlus}`,
                 backgroundColor: t.bgCard,
                 border: `1px solid ${t.border}`,
-                borderRadius: "12px",
+                borderRadius: radius.card,
               }}
             >
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "12px",
-                  marginBottom: "20px",
+                  gap: spacing.md,
+                  marginBottom: spacing.lgPlus,
                 }}
               >
                 <div
@@ -121,14 +109,14 @@ export default function Skills() {
                     width: "4px",
                     height: "20px",
                     backgroundColor: t.accent,
-                    borderRadius: "2px",
+                    borderRadius: radius.bar,
                     flexShrink: 0,
                   }}
                 />
                 <p
                   style={{
                     fontFamily: fonts.sans,
-                    fontSize: "11px",
+                    fontSize: fontSize.xs,
                     fontWeight: 600,
                     letterSpacing: "0.18em",
                     textTransform: "uppercase",
@@ -144,7 +132,7 @@ export default function Skills() {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "12px",
+                  gap: spacing.md,
                 }}
               >
                 {group.items.map((item) => (
@@ -170,17 +158,17 @@ export default function Skills() {
       <style>{`
         @media (max-width: 1024px) {
           section#skills {
-            padding: 100px 48px !important;
+            padding: ${section.laptop} !important;
           }
         }
         @media (max-width: 768px) {
           section#skills {
-            padding: 80px 32px !important;
+            padding: ${section.tablet} !important;
           }
         }
         @media (max-width: 480px) {
           section#skills {
-            padding: 60px 20px !important;
+            padding: ${section.mobile} !important;
           }
         }
       `}</style>

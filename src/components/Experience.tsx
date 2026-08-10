@@ -1,10 +1,23 @@
 import { useRef } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/useTheme";
 import { fonts, type ThemeTokens } from "../theme";
 import { motion, useInView } from "framer-motion";
 import { experiences } from "../data/experience";
 import type { Experience } from "../types";
+import {
+  duration,
+  fontSize,
+  hexAlpha,
+  offset,
+  radius,
+  section,
+  sectionInner,
+  sectionOverlay,
+  spacing,
+  stagger,
+  transitions,
+} from "../constants";
 
 function ExperienceCard({
   exp,
@@ -25,17 +38,17 @@ function ExperienceCard({
     <motion.div
       ref={ref}
       className="experience-card card-hover"
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: offset.ySmall }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: offset.ySmall }}
       transition={{
-        duration: 0.5,
-        delay: i * 0.1,
+        duration: duration.medium,
+        delay: i * stagger,
         ease: "easeOut",
       }}
       style={{
         backgroundColor: t.bgCard,
         border: `1px solid ${t.border}`,
-        borderRadius: "12px",
+        borderRadius: radius.card,
         overflow: "hidden",
         position: "relative",
         willChange: "transform, opacity",
@@ -55,20 +68,20 @@ function ExperienceCard({
 
       <div
         style={{
-          padding: "28px 32px",
+          padding: `${spacing.xlPlus} ${spacing.xxl}`,
           display: "flex",
           flexDirection: "column",
         }}
       >
-        <div style={{ marginBottom: "12px" }}>
+        <div style={{ marginBottom: spacing.md }}>
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              gap: "16px",
+              gap: spacing.lg,
               flexWrap: "wrap",
-              marginBottom: "12px",
+              marginBottom: spacing.md,
             }}
           >
             <h3
@@ -91,10 +104,10 @@ function ExperienceCard({
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 color: t.accent,
-                border: `1px solid ${t.accent}40`,
-                backgroundColor: `${t.accent}15`,
-                padding: "4px 10px",
-                borderRadius: "50px",
+                border: `1px solid ${t.accent}${hexAlpha.border}`,
+                backgroundColor: `${t.accent}${hexAlpha.bg}`,
+                padding: `${spacing.xs} 10px`,
+                borderRadius: radius.pill,
               }}
             >
               {exp.type}
@@ -105,7 +118,7 @@ function ExperienceCard({
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "12px",
+              gap: spacing.md,
               flexWrap: "wrap",
             }}
           >
@@ -114,8 +127,8 @@ function ExperienceCard({
                 fontFamily: fonts.sans,
                 fontSize: "14px",
                 fontWeight: 600,
-                marginTop: "20px",
-                marginBottom: "20px",
+                marginTop: spacing.lgPlus,
+                marginBottom: spacing.lgPlus,
                 color: t.accent,
               }}
             >
@@ -125,7 +138,7 @@ function ExperienceCard({
             <span
               style={{
                 fontFamily: fonts.sans,
-                fontSize: "13px",
+                fontSize: fontSize.sm,
                 color: t.textMuted,
               }}
             >
@@ -135,7 +148,7 @@ function ExperienceCard({
             <span
               style={{
                 fontFamily: fonts.sans,
-                fontSize: "13px",
+                fontSize: fontSize.sm,
                 color: t.textMuted,
               }}
             >
@@ -151,7 +164,7 @@ function ExperienceCard({
             fontWeight: 500,
             color: t.textSub,
             lineHeight: 1.7,
-            margin: "0 0 20px 0",
+            margin: `0 0 ${spacing.lgPlus} 0`,
           }}
         >
           {exp.description}
@@ -163,7 +176,7 @@ function ExperienceCard({
             flexWrap: "wrap",
             justifyContent: "flex-end",
             alignItems: "end",
-            gap: "8px",
+            gap: spacing.sm,
           }}
         >
           {exp.stack.map((tech: string) => (
@@ -171,14 +184,14 @@ function ExperienceCard({
               key={tech}
               style={{
                 fontFamily: fonts.sans,
-                fontSize: "11px",
+                fontSize: fontSize.xs,
                 fontWeight: 500,
                 letterSpacing: "0.05em",
                 color: t.textMuted,
                 backgroundColor: `${t.bgAlt}`,
                 border: `1px solid ${t.border}`,
-                padding: "5px 5px",
-                borderRadius: "6px",
+                padding: spacing.xs,
+                borderRadius: radius.tag,
               }}
             >
               {tech}
@@ -204,36 +217,21 @@ export default function Experience() {
       ref={sectionRef}
       style={{
         position: "relative",
-        padding: "120px 80px",
-        transition: "background-color 0.4s ease",
+        padding: section.base,
+        transition: transitions.bg,
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: t.bgAlt,
-          opacity: 0.75,
-          zIndex: 0,
-        }}
-      />
+      <div style={sectionOverlay(t.bgAlt)} />
 
-      <div
-        style={{
-          position: "relative",
-          zIndex: 2,
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
+      <div style={sectionInner}>
         <motion.div
           ref={headerRef}
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: offset.y }}
           animate={{
             opacity: headerVisible ? 1 : 0,
-            y: headerVisible ? 0 : 40,
+            y: headerVisible ? 0 : offset.y,
           }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: duration.slow }}
           className="section-header"
         >
           <span className="section-label" style={{ color: t.accentHover }}>
@@ -253,7 +251,7 @@ export default function Experience() {
           .experience-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 32px;
+            gap: ${spacing.xxl};
           }
 
           .experience-card {

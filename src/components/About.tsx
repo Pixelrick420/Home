@@ -1,8 +1,21 @@
 import { useRef } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/useTheme";
 import { fonts } from "../theme";
 import { motion } from "framer-motion";
+import {
+  duration,
+  ease,
+  fontSize,
+  offset,
+  radius,
+  section,
+  sectionInner,
+  sectionOverlay,
+  sectionStyle,
+  spacing,
+  stagger,
+} from "../constants";
 
 const currently = [
   { label: "Studying", value: "B.Tech CSE @ GEC Thrissur" },
@@ -12,6 +25,13 @@ const currently = [
 ];
 
 const languages = ["English", "Malayalam", "Hindi"];
+
+const cardBase = {
+  borderRadius: radius.card,
+  padding: spacing.huge,
+  position: "relative" as const,
+  overflow: "hidden",
+};
 
 export default function About() {
   const { t } = useTheme();
@@ -24,37 +44,15 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      style={{
-        position: "relative",
-        padding: "120px 80px",
-        transition: "background-color 0.4s ease",
-        overflow: "hidden",
-      }}
+      style={sectionStyle}
     >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: t.bgAlt,
-          opacity: 0.75,
-          zIndex: 0,
-          transition: "background-color 0.4s ease",
-        }}
-      />
+      <div style={sectionOverlay(t.bgAlt)} />
 
-      <div
-        ref={contentRef}
-        style={{
-          position: "relative",
-          zIndex: 2,
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
+      <div ref={contentRef} style={sectionInner}>
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 40 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          initial={{ opacity: 0, y: offset.y }}
+          animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : offset.y }}
+          transition={{ duration: duration.slow, ease }}
           className="section-header"
         >
           <span
@@ -81,18 +79,15 @@ export default function About() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "32px",
+            gap: spacing.xxl,
           }}
         >
           <div
             className="about-card card-hover"
             style={{
+              ...cardBase,
               backgroundColor: t.bgCard,
               border: `1px solid ${t.border}`,
-              borderRadius: "12px",
-              padding: "48px",
-              position: "relative",
-              overflow: "hidden",
             }}
           >
             <div
@@ -109,79 +104,79 @@ export default function About() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
               transition={{
-                duration: 0.8,
+                duration: duration.slow,
                 delay: 0.15,
-                ease: [0.25, 0.1, 0.25, 1],
+                ease,
               }}
             >
-            <p
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: "17px",
-                fontWeight: 800,
-                color: t.textSub,
-                lineHeight: 1.8,
-                margin: "0 0 20px 0",
-              }}
-            >
-              I'm a Computer Science undergraduate at Government Engineering
-              College, Thrissur. Having completed multiple internships and projects,
-              I'm looking to apply what i have learnt so far, explore new technologies,
-              and connect with others in the field.
-            </p>
-            <p
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: "17px",
-                fontWeight: 800,
-                color: t.textSub,
-                lineHeight: 1.8,
-                margin: "0 0 32px 0",
-              }}
-            >
-              My work spans machine learning, web development, systems
-              programming, and the occasional satirical VS Code extension.{" "}
-              <br />I like experimenting and breaking things.
-            </p>
+              <p
+                style={{
+                  fontFamily: fonts.sans,
+                  fontSize: "17px",
+                  fontWeight: 800,
+                  color: t.textSub,
+                  lineHeight: 1.8,
+                  margin: `0 0 ${spacing.lgPlus} 0`,
+                }}
+              >
+                I'm a Computer Science undergraduate at Government Engineering
+                College, Thrissur. Having completed multiple internships and
+                projects, I'm looking to apply what i have learnt so far,
+                explore new technologies, and connect with others in the field.
+              </p>
+              <p
+                style={{
+                  fontFamily: fonts.sans,
+                  fontSize: "17px",
+                  fontWeight: 800,
+                  color: t.textSub,
+                  lineHeight: 1.8,
+                  margin: `0 0 ${spacing.xxl} 0`,
+                }}
+              >
+                My work spans machine learning, web development, systems
+                programming, and the occasional satirical VS Code extension.{" "}
+                <br />I like experimenting and breaking things.
+              </p>
 
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-              {languages.map((lang, i) => (
-                <motion.span
-                  key={lang}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{
-                    opacity: visible ? 1 : 0,
-                    scale: visible ? 1 : 0.8,
-                  }}
-                  transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                  style={{
-                    fontFamily: fonts.sans,
-                    fontSize: "11px",
-                    fontWeight: 500,
-                    letterSpacing: "0.05em",
-                    color: t.textMuted,
-                    backgroundColor: t.bgAlt,
-                    border: `1px solid ${t.border}`,
-                    padding: "5px",
-                    borderRadius: "6px",
-                  }}
-                >
-                  {lang}
-                </motion.span>
-              ))}
-            </div>
-          </motion.div>
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                {languages.map((lang, i) => (
+                  <motion.span
+                    key={lang}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{
+                      opacity: visible ? 1 : 0,
+                      scale: visible ? 1 : 0.8,
+                    }}
+                    transition={{
+                      duration: duration.medium,
+                      delay: 0.4 + i * stagger,
+                    }}
+                    style={{
+                      fontFamily: fonts.sans,
+                      fontSize: fontSize.xs,
+                      fontWeight: 500,
+                      letterSpacing: "0.05em",
+                      color: t.textMuted,
+                      backgroundColor: t.bgAlt,
+                      border: `1px solid ${t.border}`,
+                      padding: spacing.xs,
+                      borderRadius: radius.tag,
+                    }}
+                  >
+                    {lang}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
           <div
             className="about-card card-hover"
             style={{
+              ...cardBase,
               backgroundColor: t.bgCard,
               border: `1px solid ${t.border}`,
-              borderRadius: "12px",
-              padding: "48px",
-              position: "relative",
-              overflow: "hidden",
             }}
           >
             <div
@@ -198,85 +193,92 @@ export default function About() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
               transition={{
-                duration: 0.8,
+                duration: duration.slow,
                 delay: 0.25,
-                ease: [0.25, 0.1, 0.25, 1],
-              }}
-            >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                marginBottom: "28px",
+                ease,
               }}
             >
               <div
                 style={{
-                  width: "4px",
-                  height: "20px",
-                  backgroundColor: t.accent,
-                  borderRadius: "2px",
-                  flexShrink: 0,
-                }}
-              />
-              <h3
-                style={{
-                  fontFamily: fonts.sans,
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: t.textMuted,
-                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: spacing.md,
+                  marginBottom: spacing.xlPlus,
                 }}
               >
-                Currently
-              </h3>
-            </div>
-
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "4px" }}
-            >
-              {currently.map(({ label, value }, i) => (
-                <motion.div
-                  key={label}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : -30 }}
-                  transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
+                <div
                   style={{
-                    display: "grid",
-                    gridTemplateColumns: "100px 1fr",
-                    gap: "20px",
-                    padding: "20px 0",
-                    borderBottom: `1px solid ${t.border}`,
+                    width: "4px",
+                    height: "20px",
+                    backgroundColor: t.accent,
+                    borderRadius: radius.bar,
+                    flexShrink: 0,
+                  }}
+                />
+                <h3
+                  style={{
+                    fontFamily: fonts.sans,
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: t.textMuted,
+                    margin: 0,
                   }}
                 >
-                  <span
+                  Currently
+                </h3>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: spacing.xs,
+                }}
+              >
+                {currently.map(({ label, value }, i) => (
+                  <motion.div
+                    key={label}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : -30 }}
+                    transition={{
+                      duration: duration.medium,
+                      delay: 0.4 + i * stagger,
+                    }}
                     style={{
-                      fontFamily: fonts.sans,
-                      fontSize: "12px",
-                      fontWeight: 500,
-                      color: t.textMuted,
+                      display: "grid",
+                      gridTemplateColumns: "100px 1fr",
+                      gap: spacing.lgPlus,
+                      padding: `${spacing.lgPlus} 0`,
+                      borderBottom: `1px solid ${t.border}`,
                     }}
                   >
-                    {label}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: fonts.sans,
-                      fontSize: "16px",
-                      fontWeight: 500,
-                      color: t.text,
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    {value}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                    <span
+                      style={{
+                        fontFamily: fonts.sans,
+                        fontSize: "12px",
+                        fontWeight: 500,
+                        color: t.textMuted,
+                      }}
+                    >
+                      {label}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: fonts.sans,
+                        fontSize: "16px",
+                        fontWeight: 500,
+                        color: t.text,
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {value}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -284,17 +286,17 @@ export default function About() {
       <style>{`
         @media (max-width: 1024px) {
           section#about {
-            padding: 100px 48px !important;
+            padding: ${section.laptop} !important;
           }
         }
         @media (max-width: 768px) {
           section#about {
-            padding: 80px 32px !important;
+            padding: ${section.tablet} !important;
           }
         }
         @media (max-width: 480px) {
           section#about {
-            padding: 60px 20px !important;
+            padding: ${section.mobile} !important;
           }
         }
         @media (max-width: 640px) {

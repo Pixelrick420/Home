@@ -58,13 +58,8 @@ const PALETTES = {
   p3: { bg: "#0A0A0A", fg: "#FF8C42", accent: "#FF8C42" },
 };
 
-const projectPaletteConfig: Record<
-  string,
+const projectPaletteConfig: Record<string, { palette: keyof typeof PALETTES }> =
   {
-    palette: keyof typeof PALETTES;
-    overrides?: Partial<{ bg: string; fg: string; accent: string }>;
-  }
-> = {
   chatsocket: { palette: "p1" },
   mesh: { palette: "p1" },
   gameoflife: { palette: "p2" },
@@ -86,8 +81,6 @@ export const projectPalettes: Record<
   string,
   { bg: string; fg: string; accent: string }
 > = {};
-for (const [id, { palette, overrides }] of Object.entries(
-  projectPaletteConfig,
-)) {
-  projectPalettes[id] = { ...PALETTES[palette], ...overrides };
+for (const [id, { palette }] of Object.entries(projectPaletteConfig)) {
+  projectPalettes[id] = { ...PALETTES[palette] };
 }

@@ -1,9 +1,20 @@
 import { useState, type ReactNode } from "react";
 import type { Project } from "../types";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/useTheme";
 import { fonts } from "../theme";
 import { motion } from "framer-motion";
 import { projectPalettes } from "../theme";
+import {
+  alpha,
+  duration,
+  ease,
+  fontSize,
+  offset,
+  overlayPill,
+  radius,
+  spacing,
+  stagger,
+} from "../constants";
 
 interface Props {
   project: Project;
@@ -1243,21 +1254,21 @@ export default function ProjectCard({
       }}
       role="button"
       tabIndex={0}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: offset.y }}
       animate={{
         opacity: visible ? 1 : 0,
-        y: visible ? 0 : 40,
+        y: visible ? 0 : offset.y,
       }}
       transition={{
-        duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.25, 0.1, 0.25, 1],
+        duration: duration.medium,
+        delay: index * stagger,
+        ease,
       }}
       className="project-card card-hover"
       style={{
         backgroundColor: t.bgCard,
         border: `1px solid ${hov ? t.accent : t.border}`,
-        borderRadius: "12px",
+        borderRadius: radius.card,
         overflow: "hidden",
         cursor: "pointer",
       }}
@@ -1288,7 +1299,7 @@ export default function ProjectCard({
             style={{
               position: "absolute",
               inset: 0,
-              backgroundColor: "rgba(10, 10, 10, 0.92)",
+              backgroundColor: `rgba(10, 10, 10, ${alpha.cardOverlay})`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -1301,13 +1312,13 @@ export default function ProjectCard({
                 fontSize: "14px",
                 fontWeight: 600,
                 letterSpacing: "0.05em",
-                color: "#1A1A1A",
-                backgroundColor: "#aaaaaa",
+                color: overlayPill.text,
+                backgroundColor: overlayPill.bg,
                 padding: "14px 24px",
-                borderRadius: "50px",
+                borderRadius: radius.pill,
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "8px",
+                gap: spacing.sm,
               }}
             >
               Learn More
@@ -1322,7 +1333,7 @@ export default function ProjectCard({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-start",
-            marginBottom: "12px",
+            marginBottom: spacing.md,
           }}
         >
           <h3
@@ -1345,7 +1356,7 @@ export default function ProjectCard({
               color: t.textFaint,
               marginTop: "2px",
               flexShrink: 0,
-              marginLeft: "12px",
+              marginLeft: spacing.md,
             }}
           >
             {project.year}
@@ -1356,7 +1367,7 @@ export default function ProjectCard({
           className="project-description"
           style={{
             fontFamily: fonts.sans,
-            fontSize: "15px",
+            fontSize: fontSize.md,
             color: t.textSub,
             lineHeight: 1.6,
             margin: "0 0 18px 0",
@@ -1367,7 +1378,7 @@ export default function ProjectCard({
 
         <div
           className="project-tags"
-          style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}
+          style={{ display: "flex", flexWrap: "wrap", gap: spacing.sm }}
         >
           {project.tags.map((tag) => (
             <span
@@ -1375,12 +1386,12 @@ export default function ProjectCard({
               className="project-tag"
               style={{
                 fontFamily: fonts.sans,
-                fontSize: "11px",
+                fontSize: fontSize.xs,
                 fontWeight: 500,
                 color: t.textSub,
                 backgroundColor: t.bgAlt,
-                padding: "6px 12px",
-                borderRadius: "6px",
+                padding: `6px ${spacing.md}`,
+                borderRadius: radius.tag,
               }}
             >
               {tag}

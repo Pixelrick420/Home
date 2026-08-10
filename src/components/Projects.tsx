@@ -3,9 +3,21 @@ import { useScrollFade } from "../hooks/useScrollFade";
 import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/useTheme";
 import { motion } from "framer-motion";
 import { fonts } from "../theme";
+import {
+  duration,
+  ease,
+  offset,
+  radius,
+  section,
+  sectionInner,
+  sectionOverlay,
+  sectionStyle,
+  spacing,
+  transitions,
+} from "../constants";
 
 function useColumns(): number {
   const [columns, setColumns] = useState(3);
@@ -49,52 +61,27 @@ export default function Projects() {
   const hasMoreProjects = projects.length > displayLimit;
 
   return (
-    <section
-      id="work"
-      ref={sectionRef}
-      style={{
-        position: "relative",
-        padding: "120px 80px",
-        transition: "background-color 0.4s ease",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: t.bgAlt,
-          opacity: 0.75,
-          zIndex: 0,
-          transition: "background-color 0.4s ease",
-        }}
-      />
+    <section id="work" ref={sectionRef} style={sectionStyle}>
+      <div style={sectionOverlay(t.bgAlt)} />
 
-      <div
-        style={{
-          position: "relative",
-          zIndex: 2,
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
+      <div style={sectionInner}>
         <motion.div
           ref={headerRef}
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: offset.y }}
           animate={{
             opacity: headerVisible ? 1 : 0,
-            y: headerVisible ? 0 : 40,
+            y: headerVisible ? 0 : offset.y,
           }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: duration.slow, ease }}
           className="section-header"
         >
           <motion.span
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -offset.x }}
             animate={{
               opacity: headerVisible ? 1 : 0,
-              x: headerVisible ? 0 : -20,
+              x: headerVisible ? 0 : -offset.x,
             }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: duration.medium, delay: 0.1 }}
             className="section-label"
             style={{
               color: t.accentHover,
@@ -118,11 +105,11 @@ export default function Projects() {
           ref={gridRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: gridVisible ? 1 : 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: duration.medium }}
           style={{
             display: "grid",
             gridTemplateColumns: `repeat(${columns}, 1fr)`,
-            gap: "28px",
+            gap: spacing.xlPlus,
           }}
         >
           {displayedProjects.map((p, i) => (
@@ -140,13 +127,16 @@ export default function Projects() {
 
         {hasMoreProjects && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: gridVisible ? 1 : 0, y: gridVisible ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            initial={{ opacity: 0, y: offset.ySmall }}
+            animate={{
+              opacity: gridVisible ? 1 : 0,
+              y: gridVisible ? 0 : offset.ySmall,
+            }}
+            transition={{ duration: duration.medium, delay: 0.3 }}
             style={{
               display: "flex",
               justifyContent: "center",
-              marginTop: "48px",
+              marginTop: spacing.huge,
             }}
           >
             <motion.button
@@ -157,13 +147,13 @@ export default function Projects() {
                 fontFamily: fonts.sans,
                 fontSize: "14px",
                 fontWeight: 500,
-                padding: "12px 28px",
-                borderRadius: "40px",
+                padding: `${spacing.md} ${spacing.xlPlus}`,
+                borderRadius: radius.pillSm,
                 backgroundColor: "transparent",
                 border: `1px solid ${t.accent}`,
                 color: t.accent,
                 cursor: "pointer",
-                transition: "all 0.2s ease",
+                transition: transitions.all,
               }}
             >
               {showAll ? "Show Less" : "Show All Projects"}
@@ -175,17 +165,17 @@ export default function Projects() {
       <style>{`
         @media (max-width: 1024px) {
           section#work {
-            padding: 100px 48px !important;
+            padding: ${section.laptop} !important;
           }
         }
         @media (max-width: 768px) {
           section#work {
-            padding: 80px 32px !important;
+            padding: ${section.tablet} !important;
           }
         }
         @media (max-width: 640px) {
           section#work {
-            padding: 60px 20px !important;
+            padding: ${section.mobile} !important;
           }
 
           .project-card > div:last-child {

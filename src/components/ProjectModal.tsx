@@ -1,9 +1,19 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Project } from "../types";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/useTheme";
 import { fonts } from "../theme";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import {
+  alpha,
+  duration,
+  ease,
+  fontSize,
+  radius,
+  spacing,
+  width,
+  zIndex,
+} from "../constants";
 
 interface Props {
   project: Project | null;
@@ -32,7 +42,7 @@ export default function ProjectModal({ project, onClose }: Props) {
 
   const paraStyle = {
     fontFamily: fonts.sans,
-    fontSize: "15px",
+    fontSize: fontSize.md,
     fontWeight: 500,
     color: t.textSub,
     lineHeight: 1.7,
@@ -47,17 +57,17 @@ export default function ProjectModal({ project, onClose }: Props) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: duration.fast }}
           onClick={onClose}
           style={{
             position: "fixed",
             inset: 0,
-            zIndex: 1000,
-            backgroundColor: "rgba(10, 10, 10, 0.6)",
+            zIndex: zIndex.modal,
+            backgroundColor: `rgba(10, 10, 10, ${alpha.backdrop})`,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "24px",
+            padding: spacing.xl,
             overflowY: "auto",
           }}
         >
@@ -70,25 +80,25 @@ export default function ProjectModal({ project, onClose }: Props) {
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.98 }}
-            transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.25, ease }}
             style={{
               backgroundColor: t.bgCard,
               border: `1px solid ${t.border}`,
-              borderRadius: "16px",
+              borderRadius: radius.modal,
               width: "100%",
-              maxWidth: "640px",
+              maxWidth: width.modal,
               maxHeight: "85vh",
               overflow: "auto",
-              boxShadow: "0 24px 64px rgba(0, 0, 0, 0.35)",
+              boxShadow: `0 24px 64px rgba(0, 0, 0, ${alpha.shadow})`,
             }}
           >
-            <div style={{ padding: "28px 32px 32px" }}>
+            <div style={{ padding: `${spacing.xlPlus} ${spacing.xxl} ${spacing.xxl}` }}>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "flex-start",
-                  gap: "16px",
+                  gap: spacing.lg,
                   marginBottom: "18px",
                 }}
               >
@@ -144,7 +154,7 @@ export default function ProjectModal({ project, onClose }: Props) {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "16px",
+                  gap: spacing.lg,
                 }}
               >
                 <p style={paraStyle}>{project.what}</p>
@@ -156,9 +166,9 @@ export default function ProjectModal({ project, onClose }: Props) {
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
-                  gap: "12px",
-                  marginTop: "28px",
-                  paddingTop: "24px",
+                  gap: spacing.md,
+                  marginTop: spacing.xlPlus,
+                  paddingTop: spacing.xl,
                   borderTop: `1px solid ${t.border}`,
                 }}
               >
@@ -176,10 +186,10 @@ export default function ProjectModal({ project, onClose }: Props) {
                     textDecoration: "none",
                     border: `1px solid ${t.accent}`,
                     padding: "10px 20px",
-                    borderRadius: "40px",
+                    borderRadius: radius.pillSm,
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "8px",
+                    gap: spacing.sm,
                   }}
                 >
                   <FaGithub size={16} />
@@ -200,10 +210,10 @@ export default function ProjectModal({ project, onClose }: Props) {
                       textDecoration: "none",
                       border: `1px solid ${t.accent}`,
                       padding: "10px 20px",
-                      borderRadius: "40px",
+                      borderRadius: radius.pillSm,
                       display: "inline-flex",
                       alignItems: "center",
-                      gap: "8px",
+                      gap: spacing.sm,
                     }}
                   >
                     <FaExternalLinkAlt size={14} />

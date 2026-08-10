@@ -1,31 +1,13 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
-import { lightTokens, darkTokens, type ThemeTokens } from "../theme.ts";
-
-export type Mode = "light" | "dark";
-
-interface ThemeCtx {
-  mode: Mode;
-  toggle: () => void;
-  t: ThemeTokens;
-}
-
-const ThemeContext = createContext<ThemeCtx>({
-  mode: "dark",
-  toggle: () => {},
-  t: darkTokens,
-});
+import { useEffect, useState, type ReactNode } from "react";
+import { lightTokens, darkTokens } from "../theme.ts";
+import { selectionText } from "../constants";
+import { ThemeContext, DEFAULT_MODE, type Mode } from "./useTheme";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<Mode>(() => {
     const saved = localStorage.getItem("portfolio-theme");
     if (saved === "dark" || saved === "light") return saved;
-    return "dark";
+    return DEFAULT_MODE;
   });
 
   const t = mode === "light" ? lightTokens : darkTokens;
@@ -40,7 +22,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
     root.style.setProperty(
       "--selection-text",
-      mode === "light" ? "#FFFFFF" : "#1A1A1A",
+      mode === "light" ? selectionText.light : selectionText.dark,
     );
 
     root.style.setProperty("--scrollbar", t.borderHover);
@@ -58,5 +40,3 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     </ThemeContext.Provider>
   );
 }
-
-export const useTheme = () => useContext(ThemeContext);

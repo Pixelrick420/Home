@@ -1,7 +1,21 @@
 import { useEffect, useState, useRef } from "react";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/useTheme";
 import { fonts } from "../theme";
 import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  alpha,
+  duration,
+  ease,
+  fontSize,
+  layout,
+  offset,
+  pagePadding,
+  radius,
+  spacing,
+  transitions,
+  width,
+  zIndex,
+} from "../constants";
 
 export default function Hero() {
   const { t, mode } = useTheme();
@@ -26,12 +40,12 @@ export default function Hero() {
       ref={containerRef}
       style={{
         position: "relative",
-        minHeight: "100vh",
+        minHeight: layout.minHeight,
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
-        padding: "0 80px",
-        transition: "background-color 0.4s ease",
+        padding: `0 ${pagePadding.desktop}`,
+        transition: transitions.bg,
       }}
     >
       <div
@@ -39,33 +53,33 @@ export default function Hero() {
           position: "absolute",
           inset: 0,
           backgroundColor: t.bgAlt,
-          opacity: 0.75,
-          zIndex: 0,
-          transition: "background-color 0.4s ease",
+          opacity: alpha.sectionOverlay,
+          zIndex: zIndex.sectionBg,
+          transition: transitions.bg,
         }}
       />
       <motion.div
         style={{
           position: "relative",
-          zIndex: 2,
-          maxWidth: "1000px",
+          zIndex: zIndex.content,
+          maxWidth: width.hero,
           y,
           opacity,
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: duration.slow }}
       >
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           animate={visible ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          style={{ marginBottom: "32px" }}
+          transition={{ duration: duration.slow, delay: 0.2 }}
+          style={{ marginBottom: spacing.xxl }}
         >
           <span
             style={{
               fontFamily: fonts.sans,
-              fontSize: "clamp(5px, 2.5vw, 12px)",
+              fontSize: fontSize.heroBadge,
               padding: "clamp(6px, 2vw, 10px) clamp(12px, 4vw, 20px)",
               maxWidth: "100%",
               whiteSpace: "nowrap",
@@ -75,8 +89,8 @@ export default function Hero() {
               letterSpacing: "0.2em",
               textTransform: "uppercase",
               color: t.accent,
-              backgroundColor: mode === "light" ? "#FAFAFA" : "#1A1A1A",
-              borderRadius: "50px",
+              backgroundColor: mode === "light" ? t.bgAlt : t.bgCard,
+              borderRadius: radius.pill,
               display: "inline-block",
             }}
           >
@@ -85,16 +99,16 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 60 }}
+          initial={{ opacity: 0, y: offset.yLg }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: duration.slow, delay: 0.35, ease }}
           style={{
             fontFamily: fonts.serif,
-            fontSize: "clamp(42px, 8vw, 140px)",
+            fontSize: fontSize.heroTitle,
             fontWeight: 700,
             color: t.text,
             lineHeight: 0.92,
-            margin: "0 0 16px 0",
+            margin: `0 0 ${spacing.lg} 0`,
             letterSpacing: "-0.03em",
 
             whiteSpace: "nowrap",
@@ -108,39 +122,39 @@ export default function Hero() {
         <motion.div
           initial={{ scaleX: 0 }}
           animate={visible ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: duration.slow, delay: 0.5 }}
           style={{
             width: "80px",
             height: "4px",
             backgroundColor: t.accent,
-            borderRadius: "2px",
-            marginBottom: "32px",
+            borderRadius: radius.bar,
+            marginBottom: spacing.xxl,
             transformOrigin: "left",
           }}
         />
 
         <motion.p
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: offset.y }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: duration.slow, delay: 0.6 }}
           style={{
             fontFamily: fonts.sans,
-            fontSize: "clamp(18px, 2.5vw, 26px)",
+            fontSize: fontSize.heroLead,
             fontWeight: 400,
             color: t.textSub,
-            maxWidth: "560px",
+            maxWidth: width.heroText,
             lineHeight: 1.55,
-            margin: "0 0 48px 0",
+            margin: `0 0 ${spacing.huge} 0`,
           }}
         >
           Building things from the ground up.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: offset.y }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.75 }}
-          style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}
+          transition={{ duration: duration.slow, delay: 0.75 }}
+          style={{ display: "flex", gap: spacing.lg, flexWrap: "wrap" }}
         >
           <motion.button
             onClick={() =>
@@ -152,22 +166,22 @@ export default function Hero() {
               scale: 1.02,
             }}
             whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: duration.fast }}
             style={{
               fontFamily: fonts.sans,
-              fontSize: "14px",
+              fontSize: fontSize.sm,
               fontWeight: 600,
               letterSpacing: "0.05em",
               color: t.bg,
               backgroundColor: t.accent,
               border: `1px solid ${t.accent}`,
-              padding: "16px 32px",
+              padding: `${spacing.lg} ${spacing.xxl}`,
               cursor: "pointer",
-              borderRadius: "50px",
+              borderRadius: radius.pill,
               display: "flex",
               alignItems: "center",
-              gap: "8px",
-              transition: "background-color 0.2s, box-shadow 0.2s",
+              gap: spacing.sm,
+              transition: transitions.primary,
             }}
           >
             View Work
@@ -175,7 +189,7 @@ export default function Hero() {
               animate={{ x: [0, 4, 0] }}
               transition={{
                 repeat: Infinity,
-                duration: 1.5,
+                duration: duration.loop,
                 ease: "easeInOut",
               }}
             >
@@ -191,23 +205,22 @@ export default function Hero() {
               scale: 1.02,
             }}
             whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: duration.fast }}
             style={{
               fontFamily: fonts.sans,
-              fontSize: "14px",
+              fontSize: fontSize.sm,
               fontWeight: 600,
               letterSpacing: "0.05em",
               color: t.text,
               textDecoration: "none",
               backgroundColor: "transparent",
               border: `1px solid ${t.accent}`,
-              padding: "16px 32px",
-              borderRadius: "50px",
+              padding: `${spacing.lg} ${spacing.xxl}`,
+              borderRadius: radius.pill,
               display: "flex",
               alignItems: "center",
-              gap: "8px",
-              transition:
-                "background-color 0.2s, border-color 0.2s, color 0.2s",
+              gap: spacing.sm,
+              transition: transitions.button,
             }}
           >
             Resume ↗
@@ -217,17 +230,17 @@ export default function Hero() {
       <style>{`
         @media (max-width: 1024px) {
           section[style*="padding: 0 80px"] {
-            padding: 0 48px !important;
+            padding: 0 ${pagePadding.laptop} !important;
           }
         }
         @media (max-width: 768px) {
           section[style*="padding: 0 80px"] {
-            padding: 0 32px !important;
+            padding: 0 ${pagePadding.tablet} !important;
           }
         }
         @media (max-width: 480px) {
           section[style*="padding: 0 80px"] {
-            padding: 0 20px !important;
+            padding: 0 ${pagePadding.mobile} !important;
           }
         }
       `}</style>

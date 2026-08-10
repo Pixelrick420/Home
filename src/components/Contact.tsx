@@ -1,11 +1,26 @@
 import { useRef } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/useTheme";
 import { fonts } from "../theme";
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
 import { SiLeetcode } from "@react-icons/all-files/si/SiLeetcode";
 import { motion } from "framer-motion";
+import {
+  alpha,
+  contactSection,
+  duration,
+  fontSize,
+  hexAlpha,
+  offset,
+  radius,
+  sectionInner,
+  sectionOverlay,
+  sectionStyle,
+  spacing,
+  stagger,
+  transitions,
+} from "../constants";
 
 const socials = [
   {
@@ -36,37 +51,15 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      style={{
-        position: "relative",
-        padding: "120px 80px 100px",
-        transition: "background-color 0.4s ease",
-        overflow: "hidden",
-      }}
+      style={{ ...sectionStyle, padding: contactSection.base }}
     >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: t.bgAlt,
-          opacity: 0.75,
-          zIndex: 0,
-          transition: "background-color 0.4s ease",
-        }}
-      />
+      <div style={sectionOverlay(t.bgAlt)} />
 
-      <div
-        ref={contentRef}
-        style={{
-          position: "relative",
-          zIndex: 2,
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
+      <div ref={contentRef} style={sectionInner}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 30 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: duration.slow }}
           className="section-header"
         >
           <span
@@ -80,7 +73,7 @@ export default function Contact() {
           <motion.h2
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
+            transition={{ duration: duration.slow, delay: 0.1 }}
             className="section-title"
           >
             Let's build <span style={{ color: t.accent }}>something</span>
@@ -90,12 +83,12 @@ export default function Contact() {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 30 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: duration.slow, delay: 0.2 }}
           style={{
             fontFamily: fonts.sans,
-            fontSize: "18px",
+            fontSize: fontSize.lg,
             color: t.textSub,
-            margin: "0 0 56px 0",
+            margin: `0 0 56px 0`,
             lineHeight: 1.6,
             fontWeight: 800,
           }}
@@ -106,11 +99,11 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 30 }}
-          transition={{ duration: 0.8, delay: 0.35 }}
+          transition={{ duration: duration.slow, delay: 0.35 }}
           style={{
             display: "flex",
             flexWrap: "wrap",
-            gap: "16px",
+            gap: spacing.lg,
           }}
         >
           {socials.map((s, i) => (
@@ -119,26 +112,29 @@ export default function Contact() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 20 }}
-              transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
+              initial={{ opacity: 0, y: offset.ySmall }}
+              animate={{
+                opacity: visible ? 1 : 0,
+                y: visible ? 0 : offset.ySmall,
+              }}
+              transition={{ duration: duration.medium, delay: 0.4 + i * stagger }}
               aria-label={s.label}
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "12px",
+                gap: spacing.md,
                 padding: "18px 28px",
                 backgroundColor: t.bg,
                 border: `1px solid ${t.border}`,
-                borderRadius: "12px",
+                borderRadius: radius.card,
                 textDecoration: "none",
                 color: t.text,
-                transition: "border-color 0.3s, box-shadow 0.3s",
+                transition: transitions.card,
               }}
               onMouseEnter={(e) => {
                 const a = e.currentTarget as HTMLAnchorElement;
                 a.style.borderColor = t.accent;
-                a.style.boxShadow = `0 8px 40px ${t.accent}20`;
+                a.style.boxShadow = `0 8px 40px ${t.accent}${hexAlpha.shadow}`;
               }}
               onMouseLeave={(e) => {
                 const a = e.currentTarget as HTMLAnchorElement;
@@ -153,15 +149,15 @@ export default function Contact() {
 
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: visible ? 0.5 : 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          animate={{ opacity: visible ? alpha.footer : 0 }}
+          transition={{ duration: duration.slow, delay: 0.6 }}
           style={{
             marginTop: "100px",
-            paddingTop: "32px",
+            paddingTop: spacing.xxl,
             display: "flex",
             justifyContent: "flex-end",
             flexWrap: "wrap",
-            gap: "16px",
+            gap: spacing.lg,
           }}
         >
           <span
@@ -181,17 +177,17 @@ export default function Contact() {
       <style>{`
         @media (max-width: 1024px) {
           section#contact {
-            padding: 100px 48px 80px !important;
+            padding: ${contactSection.laptop} !important;
           }
         }
         @media (max-width: 768px) {
           section#contact {
-            padding: 80px 32px 60px !important;
+            padding: ${contactSection.tablet} !important;
           }
         }
         @media (max-width: 480px) {
           section#contact {
-            padding: 60px 20px 48px !important;
+            padding: ${contactSection.mobile} !important;
           }
         }
       `}</style>

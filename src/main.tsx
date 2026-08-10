@@ -10,6 +10,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
+import { lightTokens } from "./theme";
+import { pagePadding, selectionText, transitions } from "./constants";
 
 const style = document.createElement("style");
 
@@ -21,25 +23,15 @@ fontPreload.href = playfairDisplayLatin700;
 fontPreload.crossOrigin = "anonymous";
 document.head.appendChild(fontPreload);
 
+const cssVars = Object.entries(lightTokens)
+  .map(([key, value]) => `    --${key}: ${value};`)
+  .join("\n");
+
 style.textContent = `
   :root {
-    --bg: #FFFFFF;
-    --bgAlt: #FAFAFA;
-    --bgCard: #FFFFFF;
-
-    --text: #1A1A1A;
-    --textSub: #222222;
-    --textMuted: #555555;
-    --textFaint: #999999;
-
-    --accent: #FF69B4;
-    --accentHover: #E30B5C;
-
-    --border: #E5E5E5;
-    --borderHover: #CCCCCC;
-
-    --scrollbar: #CCCCCC;
-    --selection-text: #FFFFFF;
+${cssVars}
+    --scrollbar: ${lightTokens.borderHover};
+    --selection-text: ${selectionText.light};
   }
 
   *, *::before, *::after {
@@ -85,28 +77,28 @@ style.textContent = `
   }
 
   section {
-    padding-left: 80px !important;
-    padding-right: 80px !important;
+    padding-left: ${pagePadding.desktop} !important;
+    padding-right: ${pagePadding.desktop} !important;
   }
 
   @media (max-width: 1024px) {
     section {
-      padding-left: 48px !important;
-      padding-right: 48px !important;
+      padding-left: ${pagePadding.laptop} !important;
+      padding-right: ${pagePadding.laptop} !important;
     }
   }
 
   @media (max-width: 768px) {
     section {
-      padding-left: 32px !important;
-      padding-right: 32px !important;
+      padding-left: ${pagePadding.tablet} !important;
+      padding-right: ${pagePadding.tablet} !important;
     }
   }
 
   @media (max-width: 480px) {
     section {
-      padding-left: 20px !important;
-      padding-right: 20px !important;
+      padding-left: ${pagePadding.mobile} !important;
+      padding-right: ${pagePadding.mobile} !important;
     }
   }
 
@@ -141,7 +133,7 @@ style.textContent = `
   }
 
   .card-hover {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: ${transitions.card};
     cursor: pointer;
   }
 
