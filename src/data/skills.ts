@@ -16,7 +16,7 @@ export const skills: SkillGroup[] = [
   },
   {
     category: "Databases",
-    items: ["PostgreSQL", "Firestore"],
+    items: ["PostgreSQL", "Firestore", "Oracle Vector DB"],
   },
   {
     category: "DevOps",
