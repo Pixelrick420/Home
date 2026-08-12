@@ -9,8 +9,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Fractal",
     year: "2026",
     what: "Fractal is a compiled programming language for beginners. It combines Python's friendly syntax with the discipline of typed, compiled languages. It ships with a desktop IDE and a browser playground. The project was built by a team of three, and I was one of them.",
-    problem: "Beginner languages hide how computers actually run code. Fractal keeps the compiled pipeline visible with strict types and clear error messages, so newcomers learn what compilation really does.",
-    stack: "The compiler and editor are written in Rust. The lexer, parser, and code generator are all implemented from scratch.",
+    problem:
+      "Beginner languages hide how computers actually run code. Fractal keeps the compiled pipeline visible with strict types and clear error messages, so newcomers learn what compilation really does.",
+    stack:
+      "The compiler and editor are written in Rust. The lexer, parser, and code generator are all implemented from scratch.",
     demo: "https://fractal-programming.vercel.app/demo",
   },
   {
@@ -21,8 +23,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/ChatSocket",
     year: "2025",
     what: "ChatSocket is a multi-room chat application written in C. It runs on macOS and Linux. It includes a TLS server, a command-line client, and a full-screen terminal client.",
-    problem: "Most chat servers can read the messages they relay. ChatSocket encrypts messages end-to-end, so the server relays them without being able to read them. It also resists replay attacks and identity spoofing.",
-    stack: "The stack is C with OpenSSL for TLS and cryptography. The terminal interface is a custom renderer built directly on ANSI control codes, with no external widget toolkit.",
+    problem:
+      "Most chat servers can read the messages they relay. ChatSocket encrypts messages end-to-end, so the server relays them without being able to read them. It also resists replay attacks and identity spoofing.",
+    stack:
+      "The stack is C with OpenSSL for TLS and cryptography. The terminal interface is a custom renderer built directly on ANSI control codes, with no external widget toolkit.",
   },
   {
     id: "automata",
@@ -33,8 +37,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Automata",
     year: "2024",
     what: "Automata is a web app that converts regular expressions into nondeterministic finite automata (NFAs). It renders the automaton as an interactive diagram that you can drag and rearrange. It runs live in the browser.",
-    problem: "Automata theory is abstract and hard to grasp from text alone. Automata turns a regular expression into a visible graph, so learners can watch how the machine is constructed and why it behaves the way it does.",
-    stack: "The frontend is built with Next.js and React. The backend is a FastAPI service written in Python. It is deployed on Vercel and Render.",
+    problem:
+      "Automata theory is abstract and hard to grasp from text alone. Automata turns a regular expression into a visible graph, so learners can watch how the machine is constructed and why it behaves the way it does.",
+    stack:
+      "The frontend is built with Next.js and React. The backend is a FastAPI service written in Python. It is deployed on Vercel and Render.",
     demo: "https://regex-automata.vercel.app",
   },
   {
@@ -46,8 +52,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Ascii",
     year: "2024",
     what: "Ascii converts images, videos, and live camera feeds into ASCII art. It renders the result in the terminal with full color using ANSI escape sequences.",
-    problem: "Most ASCII art tools only handle static images. Ascii supports full multimedia: still images, video files, and live camera feeds, all rendered as color ASCII in the terminal in real time.",
-    stack: "It is written in Python. Pillow handles image processing, and OpenCV handles video and camera capture.",
+    problem:
+      "Most ASCII art tools only handle static images. Ascii supports full multimedia: still images, video files, and live camera feeds, all rendered as color ASCII in the terminal in real time.",
+    stack:
+      "It is written in Python. Pillow handles image processing, and OpenCV handles video and camera capture.",
   },
   {
     id: "mesh",
@@ -58,8 +66,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/mesh",
     year: "2024",
     what: "Mesh is a collaborative pixel-art canvas inspired by r/place. Users place one pixel at a time on a shared canvas and watch changes appear in real time.",
-    problem: "Mesh gives a large group one shared surface to draw on together. A one-minute cooldown between placements keeps the canvas calm and fair, and real-time sync makes every change visible instantly.",
-    stack: "It is built with Next.js and React on the frontend. Firebase handles authentication and real-time data, and the app is deployed on Vercel.",
+    problem:
+      "Mesh gives a large group one shared surface to draw on together. A one-minute cooldown between placements keeps the canvas calm and fair, and real-time sync makes every change visible instantly.",
+    stack:
+      "It is built with Next.js and React on the frontend. Firebase handles authentication and real-time data, and the app is deployed on Vercel.",
     demo: "https://pixel-mesh.vercel.app",
   },
   {
@@ -71,8 +81,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Election",
     year: "2023",
     what: "Election is a voting system for school elections. Voters cast their ballots on a full-screen kiosk, and the app counts results live. It was deployed and used at GHSS Panamaram.",
-    problem: "Paper ballots are slow to count and easy to miscount. Election digitizes the whole process with a secure, password-protected interface and instant results.",
-    stack: "It is written in Python with a Tkinter GUI and an SQLite3 database. The app runs on a single machine with no networking, and admin access is protected with SHA-256 password hashing.",
+    problem:
+      "Paper ballots are slow to count and easy to miscount. Election digitizes the whole process with a secure, password-protected interface and instant results.",
+    stack:
+      "It is written in Python with a Tkinter GUI and an SQLite3 database. The app runs on a single machine with no networking, and admin access is protected with SHA-256 password hashing.",
   },
   {
     id: "handwritten-digits",
@@ -83,8 +95,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Handwritten-Digits",
     year: "2025",
     what: "Handwritten Digits is a neural network that recognizes handwritten digits. It is trained on the MNIST dataset. A small GUI lets you draw a digit and watch the model predict it in real time.",
-    problem: "Deep-learning frameworks hide how a neural network actually works. This project builds the whole model from scratch in NumPy, so every step from training to prediction stays visible.",
-    stack: "It uses Python with NumPy for the network math and Tkinter for the drawing interface. The trained model reaches about 98% accuracy on the test set.",
+    problem:
+      "Deep-learning frameworks hide how a neural network actually works. This project builds the whole model from scratch in NumPy, so every step from training to prediction stays visible.",
+    stack:
+      "It uses Python with NumPy for the network math and Tkinter for the drawing interface. The trained model reaches about 98% accuracy on the test set.",
   },
   {
     id: "below-c-level",
@@ -94,21 +108,24 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Below-C-Level",
     year: "2025",
     what: "Below C Level is a VS Code extension built for a 'useless projects' hackathon. It adds absurd tools to the editor, like a snake game that eats your code and a renamer that turns variables into Shakespearean insults. It was built by a team of two.",
-    problem: "Code editors are all productivity and no fun. The extension attacks burnout with jokes, games, and deliberate nonsense that makes long coding sessions lighter.",
-    stack: "It is written in TypeScript for the VS Code extension API. Generated content comes from calls to the Groq API.",
+    problem:
+      "Code editors are all productivity and no fun. The extension attacks burnout with jokes, games, and deliberate nonsense that makes long coding sessions lighter.",
+    stack:
+      "It is written in TypeScript for the VS Code extension API. Generated content comes from calls to the Groq API.",
     demo: "https://marketplace.visualstudio.com/items?itemName=Theerttha.below-c-level",
   },
   {
     id: "sharewave",
     title: "ShareWave",
-    description:
-      "A mobile app that can share files through sound.",
+    description: "A mobile app that can share files through sound.",
     tags: ["Flutter", "Dart", "Android"],
     github: "https://github.com/Pixelrick420/ShareWave",
     year: "2026",
     what: "ShareWave is an Android app that transfers files between two nearby phones using only their speakers and microphones. The sender shows a short code, the receiver types it in, and the file moves through sound. The app is still a work in progress.",
-    problem: "File transfer normally needs Wi-Fi, Bluetooth, or the internet. ShareWave removes all three. The transfer is encrypted, so a recording of the audio carries only ciphertext.",
-    stack: "It is built with Flutter and Dart. The audio channel uses parallel-tone MFSK modulation with Reed-Solomon error correction and AES-GCM encryption.",
+    problem:
+      "File transfer normally needs Wi-Fi, Bluetooth, or the internet. ShareWave removes all three. The transfer is encrypted, so a recording of the audio carries only ciphertext.",
+    stack:
+      "It is built with Flutter and Dart. The audio channel uses parallel-tone MFSK modulation with Reed-Solomon error correction and AES-GCM encryption.",
   },
   {
     id: "asteroids",
@@ -119,8 +136,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Asteroids",
     year: "2024",
     what: "Asteroids is the classic arcade game, rebuilt in C++ with SDL2. You fly a ship, rotate and thrust, and shoot asteroids that split into smaller ones as you destroy them.",
-    problem: "The game is a clean way to practice real-time graphics and game loops. It uses transformation matrices for rotation and input, and collision detection to decide when the game ends.",
-    stack: "It is written in C++ using the SDL2 library for graphics and input. The 2D graphics engine is custom-built for this project.",
+    problem:
+      "The game is a clean way to practice real-time graphics and game loops. It uses transformation matrices for rotation and input, and collision detection to decide when the game ends.",
+    stack:
+      "It is written in C++ using the SDL2 library for graphics and input. The 2D graphics engine is custom-built for this project.",
   },
   {
     id: "sort",
@@ -131,8 +150,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Sort",
     year: "2023",
     what: "Sort is a visualizer for sorting algorithms. It animates algorithms such as bubble sort and merge sort so you can watch how they reorder data step by step.",
-    problem: "Sorting algorithms are abstract and easy to misread on paper. Sort turns each comparison and swap into a visible animation, which makes the difference between algorithms obvious.",
-    stack: "It is built with plain JavaScript and runs in the browser. The live demo is hosted on GitHub Pages.",
+    problem:
+      "Sorting algorithms are abstract and easy to misread on paper. Sort turns each comparison and swap into a visible animation, which makes the difference between algorithms obvious.",
+    stack:
+      "It is built with plain JavaScript and runs in the browser. The live demo is hosted on GitHub Pages.",
     demo: "https://pixelrick420.github.io/Sort/",
   },
   {
@@ -143,8 +164,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/GameOfLife",
     year: "2023",
     what: "GameOfLife is an implementation of John Conway's Game of Life. Cells live, die, and multiply on a grid according to simple rules, producing complex patterns over time.",
-    problem: "The Game of Life shows how simple rules create complex behavior. This implementation makes it interactive, so you can set up a pattern and watch it evolve on a canvas.",
-    stack: "It is built with HTML5 Canvas and runs in the browser. The live demo is hosted on GitHub Pages.",
+    problem:
+      "The Game of Life shows how simple rules create complex behavior. This implementation makes it interactive, so you can set up a pattern and watch it evolve on a canvas.",
+    stack:
+      "It is built with HTML5 Canvas and runs in the browser. The live demo is hosted on GitHub Pages.",
     demo: "https://pixelrick420.github.io/GameOfLife/",
   },
   {
@@ -155,8 +178,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Shell",
     year: "2024",
     what: "Shell is a lightweight Unix-like shell written in pure Python. It supports built-in commands, tab completion, command history, and I/O redirection.",
-    problem: "A shell looks simple until you try to build one. This project shows how command parsing, execution, and redirection work under the hood. It was built following the CodeCrafters 'Build your own Shell' course.",
-    stack: "It is written in Python with no framework. It adds readline support for line editing on Linux and macOS.",
+    problem:
+      "A shell looks simple until you try to build one. This project shows how command parsing, execution, and redirection work under the hood. It was built following the CodeCrafters 'Build your own Shell' course.",
+    stack:
+      "It is written in Python with no framework. It adds readline support for line editing on Linux and macOS.",
   },
   {
     id: "tetris",
@@ -167,8 +192,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Tetris",
     year: "2023",
     what: "Tetris is a port of the classic puzzle game that runs in the Windows console. It includes a level-select menu, a next-piece preview, and retro ASCII graphics.",
-    problem: "Console games prove that a good game does not need fancy graphics. The project shows how to drive the Windows console API directly for real-time input and rendering.",
-    stack: "It is written in C++ using the WinAPI for console output and input. A rotation matrix handles tetromino rotation, and the game loop uses a fixed time step.",
+    problem:
+      "Console games prove that a good game does not need fancy graphics. The project shows how to drive the Windows console API directly for real-time input and rendering.",
+    stack:
+      "It is written in C++ using the WinAPI for console output and input. A rotation matrix handles tetromino rotation, and the game loop uses a fixed time step.",
     demo: "https://youtu.be/8OK8_tHeCIA",
   },
   {
@@ -180,8 +207,10 @@ export const projects: Project[] = [
     github: "https://github.com/Pixelrick420/Leaderboard",
     year: "2026",
     what: "Leaderboard is a real-time scoreboard built for HackQuest, a live tech event. It tracks team scores and rankings as the event runs.",
-    problem: "Static standings go stale fast during a live event. Leaderboard updates rankings instantly as organizers enter new scores, so the audience always sees the current position of every team.",
-    stack: "It is built with React and TypeScript with real-time updates. It runs live in the browser and is deployed on Vercel.",
+    problem:
+      "Static standings go stale fast during a live event. Leaderboard updates rankings instantly as organizers enter new scores, so the audience always sees the current position of every team.",
+    stack:
+      "It is built with React and TypeScript with real-time updates. It runs live in the browser and is deployed on Vercel.",
     demo: "https://hackquest-leaderboard.vercel.app/",
   },
 ];

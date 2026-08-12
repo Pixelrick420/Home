@@ -19,6 +19,8 @@ function Layout() {
         position: "relative",
         minHeight: layout.minHeight,
         overflowX: "hidden",
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
       }}
     >
       <Analytics />

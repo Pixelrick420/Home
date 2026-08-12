@@ -97,8 +97,7 @@ export default function WaveBackground() {
       }
       for (let j = 0; j < rows; j++) {
         yComp[j] =
-          (Math.sin(yBase1[j] + s1 + tfA) +
-            Math.sin(yBase2[j] + s2 + tfA)) *
+          (Math.sin(yBase1[j] + s1 + tfA) + Math.sin(yBase2[j] + s2 + tfA)) *
           0.5;
       }
 

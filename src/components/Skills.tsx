@@ -71,7 +71,8 @@ export default function Skills() {
           transition={{ duration: duration.medium }}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fill, minmax(clamp(120px, 4vw, 240px), 1fr))",
             gap: spacing.lgPlus,
           }}
         >

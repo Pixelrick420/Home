@@ -117,7 +117,10 @@ export default function Contact() {
                 opacity: visible ? 1 : 0,
                 y: visible ? 0 : offset.ySmall,
               }}
-              transition={{ duration: duration.medium, delay: 0.4 + i * stagger }}
+              transition={{
+                duration: duration.medium,
+                delay: 0.4 + i * stagger,
+              }}
               aria-label={s.label}
               style={{
                 display: "flex",

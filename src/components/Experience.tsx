@@ -39,7 +39,9 @@ function ExperienceCard({
       ref={ref}
       className="experience-card card-hover"
       initial={{ opacity: 0, y: offset.ySmall }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: offset.ySmall }}
+      animate={
+        isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: offset.ySmall }
+      }
       transition={{
         duration: duration.medium,
         delay: i * stagger,

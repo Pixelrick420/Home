@@ -92,7 +92,11 @@ export default function ProjectModal({ project, onClose }: Props) {
               boxShadow: `0 24px 64px rgba(0, 0, 0, ${alpha.shadow})`,
             }}
           >
-            <div style={{ padding: `${spacing.xlPlus} ${spacing.xxl} ${spacing.xxl}` }}>
+            <div
+              style={{
+                padding: `${spacing.xlPlus} ${spacing.xxl} ${spacing.xxl}`,
+              }}
+            >
               <div
                 style={{
                   display: "flex",

@@ -24,7 +24,7 @@ const currently = [
   { label: "Located", value: "Kerala, India" },
 ];
 
-const languages = ["English", "Malayalam", "Hindi"];
+const languages = ["Hindi", "English", "Malayalam"];
 
 const cardBase = {
   borderRadius: radius.card,
@@ -41,11 +41,7 @@ export default function About() {
   });
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      style={sectionStyle}
-    >
+    <section id="about" ref={sectionRef} style={sectionStyle}>
       <div style={sectionOverlay(t.bgAlt)} />
 
       <div ref={contentRef} style={sectionInner}>
@@ -116,7 +112,7 @@ export default function About() {
                   fontWeight: 800,
                   color: t.textSub,
                   lineHeight: 1.8,
-                  margin: `0 0 ${spacing.lgPlus} 0`,
+                  margin: spacing.md,
                 }}
               >
                 I'm a Computer Science undergraduate at Government Engineering
@@ -131,7 +127,7 @@ export default function About() {
                   fontWeight: 800,
                   color: t.textSub,
                   lineHeight: 1.8,
-                  margin: `0 0 ${spacing.xxl} 0`,
+                  margin: spacing.md,
                 }}
               >
                 My work spans machine learning, web development, systems
@@ -139,7 +135,15 @@ export default function About() {
                 <br />I like experimenting and breaking things.
               </p>
 
-              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: "20px",
+                  flexDirection: "row-reverse",
+                  gap: "10px",
+                  flexWrap: "wrap",
+                }}
+              >
                 {languages.map((lang, i) => (
                   <motion.span
                     key={lang}

@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 
 export const alpha = {
-  sectionOverlay: 0.85,
+  sectionOverlay: 0.87,
   cardOverlay: 0.92,
   backdrop: 0.6,
   shadow: 0.35,

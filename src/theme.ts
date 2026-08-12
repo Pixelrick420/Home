@@ -26,12 +26,12 @@ export const darkTokens = {
   bgAlt: "#0A0A0A",
   bgCard: "#141414",
 
-  text: "#E8E8E8",
+  text: "#EEEEEE",
   textSub: "#D0D0D0",
-  textMuted: "#999999",
-  textFaint: "#707070",
+  textMuted: "#AAAAAA",
+  textFaint: "#797979",
 
-  accent: "#E8E8E8",
+  accent: "#CCCCCC",
   accentHover: "#F2F2F2",
 
   border: "#BDBDBD",
@@ -60,22 +60,22 @@ const PALETTES = {
 
 const projectPaletteConfig: Record<string, { palette: keyof typeof PALETTES }> =
   {
-  chatsocket: { palette: "p1" },
-  mesh: { palette: "p1" },
-  gameoflife: { palette: "p2" },
-  sharewave: { palette: "p2" },
-  ascii: { palette: "p3" },
-  sort: { palette: "p1" },
-  tetris: { palette: "p1" },
-  "below-c-level": { palette: "p1" },
-  fractal: { palette: "p3" },
-  election: { palette: "p2" },
-  automata: { palette: "p2" },
-  asteroids: { palette: "p3" },
-  shell: { palette: "p3" },
-  leaderboard: { palette: "p2" },
-  "handwritten-digits": { palette: "p3" },
-};
+    chatsocket: { palette: "p1" },
+    mesh: { palette: "p1" },
+    gameoflife: { palette: "p2" },
+    sharewave: { palette: "p2" },
+    ascii: { palette: "p3" },
+    sort: { palette: "p1" },
+    tetris: { palette: "p1" },
+    "below-c-level": { palette: "p1" },
+    fractal: { palette: "p3" },
+    election: { palette: "p2" },
+    automata: { palette: "p2" },
+    asteroids: { palette: "p3" },
+    shell: { palette: "p3" },
+    leaderboard: { palette: "p2" },
+    "handwritten-digits": { palette: "p3" },
+  };
 
 export const projectPalettes: Record<
   string,
