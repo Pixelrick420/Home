@@ -79,13 +79,13 @@ export default function Hero() {
           <span
             style={{
               fontFamily: fonts.sans,
-              fontSize: fontSize.heroBadge,
-              padding: "clamp(6px, 2vw, 10px) clamp(12px, 4vw, 20px)",
+              fontWeight: 900,
+              fontSize: "clamp(8px, 2vw, 10px)",
+              padding: "clamp(1px, 2vw, 10px) clamp(10px, 4vw, 20px)",
               maxWidth: "100%",
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
-              fontWeight: 600,
               letterSpacing: "0.2em",
               textTransform: "uppercase",
               color: t.accent,

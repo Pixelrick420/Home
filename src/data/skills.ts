@@ -15,7 +15,7 @@ export const skills: SkillGroup[] = [
   },
   {
     category: "DevOps",
-    items: ["Docker", "Podman", "Github Actions"],
+    items: ["Docker", "Podman", "Actions"],
   },
   {
     category: "Apps",

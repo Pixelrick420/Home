@@ -72,7 +72,7 @@ export default function Skills() {
           style={{
             display: "grid",
             gridTemplateColumns:
-              "repeat(auto-fill, minmax(clamp(160px, 25vw, 360px), 1fr))",
+              "repeat(auto-fill, minmax(clamp(120px, 25vw, 360px), 1fr))",
             gap: spacing.lgPlus,
           }}
         >
@@ -91,7 +91,7 @@ export default function Skills() {
               }}
               className="card-hover"
               style={{
-                padding: `${spacing.xxl} ${spacing.xlPlus}`,
+                padding: `${spacing.lgPlus} ${spacing.md}`,
                 backgroundColor: t.bgCard,
                 border: `1px solid ${t.border}`,
                 borderRadius: radius.card,
