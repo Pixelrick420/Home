@@ -72,7 +72,7 @@ export default function Skills() {
           style={{
             display: "grid",
             gridTemplateColumns:
-              "repeat(auto-fill, minmax(clamp(120px, 4vw, 240px), 1fr))",
+              "repeat(auto-fill, minmax(clamp(160px, 25vw, 360px), 1fr))",
             gap: spacing.lgPlus,
           }}
         >

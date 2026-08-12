@@ -1271,6 +1271,9 @@ export default function ProjectCard({
         borderRadius: radius.card,
         overflow: "hidden",
         cursor: "pointer",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
       }}
     >
       <div
@@ -1279,6 +1282,7 @@ export default function ProjectCard({
           width: "100%",
           paddingBottom: "100%",
           overflow: "hidden",
+          flexShrink: 0,
         }}
       >
         <div style={{ position: "absolute", inset: 0 }}>
@@ -1327,7 +1331,14 @@ export default function ProjectCard({
         </div>
       </div>
 
-      <div style={{ padding: "24px 28px 28px" }}>
+      <div
+        style={{
+          padding: "24px 28px 28px",
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+        }}
+      >
         <div
           style={{
             display: "flex",
@@ -1378,7 +1389,12 @@ export default function ProjectCard({
 
         <div
           className="project-tags"
-          style={{ display: "flex", flexWrap: "wrap", gap: spacing.sm }}
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: spacing.sm,
+            marginTop: "auto",
+          }}
         >
           {project.tags.map((tag) => (
             <span

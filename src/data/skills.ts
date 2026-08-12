@@ -7,16 +7,11 @@ export const skills: SkillGroup[] = [
   },
   {
     category: "Web",
-    items: [
-      "React",
-      "Sveltekit",
-      "Node.js",
-      "Tailwind",
-    ],
+    items: ["React", "Sveltekit", "Node.js", "Tailwind"],
   },
   {
     category: "Databases",
-    items: ["PostgreSQL", "Firestore", "Oracle Vector DB"],
+    items: ["PostgreSQL", "Firestore", "Oracle AI DB"],
   },
   {
     category: "DevOps",
