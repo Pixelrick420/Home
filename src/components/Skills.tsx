@@ -4,13 +4,14 @@ import { skills } from "../data/skills";
 import { useTheme } from "../context/useTheme";
 import { fonts } from "../theme";
 import { motion } from "framer-motion";
+import SectionHeader from "./SectionHeader";
 import {
+  cardStyle,
   duration,
   ease,
   fontSize,
   offset,
   radius,
-  section,
   sectionInner,
   sectionOverlay,
   sectionStyle,
@@ -22,47 +23,23 @@ export default function Skills() {
   const { t } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
 
-  const [headerRef, headerVisible] = useScrollFade<HTMLDivElement>({
-    threshold: 0.2,
-  });
   const [gridRef, gridVisible] = useScrollFade<HTMLDivElement>({
     threshold: 0.04,
   });
 
   return (
-    <section id="skills" ref={sectionRef} style={sectionStyle}>
+    <section
+      id="skills"
+      ref={sectionRef}
+      className="section-block"
+      style={sectionStyle}
+    >
       <div style={sectionOverlay(t.bgAlt)} />
 
       <div style={sectionInner}>
-        <motion.div
-          ref={headerRef}
-          initial={{ opacity: 0, y: offset.y }}
-          animate={{
-            opacity: headerVisible ? 1 : 0,
-            y: headerVisible ? 0 : offset.y,
-          }}
-          transition={{ duration: duration.slow, ease }}
-          className="section-header"
-        >
-          <span
-            className="section-label"
-            style={{
-              color: t.accentHover,
-            }}
-          >
-            04 - Skills
-          </span>
-          <h2 className="section-title">
-            My{" "}
-            <span
-              style={{
-                color: t.accent,
-              }}
-            >
-              Toolkit
-            </span>
-          </h2>
-        </motion.div>
+        <SectionHeader label="04 - Skills">
+          My <span style={{ color: t.accent }}>Toolkit</span>
+        </SectionHeader>
 
         <motion.div
           ref={gridRef}
@@ -91,10 +68,8 @@ export default function Skills() {
               }}
               className="card-hover"
               style={{
+                ...cardStyle(t),
                 padding: `${spacing.lgPlus} ${spacing.md}`,
-                backgroundColor: t.bgCard,
-                border: `1px solid ${t.border}`,
-                borderRadius: radius.card,
               }}
             >
               <div
@@ -155,24 +130,6 @@ export default function Skills() {
           ))}
         </motion.div>
       </div>
-
-      <style>{`
-        @media (max-width: 1024px) {
-          section#skills {
-            padding: ${section.laptop} !important;
-          }
-        }
-        @media (max-width: 768px) {
-          section#skills {
-            padding: ${section.tablet} !important;
-          }
-        }
-        @media (max-width: 480px) {
-          section#skills {
-            padding: ${section.mobile} !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

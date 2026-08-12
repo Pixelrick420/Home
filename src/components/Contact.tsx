@@ -6,9 +6,9 @@ import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
 import { SiLeetcode } from "@react-icons/all-files/si/SiLeetcode";
 import { motion } from "framer-motion";
+import SectionHeader from "./SectionHeader";
 import {
   alpha,
-  contactSection,
   duration,
   fontSize,
   hexAlpha,
@@ -51,34 +51,15 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      style={{ ...sectionStyle, padding: contactSection.base }}
+      className="section-block"
+      style={sectionStyle}
     >
       <div style={sectionOverlay(t.bgAlt)} />
 
       <div ref={contentRef} style={sectionInner}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 30 }}
-          transition={{ duration: duration.slow }}
-          className="section-header"
-        >
-          <span
-            className="section-label"
-            style={{
-              color: t.accentHover,
-            }}
-          >
-            05 - Contact
-          </span>
-          <motion.h2
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
-            transition={{ duration: duration.slow, delay: 0.1 }}
-            className="section-title"
-          >
-            Let's build <span style={{ color: t.accent }}>something</span>
-          </motion.h2>
-        </motion.div>
+        <SectionHeader label="05 - Contact" threshold={0.08}>
+          Let's build <span style={{ color: t.accent }}>something</span>
+        </SectionHeader>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -176,24 +157,6 @@ export default function Contact() {
           </span>
         </motion.div>
       </div>
-
-      <style>{`
-        @media (max-width: 1024px) {
-          section#contact {
-            padding: ${contactSection.laptop} !important;
-          }
-        }
-        @media (max-width: 768px) {
-          section#contact {
-            padding: ${contactSection.tablet} !important;
-          }
-        }
-        @media (max-width: 480px) {
-          section#contact {
-            padding: ${contactSection.mobile} !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

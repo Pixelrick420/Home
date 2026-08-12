@@ -1,22 +1,23 @@
 import { useRef } from "react";
-import { useScrollFade } from "../hooks/useScrollFade";
 import { useTheme } from "../context/useTheme";
 import { fonts, type ThemeTokens } from "../theme";
 import { motion, useInView } from "framer-motion";
 import { experiences } from "../data/experience";
 import type { Experience } from "../types";
+import SectionHeader from "./SectionHeader";
 import {
+  accentBar,
+  cardStyle,
   duration,
   fontSize,
   hexAlpha,
   offset,
   radius,
-  section,
   sectionInner,
   sectionOverlay,
+  sectionStyle,
   spacing,
   stagger,
-  transitions,
 } from "../constants";
 
 function ExperienceCard({
@@ -48,25 +49,14 @@ function ExperienceCard({
         ease: "easeOut",
       }}
       style={{
-        backgroundColor: t.bgCard,
-        border: `1px solid ${t.border}`,
-        borderRadius: radius.card,
+        ...cardStyle(t),
         overflow: "hidden",
         position: "relative",
         willChange: "transform, opacity",
         transform: "translateZ(0)",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          bottom: 0,
-          width: "10px",
-          backgroundColor: t.accent,
-        }}
-      />
+      <div style={accentBar(t)} />
 
       <div
         style={{
@@ -209,40 +199,19 @@ export default function Experience() {
   const { t } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
 
-  const [headerRef, headerVisible] = useScrollFade<HTMLDivElement>({
-    threshold: 0.2,
-  });
-
   return (
     <section
       id="experience"
       ref={sectionRef}
-      style={{
-        position: "relative",
-        padding: section.base,
-        transition: transitions.bg,
-      }}
+      className="section-block"
+      style={sectionStyle}
     >
       <div style={sectionOverlay(t.bgAlt)} />
 
       <div style={sectionInner}>
-        <motion.div
-          ref={headerRef}
-          initial={{ opacity: 0, y: offset.y }}
-          animate={{
-            opacity: headerVisible ? 1 : 0,
-            y: headerVisible ? 0 : offset.y,
-          }}
-          transition={{ duration: duration.slow }}
-          className="section-header"
-        >
-          <span className="section-label" style={{ color: t.accentHover }}>
-            02 - Experience
-          </span>
-          <h2 className="section-title">
-            Where I've <span style={{ color: t.accent }}>Worked</span>
-          </h2>
-        </motion.div>
+        <SectionHeader label="02 - Experience">
+          Where I've <span style={{ color: t.accent }}>Worked</span>
+        </SectionHeader>
 
         <div className="experience-grid">
           {experiences.map((exp, i) => (

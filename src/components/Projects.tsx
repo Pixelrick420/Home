@@ -3,15 +3,14 @@ import { useScrollFade } from "../hooks/useScrollFade";
 import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
+import SectionHeader from "./SectionHeader";
 import { useTheme } from "../context/useTheme";
 import { motion } from "framer-motion";
 import { fonts } from "../theme";
 import {
   duration,
-  ease,
   offset,
   radius,
-  section,
   sectionInner,
   sectionOverlay,
   sectionStyle,
@@ -47,9 +46,6 @@ export default function Projects() {
   );
   const columns = useColumns();
 
-  const [headerRef, headerVisible] = useScrollFade<HTMLDivElement>({
-    threshold: 0.2,
-  });
   const [gridRef, gridVisible] = useScrollFade<HTMLDivElement>({
     threshold: 0.04,
   });
@@ -61,45 +57,18 @@ export default function Projects() {
   const hasMoreProjects = projects.length > displayLimit;
 
   return (
-    <section id="work" ref={sectionRef} style={sectionStyle}>
+    <section
+      id="work"
+      ref={sectionRef}
+      className="section-block"
+      style={sectionStyle}
+    >
       <div style={sectionOverlay(t.bgAlt)} />
 
       <div style={sectionInner}>
-        <motion.div
-          ref={headerRef}
-          initial={{ opacity: 0, y: offset.y }}
-          animate={{
-            opacity: headerVisible ? 1 : 0,
-            y: headerVisible ? 0 : offset.y,
-          }}
-          transition={{ duration: duration.slow, ease }}
-          className="section-header"
-        >
-          <motion.span
-            initial={{ opacity: 0, x: -offset.x }}
-            animate={{
-              opacity: headerVisible ? 1 : 0,
-              x: headerVisible ? 0 : -offset.x,
-            }}
-            transition={{ duration: duration.medium, delay: 0.1 }}
-            className="section-label"
-            style={{
-              color: t.accentHover,
-            }}
-          >
-            01 - Selected Work
-          </motion.span>
-          <h2 className="section-title">
-            Things I've{" "}
-            <span
-              style={{
-                color: t.accent,
-              }}
-            >
-              Built
-            </span>
-          </h2>
-        </motion.div>
+        <SectionHeader label="01 - Selected Work">
+          Things I've <span style={{ color: t.accent }}>Built</span>
+        </SectionHeader>
 
         <motion.div
           ref={gridRef}
@@ -163,21 +132,7 @@ export default function Projects() {
       </div>
 
       <style>{`
-        @media (max-width: 1024px) {
-          section#work {
-            padding: ${section.laptop} !important;
-          }
-        }
-        @media (max-width: 768px) {
-          section#work {
-            padding: ${section.tablet} !important;
-          }
-        }
         @media (max-width: 640px) {
-          section#work {
-            padding: ${section.mobile} !important;
-          }
-
           .project-card > div:last-child {
             padding: 20px !important;
           }
@@ -188,11 +143,6 @@ export default function Projects() {
 
           .project-description {
             font-size: 13px !important;
-          }
-
-          .project-tag {
-            font-size: 10px !important;
-            padding: 4px 8px !important;
           }
         }
       `}</style>

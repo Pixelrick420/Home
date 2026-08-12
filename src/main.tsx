@@ -102,6 +102,32 @@ ${cssVars}
     }
   }
 
+  .section-block {
+    padding-top: 120px !important;
+    padding-bottom: 120px !important;
+  }
+
+  @media (max-width: 1024px) {
+    .section-block {
+      padding-top: 100px !important;
+      padding-bottom: 100px !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section-block {
+      padding-top: 80px !important;
+      padding-bottom: 80px !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-block {
+      padding-top: 60px !important;
+      padding-bottom: 60px !important;
+    }
+  }
+
   .section-header {
     margin-bottom: 64px;
   }

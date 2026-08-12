@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { projectPalettes } from "../theme";
 import {
   alpha,
+  cardStyle,
   duration,
   ease,
   fontSize,
@@ -14,6 +15,7 @@ import {
   radius,
   spacing,
   stagger,
+  tagStyle,
 } from "../constants";
 
 interface Props {
@@ -1266,9 +1268,8 @@ export default function ProjectCard({
       }}
       className="project-card card-hover"
       style={{
-        backgroundColor: t.bgCard,
+        ...cardStyle(t),
         border: `1px solid ${hov ? t.accent : t.border}`,
-        borderRadius: radius.card,
         overflow: "hidden",
         cursor: "pointer",
         display: "flex",
@@ -1400,15 +1401,7 @@ export default function ProjectCard({
             <span
               key={tag}
               className="project-tag"
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: fontSize.xs,
-                fontWeight: 500,
-                color: t.textSub,
-                backgroundColor: t.bgAlt,
-                padding: `6px ${spacing.md}`,
-                borderRadius: radius.tag,
-              }}
+              style={tagStyle(t)}
             >
               {tag}
             </span>

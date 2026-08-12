@@ -49,6 +49,20 @@ export default function ProjectModal({ project, onClose }: Props) {
     margin: 0,
   };
 
+  const linkStyle = {
+    fontFamily: fonts.sans,
+    fontSize: "14px",
+    fontWeight: 600,
+    color: t.accent,
+    textDecoration: "none",
+    border: `1px solid ${t.accent}`,
+    padding: "10px 20px",
+    borderRadius: radius.pillSm,
+    display: "inline-flex",
+    alignItems: "center",
+    gap: spacing.sm,
+  };
+
   return (
     <AnimatePresence>
       {project && (
@@ -182,19 +196,7 @@ export default function ProjectModal({ project, onClose }: Props) {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  style={{
-                    fontFamily: fonts.sans,
-                    fontSize: "14px",
-                    fontWeight: 600,
-                    color: t.accent,
-                    textDecoration: "none",
-                    border: `1px solid ${t.accent}`,
-                    padding: "10px 20px",
-                    borderRadius: radius.pillSm,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: spacing.sm,
-                  }}
+                  style={linkStyle}
                 >
                   <FaGithub size={16} />
                   View on GitHub
@@ -206,19 +208,7 @@ export default function ProjectModal({ project, onClose }: Props) {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    style={{
-                      fontFamily: fonts.sans,
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      color: t.accent,
-                      textDecoration: "none",
-                      border: `1px solid ${t.accent}`,
-                      padding: "10px 20px",
-                      borderRadius: radius.pillSm,
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: spacing.sm,
-                    }}
+                    style={linkStyle}
                   >
                     <FaExternalLinkAlt size={14} />
                     Live Demo

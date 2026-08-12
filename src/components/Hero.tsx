@@ -9,7 +9,6 @@ import {
   fontSize,
   layout,
   offset,
-  pagePadding,
   radius,
   spacing,
   transitions,
@@ -21,6 +20,19 @@ export default function Hero() {
   const { t, mode } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+
+  const heroButtonBase = {
+    fontFamily: fonts.sans,
+    fontSize: fontSize.sm,
+    fontWeight: 600,
+    letterSpacing: "0.05em",
+    border: `1px solid ${t.accent}`,
+    padding: `${spacing.lg} ${spacing.xxl}`,
+    borderRadius: radius.pill,
+    display: "flex",
+    alignItems: "center",
+    gap: spacing.sm,
+  };
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -44,7 +56,6 @@ export default function Hero() {
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
-        padding: `0 ${pagePadding.desktop}`,
         transition: transitions.bg,
       }}
     >
@@ -168,19 +179,10 @@ export default function Hero() {
             whileTap={{ scale: 0.98 }}
             transition={{ duration: duration.fast }}
             style={{
-              fontFamily: fonts.sans,
-              fontSize: fontSize.sm,
-              fontWeight: 600,
-              letterSpacing: "0.05em",
+              ...heroButtonBase,
               color: t.bg,
               backgroundColor: t.accent,
-              border: `1px solid ${t.accent}`,
-              padding: `${spacing.lg} ${spacing.xxl}`,
               cursor: "pointer",
-              borderRadius: radius.pill,
-              display: "flex",
-              alignItems: "center",
-              gap: spacing.sm,
               transition: transitions.primary,
             }}
           >
@@ -207,19 +209,10 @@ export default function Hero() {
             whileTap={{ scale: 0.98 }}
             transition={{ duration: duration.fast }}
             style={{
-              fontFamily: fonts.sans,
-              fontSize: fontSize.sm,
-              fontWeight: 600,
-              letterSpacing: "0.05em",
+              ...heroButtonBase,
               color: t.text,
               textDecoration: "none",
               backgroundColor: "transparent",
-              border: `1px solid ${t.accent}`,
-              padding: `${spacing.lg} ${spacing.xxl}`,
-              borderRadius: radius.pill,
-              display: "flex",
-              alignItems: "center",
-              gap: spacing.sm,
               transition: transitions.button,
             }}
           >
@@ -227,23 +220,6 @@ export default function Hero() {
           </motion.a>
         </motion.div>
       </motion.div>
-      <style>{`
-        @media (max-width: 1024px) {
-          section[style*="padding: 0 80px"] {
-            padding: 0 ${pagePadding.laptop} !important;
-          }
-        }
-        @media (max-width: 768px) {
-          section[style*="padding: 0 80px"] {
-            padding: 0 ${pagePadding.tablet} !important;
-          }
-        }
-        @media (max-width: 480px) {
-          section[style*="padding: 0 80px"] {
-            padding: 0 ${pagePadding.mobile} !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

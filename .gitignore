@@ -28,3 +28,4 @@ graphify-out/
 # dev-agent-skills
 AGENTS.md
 .agents-md.sha256
+.dev-agent/

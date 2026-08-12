@@ -1,4 +1,6 @@
 import type { CSSProperties } from "react";
+import { fonts } from "./theme";
+import type { ThemeTokens } from "./theme";
 
 export const alpha = {
   sectionOverlay: 0.87,
@@ -52,20 +54,6 @@ export const pagePadding = {
   laptop: "48px",
   tablet: "32px",
   mobile: "20px",
-} as const;
-
-export const section = {
-  base: "120px 80px",
-  laptop: "100px 48px",
-  tablet: "80px 32px",
-  mobile: "60px 20px",
-} as const;
-
-export const contactSection = {
-  base: "120px 80px 100px",
-  laptop: "100px 48px 80px",
-  tablet: "80px 32px 60px",
-  mobile: "60px 20px 48px",
 } as const;
 
 export const zIndex = {
@@ -128,7 +116,6 @@ export const selectionText = {
 
 export const sectionStyle: CSSProperties = {
   position: "relative",
-  padding: section.base,
   transition: transitions.bg,
   overflow: "hidden",
 };
@@ -148,3 +135,33 @@ export const sectionInner: CSSProperties = {
   maxWidth: width.container,
   margin: "0 auto",
 };
+
+export const cardStyle = (t: ThemeTokens): CSSProperties => ({
+  backgroundColor: t.bgCard,
+  border: `1px solid ${t.border}`,
+  borderRadius: radius.card,
+});
+
+export const tagStyle = (t: ThemeTokens): CSSProperties => ({
+  fontFamily: fonts.sans,
+  fontSize: fontSize.xs,
+  fontWeight: 500,
+  letterSpacing: "0.05em",
+  color: t.textMuted,
+  backgroundColor: t.bgAlt,
+  border: `1px solid ${t.border}`,
+  padding: spacing.xs,
+  borderRadius: radius.tag,
+  maxWidth: "100%",
+  boxSizing: "border-box",
+  overflowWrap: "anywhere",
+});
+
+export const accentBar = (t: ThemeTokens): CSSProperties => ({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  bottom: 0,
+  width: "10px",
+  backgroundColor: t.accent,
+});
