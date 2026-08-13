@@ -19,7 +19,7 @@ export const skills: SkillGroup[] = [
   },
   {
     category: "Apps",
-    items: ["Flutter", "Tauri"],
+    items: ["Flutter", "Tauri", "Android Studio"],
   },
   {
     category: "Tools",
