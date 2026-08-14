@@ -27,14 +27,19 @@ export const radius = {
 } as const;
 
 export const fontSize = {
-  xs: "11px",
-  sm: "13px",
-  md: "15px",
-  lg: "18px",
+  xxs: "11px",
+  xs: "12px",
+  meta: "13px",
+  sm: "14px",
+  body: "15px",
+  md: "16px",
+  mdPlus: "17px",
+  bodyLg: "18px",
+  lg: "19px",
   heading: "24px",
   heroBadge: "clamp(5px, 2.5vw, 12px)",
   heroTitle: "clamp(42px, 8vw, 140px)",
-  heroLead: "clamp(18px, 2.5vw, 26px)",
+  heroLead: "clamp(16px, 2.5vw, 26px)",
 } as const;
 
 export const spacing = {
@@ -155,6 +160,49 @@ export const tagStyle = (t: ThemeTokens): CSSProperties => ({
   maxWidth: "100%",
   boxSizing: "border-box",
   overflowWrap: "anywhere",
+});
+
+export const eyebrowStyle = (
+  t: ThemeTokens,
+  letterSpacing = "0.2em",
+): CSSProperties => ({
+  fontFamily: fonts.sans,
+  fontSize: fontSize.meta,
+  fontWeight: 600,
+  letterSpacing,
+  textTransform: "uppercase",
+  color: t.textMuted,
+  margin: 0,
+});
+
+export const labelStyle = (t: ThemeTokens): CSSProperties => ({
+  fontFamily: fonts.sans,
+  fontSize: "clamp(15px, 2vw, 20px)",
+  fontWeight: 600,
+  color: t.text,
+  minWidth: 0,
+  overflowWrap: "anywhere",
+  wordBreak: "break-word",
+});
+
+export const barBlock = (t: ThemeTokens): CSSProperties => ({
+  width: "4px",
+  height: "20px",
+  backgroundColor: t.accent,
+  borderRadius: radius.bar,
+  flexShrink: 0,
+});
+
+export const iconButtonStyle = (t: ThemeTokens, size = 36): CSSProperties => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: `${size}px`,
+  height: `${size}px`,
+  backgroundColor: "transparent",
+  color: t.text,
+  border: "none",
+  cursor: "pointer",
 });
 
 export const accentBar = (t: ThemeTokens): CSSProperties => ({

@@ -9,6 +9,7 @@ import {
   duration,
   ease,
   fontSize,
+  iconButtonStyle,
   radius,
   spacing,
   width,
@@ -64,161 +65,219 @@ export default function ProjectModal({ project, onClose }: Props) {
   };
 
   return (
-    <AnimatePresence>
-      {project && (
-        <motion.div
-          key={`${project.id}-backdrop`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: duration.fast }}
-          onClick={onClose}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: zIndex.modal,
-            backgroundColor: `rgba(10, 10, 10, ${alpha.backdrop})`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: spacing.xl,
-            overflowY: "auto",
-          }}
-        >
+    <>
+      <AnimatePresence>
+        {project && (
           <motion.div
-            key={`${project.id}-panel`}
-            role="dialog"
-            aria-modal="true"
-            aria-label={project.title}
-            onClick={(e) => e.stopPropagation()}
-            initial={{ opacity: 0, y: 24, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.98 }}
-            transition={{ duration: 0.25, ease }}
+            key={`${project.id}-backdrop`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: duration.fast }}
+            onClick={onClose}
             style={{
-              backgroundColor: t.bgCard,
-              border: `1px solid ${t.border}`,
-              borderRadius: radius.modal,
-              width: "100%",
-              maxWidth: width.modal,
-              maxHeight: "85vh",
-              overflow: "auto",
-              boxShadow: `0 24px 64px rgba(0, 0, 0, ${alpha.shadow})`,
+              position: "fixed",
+              inset: 0,
+              zIndex: zIndex.modal,
+              backgroundColor: `rgba(10, 10, 10, ${alpha.backdrop})`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: spacing.xl,
+              overflowY: "auto",
             }}
           >
-            <div
+            <motion.div
+              key={`${project.id}-panel`}
+              role="dialog"
+              aria-modal="true"
+              aria-label={project.title}
+              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 24, scale: 0.98 }}
+              transition={{ duration: 0.25, ease }}
+              className="modal-panel"
               style={{
-                padding: `${spacing.xlPlus} ${spacing.xxl} ${spacing.xxl}`,
+                backgroundColor: t.bgCard,
+                border: `1px solid ${t.border}`,
+                borderRadius: radius.modal,
+                width: "100%",
+                maxWidth: width.modal,
+                maxHeight: "75vh",
+                overflow: "auto",
+                boxShadow: `0 24px 64px rgba(0, 0, 0, ${alpha.shadow})`,
               }}
             >
               <div
+                className="modal-content"
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  gap: spacing.lg,
-                  marginBottom: "18px",
+                  padding: `${spacing.xlPlus} ${spacing.xxl} ${spacing.xxl}`,
                 }}
               >
-                <div>
-                  <h3
-                    style={{
-                      fontFamily: fonts.serif,
-                      fontSize: "26px",
-                      fontWeight: 700,
-                      color: t.text,
-                      margin: 0,
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-                  <span
-                    style={{
-                      fontFamily: fonts.mono,
-                      fontSize: "12px",
-                      color: t.textFaint,
-                      display: "inline-block",
-                      marginTop: "6px",
-                    }}
-                  >
-                    {project.year}
-                  </span>
-                </div>
-                <button
-                  onClick={onClose}
-                  aria-label="Close"
+                <div
+                  className="modal-header"
                   style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    border: "none",
-                    backgroundColor: "transparent",
-                    color: t.textFaint,
-                    fontSize: "24px",
-                    lineHeight: 1,
-                    cursor: "pointer",
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    gap: spacing.lg,
+                    marginBottom: "18px",
                   }}
                 >
-                  ×
-                </button>
-              </div>
+                  <div>
+                    <h3
+                      className="modal-title"
+                      style={{
+                        fontFamily: fonts.serif,
+                        fontSize: "26px",
+                        fontWeight: 700,
+                        color: t.text,
+                        margin: 0,
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {project.title}
+                    </h3>
+                    <span
+                      className="modal-year"
+                      style={{
+                        fontFamily: fonts.mono,
+                        fontSize: "12px",
+                        color: t.textFaint,
+                        display: "inline-block",
+                        marginTop: "6px",
+                      }}
+                    >
+                      {project.year}
+                    </span>
+                  </div>
+                  <button
+                    onClick={onClose}
+                    aria-label="Close"
+                    style={{
+                      ...iconButtonStyle(t, 32),
+                      borderRadius: "50%",
+                      color: t.textFaint,
+                      fontSize: "24px",
+                      lineHeight: 1,
+                      flexShrink: 0,
+                    }}
+                  >
+                    ×
+                  </button>
+                </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: spacing.lg,
-                }}
-              >
-                <p style={paraStyle}>{project.what}</p>
-                <p style={paraStyle}>{project.problem}</p>
-                <p style={paraStyle}>{project.stack}</p>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: spacing.md,
-                  marginTop: spacing.xlPlus,
-                  paddingTop: spacing.xl,
-                  borderTop: `1px solid ${t.border}`,
-                }}
-              >
-                <motion.a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  style={linkStyle}
+                <div
+                  className="modal-body"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: spacing.lg,
+                  }}
                 >
-                  <FaGithub size={16} />
-                  View on GitHub
-                </motion.a>
-                {project.demo && (
+                  <p className="modal-para" style={paraStyle}>{project.what}</p>
+                  <p className="modal-para" style={paraStyle}>{project.problem}</p>
+                  <p className="modal-para" style={paraStyle}>{project.stack}</p>
+                </div>
+
+                <div
+                  className="modal-links"
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: spacing.md,
+                    marginTop: spacing.xlPlus,
+                    paddingTop: spacing.xl,
+                    borderTop: `1px solid ${t.border}`,
+                  }}
+                >
                   <motion.a
-                    href={project.demo}
+                    className="modal-link"
+                    href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     style={linkStyle}
                   >
-                    <FaExternalLinkAlt size={14} />
-                    Live Demo
+                    <FaGithub size={16} />
+                    <span className="modal-link-short">Github</span>
+                    <span className="modal-link-long">View on GitHub</span>
                   </motion.a>
-                )}
+                  {project.demo && (
+                    <motion.a
+                      className="modal-link"
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      style={linkStyle}
+                    >
+                      <FaExternalLinkAlt size={14} />
+                      <span className="modal-link-short">Demo</span>
+                      <span className="modal-link-long">Live Demo</span>
+                    </motion.a>
+                  )}
+                </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        )}
+      </AnimatePresence>
+
+      <style>{`
+        .modal-link-short {
+          display: none;
+        }
+
+        @media (max-width: 640px) {
+          .modal-content {
+            padding: 20px !important;
+          }
+
+          .modal-header {
+            margin-bottom: 12px !important;
+          }
+
+          .modal-title {
+            font-size: 20px !important;
+          }
+
+          .modal-year {
+            margin-top: 4px !important;
+          }
+
+          .modal-body {
+            gap: 10px !important;
+          }
+
+          .modal-para {
+            font-size: 13px !important;
+            line-height: 1.55 !important;
+          }
+
+          .modal-links {
+            margin-top: 16px !important;
+            padding-top: 16px !important;
+            gap: 10px !important;
+          }
+
+          .modal-link {
+            padding: 8px 16px !important;
+            font-size: 13px !important;
+          }
+
+          .modal-link-short {
+            display: inline;
+          }
+
+          .modal-link-long {
+            display: none;
+          }
+        }
+      `}</style>
+    </>
   );
 }

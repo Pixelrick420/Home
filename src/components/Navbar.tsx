@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 import { useTheme } from "../context/useTheme";
 import { fonts } from "../theme";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaMoon } from "@react-icons/all-files/fa/FaMoon";
-import { FaSun } from "@react-icons/all-files/fa/FaSun";
-import { FaBars } from "@react-icons/all-files/fa/FaBars";
-import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
+import { FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
 import {
   alpha,
   duration,
   ease,
   fontSize,
+  iconButtonStyle,
   offset,
   pagePadding,
   spacing,
@@ -135,15 +133,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "36px",
-              height: "36px",
-              backgroundColor: "transparent",
-              color: t.text,
-              border: "none",
-              cursor: "pointer",
+              ...iconButtonStyle(t),
               transition: transitions.color,
             }}
           >
@@ -172,17 +162,7 @@ export default function Navbar() {
             onClick={toggle}
             whileTap={{ scale: 0.9 }}
             aria-label={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "36px",
-              height: "36px",
-              backgroundColor: "transparent",
-              color: t.text,
-              border: "none",
-              cursor: "pointer",
-            }}
+            style={iconButtonStyle(t)}
           >
             {mode === "light" ? (
               <FaMoon
@@ -203,17 +183,7 @@ export default function Navbar() {
           <motion.button
             onClick={() => setMenuOpen((o: boolean) => !o)}
             whileTap={{ scale: 0.9 }}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: t.text,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "36px",
-              height: "36px",
-            }}
+            style={iconButtonStyle(t)}
             aria-label="Toggle menu"
           >
             {menuOpen ? (
@@ -236,6 +206,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            className="mob-menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -303,17 +274,17 @@ export default function Navbar() {
       <style>{`
         @media (max-width: 1024px) {
           nav { padding-left: ${pagePadding.laptop} !important; padding-right: ${pagePadding.laptop} !important; }
-          [style*="padding: 0 80px"] { padding: 0 ${pagePadding.laptop} !important; }
+          .mob-menu { padding: 0 ${pagePadding.laptop} !important; }
         }
         @media (max-width: 768px) {
           .desk-nav { display: none !important; }
           .mob-controls { display: flex !important; }
           nav { padding-left: ${pagePadding.tablet} !important; padding-right: ${pagePadding.tablet} !important; }
-          [style*="padding: 0 80px"] { padding: 0 ${pagePadding.tablet} !important; }
+          .mob-menu { padding: 0 ${pagePadding.tablet} !important; }
         }
         @media (max-width: 480px) {
           nav { padding-left: ${pagePadding.mobile} !important; padding-right: ${pagePadding.mobile} !important; }
-          [style*="padding: 0 80px"] { padding: 0 ${pagePadding.mobile} !important; }
+          .mob-menu { padding: 0 ${pagePadding.mobile} !important; }
         }
       `}</style>
     </>

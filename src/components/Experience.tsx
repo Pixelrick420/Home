@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { experiences } from "../data/experience";
 import type { Experience } from "../types";
 import SectionHeader from "./SectionHeader";
+import Section from "./Section";
 import {
   accentBar,
   cardStyle,
@@ -13,11 +14,9 @@ import {
   hexAlpha,
   offset,
   radius,
-  sectionInner,
-  sectionOverlay,
-  sectionStyle,
   spacing,
   stagger,
+  tagStyle,
 } from "../constants";
 
 function ExperienceCard({
@@ -91,7 +90,7 @@ function ExperienceCard({
             <span
               style={{
                 fontFamily: fonts.sans,
-                fontSize: "10px",
+                fontSize: fontSize.xxs,
                 fontWeight: 600,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
@@ -117,7 +116,7 @@ function ExperienceCard({
             <span
               style={{
                 fontFamily: fonts.sans,
-                fontSize: "14px",
+                fontSize: fontSize.body,
                 fontWeight: 600,
                 marginTop: spacing.lgPlus,
                 marginBottom: spacing.lgPlus,
@@ -126,7 +125,9 @@ function ExperienceCard({
             >
               {exp.company}
             </span>
-            <span style={{ color: t.textMuted, fontSize: "12px" }}>•</span>
+            <span style={{ color: t.textMuted, fontSize: fontSize.meta }}>
+              •
+            </span>
             <span
               style={{
                 fontFamily: fonts.sans,
@@ -136,7 +137,9 @@ function ExperienceCard({
             >
               {exp.location}
             </span>
-            <span style={{ color: t.textMuted, fontSize: "12px" }}>•</span>
+            <span style={{ color: t.textMuted, fontSize: fontSize.meta }}>
+              •
+            </span>
             <span
               style={{
                 fontFamily: fonts.sans,
@@ -152,7 +155,7 @@ function ExperienceCard({
         <p
           style={{
             fontFamily: fonts.sans,
-            fontSize: "14px",
+            fontSize: fontSize.body,
             fontWeight: 500,
             color: t.textSub,
             lineHeight: 1.7,
@@ -172,20 +175,7 @@ function ExperienceCard({
           }}
         >
           {exp.stack.map((tech: string) => (
-            <span
-              key={tech}
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: fontSize.xs,
-                fontWeight: 500,
-                letterSpacing: "0.05em",
-                color: t.textMuted,
-                backgroundColor: `${t.bgAlt}`,
-                border: `1px solid ${t.border}`,
-                padding: spacing.xs,
-                borderRadius: radius.tag,
-              }}
-            >
+            <span key={tech} style={tagStyle(t)}>
               {tech}
             </span>
           ))}
@@ -197,45 +187,35 @@ function ExperienceCard({
 
 export default function Experience() {
   const { t } = useTheme();
-  const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section
-      id="experience"
-      ref={sectionRef}
-      className="section-block"
-      style={sectionStyle}
-    >
-      <div style={sectionOverlay(t.bgAlt)} />
+    <Section id="experience">
+      <SectionHeader label="02 - Experience">
+        Where I've <span style={{ color: t.accent }}>Worked</span>
+      </SectionHeader>
 
-      <div style={sectionInner}>
-        <SectionHeader label="02 - Experience">
-          Where I've <span style={{ color: t.accent }}>Worked</span>
-        </SectionHeader>
-
-        <div className="experience-grid">
-          {experiences.map((exp, i) => (
-            <ExperienceCard key={exp.id} exp={exp} i={i} t={t} />
-          ))}
-        </div>
-        <style>{`
-          .experience-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: ${spacing.xxl};
-          }
-
-          .experience-card {
-            min-width: 0;
-          }
-
-          @media (max-width: 900px) {
-            .experience-grid {
-              grid-template-columns: 1fr;
-            }
-          }
-        `}</style>
+      <div className="experience-grid">
+        {experiences.map((exp, i) => (
+          <ExperienceCard key={exp.id} exp={exp} i={i} t={t} />
+        ))}
       </div>
-    </section>
+      <style>{`
+        .experience-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: ${spacing.xxl};
+        }
+
+        .experience-card {
+          min-width: 0;
+        }
+
+        @media (max-width: 900px) {
+          .experience-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+    </Section>
   );
 }

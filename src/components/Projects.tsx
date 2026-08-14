@@ -1,19 +1,18 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
 import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import SectionHeader from "./SectionHeader";
+import Section from "./Section";
 import { useTheme } from "../context/useTheme";
 import { motion } from "framer-motion";
 import { fonts } from "../theme";
 import {
   duration,
+  fontSize,
   offset,
   radius,
-  sectionInner,
-  sectionOverlay,
-  sectionStyle,
   spacing,
   transitions,
 } from "../constants";
@@ -39,7 +38,6 @@ function useColumns(): number {
 
 export default function Projects() {
   const { t } = useTheme();
-  const sectionRef = useRef<HTMLElement>(null);
   const [showAll, setShowAll] = useState(false);
   const [selected, setSelected] = useState<(typeof projects)[number] | null>(
     null,
@@ -57,79 +55,70 @@ export default function Projects() {
   const hasMoreProjects = projects.length > displayLimit;
 
   return (
-    <section
-      id="work"
-      ref={sectionRef}
-      className="section-block"
-      style={sectionStyle}
-    >
-      <div style={sectionOverlay(t.bgAlt)} />
+    <Section id="work">
+      <SectionHeader label="01 - Selected Work">
+        Things I've <span style={{ color: t.accent }}>Built</span>
+      </SectionHeader>
 
-      <div style={sectionInner}>
-        <SectionHeader label="01 - Selected Work">
-          Things I've <span style={{ color: t.accent }}>Built</span>
-        </SectionHeader>
+      <motion.div
+        ref={gridRef}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: gridVisible ? 1 : 0 }}
+        transition={{ duration: duration.medium }}
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${columns}, 1fr)`,
+          gap: spacing.xlPlus,
+        }}
+      >
+        {displayedProjects.map((p, i) => (
+          <ProjectCard
+            key={p.id}
+            project={p}
+            index={i}
+            visible={gridVisible}
+            onSelect={() => setSelected(p)}
+          />
+        ))}
+      </motion.div>
 
+      <ProjectModal project={selected} onClose={() => setSelected(null)} />
+
+      {hasMoreProjects && (
         <motion.div
-          ref={gridRef}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: gridVisible ? 1 : 0 }}
-          transition={{ duration: duration.medium }}
+          initial={{ opacity: 0, y: offset.ySmall }}
+          animate={{
+            opacity: gridVisible ? 1 : 0,
+            y: gridVisible ? 0 : offset.ySmall,
+          }}
+          transition={{ duration: duration.medium, delay: 0.3 }}
           style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${columns}, 1fr)`,
-            gap: spacing.xlPlus,
+            display: "flex",
+            justifyContent: "center",
+            marginTop: spacing.huge,
           }}
         >
-          {displayedProjects.map((p, i) => (
-            <ProjectCard
-              key={p.id}
-              project={p}
-              index={i}
-              visible={gridVisible}
-              onSelect={() => setSelected(p)}
-            />
-          ))}
-        </motion.div>
-
-        <ProjectModal project={selected} onClose={() => setSelected(null)} />
-
-        {hasMoreProjects && (
-          <motion.div
-            initial={{ opacity: 0, y: offset.ySmall }}
-            animate={{
-              opacity: gridVisible ? 1 : 0,
-              y: gridVisible ? 0 : offset.ySmall,
-            }}
-            transition={{ duration: duration.medium, delay: 0.3 }}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setShowAll(!showAll)}
             style={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: spacing.huge,
+              fontFamily: fonts.sans,
+              fontSize: fontSize.body,
+              fontWeight: 500,
+              padding: `${spacing.md} ${spacing.xlPlus}`,
+              borderRadius: radius.pillSm,
+              backgroundColor: "transparent",
+              border: `1px solid ${t.accent}`,
+              color: t.accent,
+              cursor: "pointer",
+              transition: transitions.all,
             }}
           >
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setShowAll(!showAll)}
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: "14px",
-                fontWeight: 500,
-                padding: `${spacing.md} ${spacing.xlPlus}`,
-                borderRadius: radius.pillSm,
-                backgroundColor: "transparent",
-                border: `1px solid ${t.accent}`,
-                color: t.accent,
-                cursor: "pointer",
-                transition: transitions.all,
-              }}
-            >
-              {showAll ? "Show Less" : "Show All Projects"}
-            </motion.button>
-          </motion.div>
-        )}
-      </div>
+            {showAll ? "Show Less" : "Show All Projects"}
+          </motion.button>
+        </motion.div>
+      )}
 
       <style>{`
         @media (max-width: 640px) {
@@ -146,6 +135,6 @@ export default function Projects() {
           }
         }
       `}</style>
-    </section>
+    </Section>
   );
 }
