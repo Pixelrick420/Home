@@ -33,7 +33,7 @@ export const projects: Project[] = [
     title: "Automata",
     description:
       "A tool that converts regex to NFA, rendered as an interactive graph.",
-    tags: ["JavaScript", "Automata Theory", "Visualization"],
+    tags: ["JS", "Automata", "Visualization"],
     github: "https://github.com/Pixelrick420/Automata",
     year: "2024",
     what: "Automata is a web app that converts regular expressions into nondeterministic finite automata (NFAs), rendering the result as an interactive diagram you can drag and rearrange.",
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     title: "Handwritten Digits",
     description:
       "Neural net built from scratch for handwritten digit recognition on MNIST.",
-    tags: ["Python", "NumPy", "Neural Networks"],
+    tags: ["Python", "Neural Networks"],
     github: "https://github.com/Pixelrick420/Handwritten-Digits",
     year: "2025",
     what: "Handwritten Digits is a neural network trained on the MNIST dataset to recognize handwritten digits. A small GUI lets you draw a digit and watch the model predict it in real time.",
@@ -146,7 +146,7 @@ export const projects: Project[] = [
     title: "Sort",
     description:
       "A sorting algorithm visualisation project. Built using plain Javscript",
-    tags: ["Algorithms", "Visualization", "Javascript"],
+    tags: ["Algorithms", "Visualization", "JS"],
     github: "https://github.com/Pixelrick420/Sort",
     year: "2023",
     what: "Sort is a visualizer for sorting algorithms, animating algorithms like bubble sort and merge sort so you can watch how they reorder data step by step.",
@@ -160,7 +160,7 @@ export const projects: Project[] = [
     id: "gameoflife",
     title: "GameOfLife",
     description: "John Conway's Game of Life",
-    tags: ["HTML", "Canvas", "Cellular Automata"],
+    tags: ["HTML", "Canvas", "Automata"],
     github: "https://github.com/Pixelrick420/GameOfLife",
     year: "2023",
     what: "GameOfLife is an implementation of John Conway's Game of Life, where cells live, die, and multiply on a grid according to simple rules.",

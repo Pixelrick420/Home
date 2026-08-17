@@ -91,7 +91,7 @@ export default function Hero() {
             style={{
               fontFamily: fonts.sans,
               fontWeight: 900,
-              fontSize: "clamp(8px, 2vw, 10px)",
+              fontSize: fontSize.heroBadge,
               padding: "clamp(1px, 2vw, 10px) clamp(10px, 4vw, 20px)",
               maxWidth: "100%",
               whiteSpace: "nowrap",

@@ -37,9 +37,9 @@ export const fontSize = {
   bodyLg: "18px",
   lg: "19px",
   heading: "24px",
-  heroBadge: "clamp(5px, 2.5vw, 12px)",
-  heroTitle: "clamp(42px, 8vw, 140px)",
-  heroLead: "clamp(16px, 2.5vw, 26px)",
+  heroBadge: "clamp(5px, 3vw, 14px)",
+  heroTitle: "clamp(42px, 9vw, 140px)",
+  heroLead: "clamp(16px, 3vw, 26px)",
 } as const;
 
 export const spacing = {

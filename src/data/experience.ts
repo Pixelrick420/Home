@@ -20,7 +20,7 @@ export const experiences: Experience[] = [
     location: "Remote",
     description:
       "Contributed across multiple active projects at 10xMinds including NimbusMobile.",
-    stack: ["TypeScript", "SvelteKit", "Node.js"],
+    stack: ["TypeScript", "SvelteKit", "Node"],
   },
   {
     id: 3,
