@@ -17,7 +17,7 @@ export default function WaveBackground() {
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 2);
     const gridSize = isMobile ? 30 : 12;
-    const levels = [-0.8, -0.2, 0.2, 0.8];
+    const levels = [-1.2, -0.8, -0.2, 0.2, 0.8, 1.2];
 
     let animationId: number;
     let time = 0;
@@ -113,7 +113,7 @@ export default function WaveBackground() {
 
       ctx.fillStyle = t.bg;
       ctx.fillRect(0, 0, width, height);
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 2;
       ctx.strokeStyle = t.accent;
       ctx.lineJoin = isMobile ? "miter" : "round";
       ctx.lineCap = isMobile ? "butt" : "round";

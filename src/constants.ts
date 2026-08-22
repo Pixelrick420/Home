@@ -3,7 +3,7 @@ import { fonts } from "./theme";
 import type { ThemeTokens } from "./theme";
 
 export const alpha = {
-  sectionOverlay: 0.87,
+  sectionOverlay: 0.7,
   cardOverlay: 0.92,
   backdrop: 0.6,
   shadow: 0.35,
