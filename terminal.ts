@@ -14,7 +14,8 @@ function colorArt(line: string): string {
   return `${GREEN}${line}${RESET}`;
 }
 
-export const socials = [
+export const stuff = [
+  { label: "Location", value: "Kerala, India" },
   { label: "Website", value: "https://pixelrick.is-a.dev" },
   { label: "GitHub", value: "https://github.com/Pixelrick420" },
   { label: "LeetCode", value: "https://leetcode.com/u/Pixelrick420/" },
@@ -23,8 +24,6 @@ export const socials = [
 export const aboutLines = [
   "I'm a CSE undergrad and I like programming.",
   "You can find out more by visiting my website.",
-  "",
-  "Location: Kerala, India",
 ];
 
 function padRight(text: string, width: number): string {
@@ -44,11 +43,10 @@ export function isTerminalRequest(request: Request): boolean {
 }
 
 export function renderHome(): string {
-  const socialLines = socials.map(
-    (s) => `${padRight(s.label, 10)} ${s.value}`,
-  );
+  const socialLines = stuff.map((s) => `${padRight(s.label, 10)} ${s.value}`);
 
   return [
+    line,
     "",
     ...asciiArt.map(colorArt),
     "",
