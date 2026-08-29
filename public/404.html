@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow" />
+        <title>404 · Pixelrick</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="canonical" href="https://pixelrick.is-a.dev/" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@700&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --bg: #000000;
+                --bg-alt: #0a0a0a;
+                --text: #eeeeee;
+                --text-sub: #d0d0d0;
+                --text-muted: #aaaaaa;
+                --accent: #cccccc;
+                --border: #bdbdbd;
+            }
+
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --bg: #ffffff;
+                    --bg-alt: #fafafa;
+                    --text: #1a1a1a;
+                    --text-sub: #222222;
+                    --text-muted: #555555;
+                    --border: #222222;
+                }
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html,
+            body {
+                height: 100%;
+            }
+
+            body {
+                font-family: "Space Grotesk", system-ui, sans-serif;
+                background: var(--bg);
+                color: var(--text);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                -webkit-font-smoothing: antialiased;
+                overflow-x: hidden;
+            }
+
+            .section-overlay {
+                position: absolute;
+                inset: 0;
+                background-color: var(--bg-alt);
+                opacity: 0.7;
+                z-index: 0;
+            }
+
+            .content {
+                position: relative;
+                z-index: 1;
+                max-width: 1000px;
+                width: 100%;
+                padding: 80px 20px;
+            }
+
+            .eyebrow {
+                font-family: "JetBrains Mono", monospace;
+                font-size: clamp(5px, 3vw, 14px);
+                font-weight: 400;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--accent);
+                background-color: var(--bg-alt);
+                border: 1px solid var(--border);
+                border-radius: 50px;
+                padding: clamp(8px, 2vw, 10px) clamp(14px, 4vw, 20px);
+                display: inline-block;
+                margin-bottom: 32px;
+            }
+
+            h1 {
+                font-family: "Bodoni Moda", "Playfair Display", Georgia, serif;
+                font-size: clamp(42px, 9vw, 140px);
+                font-weight: 900;
+                color: #a3e635;
+                line-height: 0.92;
+                letter-spacing: -0.01em;
+                margin-bottom: 32px;
+            }
+
+            .bar {
+                width: 80px;
+                height: 4px;
+                background-color: var(--accent);
+                border-radius: 2px;
+                margin-bottom: 32px;
+            }
+
+            p {
+                font-family: "Space Grotesk", system-ui, sans-serif;
+                font-size: clamp(16px, 3vw, 26px);
+                font-weight: 400;
+                color: var(--text-sub);
+                line-height: 1.55;
+                max-width: 560px;
+                margin-bottom: 48px;
+            }
+
+            .actions {
+                display: flex;
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+
+            a,
+            button {
+                font-family: "Space Grotesk", system-ui, sans-serif;
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: 0.05em;
+                border: 1px solid var(--accent);
+                padding: 16px 32px;
+                border-radius: 50px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                cursor: pointer;
+                transition:
+                    background-color 0.2s,
+                    color 0.2s,
+                    transform 0.2s ease;
+            }
+
+            a.primary {
+                color: var(--bg);
+                background-color: var(--accent);
+            }
+
+            a.primary:hover {
+                transform: scale(1.02);
+                background-color: var(--text);
+            }
+
+            button.secondary {
+                color: var(--text);
+                background-color: transparent;
+            }
+
+            button.secondary:hover {
+                transform: scale(1.02);
+                background-color: var(--accent);
+                color: var(--bg);
+            }
+
+            .no-js {
+                color: var(--text-muted);
+                font-size: 13px;
+                margin-top: 24px;
+                display: block;
+            }
+
+            @media (max-width: 768px) {
+                .content {
+                    padding: 48px 20px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="section-overlay"></div>
+        <div class="content">
+            <span class="eyebrow">Page not found.</span>
+            <h1>HTTP 404</h1>
+            <div class="bar"></div>
+            <p>This resource doesn't exist on this domain.</p>
+            <div class="actions">
+                <button
+                    class="secondary"
+                    onclick="
+                        history.length > 1
+                            ? history.back()
+                            : (location.href = '/')
+                    "
+                >
+                    ← Go back
+                </button>
+            </div>
+            <noscript>
+                <span class="no-js"
+                    >JavaScript is disabled. Use the "Back home" link
+                    above.</span
+                >
+            </noscript>
+        </div>
+    </body>
+</html>
