@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
-Sitemap: https://pixelrick-resume.vercel.app/sitemap.xml
+
+Content-Signal: ai-train=no, search=yes, ai-input=no
+Agentmap: https://pixelrick.is-a.dev/.well-known/ai-catalog.json
+
+Sitemap: https://pixelrick.is-a.dev/sitemap.xml
