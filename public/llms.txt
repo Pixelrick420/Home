@@ -1,0 +1,21 @@
+# Hari Krishnan R | Portfolio
+
+> Creative developer portfolio showcasing projects in web, algorithms, and interactive art. Computer Science undergraduate at Government Engineering College, Thrissur, based in Kerala, India.
+
+## Key topics
+
+- Projects: compilers, systems programming, neural networks, web apps, games
+- Experience: internships at Auvieo, 10xMinds, Oracle
+- Skills: Python, C, Rust, TypeScript; React, SvelteKit, Node.js, Tailwind; PostgreSQL, Firestore; Docker, Podman; Flutter, Tauri
+
+## Index
+
+- [Portfolio homepage](https://pixelrick.is-a.dev/): HTML portfolio. Machines can request a markdown version with `Accept: text/markdown`.
+- [Resume (PDF)](https://pixelrick.is-a.dev/resume.pdf): PDF resume with education, experience, and projects.
+- [Portfolio Overview Agent Skill](https://pixelrick.is-a.dev/.well-known/agent-skills/portfolio-overview/SKILL.md): Guide for AI agents to navigate, summarize, and extract information from the portfolio.
+- [AI Resource Discovery Catalog](https://pixelrick.is-a.dev/.well-known/ai-catalog.json): Machine-readable catalog of agent-accessible resources on this site.
+- [Agent Skills Discovery Index](https://pixelrick.is-a.dev/.well-known/agent-skills/index.json): Index of agent skills published on this domain.
+- [GitHub](https://github.com/Pixelrick420): Open-source code for portfolio projects.
+- [LeetCode](https://leetcode.com/u/Pixelrick420/): Algorithm practice profile.
+- [LinkedIn](https://www.linkedin.com/in/harikrishnan-r-41b1a3291/): Professional profile.
+- [Sitemap](https://pixelrick.is-a.dev/sitemap.xml): XML sitemap of the site.

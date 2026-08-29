@@ -67,17 +67,6 @@ export const aiCatalog = {
       ],
     },
     {
-      identifier: "urn:air:pixelrick.is-a.dev:mcp:portfolio",
-      displayName: "Portfolio MCP Server Card",
-      type: "application/mcp-server-card+json",
-      url: "https://pixelrick.is-a.dev/.well-known/mcp/server-card.json",
-      representativeQueries: [
-        "does this site expose an MCP server",
-        "what MCP capabilities does this portfolio advertise",
-        "discover MCP tooling for this domain",
-      ],
-    },
-    {
       identifier: "urn:air:pixelrick.is-a.dev:index:agent-skills",
       displayName: "Agent Skills Discovery Index",
       type: "application/json",
@@ -103,19 +92,6 @@ export const agentSkillsIndex = {
       digest: PORTFOLIO_SKILL_DIGEST,
     },
   ],
-};
-
-export const mcpServerCard = {
-  serverInfo: {
-    name: "pixelrick-portfolio",
-    version: "1.0.0",
-  },
-  endpoint: "https://pixelrick.is-a.dev/mcp",
-  capabilities: {
-    tools: { listChanged: false },
-    resources: {},
-    prompts: {},
-  },
 };
 
 const aboutLines = [

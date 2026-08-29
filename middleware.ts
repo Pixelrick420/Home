@@ -4,7 +4,6 @@ import {
   agentSkillsIndex,
   aiCatalog,
   linkHeader,
-  mcpServerCard,
   renderMarkdownHome,
 } from "./agent.js";
 
@@ -45,23 +44,6 @@ export default function middleware(request: Request) {
     return jsonResponse(agentSkillsIndex);
   }
 
-  if (pathname === "/.well-known/mcp/server-card.json") {
-    return jsonResponse(mcpServerCard);
-  }
-
-  if (pathname === "/mcp" || pathname.startsWith("/mcp/")) {
-    return new Response(
-      JSON.stringify({
-        error: "not_implemented",
-        message: "This endpoint is reserved for an MCP server that is not implemented yet.",
-      }),
-      {
-        status: 501,
-        headers: { "Content-Type": "application/json; charset=utf-8" },
-      },
-    );
-  }
-
   if (pathname === "/" || pathname === "" || pathname.endsWith("index.html")) {
     if (wantsMarkdown(request)) {
       const markdown = renderMarkdownHome();
@@ -92,6 +74,6 @@ export default function middleware(request: Request) {
 }
 
 export const config = {
-  matcher: ["/", "/index.html", "/.well-known/:path*", "/mcp", "/mcp/:path*"],
+  matcher: ["/", "/index.html", "/.well-known/:path*"],
   runtime: "nodejs",
 };

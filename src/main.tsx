@@ -12,9 +12,6 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 import { lightTokens } from "./theme";
 import { pagePadding, selectionText, transitions } from "./constants";
-import { registerWebMCPTools } from "./webmcp";
-
-registerWebMCPTools();
 
 const style = document.createElement("style");
 
