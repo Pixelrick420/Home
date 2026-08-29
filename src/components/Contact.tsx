@@ -91,6 +91,7 @@ export default function Contact() {
               delay: 0.4 + i * stagger,
             }}
             aria-label={s.label}
+            title={s.label}
             style={{
               display: "flex",
               alignItems: "center",
@@ -114,7 +115,7 @@ export default function Contact() {
               a.style.boxShadow = "none";
             }}
           >
-            <s.icon size={20} />
+            <s.icon size={20} aria-hidden="true" />
           </motion.a>
         ))}
       </motion.div>

@@ -1247,15 +1247,6 @@ export default function ProjectCard({
     <motion.article
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      onClick={onSelect}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onSelect();
-        }
-      }}
-      role="button"
-      tabIndex={0}
       initial={{ opacity: 0, y: offset.y }}
       animate={{
         opacity: visible ? 1 : 0,
@@ -1275,8 +1266,23 @@ export default function ProjectCard({
         display: "flex",
         flexDirection: "column",
         height: "100%",
+        position: "relative",
       }}
     >
+      <button
+        type="button"
+        aria-label={`View details for ${project.title}`}
+        onClick={onSelect}
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          cursor: "pointer",
+          padding: 0,
+          border: "none",
+          background: "transparent",
+        }}
+      />
       <div
         style={{
           position: "relative",
