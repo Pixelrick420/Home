@@ -36,6 +36,18 @@ function jsonResponse(
 export default function middleware(request: Request) {
   const { pathname } = new URL(request.url);
 
+  if (pathname === "/.well-known/homepage.md") {
+    const markdown = renderMarkdownHome();
+    return new Response(markdown, {
+      status: 200,
+      headers: {
+        ...HOMEPAGE_HEADERS,
+        "Content-Type": "text/markdown; charset=utf-8",
+        "x-markdown-tokens": String(Math.ceil(markdown.length / 4)),
+      },
+    });
+  }
+
   if (pathname === "/.well-known/ai-catalog.json") {
     return jsonResponse(aiCatalog);
   }

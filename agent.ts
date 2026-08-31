@@ -6,6 +6,7 @@ export const site = {
   domain: "pixelrick.is-a.dev",
   baseUrl: "https://pixelrick.is-a.dev",
   resumeUrl: "https://pixelrick.is-a.dev/resume.pdf",
+  markdownUrl: "https://pixelrick.is-a.dev/.well-known/homepage.md",
 };
 
 export const socials = [
@@ -21,6 +22,7 @@ export const linkHeader = [
   '</.well-known/ai-catalog.json>; rel="api-catalog"',
   '</.well-known/ai-catalog.json>; rel="describedby"',
   '</.well-known/agent-skills/index.json>; rel="describedby"',
+  '</.well-known/homepage.md>; rel="alternate"; type="text/markdown"',
 ].join(", ");
 
 const PORTFOLIO_SKILL_DIGEST =

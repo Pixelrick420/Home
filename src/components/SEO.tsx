@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import { projects } from "../data/projects";
 
 interface SEOProps {
   title?: string;
@@ -34,56 +33,6 @@ export default function SEO({
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={ogImage} />
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "Person",
-              "@id": `${url}#person`,
-              name: "Hari Krishnan R",
-              url,
-              image: ogImage,
-              description,
-              jobTitle: "Student",
-              alumniOf: {
-                "@type": "CollegeOrUniversity",
-                name: "Government Engineering College, Thrissur",
-              },
-              sameAs: [
-                "https://github.com/Pixelrick420",
-                "https://leetcode.com/u/Pixelrick420/",
-                "https://www.linkedin.com/in/harikrishnan-r-41b1a3291/",
-              ],
-              knowsAbout: [
-                "Python",
-                "Rust",
-                "TypeScript",
-                "C",
-                "React",
-                "SvelteKit",
-                "Machine Learning",
-                "Compilers",
-              ],
-            },
-            {
-              "@type": "CollectionPage",
-              url,
-              mainEntity: {
-                "@type": "ItemList",
-                itemListElement: projects.map((p, idx) => ({
-                  "@type": "CreativeWork",
-                  position: idx + 1,
-                  name: p.title,
-                  description: p.description,
-                  url: p.github,
-                  keywords: p.tags.join(", "),
-                })),
-              },
-            },
-          ],
-        })}
-      </script>
     </Helmet>
   );
 }
