@@ -26,7 +26,7 @@ export default function Skills() {
 
   return (
     <Section id="skills">
-      <SectionHeader label="04 - Skills">
+      <SectionHeader label="05 - Skills">
         My <span style={{ color: t.accent }}>Toolkit</span>
       </SectionHeader>
 

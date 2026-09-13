@@ -6,6 +6,7 @@ import Hero from "./components/Hero";
 import WaveBackground from "./components/Waves";
 import { zIndex, layout } from "./constants";
 const Projects = lazy(() => import("./components/Projects"));
+const Activity = lazy(() => import("./components/ActivityHeatmap"));
 const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
 const Contact = lazy(() => import("./components/Contact"));
@@ -33,6 +34,7 @@ function Layout() {
           <Suspense fallback={<div style={{ height: layout.minHeight }} />}>
             <Projects />
             <Experience />
+            <Activity />
             <About />
             <Skills />
             <Contact />

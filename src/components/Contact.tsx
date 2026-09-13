@@ -45,7 +45,7 @@ export default function Contact() {
 
   return (
     <Section id="contact" innerRef={contentRef}>
-      <SectionHeader label="05 - Contact" threshold={0.08}>
+      <SectionHeader label="06 - Contact" threshold={0.08}>
         Let's build <span style={{ color: t.accent }}>something</span>
       </SectionHeader>
 

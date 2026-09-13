@@ -44,7 +44,7 @@ export default function About() {
 
   return (
     <Section id="about" innerRef={contentRef}>
-      <SectionHeader label="03 - About" threshold={0.08}>
+      <SectionHeader label="04 - About" threshold={0.08}>
         Hello <span style={{ color: t.accent }}>:D</span>
       </SectionHeader>
 
