@@ -4,34 +4,26 @@ import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import WaveBackground from "./components/Waves";
-import { zIndex, layout } from "./constants";
+import SEO from "./components/SEO";
+
 const Projects = lazy(() => import("./components/Projects"));
 const Activity = lazy(() => import("./components/ActivityHeatmap"));
 const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
 const Contact = lazy(() => import("./components/Contact"));
 const Experience = lazy(() => import("./components/Experience"));
-import SEO from "./components/SEO";
 
 function Layout() {
   return (
-    <div
-      style={{
-        position: "relative",
-        minHeight: layout.minHeight,
-        overflowX: "hidden",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-      }}
-    >
+    <div className="relative min-h-screen overflow-x-hidden [scrollbar-width:none] [ms-overflow-style:none]">
       <Analytics />
       <SEO />
       <WaveBackground />
-      <div style={{ position: "relative", zIndex: zIndex.app }}>
+      <div className="relative z-[1]">
         <Navbar />
         <main>
           <Hero />
-          <Suspense fallback={<div style={{ height: layout.minHeight }} />}>
+          <Suspense fallback={<div className="min-h-screen" />}>
             <Projects />
             <Experience />
             <Activity />

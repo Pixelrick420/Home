@@ -1,29 +1,21 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Project } from "../types";
-import { useTheme } from "../context/useTheme";
-import { fonts } from "../theme";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import {
-  alpha,
-  duration,
-  ease,
-  fontSize,
-  iconButtonStyle,
-  radius,
-  spacing,
-  width,
-  zIndex,
-} from "../constants";
+import { duration, ease } from "../constants";
 
 interface Props {
   project: Project | null;
   onClose: () => void;
 }
 
-export default function ProjectModal({ project, onClose }: Props) {
-  const { t } = useTheme();
+const paraClass =
+  "m-0 font-sans text-md font-medium leading-[1.7] text-text-sub max-sm:text-meta max-sm:leading-[1.55]";
 
+const linkClass =
+  "inline-flex items-center gap-2 rounded-pill-sm border border-accent px-5 py-2.5 font-sans text-sm font-semibold text-accent no-underline max-sm:px-4 max-sm:py-2 max-sm:text-meta";
+
+export default function ProjectModal({ project, onClose }: Props) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -41,29 +33,6 @@ export default function ProjectModal({ project, onClose }: Props) {
     };
   }, [project]);
 
-  const paraStyle = {
-    fontFamily: fonts.sans,
-    fontSize: fontSize.md,
-    fontWeight: 500,
-    color: t.textSub,
-    lineHeight: 1.7,
-    margin: 0,
-  };
-
-  const linkStyle = {
-    fontFamily: fonts.sans,
-    fontSize: "14px",
-    fontWeight: 600,
-    color: t.accent,
-    textDecoration: "none",
-    border: `1px solid ${t.accent}`,
-    padding: "10px 20px",
-    borderRadius: radius.pillSm,
-    display: "inline-flex",
-    alignItems: "center",
-    gap: spacing.sm,
-  };
-
   return (
     <>
       <AnimatePresence>
@@ -75,17 +44,7 @@ export default function ProjectModal({ project, onClose }: Props) {
             exit={{ opacity: 0 }}
             transition={{ duration: duration.fast }}
             onClick={onClose}
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: zIndex.modal,
-              backgroundColor: `rgba(10, 10, 10, ${alpha.backdrop})`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: spacing.xl,
-              overflowY: "auto",
-            }}
+            className="fixed inset-0 z-[1000] flex items-center justify-center overflow-y-auto bg-black/60 p-6"
           >
             <motion.div
               key={`${project.id}-panel`}
@@ -97,127 +56,63 @@ export default function ProjectModal({ project, onClose }: Props) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 24, scale: 0.98 }}
               transition={{ duration: 0.25, ease }}
-              className="modal-panel"
-              style={{
-                backgroundColor: t.bgCard,
-                border: `1px solid ${t.border}`,
-                borderRadius: radius.modal,
-                width: "100%",
-                maxWidth: width.modal,
-                maxHeight: "75vh",
-                overflow: "auto",
-                boxShadow: `0 24px 64px rgba(0, 0, 0, ${alpha.shadow})`,
-              }}
+              className="w-full max-w-[640px] overflow-auto rounded-modal border border-border bg-bg-card shadow-[0_24px_64px_rgba(0,0,0,0.35)]"
+              style={{ maxHeight: "75vh" }}
             >
-              <div
-                className="modal-content"
-                style={{
-                  padding: `${spacing.xlPlus} ${spacing.xxl} ${spacing.xxl}`,
-                }}
-              >
-                <div
-                  className="modal-header"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
-                    gap: spacing.lg,
-                    marginBottom: "18px",
-                  }}
-                >
+              <div className="max-sm:p-5 px-8 pt-7 pb-8">
+                <div className="mb-4.5 flex items-start justify-between gap-4 max-sm:mb-3">
                   <div>
-                    <h3
-                      className="modal-title"
-                      style={{
-                        fontFamily: fonts.serif,
-                        fontSize: "26px",
-                        fontWeight: 700,
-                        color: t.text,
-                        margin: 0,
-                        lineHeight: 1.2,
-                      }}
-                    >
+                    <h3 className="m-0 font-serif text-2xl font-bold leading-[1.2] text-text max-sm:text-lg">
                       {project.title}
                     </h3>
-                    <span
-                      className="modal-year"
-                      style={{
-                        fontFamily: fonts.mono,
-                        fontSize: "12px",
-                        color: t.textFaint,
-                        display: "inline-block",
-                        marginTop: "6px",
-                      }}
-                    >
+                    <span className="mt-1.5 inline-block font-mono text-xs text-text-faint max-sm:mt-1">
                       {project.year}
                     </span>
                   </div>
-                  <button
+                  <motion.button
                     onClick={onClose}
                     aria-label="Close"
-                    style={{
-                      ...iconButtonStyle(t, 32),
-                      borderRadius: "50%",
-                      color: t.textFaint,
-                      fontSize: "24px",
-                      lineHeight: 1,
-                      flexShrink: 0,
-                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full border-none bg-transparent text-2xl leading-none text-text-faint"
                   >
                     ×
-                  </button>
+                  </motion.button>
                 </div>
 
-                <div
-                  className="modal-body"
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: spacing.lg,
-                  }}
-                >
-                  <p className="modal-para" style={paraStyle}>{project.what}</p>
-                  <p className="modal-para" style={paraStyle}>{project.problem}</p>
-                  <p className="modal-para" style={paraStyle}>{project.stack}</p>
+                <div className="flex flex-col gap-4 max-sm:gap-2.5">
+                  <p className={`${paraClass}`}>{project.what}</p>
+                  <p className={`${paraClass}`}>
+                    {project.problem}
+                  </p>
+                  <p className={`${paraClass}`}>{project.stack}</p>
                 </div>
 
-                <div
-                  className="modal-links"
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: spacing.md,
-                    marginTop: spacing.xlPlus,
-                    paddingTop: spacing.xl,
-                    borderTop: `1px solid ${t.border}`,
-                  }}
-                >
+                <div className="mt-7 flex flex-wrap gap-3 border-t border-border pt-6 max-sm:mt-4 max-sm:gap-2.5 max-sm:pt-4">
                   <motion.a
-                    className="modal-link"
+                    className={linkClass}
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    style={linkStyle}
                   >
                     <FaGithub size={16} />
-                    <span className="modal-link-short">Github</span>
-                    <span className="modal-link-long">View on GitHub</span>
+                    <span className="hidden max-sm:inline">Github</span>
+                    <span className="max-sm:hidden">View on GitHub</span>
                   </motion.a>
                   {project.demo && (
                     <motion.a
-                      className="modal-link"
+                      className={linkClass}
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      style={linkStyle}
                     >
                       <FaExternalLinkAlt size={14} />
-                      <span className="modal-link-short">Demo</span>
-                      <span className="modal-link-long">Live Demo</span>
+                      <span className="hidden max-sm:inline">Demo</span>
+                      <span className="max-sm:hidden">Live Demo</span>
                     </motion.a>
                   )}
                 </div>
@@ -226,58 +121,6 @@ export default function ProjectModal({ project, onClose }: Props) {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>{`
-        .modal-link-short {
-          display: none;
-        }
-
-        @media (max-width: 640px) {
-          .modal-content {
-            padding: 20px !important;
-          }
-
-          .modal-header {
-            margin-bottom: 12px !important;
-          }
-
-          .modal-title {
-            font-size: 20px !important;
-          }
-
-          .modal-year {
-            margin-top: 4px !important;
-          }
-
-          .modal-body {
-            gap: 10px !important;
-          }
-
-          .modal-para {
-            font-size: 13px !important;
-            line-height: 1.55 !important;
-          }
-
-          .modal-links {
-            margin-top: 16px !important;
-            padding-top: 16px !important;
-            gap: 10px !important;
-          }
-
-          .modal-link {
-            padding: 8px 16px !important;
-            font-size: 13px !important;
-          }
-
-          .modal-link-short {
-            display: inline;
-          }
-
-          .modal-link-long {
-            display: none;
-          }
-        }
-      `}</style>
     </>
   );
 }

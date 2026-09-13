@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
-import { useTheme } from "../context/useTheme";
 import { useScrollFade } from "../hooks/useScrollFade";
 import { duration, ease, offset } from "../constants";
 
@@ -11,7 +10,6 @@ interface Props {
 }
 
 export default function SectionHeader({ label, threshold, children }: Props) {
-  const { t } = useTheme();
   const [ref, visible] = useScrollFade<HTMLDivElement>({ threshold });
 
   return (
@@ -20,12 +18,14 @@ export default function SectionHeader({ label, threshold, children }: Props) {
       initial={{ opacity: 0, y: offset.y }}
       animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : offset.y }}
       transition={{ duration: duration.slow, ease }}
-      className="section-header"
+      className="mb-16"
     >
-      <span className="section-label" style={{ color: t.accentHover }}>
+      <span className="mb-4 block font-sans text-xs font-semibold uppercase tracking-[0.25em] text-accent-hover">
         {label}
       </span>
-      <h2 className="section-title">{children}</h2>
+      <h2 className="font-serif text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-text sm:text-5xl md:text-6xl lg:text-7xl">
+        {children}
+      </h2>
     </motion.div>
   );
 }

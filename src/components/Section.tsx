@@ -1,20 +1,22 @@
 import type { ReactNode, Ref } from "react";
-import { useTheme } from "../context/useTheme";
-import { sectionInner, sectionOverlay, sectionStyle } from "../constants";
 
 interface SectionProps {
-  id?: string;
-  innerRef?: Ref<HTMLDivElement>;
   children: ReactNode;
+  id: string;
+  innerRef?: Ref<HTMLDivElement>;
 }
 
 export default function Section({ id, innerRef, children }: SectionProps) {
-  const { t } = useTheme();
-
   return (
-    <section id={id} className="section-block" style={sectionStyle}>
-      <div style={sectionOverlay(t.bgAlt)} />
-      <div ref={innerRef} style={sectionInner}>
+    <section
+      id={id}
+      className="section-block section-pad relative transition-colors duration-400"
+    >
+      <div className="absolute inset-0 z-0 bg-bg-alt opacity-70 transition-colors duration-400" />
+      <div
+        ref={innerRef}
+        className="relative z-[2] mx-auto w-full max-w-[1200px]"
+      >
         {children}
       </div>
     </section>

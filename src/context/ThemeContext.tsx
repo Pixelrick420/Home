@@ -1,6 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { lightTokens, darkTokens } from "../theme.ts";
-import { selectionText } from "../constants";
+import { useLayoutEffect, useState, type ReactNode } from "react";
 import { ThemeContext, DEFAULT_MODE, type Mode } from "./useTheme";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -10,30 +8,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return DEFAULT_MODE;
   });
 
-  const t = mode === "light" ? lightTokens : darkTokens;
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     localStorage.setItem("portfolio-theme", mode);
-    const root = document.documentElement;
-
-    Object.entries(t).forEach(([key, value]) => {
-      root.style.setProperty(`--${key}`, value);
-    });
-
-    root.style.setProperty(
-      "--selection-text",
-      mode === "light" ? selectionText.light : selectionText.dark,
-    );
-
-    root.style.setProperty("--scrollbar", t.borderHover);
-  }, [mode, t]);
+    document.documentElement.dataset.theme = mode;
+  }, [mode]);
 
   return (
     <ThemeContext.Provider
       value={{
         mode,
         toggle: () => setMode((m) => (m === "light" ? "dark" : "light")),
-        t,
       }}
     >
       {children}

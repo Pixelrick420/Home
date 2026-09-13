@@ -9,6 +9,15 @@
             content="Creative developer portfolio showcasing projects in web, algorithms, and interactive art."
         />
         <meta name="theme-color" content="#FFFFFF" />
+        <script>
+            (function () {
+                var stored = null;
+                try {
+                    stored = localStorage.getItem("portfolio-theme");
+                } catch (e) {}
+                document.documentElement.dataset.theme = stored === "light" ? "light" : "dark";
+            })();
+        </script>
         <link rel="ai-catalog" href="/.well-known/ai-catalog.json" />
         <link
             rel="alternate"
@@ -139,7 +148,7 @@
                                     "@type": "CreativeWork",
                                     "position": 11,
                                     "name": "Sort",
-                                    "description": "A sorting algorithm visualisation project. Built using plain Javscript",
+                                    "description": "A sorting algorithm visualisation project. Built using plain JavaScript",
                                     "url": "https://github.com/Pixelrick420/Sort",
                                     "keywords": "Algorithms, Visualization, JS"
                                 },

@@ -1,25 +1,11 @@
 import { useScrollFade } from "../hooks/useScrollFade";
 import { skills } from "../data/skills";
-import { useTheme } from "../context/useTheme";
-import { fonts } from "../theme";
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
-import {
-  barBlock,
-  cardStyle,
-  duration,
-  ease,
-  eyebrowStyle,
-  fontSize,
-  offset,
-  spacing,
-  stagger,
-} from "../constants";
+import { duration, ease, offset, stagger } from "../constants";
 
 export default function Skills() {
-  const { t } = useTheme();
-
   const [gridRef, gridVisible] = useScrollFade<HTMLDivElement>({
     threshold: 0.04,
   });
@@ -27,7 +13,7 @@ export default function Skills() {
   return (
     <Section id="skills">
       <SectionHeader label="05 - Skills">
-        My <span style={{ color: t.accent }}>Toolkit</span>
+        My <span className="text-accent">Toolkit</span>
       </SectionHeader>
 
       <motion.div
@@ -35,11 +21,7 @@ export default function Skills() {
         initial={{ opacity: 0 }}
         animate={{ opacity: gridVisible ? 1 : 0 }}
         transition={{ duration: duration.medium }}
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(clamp(120px, 25vw, 360px), 1fr))",
-          gap: spacing.lgPlus,
-        }}
+        className="grid grid-cols-1 gap-5 xs:grid-cols-2 lg:grid-cols-3"
       >
         {skills.map((group, i) => (
           <motion.div
@@ -54,41 +36,20 @@ export default function Skills() {
               delay: i * stagger,
               ease,
             }}
-            className="card-hover"
-            style={{
-              ...cardStyle(t),
-              padding: `${spacing.lgPlus} ${spacing.md}`,
-            }}
+            className="card-hover flex flex-col rounded-card border border-border bg-bg-card px-3 py-5"
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: spacing.md,
-                marginBottom: spacing.lgPlus,
-              }}
-            >
-              <div style={barBlock(t)} />
-              <p style={eyebrowStyle(t, "0.18em")}>{group.category}</p>
+            <div className="mb-5 flex items-center gap-3">
+              <div className="h-5 w-1 shrink-0 rounded-bar bg-accent" />
+              <p className="m-0 font-sans text-meta font-semibold uppercase tracking-[0.18em] text-text-muted">
+                {group.category}
+              </p>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: spacing.md,
-              }}
-            >
+            <div className="flex flex-col gap-3">
               {group.items.map((item) => (
                 <span
                   key={item}
-                  style={{
-                    fontFamily: fonts.sans,
-                    fontSize: fontSize.mdPlus,
-                    fontWeight: 500,
-                    color: t.text,
-                    lineHeight: 1,
-                  }}
+                  className="font-sans text-md-plus font-medium leading-none text-text"
                 >
                   {item}
                 </span>

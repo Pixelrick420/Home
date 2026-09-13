@@ -1,15 +1,18 @@
 import { useEffect, useRef } from "react";
 import { useTheme } from "../context/useTheme";
-import { zIndex } from "../constants";
 
 export default function WaveBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const { t } = useTheme();
+  const { mode } = useTheme();
   const scrollYRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d", { alpha: false })!;
+
+    const styles = getComputedStyle(document.documentElement);
+    const bg = styles.getPropertyValue("--bg").trim() || "#000000";
+    const accent = styles.getPropertyValue("--accent").trim() || "#cccccc";
 
     let width = 0;
     let height = 0;
@@ -111,10 +114,10 @@ export default function WaveBackground() {
         }
       }
 
-      ctx.fillStyle = t.bg;
+      ctx.fillStyle = bg;
       ctx.fillRect(0, 0, width, height);
       ctx.lineWidth = 2;
-      ctx.strokeStyle = t.accent;
+      ctx.strokeStyle = accent;
       ctx.lineJoin = isMobile ? "miter" : "round";
       ctx.lineCap = isMobile ? "butt" : "round";
 
@@ -215,17 +218,7 @@ export default function WaveBackground() {
       document.removeEventListener("visibilitychange", onVisibility);
       cancelAnimationFrame(animationId);
     };
-  }, [t.bg, t.accent]);
+  }, [mode]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: zIndex.waves,
-        pointerEvents: "none",
-      }}
-    />
-  );
+  return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-[-1]" />;
 }

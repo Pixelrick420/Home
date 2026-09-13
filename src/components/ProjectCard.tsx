@@ -1,32 +1,31 @@
 import { useState, type ReactNode } from "react";
 import type { Project } from "../types";
-import { useTheme } from "../context/useTheme";
-import { fonts } from "../theme";
 import { motion } from "framer-motion";
 import { projectPalettes } from "../theme";
-import {
-  alpha,
-  cardStyle,
-  duration,
-  ease,
-  fontSize,
-  offset,
-  overlayPill,
-  radius,
-  spacing,
-  stagger,
-  tagStyle,
-} from "../constants";
+import { duration, ease, offset, stagger } from "../constants";
 
-interface Props {
+const MESH_CELLS = Array.from({ length: 14 }, (_, r) =>
+  Array.from({ length: 18 }, (_, c) => {
+    if (Math.random() > 0.3) return null;
+    return { r, c, op: 0.3 + Math.random() * 0.6 };
+  }),
+)
+  .flat()
+  .filter((cell): cell is { r: number; c: number; op: number } => cell !== null);
+
+interface ProjectCardProps {
   project: Project;
   index: number;
   visible: boolean;
   onSelect: () => void;
 }
 
-function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
-  const p = projectPalettes[id] ?? { bg, fg, accent: fg };
+function CoverArt({ id }: { id: string }) {
+  const p = projectPalettes[id] ?? {
+    bg: "#0A0A0A",
+    fg: "#FF8C42",
+    accent: "#FF8C42",
+  };
 
   const covers: Record<string, ReactNode> = {
     fractal: (
@@ -347,7 +346,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
             width="18"
             height={h}
             rx="3"
-            fill={sorted ? p.fg : p.fg}
+            fill={p.fg}
             opacity={sorted ? 0.9 : 0.3}
           />
         ))}
@@ -479,23 +478,17 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
     mesh: (
       <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
         <rect width="280" height="280" fill={p.bg} />
-        {Array.from({ length: 14 }, (_, r) =>
-          Array.from({ length: 18 }, (_, c) => {
-            if (Math.random() > 0.3) return null;
-            const op = 0.3 + Math.random() * 0.6;
-            return (
-              <rect
-                key={`${r}-${c}`}
-                x={c * 15 + 5}
-                y={r * 16 + 25}
-                width="13"
-                height="14"
-                fill={p.fg}
-                opacity={op}
-              />
-            );
-          }),
-        )}
+        {MESH_CELLS.map(({ r, c, op }) => (
+          <rect
+            key={`${r}-${c}`}
+            x={c * 15 + 5}
+            y={r * 16 + 25}
+            width="13"
+            height="14"
+            fill={p.fg}
+            opacity={op}
+          />
+        ))}
       </svg>
     ),
 
@@ -765,7 +758,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
                   width="13"
                   height="13"
                   rx="2"
-                  fill={isAlive ? p.fg : p.fg}
+                  fill={p.fg}
                   opacity={isAlive ? 0.88 : 0.06}
                 />,
               );
@@ -1225,7 +1218,7 @@ function CoverArt({ id, bg, fg }: { id: string; bg: string; fg: string }) {
   const content = covers[id];
   if (!content) return null;
 
-  return <div style={{ width: "100%", height: "100%" }}>{content}</div>;
+  return <div className="h-full w-full">{content}</div>;
 }
 
 export default function ProjectCard({
@@ -1233,15 +1226,8 @@ export default function ProjectCard({
   index,
   visible,
   onSelect,
-}: Props) {
-  const { t } = useTheme();
+}: ProjectCardProps) {
   const [hov, setHov] = useState(false);
-
-  const pal = projectPalettes[project.id] ?? {
-    bg: "#0A0A0A",
-    fg: "#FF8C42",
-    accent: "#FF8C42",
-  };
 
   return (
     <motion.article
@@ -1257,48 +1243,23 @@ export default function ProjectCard({
         delay: index * stagger,
         ease,
       }}
-      className="project-card card-hover"
-      style={{
-        ...cardStyle(t),
-        border: `1px solid ${hov ? t.accent : t.border}`,
-        overflow: "hidden",
-        cursor: "pointer",
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        position: "relative",
-      }}
+      className="card-hover relative flex h-full flex-col overflow-hidden rounded-card border bg-bg-card"
+      style={{ borderColor: hov ? "var(--accent)" : "var(--border)" }}
     >
       <button
         type="button"
         aria-label={`View details for ${project.title}`}
         onClick={onSelect}
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-          cursor: "pointer",
-          padding: 0,
-          border: "none",
-          background: "transparent",
-        }}
+        className="absolute inset-0 z-[1] cursor-pointer border-none bg-transparent p-0"
       />
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          paddingBottom: "100%",
-          overflow: "hidden",
-          flexShrink: 0,
-        }}
-      >
-        <div style={{ position: "absolute", inset: 0 }}>
+      <div className="relative project-cover w-full shrink-0 overflow-hidden">
+        <div className="absolute inset-0">
           <motion.div
             animate={{ scale: hov ? 1.05 : 1 }}
             transition={{ duration: 0.6, ease: [0.65, 0.05, 0, 1] }}
-            style={{ width: "100%", height: "100%" }}
+            className="h-full w-full"
           >
-            <CoverArt id={project.id} bg={pal.bg} fg={pal.fg} />
+            <CoverArt id={project.id} />
           </motion.div>
 
           <motion.div
@@ -1307,30 +1268,11 @@ export default function ProjectCard({
               clipPath: hov ? "inset(0% 0 0 0)" : "inset(100% 0 0 0)",
             }}
             transition={{ duration: 0.6, ease: [0.65, 0.05, 0, 1] }}
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundColor: `rgba(10, 10, 10, ${alpha.cardOverlay})`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+            className="absolute inset-0 flex items-center justify-center bg-black/92"
           >
             <motion.span
               whileHover={{ scale: 1.05 }}
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: "14px",
-                fontWeight: 600,
-                letterSpacing: "0.05em",
-                color: overlayPill.text,
-                backgroundColor: overlayPill.bg,
-                padding: "14px 24px",
-                borderRadius: radius.pill,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: spacing.sm,
-              }}
+              className="inline-flex items-center gap-2 rounded-pill bg-[#aaaaaa] px-6 py-3.5 font-sans text-sm font-semibold tracking-[0.05em] text-[#1A1A1A]"
             >
               Learn More
             </motion.span>
@@ -1338,77 +1280,23 @@ export default function ProjectCard({
         </div>
       </div>
 
-      <div
-        style={{
-          padding: "24px 28px 28px",
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            marginBottom: spacing.md,
-          }}
-        >
-          <h3
-            className="project-title"
-            style={{
-              fontFamily: fonts.serif,
-              fontSize: "22px",
-              fontWeight: 700,
-              color: t.text,
-              margin: 0,
-              lineHeight: 1.2,
-            }}
-          >
+      <div className="flex flex-grow flex-col p-5 md:px-7 md:pb-7 md:pt-6">
+        <div className="mb-3 flex items-start justify-between">
+          <h3 className="m-0 font-serif text-lg font-bold leading-[1.2] text-text md:text-xl">
             {project.title}
           </h3>
-          <span
-            style={{
-              fontFamily: fonts.mono,
-              fontSize: "12px",
-              color: t.textFaint,
-              marginTop: "2px",
-              flexShrink: 0,
-              marginLeft: spacing.md,
-            }}
-          >
+          <span className="mt-0.5 ml-3 shrink-0 font-mono text-xs text-text-faint">
             {project.year}
           </span>
         </div>
 
-        <p
-          className="project-description"
-          style={{
-            fontFamily: fonts.sans,
-            fontSize: fontSize.md,
-            color: t.textSub,
-            lineHeight: 1.6,
-            margin: "0 0 18px 0",
-          }}
-        >
+        <p className="m-0 mb-4.5 font-sans text-meta leading-[1.6] text-text-sub md:text-md">
           {project.description}
         </p>
 
-        <div
-          className="project-tags"
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: spacing.sm,
-            marginTop: "auto",
-          }}
-        >
+        <div className="mt-auto flex flex-wrap gap-2">
           {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="project-tag"
-              style={tagStyle(t)}
-            >
+            <span key={tag} className="tag-pill">
               {tag}
             </span>
           ))}

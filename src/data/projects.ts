@@ -67,7 +67,7 @@ export const projects: Project[] = [
     year: "2024",
     what: "Mesh is a collaborative pixel-art canvas inspired by r/place. Users place one pixel at a time on a shared canvas, with changes syncing to everyone instantly.",
     problem:
-      "I really liked r/place so i wanted to make my own version. Although simple, this projecthelped me learn a lot about data design.",
+      "I really liked r/place so I wanted to make my own version. Although simple, this project helped me learn a lot about data design.",
     stack:
       "It is built with Next.js and React on the frontend. Firebase handles authentication and real-time data, and the app is deployed on Vercel.",
     demo: "https://pixel-mesh.vercel.app",
@@ -145,7 +145,7 @@ export const projects: Project[] = [
     id: "sort",
     title: "Sort",
     description:
-      "A sorting algorithm visualisation project. Built using plain Javscript",
+      "A sorting algorithm visualisation project. Built using plain JavaScript",
     tags: ["Algorithms", "Visualization", "JS"],
     github: "https://github.com/Pixelrick420/Sort",
     year: "2023",

@@ -1,23 +1,10 @@
 import { useScrollFade } from "../hooks/useScrollFade";
-import { useTheme } from "../context/useTheme";
-import { fonts } from "../theme";
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
-import {
-  alpha,
-  duration,
-  fontSize,
-  hexAlpha,
-  offset,
-  radius,
-  spacing,
-  stagger,
-  transitions,
-} from "../constants";
+import { duration, offset, stagger } from "../constants";
 
 const socials = [
   {
@@ -38,7 +25,6 @@ const socials = [
 ];
 
 export default function Contact() {
-  const { t } = useTheme();
   const [contentRef, visible] = useScrollFade<HTMLDivElement>({
     threshold: 0.08,
   });
@@ -46,21 +32,14 @@ export default function Contact() {
   return (
     <Section id="contact" innerRef={contentRef}>
       <SectionHeader label="06 - Contact" threshold={0.08}>
-        Let's build <span style={{ color: t.accent }}>something</span>
+        Let's build <span className="text-accent">stuff</span>
       </SectionHeader>
 
       <motion.p
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 30 }}
         transition={{ duration: duration.slow, delay: 0.2 }}
-        style={{
-          fontFamily: fonts.sans,
-          fontSize: fontSize.lg,
-          color: t.textSub,
-          margin: `0 0 56px 0`,
-          lineHeight: 1.6,
-          fontWeight: 800,
-        }}
+        className="mb-14 font-sans text-lg font-extrabold leading-[1.6] text-text-sub"
       >
         Open to collaborations, interesting problems, and good conversation.
       </motion.p>
@@ -69,11 +48,7 @@ export default function Contact() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 30 }}
         transition={{ duration: duration.slow, delay: 0.35 }}
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: spacing.lg,
-        }}
+        className="flex flex-wrap gap-4"
       >
         {socials.map((s, i) => (
           <motion.a
@@ -92,28 +67,7 @@ export default function Contact() {
             }}
             aria-label={s.label}
             title={s.label}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: spacing.md,
-              padding: "18px 28px",
-              backgroundColor: t.bg,
-              border: `1px solid ${t.border}`,
-              borderRadius: radius.card,
-              textDecoration: "none",
-              color: t.text,
-              transition: transitions.card,
-            }}
-            onMouseEnter={(e) => {
-              const a = e.currentTarget as HTMLAnchorElement;
-              a.style.borderColor = t.accent;
-              a.style.boxShadow = `0 8px 40px ${t.accent}${hexAlpha.shadow}`;
-            }}
-            onMouseLeave={(e) => {
-              const a = e.currentTarget as HTMLAnchorElement;
-              a.style.borderColor = t.border;
-              a.style.boxShadow = "none";
-            }}
+            className="flex items-center gap-3 rounded-card border border-border bg-bg px-7 py-4.5 text-text no-underline transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_8px_40px_color-mix(in_srgb,var(--accent)_12.5%,transparent)]"
           >
             <s.icon size={20} aria-hidden="true" />
           </motion.a>
@@ -122,26 +76,11 @@ export default function Contact() {
 
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: visible ? alpha.footer : 0 }}
+        animate={{ opacity: visible ? 0.5 : 0 }}
         transition={{ duration: duration.slow, delay: 0.6 }}
-        style={{
-          marginTop: "100px",
-          paddingTop: spacing.xxl,
-          display: "flex",
-          justifyContent: "flex-end",
-          flexWrap: "wrap",
-          gap: spacing.lg,
-        }}
+        className="mt-25 flex flex-wrap justify-end gap-4 pt-8"
       >
-        <span
-          style={{
-            fontFamily: fonts.sans,
-            fontSize: "clamp(8px, 2vh, 13px)",
-            fontWeight: 700,
-            color: t.textMuted,
-            textAlign: "left",
-          }}
-        >
+        <span className="text-left font-sans text-xxs font-bold text-text-muted md:text-meta">
           Harikrishnan R · Wayanad
         </span>
       </motion.div>

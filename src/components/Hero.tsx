@@ -1,38 +1,16 @@
 import { useEffect, useState, useRef } from "react";
 import { useTheme } from "../context/useTheme";
-import { fonts } from "../theme";
 import { motion, useScroll, useTransform } from "framer-motion";
-import {
-  alpha,
-  duration,
-  ease,
-  fontSize,
-  layout,
-  offset,
-  radius,
-  spacing,
-  transitions,
-  width,
-  zIndex,
-} from "../constants";
+import { duration, ease, offset } from "../constants";
+import { scrollToId } from "../lib/scroll";
+
+const heroButtonBase =
+  "flex cursor-pointer items-center gap-2 rounded-pill border border-accent px-8 py-4 font-sans text-sm font-semibold tracking-[0.05em] ns:px-6 ns:py-3";
 
 export default function Hero() {
-  const { t, mode } = useTheme();
+  const { mode } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-
-  const heroButtonBase = {
-    fontFamily: fonts.sans,
-    fontSize: fontSize.sm,
-    fontWeight: 600,
-    letterSpacing: "0.05em",
-    border: `1px solid ${t.accent}`,
-    padding: `${spacing.lg} ${spacing.xxl}`,
-    borderRadius: radius.pill,
-    display: "flex",
-    alignItems: "center",
-    gap: spacing.sm,
-  };
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -40,7 +18,6 @@ export default function Hero() {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   useEffect(() => {
     const id = setTimeout(() => setVisible(true), 100);
@@ -50,33 +27,13 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      style={{
-        position: "relative",
-        minHeight: layout.minHeight,
-        display: "flex",
-        alignItems: "center",
-        overflow: "hidden",
-        transition: transitions.bg,
-      }}
+      className="section-pad relative flex min-h-screen items-center overflow-hidden transition-colors duration-400"
     >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: t.bgAlt,
-          opacity: alpha.sectionOverlay,
-          zIndex: zIndex.sectionBg,
-          transition: transitions.bg,
-        }}
-      />
+      <div className="absolute inset-0 z-0 bg-bg-alt opacity-70 transition-colors duration-400" />
+
       <motion.div
-        style={{
-          position: "relative",
-          zIndex: zIndex.content,
-          maxWidth: width.hero,
-          y,
-          opacity,
-        }}
+        className="relative z-[2] w-full max-w-[1000px]"
+        style={{ y }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: duration.slow }}
@@ -85,24 +42,13 @@ export default function Hero() {
           initial={{ opacity: 0, x: -60 }}
           animate={visible ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: duration.slow, delay: 0.2 }}
-          style={{ marginBottom: spacing.xxl }}
+          className="mb-8"
         >
           <span
+            className="inline-block max-w-full overflow-hidden whitespace-nowrap rounded-pill px-2.5 py-0.5 font-sans text-meta font-black uppercase tracking-[0.2em] text-accent text-ellipsis ns:text-xs ns:tracking-wider sm:px-3.5 sm:py-1 md:px-5 md:text-sm"
             style={{
-              fontFamily: fonts.sans,
-              fontWeight: 900,
-              fontSize: fontSize.heroBadge,
-              padding: "clamp(1px, 2vw, 10px) clamp(10px, 4vw, 20px)",
-              maxWidth: "100%",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: t.accent,
-              backgroundColor: mode === "light" ? t.bgAlt : t.bgCard,
-              borderRadius: radius.pill,
-              display: "inline-block",
+              backgroundColor:
+                mode === "light" ? "var(--bg-alt)" : "var(--bg-card)",
             }}
           >
             CS Undergrad · Programmer · Pixelrick
@@ -113,19 +59,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: offset.yLg }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: duration.slow, delay: 0.35, ease }}
-          style={{
-            fontFamily: fonts.serif,
-            fontSize: fontSize.heroTitle,
-            fontWeight: 700,
-            color: t.text,
-            lineHeight: 0.92,
-            margin: `0 0 ${spacing.lg} 0`,
-            letterSpacing: "-0.03em",
-
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "clip",
-          }}
+          className="mb-4 overflow-hidden whitespace-nowrap font-serif text-5xl font-bold leading-[0.92] tracking-[-0.03em] text-text ns:text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
         >
           Harikrishnan R
         </motion.h1>
@@ -134,29 +68,14 @@ export default function Hero() {
           initial={{ scaleX: 0 }}
           animate={visible ? { scaleX: 1 } : {}}
           transition={{ duration: duration.slow, delay: 0.5 }}
-          style={{
-            width: "80px",
-            height: "4px",
-            backgroundColor: t.accent,
-            borderRadius: radius.bar,
-            marginBottom: spacing.xxl,
-            transformOrigin: "left",
-          }}
+          className="mb-8 h-1 w-20 origin-left rounded-bar bg-accent"
         />
 
         <motion.p
           initial={{ opacity: 0, y: offset.y }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: duration.slow, delay: 0.6 }}
-          style={{
-            fontFamily: fonts.sans,
-            fontSize: fontSize.heroLead,
-            fontWeight: 400,
-            color: t.textSub,
-            maxWidth: width.heroText,
-            lineHeight: 1.55,
-            margin: `0 0 ${spacing.huge} 0`,
-          }}
+          className="mb-12 max-w-[560px] font-sans text-md-plus font-normal leading-[1.55] text-text-sub ns:text-body sm:text-lg md:text-xl lg:text-2xl"
         >
           Building things from the ground up.
         </motion.p>
@@ -165,26 +84,14 @@ export default function Hero() {
           initial={{ opacity: 0, y: offset.y }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: duration.slow, delay: 0.75 }}
-          style={{ display: "flex", gap: spacing.lg, flexWrap: "wrap" }}
+          className="flex flex-wrap gap-4"
         >
           <motion.button
-            onClick={() =>
-              document
-                .querySelector("#work")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            whileHover={{
-              scale: 1.02,
-            }}
+            onClick={() => scrollToId("#work")}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: duration.fast }}
-            style={{
-              ...heroButtonBase,
-              color: t.bg,
-              backgroundColor: t.accent,
-              cursor: "pointer",
-              transition: transitions.primary,
-            }}
+            className={`${heroButtonBase} bg-accent text-bg transition-[background-color,box-shadow] duration-200`}
           >
             View Work
             <motion.span
@@ -203,18 +110,10 @@ export default function Hero() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{
-              scale: 1.02,
-            }}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: duration.fast }}
-            style={{
-              ...heroButtonBase,
-              color: t.text,
-              textDecoration: "none",
-              backgroundColor: "transparent",
-              transition: transitions.button,
-            }}
+            className={`${heroButtonBase} bg-transparent text-text no-underline transition-[background-color,border-color,color] duration-200`}
           >
             Resume ↗
           </motion.a>

@@ -6,18 +6,10 @@ import {
   type MouseEvent,
 } from "react";
 import { motion } from "framer-motion";
-import {
-  duration,
-  ease,
-  fontSize,
-  offset,
-  radius,
-  spacing,
-} from "../constants";
-import { useTheme } from "../context/useTheme";
+import { duration, ease, offset } from "../constants";
 import { githubActivity, toDateKey, type ActivityDay } from "../data/activity";
 import { useScrollFade } from "../hooks/useScrollFade";
-import { fonts } from "../theme";
+import { cn } from "../lib/cn";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
 
@@ -43,10 +35,13 @@ const MONTHS_ABBR = [
   "Dec",
 ] as const;
 
-const LEVEL_SCALE = {
-  light: ["#eef3e3", "#d3e99f", "#b3e455", "#8ad01d", "#a3e635"],
-  dark: ["#161b14", "#243019", "#334521", "#4c6b2c", "#a3e635"],
-} as const;
+const LEVEL_CLASS = [
+  "hm-lv-0",
+  "hm-lv-1",
+  "hm-lv-2",
+  "hm-lv-3",
+  "hm-lv-4",
+];
 
 interface DayCell {
   date: string;
@@ -94,7 +89,6 @@ function dateLabel(key: string): string {
 }
 
 export default function ActivityHeatmap() {
-  const { t, mode } = useTheme();
   const [contentRef, visible] = useScrollFade<HTMLDivElement>({ threshold: 0.08 });
   const canvasRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
@@ -114,8 +108,8 @@ export default function ActivityHeatmap() {
   const daysShown = Math.min(TOTAL_DAYS, columns * ROWS);
 
   const cells = useMemo(() => {
-    const offset = Math.max(0, TOTAL_DAYS - columns * ROWS);
-    const visible = days.slice(offset);
+    const start = Math.max(0, TOTAL_DAYS - columns * ROWS);
+    const visible = days.slice(start);
     const grid: DayCell[][] = [];
     for (let col = 0; col < columns; col += 1) {
       const column: DayCell[] = [];
@@ -165,7 +159,7 @@ export default function ActivityHeatmap() {
   return (
     <Section id="activity">
       <SectionHeader label="03 - Activity">
-        What I'm <span style={{ color: t.accent }}>Up To</span>
+        What I'm <span className="text-accent">Up To</span>
       </SectionHeader>
 
       <motion.div
@@ -176,29 +170,21 @@ export default function ActivityHeatmap() {
       >
         <div
           ref={canvasRef}
-          className="heatmap-canvas"
-          style={{ position: "relative", width: "max-content", margin: "0 auto" }}
+          className="relative mx-auto w-max"
         >
-          <div
-            className="heatmap-grid"
-            style={{ display: "flex", gap: `${GAP}px` }}
-          >
+          <div className="flex gap-1">
             {cells.map((column, col) => (
-              <div
-                key={`col-${col}`}
-                style={{ display: "flex", flexDirection: "column", gap: `${GAP}px` }}
-              >
+              <div key={`col-${col}`} className="flex flex-col gap-1">
                 {column.map((day, row) => (
                   <div
                     key={day.date}
-                    className="heatmap-cell"
+                    className={cn("heatmap-cell", LEVEL_CLASS[day.level])}
                     onMouseEnter={(event) => handleCellEnter(day, row, event)}
                     onMouseLeave={() => setTip(null)}
                     style={{
                       width: cellSize,
                       height: cellSize,
-                      borderRadius: radius.bar,
-                      backgroundColor: LEVEL_SCALE[mode][day.level],
+                      borderRadius: 2,
                     }}
                   />
                 ))}
@@ -207,9 +193,8 @@ export default function ActivityHeatmap() {
           </div>
 
           <div
-            className="heatmap-tooltip"
+            className="pointer-events-none absolute z-20 whitespace-nowrap rounded-card bg-[#222222] px-2 py-1 font-sans text-xxs font-medium text-[#F2F2F2] transition-opacity duration-[120ms]"
             style={{
-              position: "absolute",
               top: tip?.y ?? 0,
               left: tip?.x ?? 0,
               transform:
@@ -218,17 +203,6 @@ export default function ActivityHeatmap() {
                   : "translate(-50%, calc(-100% - 10px))",
               transformOrigin: "top center",
               opacity: tip ? 1 : 0,
-              pointerEvents: "none",
-              padding: `${spacing.xs} ${spacing.sm}`,
-              borderRadius: radius.card,
-              backgroundColor: "#222222",
-              color: "#F2F2F2",
-              fontFamily: fonts.sans,
-              fontSize: fontSize.xxs,
-              fontWeight: 500,
-              whiteSpace: "nowrap",
-              transition: "opacity 0.12s ease",
-              zIndex: 20,
             }}
           >
             {tipText}
@@ -237,47 +211,16 @@ export default function ActivityHeatmap() {
 
         <div
           ref={footerRef}
-          className="heatmap-footer"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: spacing.sm,
-            marginTop: spacing.lg,
-          }}
+          className="mt-4 flex flex-wrap items-center justify-between gap-2"
         >
-          <span
-            style={{
-              fontFamily: fonts.sans,
-              fontSize: fontSize.sm,
-              fontWeight: 600,
-              color: t.textSub,
-            }}
-          >
+          <span className="font-sans text-sm font-semibold text-text-sub">
             {total.toLocaleString()} contributions last year
           </span>
-          <span
-            style={{
-              fontFamily: fonts.sans,
-              fontSize: fontSize.sm,
-              fontWeight: 600,
-              color: t.textSub,
-            }}
-          >
+          <span className="font-sans text-sm font-semibold text-text-sub">
             showing {daysShown} days
           </span>
         </div>
       </motion.div>
-
-      <style>{`
-        .heatmap-cell {
-          transition: transform 0.12s ease;
-        }
-        .heatmap-cell:hover {
-          transform: scale(1.2);
-        }
-      `}</style>
     </Section>
   );
 }

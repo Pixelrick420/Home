@@ -14,7 +14,7 @@ export const experiences: Experience[] = [
   {
     id: 2,
     role: "Full Stack Developer",
-    company: "Intenxminds Private Limmited",
+    company: "10xMinds Private Limited",
     type: "Internship",
     duration: "3 months",
     location: "Remote",

@@ -1,32 +1,48 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { FaBars, FaMoon, FaSun, FaTimes } from "react-icons/fa";
+import { duration, ease, offset, stagger } from "../constants";
 import { useTheme } from "../context/useTheme";
-import { fonts } from "../theme";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
-import {
-  alpha,
-  duration,
-  ease,
-  fontSize,
-  iconButtonStyle,
-  offset,
-  pagePadding,
-  spacing,
-  stagger,
-  transitions,
-  zIndex,
-} from "../constants";
+import { cn } from "../lib/cn";
+import { scrollToId } from "../lib/scroll";
 
 const navLinks = [
   { label: "work", href: "#work" },
   { label: "experience", href: "#experience" },
+  { label: "activity", href: "#activity" },
   { label: "about", href: "#about" },
   { label: "skills", href: "#skills" },
   { label: "contact", href: "#contact" },
 ];
 
+const iconClass = "block overflow-visible";
+
+function ThemeIcon() {
+  const { mode } = useTheme();
+  const Icon = mode === "light" ? FaMoon : FaSun;
+  return (
+    <Icon size={20} viewBox="-32 -32 576 576" className={iconClass} aria-hidden="true" />
+  );
+}
+
+function ThemeToggle() {
+  const { mode, toggle } = useTheme();
+  const label = `Switch to ${mode === "light" ? "dark" : "light"} mode`;
+  return (
+    <motion.button
+      onClick={toggle}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      title={label}
+      aria-label={label}
+      className="flex size-9 cursor-pointer items-center justify-center border-none bg-transparent text-text transition-colors duration-200"
+    >
+      <ThemeIcon />
+    </motion.button>
+  );
+}
+
 export default function Navbar() {
-  const { t, mode, toggle } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -36,12 +52,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const showSolidBg = scrolled || menuOpen;
-
-  const handleNav = (href: string) => {
+  const go = (href: string) => {
     setMenuOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    scrollToId(href);
   };
+
+  const showSolidBg = scrolled || menuOpen;
 
   return (
     <>
@@ -49,21 +65,10 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: duration.medium, ease }}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: zIndex.nav,
-          padding: `0 ${pagePadding.desktop}`,
-          height: "72px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: showSolidBg ? t.bgAlt : "transparent",
-          borderBottom: `1px solid ${showSolidBg ? t.border : "transparent"}`,
-        }}
-        className={showSolidBg ? "nav-blur" : undefined}
+        className={cn(
+          "section-pad fixed inset-x-0 top-0 z-[100] flex h-18 items-center justify-between",
+          showSolidBg && "border-b border-border bg-bg-alt nav-blur",
+        )}
       >
         <motion.a
           href="#"
@@ -72,132 +77,44 @@ export default function Navbar() {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
           whileHover={{ scale: 1.02 }}
-          style={{
-            fontFamily: fonts.serif,
-            fontSize: fontSize.lg,
-            fontWeight: 700,
-            color: t.text,
-            textDecoration: "none",
-            letterSpacing: "0.02em",
-            textTransform: "uppercase",
-          }}
+          className="font-serif text-lg font-bold uppercase tracking-[0.02em] text-text no-underline"
         >
           Pixelrick
         </motion.a>
 
-        <div
-          className="desk-nav"
-          aria-label={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
-          style={{ display: "flex", alignItems: "center", gap: spacing.xxl }}
-        >
+        <div className="max-lg:hidden flex items-center gap-8">
           {navLinks.map((link) => (
             <motion.button
               key={link.href}
-              onClick={() => handleNav(link.href)}
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: fontSize.sm,
-                fontWeight: 500,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: t.text,
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: `${spacing.xs} 0`,
-                position: "relative",
-              }}
+              onClick={() => go(link.href)}
               whileHover="hover"
+              className="relative cursor-pointer border-none bg-transparent p-0 py-1 font-sans text-sm font-medium uppercase tracking-[0.08em] text-text"
             >
               {link.label}
               <motion.span
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: "2px",
-                  backgroundColor: t.accent,
-                }}
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"
                 initial={{ scaleX: 0 }}
-                variants={{
-                  hover: { scaleX: 1 },
-                }}
+                variants={{ hover: { scaleX: 1 } }}
                 transition={{ duration: duration.fast, ease }}
               />
             </motion.button>
           ))}
-          <motion.button
-            onClick={toggle}
-            title={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              ...iconButtonStyle(t),
-              transition: transitions.color,
-            }}
-          >
-            {mode === "light" ? (
-              <FaMoon
-                size={20}
-                viewBox="-32 -32 576 576"
-                style={{ display: "block", overflow: "visible" }}
-              />
-            ) : (
-              <FaSun
-                size={20}
-                viewBox="-32 -32 576 576"
-                style={{ display: "block", overflow: "visible" }}
-              />
-            )}
-          </motion.button>
+          <ThemeToggle />
         </div>
 
-        <div
-          className="mob-controls"
-          aria-label={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
-          style={{ display: "none", alignItems: "center", gap: spacing.lg }}
-        >
+        <div className="flex max-lg:flex hidden items-center gap-4">
+          <ThemeToggle />
           <motion.button
-            onClick={toggle}
+            onClick={() => setMenuOpen((o) => !o)}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            aria-label={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
-            style={iconButtonStyle(t)}
-          >
-            {mode === "light" ? (
-              <FaMoon
-                size={20}
-                viewBox="-32 -32 576 576"
-                style={{ display: "block", overflow: "visible" }}
-                aria-hidden="true"
-              />
-            ) : (
-              <FaSun
-                size={20}
-                viewBox="-32 -32 576 576"
-                style={{ display: "block", overflow: "visible" }}
-                aria-hidden="true"
-              />
-            )}
-          </motion.button>
-          <motion.button
-            onClick={() => setMenuOpen((o: boolean) => !o)}
-            whileTap={{ scale: 0.9 }}
-            style={iconButtonStyle(t)}
             aria-label="Toggle menu"
+            className="flex size-9 cursor-pointer items-center justify-center border-none bg-transparent text-text transition-colors duration-200"
           >
             {menuOpen ? (
-              <FaTimes
-                size={20}
-                viewBox="-22 -32 396 576"
-                style={{ display: "block", overflow: "visible" }}
-              />
+              <FaTimes size={20} viewBox="-22 -32 396 576" className={iconClass} />
             ) : (
-              <FaBars
-                size={20}
-                viewBox="-28 -32 504 576"
-                style={{ display: "block", overflow: "visible" }}
-              />
+              <FaBars size={20} viewBox="-28 -32 504 576" className={iconClass} />
             )}
           </motion.button>
         </div>
@@ -206,61 +123,24 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="mob-menu"
+            className="section-pad fixed inset-x-0 bottom-0 top-18 z-[99] overflow-auto bg-bg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: duration.fast }}
-            style={{
-              position: "fixed",
-              top: "72px",
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: zIndex.navMenu,
-              backgroundColor: t.bg,
-              padding: `0 ${pagePadding.desktop}`,
-              overflow: "auto",
-            }}
           >
-            <div style={{ padding: `${spacing.huge} 0 ${spacing.xl}` }}>
+            <div className="flex flex-col pt-12 pb-6">
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.href}
-                  onClick={() => handleNav(link.href)}
+                  onClick={() => go(link.href)}
                   initial={{ opacity: 0, x: -offset.x }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: i * stagger,
-                    duration: duration.fast,
-                    ease,
-                  }}
-                  style={{
-                    display: "flex",
-                    alignItems: "baseline",
-                    width: "100%",
-                    textAlign: "left",
-                    fontFamily: fonts.sans,
-                    fontSize: fontSize.heading,
-                    fontWeight: 500,
-                    letterSpacing: "0.04em",
-                    textTransform: "uppercase",
-                    color: t.text,
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: `${spacing.lg} 0`,
-                  }}
+                  whileHover={{ x: 6 }}
+                  transition={{ delay: i * stagger, duration: duration.fast, ease }}
+                  className="flex w-full cursor-pointer items-baseline border-none bg-transparent p-0 py-4 text-left font-sans text-heading font-medium uppercase tracking-[0.04em] text-text"
                 >
-                  <span
-                    style={{
-                      fontFamily: fonts.mono,
-                      fontSize: fontSize.xs,
-                      color: t.accent,
-                      marginRight: spacing.lg,
-                      opacity: alpha.navNumber,
-                    }}
-                  >
+                  <span className="mr-4 font-mono text-xs text-accent opacity-80">
                     0{i + 1}
                   </span>
                   {link.label}
@@ -270,23 +150,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>{`
-        @media (max-width: 1024px) {
-          nav { padding-left: ${pagePadding.laptop} !important; padding-right: ${pagePadding.laptop} !important; }
-          .mob-menu { padding: 0 ${pagePadding.laptop} !important; }
-        }
-        @media (max-width: 768px) {
-          .desk-nav { display: none !important; }
-          .mob-controls { display: flex !important; }
-          nav { padding-left: ${pagePadding.tablet} !important; padding-right: ${pagePadding.tablet} !important; }
-          .mob-menu { padding: 0 ${pagePadding.tablet} !important; }
-        }
-        @media (max-width: 480px) {
-          nav { padding-left: ${pagePadding.mobile} !important; padding-right: ${pagePadding.mobile} !important; }
-          .mob-menu { padding: 0 ${pagePadding.mobile} !important; }
-        }
-      `}</style>
     </>
   );
 }

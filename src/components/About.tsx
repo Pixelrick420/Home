@@ -1,22 +1,8 @@
 import { useScrollFade } from "../hooks/useScrollFade";
-import { useTheme } from "../context/useTheme";
-import { fonts } from "../theme";
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
-import {
-  accentBar,
-  barBlock,
-  cardStyle,
-  duration,
-  ease,
-  eyebrowStyle,
-  fontSize,
-  labelStyle,
-  spacing,
-  stagger,
-  tagStyle,
-} from "../constants";
+import { duration, ease, stagger } from "../constants";
 
 const currently = [
   { label: "Studying", value: "B.Tech CSE @ GEC Thrissur" },
@@ -27,17 +13,7 @@ const currently = [
 
 const languages = ["Hindi", "English", "Malayalam"];
 
-const cardBase = {
-  padding: `${spacing.huge} ${spacing.xxl}`,
-  position: "relative" as const,
-  overflow: "hidden",
-  minWidth: 0,
-  boxSizing: "border-box" as const,
-};
-
 export default function About() {
-  const { t } = useTheme();
-
   const [contentRef, visible] = useScrollFade<HTMLDivElement>({
     threshold: 0.08,
   });
@@ -45,72 +21,39 @@ export default function About() {
   return (
     <Section id="about" innerRef={contentRef}>
       <SectionHeader label="04 - About" threshold={0.08}>
-        Hello <span style={{ color: t.accent }}>:D</span>
+        Hello <span className="text-accent">:D</span>
       </SectionHeader>
 
       <div
-        className="about-grid"
+        className="grid w-full min-w-0 max-w-full gap-8"
         style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
-          gap: spacing.xxl,
-          width: "100%",
-          maxWidth: "100%",
-          minWidth: 0,
-          boxSizing: "border-box",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
         }}
       >
         {/* LEFT CARD */}
-        <div
-          className="about-card card-hover about-description-card"
-          style={{
-            ...cardStyle(t),
-            ...cardBase,
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div style={accentBar(t)} />
+        <div className="card-hover relative flex min-w-0 flex-col overflow-hidden rounded-card border border-border bg-bg-card px-8 py-12">
+          <div className="absolute inset-y-0 left-0 w-2.5 bg-accent" />
 
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
             transition={{ duration: duration.slow, delay: 0.15, ease }}
-            style={{
-              minWidth: 0,
-              width: "100%",
-              boxSizing: "border-box",
-              display: "flex",
-              flexDirection: "column",
-              gap: spacing.md,
-              flexGrow: 1,
-            }}
+            className="flex w-full min-w-0 flex-grow flex-col gap-3"
           >
-            <p style={{ ...labelStyle(t), lineHeight: 1.7, margin: "0 2%" }}>
+            <p className="mx-[2%] font-sans text-body font-semibold leading-[1.7] text-text [overflow-wrap:anywhere] sm:text-md lg:text-xl">
               I'm a Computer Science undergraduate at Government Engineering
               College, Thrissur. Having completed multiple internships and
-              projects, I'm looking to apply what i have learnt so far, explore
+              projects, I'm looking to apply what I have learnt so far, explore
               new technologies, and connect with others in the field.
             </p>
 
-            <p style={{ ...labelStyle(t), lineHeight: 1.7, margin: "0 2%" }}>
+            <p className="mx-[2%] font-sans text-body font-semibold leading-[1.7] text-text [overflow-wrap:anywhere] sm:text-md lg:text-xl">
               My work spans machine learning, web development, systems
               programming, and the occasional satirical VS Code extension.
               <br />I like experimenting and breaking things.
             </p>
 
-            <div
-              className="language-tags"
-              style={{
-                display: "flex",
-                marginTop: spacing.lgPlus,
-                flexDirection: "row-reverse",
-                gap: spacing.sm,
-                flexWrap: "wrap",
-                minWidth: 0,
-              }}
-            >
+            <div className="mt-5 flex min-w-0 flex-row-reverse flex-wrap gap-2">
               {languages.map((lang, i) => (
                 <motion.span
                   key={lang}
@@ -123,7 +66,7 @@ export default function About() {
                     duration: duration.medium,
                     delay: 0.4 + i * stagger,
                   }}
-                  style={tagStyle(t)}
+                  className="tag-pill"
                 >
                   {lang}
                 </motion.span>
@@ -132,93 +75,40 @@ export default function About() {
           </motion.div>
         </div>
 
-        <div
-          className="about-card card-hover about-currently-card"
-          style={{
-            ...cardStyle(t),
-            ...cardBase,
-          }}
-        >
-          <div style={accentBar(t)} />
+        <div className="card-hover relative min-w-0 overflow-hidden rounded-card border border-border bg-bg-card px-8 py-12">
+          <div className="absolute inset-y-0 left-0 w-2.5 bg-accent" />
 
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
             transition={{ duration: duration.slow, delay: 0.25, ease }}
-            style={{
-              minWidth: 0,
-              width: "100%",
-              boxSizing: "border-box",
-            }}
+            className="w-full min-w-0"
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: spacing.md,
-                marginBottom: spacing.xlPlus,
-                minWidth: 0,
-              }}
-            >
-              <div style={barBlock(t)} />
+            <div className="mb-7 flex min-w-0 items-center gap-3">
+              <div className="h-5 w-1 shrink-0 rounded-bar bg-accent" />
 
-              <h3
-                style={{
-                  ...eyebrowStyle(t),
-                  minWidth: 0,
-                  overflowWrap: "anywhere",
-                }}
-              >
+              <h3 className="m-0 min-w-0 font-sans text-meta font-semibold uppercase tracking-[0.2em] text-text-muted [overflow-wrap:anywhere]">
                 Currently
               </h3>
             </div>
 
-            <div
-              className="currently-list"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: spacing.xs,
-                width: "100%",
-                minWidth: 0,
-              }}
-            >
+            <div className="flex w-full min-w-0 flex-col gap-1">
               {currently.map(({ label, value }, i) => (
                 <motion.div
                   key={label}
-                  className="currently-row"
+                  className="flex w-full min-w-0 flex-col items-start gap-1 border-b border-border py-5"
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : -30 }}
                   transition={{
                     duration: duration.medium,
                     delay: 0.4 + i * stagger,
                   }}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    gap: spacing.xs,
-                    padding: `${spacing.lgPlus} 0`,
-                    borderBottom: `1px solid ${t.border}`,
-                    width: "100%",
-                    minWidth: 0,
-                    boxSizing: "border-box",
-                  }}
                 >
-                  <span style={labelStyle(t)}>{label}</span>
+                  <span className="font-sans text-body font-semibold text-text sm:text-md lg:text-xl">
+                    {label}
+                  </span>
 
-                  <span
-                    style={{
-                      fontFamily: fonts.sans,
-                      fontSize: fontSize.mdPlus,
-                      fontWeight: 500,
-                      color: t.textSub,
-                      lineHeight: 1.7,
-                      minWidth: 0,
-                      overflowWrap: "anywhere",
-                      wordBreak: "break-word",
-                    }}
-                  >
+                  <span className="min-w-0 font-sans text-md-plus font-medium leading-[1.7] text-text-sub [overflow-wrap:anywhere] [word-break:break-word]">
                     {value}
                   </span>
                 </motion.div>

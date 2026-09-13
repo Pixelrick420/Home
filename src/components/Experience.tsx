@@ -1,33 +1,12 @@
 import { useRef } from "react";
-import { useTheme } from "../context/useTheme";
-import { fonts, type ThemeTokens } from "../theme";
 import { motion, useInView } from "framer-motion";
 import { experiences } from "../data/experience";
 import type { Experience } from "../types";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
-import {
-  accentBar,
-  cardStyle,
-  duration,
-  fontSize,
-  hexAlpha,
-  offset,
-  radius,
-  spacing,
-  stagger,
-  tagStyle,
-} from "../constants";
+import { duration, offset, stagger } from "../constants";
 
-function ExperienceCard({
-  exp,
-  i,
-  t,
-}: {
-  exp: Experience;
-  i: number;
-  t: ThemeTokens;
-}) {
+function ExperienceCard({ exp, i }: { exp: Experience; i: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
@@ -37,7 +16,6 @@ function ExperienceCard({
   return (
     <motion.div
       ref={ref}
-      className="experience-card card-hover"
       initial={{ opacity: 0, y: offset.ySmall }}
       animate={
         isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: offset.ySmall }
@@ -47,135 +25,43 @@ function ExperienceCard({
         delay: i * stagger,
         ease: "easeOut",
       }}
-      style={{
-        ...cardStyle(t),
-        overflow: "hidden",
-        position: "relative",
-        willChange: "transform, opacity",
-        transform: "translateZ(0)",
-      }}
+      className="card-hover relative min-w-0 overflow-hidden rounded-card border border-border bg-bg-card"
     >
-      <div style={accentBar(t)} />
+      <div className="absolute inset-y-0 left-0 w-2.5 bg-accent" />
 
-      <div
-        style={{
-          padding: `${spacing.xlPlus} ${spacing.xxl}`,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div style={{ marginBottom: spacing.md }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: spacing.lg,
-              flexWrap: "wrap",
-              marginBottom: spacing.md,
-            }}
-          >
-            <h3
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: "clamp(16px, 1.5vw, 18px)",
-                fontWeight: 600,
-                color: t.text,
-                margin: 0,
-                letterSpacing: "-0.02em",
-              }}
-            >
+      <div className="flex flex-col px-8 py-7">
+        <div className="mb-3">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-4">
+            <h3 className="m-0 font-sans text-md font-semibold tracking-[-0.02em] text-text ns:text-body xl:text-body-lg">
               {exp.role}
             </h3>
-            <span
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: fontSize.xxs,
-                fontWeight: 600,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: t.accent,
-                border: `1px solid ${t.accent}${hexAlpha.border}`,
-                backgroundColor: `${t.accent}${hexAlpha.bg}`,
-                padding: `${spacing.xs} 10px`,
-                borderRadius: radius.pill,
-              }}
-            >
+            <span className="rounded-pill border border-accent/40 bg-accent/15 px-2.5 py-1 font-sans text-xxs font-semibold uppercase tracking-[0.1em] text-accent">
               {exp.type}
             </span>
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: spacing.md,
-              flexWrap: "wrap",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: fontSize.body,
-                fontWeight: 600,
-                marginTop: spacing.lgPlus,
-                marginBottom: spacing.lgPlus,
-                color: t.accent,
-              }}
-            >
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="my-5 font-sans text-body font-semibold text-accent">
               {exp.company}
             </span>
-            <span style={{ color: t.textMuted, fontSize: fontSize.meta }}>
-              •
-            </span>
-            <span
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: fontSize.sm,
-                color: t.textMuted,
-              }}
-            >
+            <span className="text-meta text-text-muted">•</span>
+            <span className="font-sans text-sm text-text-muted">
               {exp.location}
             </span>
-            <span style={{ color: t.textMuted, fontSize: fontSize.meta }}>
-              •
-            </span>
-            <span
-              style={{
-                fontFamily: fonts.sans,
-                fontSize: fontSize.sm,
-                color: t.textMuted,
-              }}
-            >
+            <span className="text-meta text-text-muted">•</span>
+            <span className="font-sans text-sm text-text-muted">
               {exp.duration}
             </span>
           </div>
         </div>
 
-        <p
-          style={{
-            fontFamily: fonts.sans,
-            fontSize: fontSize.body,
-            fontWeight: 500,
-            color: t.textSub,
-            lineHeight: 1.7,
-            margin: `0 0 ${spacing.lgPlus} 0`,
-          }}
-        >
+        <p className="mb-5 font-sans text-body font-medium leading-[1.7] text-text-sub">
           {exp.description}
         </p>
 
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "flex-end",
-            alignItems: "end",
-            gap: spacing.sm,
-          }}
-        >
+        <div className="flex flex-wrap items-end justify-end gap-2">
           {exp.stack.map((tech: string) => (
-            <span key={tech} style={tagStyle(t)}>
+            <span key={tech} className="tag-pill">
               {tech}
             </span>
           ))}
@@ -186,36 +72,17 @@ function ExperienceCard({
 }
 
 export default function Experience() {
-  const { t } = useTheme();
-
   return (
     <Section id="experience">
       <SectionHeader label="02 - Experience">
-        Where I've <span style={{ color: t.accent }}>Worked</span>
+        Where I've <span className="text-accent">Worked</span>
       </SectionHeader>
 
-      <div className="experience-grid">
+      <div className="two-col-grid">
         {experiences.map((exp, i) => (
-          <ExperienceCard key={exp.id} exp={exp} i={i} t={t} />
+          <ExperienceCard key={exp.id} exp={exp} i={i} />
         ))}
       </div>
-      <style>{`
-        .experience-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: ${spacing.xxl};
-        }
-
-        .experience-card {
-          min-width: 0;
-        }
-
-        @media (max-width: 900px) {
-          .experience-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
     </Section>
   );
 }
