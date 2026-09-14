@@ -10,6 +10,7 @@ import { duration, ease, offset } from "../constants";
 import { githubActivity, toDateKey, type ActivityDay } from "../data/activity";
 import { useScrollFade } from "../hooks/useScrollFade";
 import { cn } from "../lib/cn";
+import type { SectionProps } from "../lib/sections";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
 
@@ -88,7 +89,7 @@ function dateLabel(key: string): string {
   return `${MONTHS_ABBR[month - 1]} ${day}, ${year}`;
 }
 
-export default function ActivityHeatmap() {
+export default function ActivityHeatmap({ sectionNumber, title }: SectionProps) {
   const [contentRef, visible] = useScrollFade<HTMLDivElement>({ threshold: 0.08 });
   const canvasRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
@@ -158,7 +159,7 @@ export default function ActivityHeatmap() {
 
   return (
     <Section id="activity">
-      <SectionHeader label="03 - Activity">
+      <SectionHeader sectionNumber={sectionNumber} title={title}>
         What I'm <span className="text-accent">Up To</span>
       </SectionHeader>
 

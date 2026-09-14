@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import { duration, ease, stagger } from "../constants";
+import type { SectionProps } from "../lib/sections";
 
 const currently = [
   { label: "Studying", value: "B.Tech CSE @ GEC Thrissur" },
@@ -13,14 +14,14 @@ const currently = [
 
 const languages = ["Hindi", "English", "Malayalam"];
 
-export default function About() {
+export default function About({ sectionNumber, title }: SectionProps) {
   const [contentRef, visible] = useScrollFade<HTMLDivElement>({
     threshold: 0.08,
   });
 
   return (
     <Section id="about" innerRef={contentRef}>
-      <SectionHeader label="04 - About" threshold={0.08}>
+      <SectionHeader sectionNumber={sectionNumber} title={title} threshold={0.08}>
         Hello <span className="text-accent">:D</span>
       </SectionHeader>
 

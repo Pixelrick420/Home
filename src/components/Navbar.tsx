@@ -5,15 +5,9 @@ import { duration, ease, offset, stagger } from "../constants";
 import { useTheme } from "../context/useTheme";
 import { cn } from "../lib/cn";
 import { scrollToId } from "../lib/scroll";
+import { sections } from "../lib/sections";
 
-const navLinks = [
-  { label: "work", href: "#work" },
-  { label: "experience", href: "#experience" },
-  { label: "activity", href: "#activity" },
-  { label: "about", href: "#about" },
-  { label: "skills", href: "#skills" },
-  { label: "contact", href: "#contact" },
-];
+const navLinks = sections.map(({ id }) => ({ label: id, href: `#${id}` }));
 
 const iconClass = "block overflow-visible";
 

@@ -7,6 +7,7 @@ import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import { motion } from "framer-motion";
 import { duration, offset } from "../constants";
+import type { SectionProps } from "../lib/sections";
 
 function useColumns(): number {
   const [columns, setColumns] = useState(3);
@@ -27,7 +28,7 @@ function useColumns(): number {
   return columns;
 }
 
-export default function Projects() {
+export default function Projects({ sectionNumber, title }: SectionProps) {
   const [showAll, setShowAll] = useState(false);
   const [selected, setSelected] = useState<(typeof projects)[number] | null>(
     null,
@@ -46,7 +47,7 @@ export default function Projects() {
 
   return (
     <Section id="work">
-      <SectionHeader label="01 - Work">
+      <SectionHeader sectionNumber={sectionNumber} title={title}>
         Things I've <span className="text-accent">Built</span>
       </SectionHeader>
 

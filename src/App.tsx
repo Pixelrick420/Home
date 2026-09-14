@@ -1,17 +1,11 @@
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import WaveBackground from "./components/Waves";
 import SEO from "./components/SEO";
-
-const Projects = lazy(() => import("./components/Projects"));
-const Activity = lazy(() => import("./components/ActivityHeatmap"));
-const About = lazy(() => import("./components/About"));
-const Skills = lazy(() => import("./components/Skills"));
-const Contact = lazy(() => import("./components/Contact"));
-const Experience = lazy(() => import("./components/Experience"));
+import { sections } from "./lib/sections";
 
 function Layout() {
   return (
@@ -24,12 +18,9 @@ function Layout() {
         <main>
           <Hero />
           <Suspense fallback={<div className="min-h-screen" />}>
-            <Projects />
-            <Experience />
-            <Activity />
-            <About />
-            <Skills />
-            <Contact />
+            {sections.map(({ Component, id, title }, index) => (
+              <Component key={id} sectionNumber={index + 1} title={title} />
+            ))}
           </Suspense>
         </main>
       </div>

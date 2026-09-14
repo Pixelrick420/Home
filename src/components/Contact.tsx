@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import { duration, offset, stagger } from "../constants";
+import type { SectionProps } from "../lib/sections";
 
 const socials = [
   {
@@ -24,14 +25,14 @@ const socials = [
   },
 ];
 
-export default function Contact() {
+export default function Contact({ sectionNumber, title }: SectionProps) {
   const [contentRef, visible] = useScrollFade<HTMLDivElement>({
     threshold: 0.08,
   });
 
   return (
     <Section id="contact" innerRef={contentRef}>
-      <SectionHeader label="06 - Contact" threshold={0.08}>
+      <SectionHeader sectionNumber={sectionNumber} title={title} threshold={0.08}>
         Let's build <span className="text-accent">stuff</span>
       </SectionHeader>
 

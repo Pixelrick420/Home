@@ -5,6 +5,7 @@ import type { Experience } from "../types";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import { duration, offset, stagger } from "../constants";
+import type { SectionProps } from "../lib/sections";
 
 function ExperienceCard({ exp, i }: { exp: Experience; i: number }) {
   const ref = useRef(null);
@@ -71,10 +72,10 @@ function ExperienceCard({ exp, i }: { exp: Experience; i: number }) {
   );
 }
 
-export default function Experience() {
+export default function Experience({ sectionNumber, title }: SectionProps) {
   return (
     <Section id="experience">
-      <SectionHeader label="02 - Experience">
+      <SectionHeader sectionNumber={sectionNumber} title={title}>
         Where I've <span className="text-accent">Worked</span>
       </SectionHeader>
 

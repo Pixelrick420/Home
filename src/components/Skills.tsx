@@ -4,15 +4,16 @@ import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import { duration, ease, offset, stagger } from "../constants";
+import type { SectionProps } from "../lib/sections";
 
-export default function Skills() {
+export default function Skills({ sectionNumber, title }: SectionProps) {
   const [gridRef, gridVisible] = useScrollFade<HTMLDivElement>({
     threshold: 0.04,
   });
 
   return (
     <Section id="skills">
-      <SectionHeader label="05 - Skills">
+      <SectionHeader sectionNumber={sectionNumber} title={title}>
         My <span className="text-accent">Toolkit</span>
       </SectionHeader>
 
