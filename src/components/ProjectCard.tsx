@@ -11,7 +11,9 @@ const MESH_CELLS = Array.from({ length: 14 }, (_, r) =>
   }),
 )
   .flat()
-  .filter((cell): cell is { r: number; c: number; op: number } => cell !== null);
+  .filter(
+    (cell): cell is { r: number; c: number; op: number } => cell !== null,
+  );
 
 interface ProjectCardProps {
   project: Project;
@@ -1250,7 +1252,7 @@ export default function ProjectCard({
         type="button"
         aria-label={`View details for ${project.title}`}
         onClick={onSelect}
-        className="absolute inset-0 z-[1] cursor-pointer border-none bg-transparent p-0"
+        className="absolute inset-0 z-1 cursor-pointer border-none bg-transparent p-0"
       />
       <div className="relative project-cover w-full shrink-0 overflow-hidden">
         <div className="absolute inset-0">
@@ -1272,7 +1274,7 @@ export default function ProjectCard({
           >
             <motion.span
               whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 rounded-pill bg-[#aaaaaa] px-6 py-3.5 font-sans text-sm font-semibold tracking-[0.05em] text-[#1A1A1A]"
+              className="inline-flex items-center gap-2 rounded-pill bg-[#aaaaaa] px-6 py-3.5 font-sans text-sm font-semibold tracking-wider text-[#1A1A1A]"
             >
               Learn More
             </motion.span>
@@ -1280,7 +1282,7 @@ export default function ProjectCard({
         </div>
       </div>
 
-      <div className="flex flex-grow flex-col p-5 md:px-7 md:pb-7 md:pt-6">
+      <div className="flex grow flex-col p-5 md:px-7 md:pb-7 md:pt-6">
         <div className="mb-3 flex items-start justify-between">
           <h3 className="m-0 font-serif text-lg font-bold leading-[1.2] text-text md:text-xl">
             {project.title}

@@ -15,7 +15,12 @@ function ThemeIcon() {
   const { mode } = useTheme();
   const Icon = mode === "light" ? FaMoon : FaSun;
   return (
-    <Icon size={20} viewBox="-32 -32 576 576" className={iconClass} aria-hidden="true" />
+    <Icon
+      size={20}
+      viewBox="-32 -32 576 576"
+      className={iconClass}
+      aria-hidden="true"
+    />
   );
 }
 
@@ -60,7 +65,7 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: duration.medium, ease }}
         className={cn(
-          "section-pad fixed inset-x-0 top-0 z-[100] flex h-18 items-center justify-between",
+          "section-pad fixed inset-x-0 top-0 z-100 flex h-18 items-center justify-between",
           showSolidBg && "border-b border-border bg-bg-alt nav-blur",
         )}
       >
@@ -96,7 +101,7 @@ export default function Navbar() {
           <ThemeToggle />
         </div>
 
-        <div className="flex max-lg:flex hidden items-center gap-4">
+        <div className="flex max-lg:flex items-center gap-4">
           <ThemeToggle />
           <motion.button
             onClick={() => setMenuOpen((o) => !o)}
@@ -106,9 +111,17 @@ export default function Navbar() {
             className="flex size-9 cursor-pointer items-center justify-center border-none bg-transparent text-text transition-colors duration-200"
           >
             {menuOpen ? (
-              <FaTimes size={20} viewBox="-22 -32 396 576" className={iconClass} />
+              <FaTimes
+                size={20}
+                viewBox="-22 -32 396 576"
+                className={iconClass}
+              />
             ) : (
-              <FaBars size={20} viewBox="-28 -32 504 576" className={iconClass} />
+              <FaBars
+                size={20}
+                viewBox="-28 -32 504 576"
+                className={iconClass}
+              />
             )}
           </motion.button>
         </div>
@@ -117,7 +130,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="section-pad fixed inset-x-0 bottom-0 top-18 z-[99] overflow-auto bg-bg"
+            className="section-pad fixed inset-x-0 bottom-0 top-18 z-99 overflow-auto bg-bg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -131,7 +144,11 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -offset.x }}
                   animate={{ opacity: 1, x: 0 }}
                   whileHover={{ x: 6 }}
-                  transition={{ delay: i * stagger, duration: duration.fast, ease }}
+                  transition={{
+                    delay: i * stagger,
+                    duration: duration.fast,
+                    ease,
+                  }}
                   className="flex w-full cursor-pointer items-baseline border-none bg-transparent p-0 py-4 text-left font-sans text-heading font-medium uppercase tracking-[0.04em] text-text"
                 >
                   <span className="mr-4 font-mono text-xs text-accent opacity-80">

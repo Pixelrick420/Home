@@ -10,7 +10,12 @@ interface Props {
   children: ReactNode;
 }
 
-export default function SectionHeader({ sectionNumber, title, threshold, children }: Props) {
+export default function SectionHeader({
+  sectionNumber,
+  title,
+  threshold,
+  children,
+}: Props) {
   const [ref, visible] = useScrollFade<HTMLDivElement>({ threshold });
 
   return (

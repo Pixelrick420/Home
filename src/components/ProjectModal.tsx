@@ -44,7 +44,7 @@ export default function ProjectModal({ project, onClose }: Props) {
             exit={{ opacity: 0 }}
             transition={{ duration: duration.fast }}
             onClick={onClose}
-            className="fixed inset-0 z-[1000] flex items-center justify-center overflow-y-auto bg-black/60 p-6"
+            className="fixed inset-0 z-1000 flex items-center justify-center overflow-y-auto bg-black/60 p-6"
           >
             <motion.div
               key={`${project.id}-panel`}
@@ -56,7 +56,7 @@ export default function ProjectModal({ project, onClose }: Props) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 24, scale: 0.98 }}
               transition={{ duration: 0.25, ease }}
-              className="w-full max-w-[640px] overflow-auto rounded-modal border border-border bg-bg-card shadow-[0_24px_64px_rgba(0,0,0,0.35)]"
+              className="w-full max-w-160 overflow-auto rounded-modal border border-border bg-bg-card shadow-[0_24px_64px_rgba(0,0,0,0.35)]"
               style={{ maxHeight: "75vh" }}
             >
               <div className="max-sm:p-5 px-8 pt-7 pb-8">
@@ -82,9 +82,7 @@ export default function ProjectModal({ project, onClose }: Props) {
 
                 <div className="flex flex-col gap-4 max-sm:gap-2.5">
                   <p className={`${paraClass}`}>{project.what}</p>
-                  <p className={`${paraClass}`}>
-                    {project.problem}
-                  </p>
+                  <p className={`${paraClass}`}>{project.problem}</p>
                   <p className={`${paraClass}`}>{project.stack}</p>
                 </div>
 

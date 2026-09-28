@@ -36,13 +36,7 @@ const MONTHS_ABBR = [
   "Dec",
 ] as const;
 
-const LEVEL_CLASS = [
-  "hm-lv-0",
-  "hm-lv-1",
-  "hm-lv-2",
-  "hm-lv-3",
-  "hm-lv-4",
-];
+const LEVEL_CLASS = ["hm-lv-0", "hm-lv-1", "hm-lv-2", "hm-lv-3", "hm-lv-4"];
 
 interface DayCell {
   date: string;
@@ -63,25 +57,19 @@ function startOfDay(date: Date): Date {
   return copy;
 }
 
-function buildDays(activity: Map<string, ActivityDay>): {
-  days: DayCell[];
-  total: number;
-} {
+function buildDays(activity: Map<string, ActivityDay>): DayCell[] {
   const today = startOfDay(new Date());
   const from = new Date(today.getTime() - (TOTAL_DAYS - 1) * DAY_MS);
 
   const days: DayCell[] = [];
-  let total = 0;
 
   for (let i = 0; i < TOTAL_DAYS; i += 1) {
     const date = new Date(from.getTime() + i * DAY_MS);
     const key = toDateKey(date);
-    const entry = activity.get(key) ?? { date: key, count: 0, level: 0 };
-    total += entry.count;
-    days.push(entry);
+    days.push(activity.get(key) ?? { date: key, count: 0, level: 0 });
   }
 
-  return { days, total };
+  return days;
 }
 
 function dateLabel(key: string): string {
@@ -89,14 +77,19 @@ function dateLabel(key: string): string {
   return `${MONTHS_ABBR[month - 1]} ${day}, ${year}`;
 }
 
-export default function ActivityHeatmap({ sectionNumber, title }: SectionProps) {
-  const [contentRef, visible] = useScrollFade<HTMLDivElement>({ threshold: 0.08 });
+export default function ActivityHeatmap({
+  sectionNumber,
+  title,
+}: SectionProps) {
+  const [contentRef, visible] = useScrollFade<HTMLDivElement>({
+    threshold: 0.08,
+  });
   const canvasRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
   const [tip, setTip] = useState<Tip | null>(null);
   const [width, setWidth] = useState(0);
 
-  const { days, total } = useMemo(
+  const days = useMemo(
     () => buildDays(new Map(githubActivity.map((day) => [day.date, day]))),
     [],
   );
@@ -108,18 +101,19 @@ export default function ActivityHeatmap({ sectionNumber, title }: SectionProps) 
   const cellSize = width > 0 ? (width + GAP) / columns - GAP : CELL_TARGET;
   const daysShown = Math.min(TOTAL_DAYS, columns * ROWS);
 
-  const cells = useMemo(() => {
+  const { grid: cells, shownTotal } = useMemo(() => {
     const start = Math.max(0, TOTAL_DAYS - columns * ROWS);
-    const visible = days.slice(start);
+    const shown = days.slice(start);
     const grid: DayCell[][] = [];
     for (let col = 0; col < columns; col += 1) {
       const column: DayCell[] = [];
       for (let row = 0; row < ROWS; row += 1) {
-        column.push(visible[col * ROWS + row]);
+        column.push(shown[col * ROWS + row]);
       }
       grid.push(column);
     }
-    return grid;
+    const shownTotal = shown.reduce((sum, day) => sum + day.count, 0);
+    return { grid, shownTotal };
   }, [columns, days]);
 
   useLayoutEffect(() => {
@@ -140,7 +134,11 @@ export default function ActivityHeatmap({ sectionNumber, title }: SectionProps) 
       : `No contributions on ${dateLabel(tip.cell.date)}`
     : "";
 
-  function handleCellEnter(cell: DayCell, row: number, event: MouseEvent<HTMLDivElement>) {
+  function handleCellEnter(
+    cell: DayCell,
+    row: number,
+    event: MouseEvent<HTMLDivElement>,
+  ) {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const canvasRect = canvas.getBoundingClientRect();
@@ -169,10 +167,7 @@ export default function ActivityHeatmap({ sectionNumber, title }: SectionProps) 
         animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : offset.y }}
         transition={{ duration: duration.slow, ease }}
       >
-        <div
-          ref={canvasRef}
-          className="relative mx-auto w-max"
-        >
+        <div ref={canvasRef} className="relative mx-auto w-max">
           <div className="flex gap-1">
             {cells.map((column, col) => (
               <div key={`col-${col}`} className="flex flex-col gap-1">
@@ -194,7 +189,7 @@ export default function ActivityHeatmap({ sectionNumber, title }: SectionProps) 
           </div>
 
           <div
-            className="pointer-events-none absolute z-20 whitespace-nowrap rounded-card bg-[#222222] px-2 py-1 font-sans text-xxs font-medium text-[#F2F2F2] transition-opacity duration-[120ms]"
+            className="pointer-events-none absolute z-20 whitespace-nowrap rounded-card bg-[#222222] px-2 py-1 font-sans text-xxs font-medium text-[#F2F2F2] transition-opacity duration-120"
             style={{
               top: tip?.y ?? 0,
               left: tip?.x ?? 0,
@@ -215,10 +210,8 @@ export default function ActivityHeatmap({ sectionNumber, title }: SectionProps) 
           className="mt-4 flex flex-wrap items-center justify-between gap-2"
         >
           <span className="font-sans text-sm font-semibold text-text-sub">
-            {total.toLocaleString()} contributions last year
-          </span>
-          <span className="font-sans text-sm font-semibold text-text-sub">
-            showing {daysShown} days
+            {shownTotal.toLocaleString()} contributions in the last {daysShown}{" "}
+            days
           </span>
         </div>
       </motion.div>

@@ -36,7 +36,7 @@ function ExperienceCard({ exp, i }: { exp: Experience; i: number }) {
             <h3 className="m-0 font-sans text-md font-semibold tracking-[-0.02em] text-text ns:text-body xl:text-body-lg">
               {exp.role}
             </h3>
-            <span className="rounded-pill border border-accent/40 bg-accent/15 px-2.5 py-1 font-sans text-xxs font-semibold uppercase tracking-[0.1em] text-accent">
+            <span className="rounded-pill border border-accent/40 bg-accent/15 px-2.5 py-1 font-sans text-xxs font-semibold uppercase tracking-widest text-accent">
               {exp.type}
             </span>
           </div>

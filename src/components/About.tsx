@@ -21,14 +21,19 @@ export default function About({ sectionNumber, title }: SectionProps) {
 
   return (
     <Section id="about" innerRef={contentRef}>
-      <SectionHeader sectionNumber={sectionNumber} title={title} threshold={0.08}>
+      <SectionHeader
+        sectionNumber={sectionNumber}
+        title={title}
+        threshold={0.08}
+      >
         Hello <span className="text-accent">:D</span>
       </SectionHeader>
 
       <div
         className="grid w-full min-w-0 max-w-full gap-8"
         style={{
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
+          gridTemplateColumns:
+            "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
         }}
       >
         {/* LEFT CARD */}
@@ -39,16 +44,16 @@ export default function About({ sectionNumber, title }: SectionProps) {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
             transition={{ duration: duration.slow, delay: 0.15, ease }}
-            className="flex w-full min-w-0 flex-grow flex-col gap-3"
+            className="flex w-full min-w-0 grow flex-col gap-3"
           >
-            <p className="mx-[2%] font-sans text-body font-semibold leading-[1.7] text-text [overflow-wrap:anywhere] sm:text-md lg:text-xl">
+            <p className="mx-[2%] font-sans text-body font-semibold leading-[1.7] text-text wrap:anywhere sm:text-md lg:text-xl">
               I'm a Computer Science undergraduate at Government Engineering
               College, Thrissur. Having completed multiple internships and
               projects, I'm looking to apply what I have learnt so far, explore
               new technologies, and connect with others in the field.
             </p>
 
-            <p className="mx-[2%] font-sans text-body font-semibold leading-[1.7] text-text [overflow-wrap:anywhere] sm:text-md lg:text-xl">
+            <p className="mx-[2%] font-sans text-body font-semibold leading-[1.7] text-text wrap:anywhere sm:text-md lg:text-xl">
               My work spans machine learning, web development, systems
               programming, and the occasional satirical VS Code extension.
               <br />I like experimenting and breaking things.
@@ -88,7 +93,7 @@ export default function About({ sectionNumber, title }: SectionProps) {
             <div className="mb-7 flex min-w-0 items-center gap-3">
               <div className="h-5 w-1 shrink-0 rounded-bar bg-accent" />
 
-              <h3 className="m-0 min-w-0 font-sans text-meta font-semibold uppercase tracking-[0.2em] text-text-muted [overflow-wrap:anywhere]">
+              <h3 className="m-0 min-w-0 font-sans text-meta font-semibold uppercase tracking-[0.2em] text-text-muted wrap:anywhere">
                 Currently
               </h3>
             </div>
@@ -109,7 +114,7 @@ export default function About({ sectionNumber, title }: SectionProps) {
                     {label}
                   </span>
 
-                  <span className="min-w-0 font-sans text-md-plus font-medium leading-[1.7] text-text-sub [overflow-wrap:anywhere] [word-break:break-word]">
+                  <span className="min-w-0 font-sans text-md-plus font-medium leading-[1.7] text-text-sub wrap:anywhere [word-break:break-word]">
                     {value}
                   </span>
                 </motion.div>

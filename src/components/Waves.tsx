@@ -220,5 +220,10 @@ export default function WaveBackground() {
     };
   }, [mode]);
 
-  return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-[-1]" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none fixed inset-0 z-[-1]"
+    />
+  );
 }

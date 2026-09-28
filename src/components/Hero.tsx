@@ -32,7 +32,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 bg-bg-alt opacity-70 transition-colors duration-400" />
 
       <motion.div
-        className="relative z-[2] w-full max-w-[1000px]"
+        className="relative z-2 w-full max-w-250"
         style={{ y }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -75,7 +75,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: offset.y }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: duration.slow, delay: 0.6 }}
-          className="mb-12 max-w-[560px] font-sans text-md-plus font-normal leading-[1.55] text-text-sub ns:text-body sm:text-lg md:text-xl lg:text-2xl"
+          className="mb-12 max-w-140 font-sans text-md-plus font-normal leading-[1.55] text-text-sub ns:text-body sm:text-lg md:text-xl lg:text-2xl"
         >
           Building things from the ground up.
         </motion.p>
