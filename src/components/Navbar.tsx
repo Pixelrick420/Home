@@ -98,7 +98,6 @@ export default function Navbar() {
               />
             </motion.button>
           ))}
-          <ThemeToggle />
         </div>
 
         <div className="flex max-lg:flex items-center gap-4">
