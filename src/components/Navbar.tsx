@@ -107,7 +107,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Toggle menu"
-            className="flex size-9 cursor-pointer items-center justify-center border-none bg-transparent text-text transition-colors duration-200"
+            className="hidden size-9 cursor-pointer items-center justify-center border-none bg-transparent text-text transition-colors duration-200 max-lg:flex"
           >
             {menuOpen ? (
               <FaTimes
