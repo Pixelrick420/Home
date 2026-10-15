@@ -1,16 +1,11 @@
 import { Helmet } from "react-helmet-async";
 
-interface SEOProps {
-  title?: string;
-  description?: string;
-  url?: string;
-}
+const title = "Hari Krishnan R | Portfolio";
+const description =
+  "Creative developer portfolio showcasing projects in web, algorithms, and interactive art.";
+const url = "https://pixelrick.is-a.dev/";
 
-export default function SEO({
-  title = "Hari Krishnan R | Portfolio",
-  description = "Creative developer portfolio showcasing projects in web, algorithms, and interactive art.",
-  url = "https://pixelrick.is-a.dev/",
-}: SEOProps) {
+export default function SEO() {
   const ogImage = new URL("og-image.png", url).href;
 
   return (

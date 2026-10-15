@@ -2,14 +2,14 @@ import { projects } from "./src/data/projects.js";
 import { skills } from "./src/data/skills.js";
 import { experiences } from "./src/data/experience.js";
 
-export const site = {
+const site = {
   domain: "pixelrick.is-a.dev",
   baseUrl: "https://pixelrick.is-a.dev",
   resumeUrl: "https://pixelrick.is-a.dev/resume.pdf",
   markdownUrl: "https://pixelrick.is-a.dev/.well-known/homepage.md",
 };
 
-export const socials = [
+const socials = [
   { label: "GitHub", url: "https://github.com/Pixelrick420" },
   { label: "LeetCode", url: "https://leetcode.com/u/Pixelrick420/" },
   {

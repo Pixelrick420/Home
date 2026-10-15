@@ -36,7 +36,6 @@ export default function About({ sectionNumber, title }: SectionProps) {
             "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
         }}
       >
-        {/* LEFT CARD */}
         <div className="card-hover relative flex min-w-0 flex-col overflow-hidden rounded-card border border-border bg-bg-card px-8 py-12">
           <div className="absolute inset-y-0 left-0 w-2.5 bg-accent" />
 
