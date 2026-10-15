@@ -1,0 +1,81 @@
+import type { CoverProps } from "./types";
+
+export default function Leaderboard({ p }: CoverProps) {
+  return (
+    <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="280" fill={p.bg} />
+      <rect
+        x="40"
+        y="130"
+        width="60"
+        height="110"
+        rx="4"
+        fill={p.fg}
+        opacity="0.45"
+      />
+      <text
+        x="70"
+        y="122"
+        fontFamily="sans-serif"
+        fontSize="13"
+        fill={p.fg}
+        opacity="0.7"
+        textAnchor="middle"
+        fontWeight="bold"
+      >
+        2
+      </text>
+      <rect
+        x="110"
+        y="90"
+        width="60"
+        height="150"
+        rx="4"
+        fill={p.fg}
+        opacity="0.9"
+      />
+      <text
+        x="140"
+        y="82"
+        fontFamily="sans-serif"
+        fontSize="13"
+        fill={p.fg}
+        opacity="0.9"
+        textAnchor="middle"
+        fontWeight="bold"
+      >
+        1
+      </text>
+      <rect
+        x="180"
+        y="160"
+        width="60"
+        height="80"
+        rx="4"
+        fill={p.fg}
+        opacity="0.3"
+      />
+      <text
+        x="210"
+        y="152"
+        fontFamily="sans-serif"
+        fontSize="13"
+        fill={p.fg}
+        opacity="0.5"
+        textAnchor="middle"
+        fontWeight="bold"
+      >
+        3
+      </text>
+      <line
+        x1="30"
+        y1="242"
+        x2="250"
+        y2="242"
+        stroke={p.fg}
+        strokeWidth="1"
+        opacity="0.2"
+      />
+    </svg>
+  );
+}
