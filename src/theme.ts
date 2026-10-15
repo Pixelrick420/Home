@@ -16,7 +16,7 @@ const projectPaletteConfig: Record<string, { palette: keyof typeof PALETTES }> =
     "below-c-level": { palette: "p1" },
     fractal: { palette: "p3" },
     election: { palette: "p2" },
-    automata: { palette: "p2" },
+    papyrus: { palette: "p2" },
     asteroids: { palette: "p3" },
     shell: { palette: "p3" },
     leaderboard: { palette: "p2" },

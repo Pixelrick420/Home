@@ -29,19 +29,17 @@ export const projects: Project[] = [
       "It is written in C with OpenSSL for TLS and cryptography. The terminal interface is a custom renderer built directly on ANSI control codes, with no external widget toolkit.",
   },
   {
-    id: "automata",
-    title: "Automata",
-    description:
-      "A tool that converts regex to NFA, rendered as an interactive graph.",
-    tags: ["JS", "Automata", "Visualization"],
-    github: "https://github.com/Pixelrick420/Automata",
-    year: "2024",
-    what: "Automata is a web app that converts regular expressions into nondeterministic finite automata (NFAs), rendering the result as an interactive diagram you can drag and rearrange.",
+    id: "papyrus",
+    title: "Papyrus",
+    description: "An offline document viewer for Android.",
+    tags: ["Kotlin", "Jetpack Compose", "Android"],
+    github: "https://github.com/Pixelrick420/Papyrus",
+    year: "2026",
+    what: "Papyrus is a document viewer for Android that opens PDFs, Markdown, plain text, code, and Office files, indexes them in a local library, and renders everything entirely on-device.",
     problem:
-      "Automata theory is abstract and hard to grasp from text alone. Seeing the machine built step by step makes it click.",
+      "Most document viewers depend on the network or upload your files somewhere. Papyrus declares no permissions at all, so nothing ever leaves the phone.",
     stack:
-      "The frontend is built with Next.js and React, with a FastAPI backend in Python. It is deployed on Vercel and Render.",
-    demo: "https://regex-automata.vercel.app",
+      "It is written in Kotlin with Jetpack Compose, using Room for the library index, PdfRenderer for PDFs, and its own tokenizer for syntax highlighting. Documents open through the Storage Access Framework.",
   },
   {
     id: "ascii",
