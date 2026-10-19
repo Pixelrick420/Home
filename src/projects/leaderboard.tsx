@@ -10,8 +10,7 @@ export default function Leaderboard({ p }: CoverProps) {
         width="60"
         height="110"
         rx="4"
-        fill={p.fg}
-        opacity="0.45"
+        fill={p.accent}
       />
       <text
         x="70"
@@ -19,7 +18,6 @@ export default function Leaderboard({ p }: CoverProps) {
         fontFamily="sans-serif"
         fontSize="13"
         fill={p.fg}
-        opacity="0.7"
         textAnchor="middle"
         fontWeight="bold"
       >
@@ -32,7 +30,6 @@ export default function Leaderboard({ p }: CoverProps) {
         height="150"
         rx="4"
         fill={p.fg}
-        opacity="0.9"
       />
       <text
         x="140"
@@ -40,7 +37,6 @@ export default function Leaderboard({ p }: CoverProps) {
         fontFamily="sans-serif"
         fontSize="13"
         fill={p.fg}
-        opacity="0.9"
         textAnchor="middle"
         fontWeight="bold"
       >
@@ -52,16 +48,14 @@ export default function Leaderboard({ p }: CoverProps) {
         width="60"
         height="80"
         rx="4"
-        fill={p.fg}
-        opacity="0.3"
+        fill={p.accent}
       />
       <text
         x="210"
         y="152"
         fontFamily="sans-serif"
         fontSize="13"
-        fill={p.fg}
-        opacity="0.5"
+        fill={p.accent}
         textAnchor="middle"
         fontWeight="bold"
       >
@@ -72,9 +66,8 @@ export default function Leaderboard({ p }: CoverProps) {
         y1="242"
         x2="250"
         y2="242"
-        stroke={p.fg}
+        stroke={p.accent}
         strokeWidth="1"
-        opacity="0.2"
       />
     </svg>
   );

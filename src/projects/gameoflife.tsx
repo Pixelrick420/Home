@@ -47,8 +47,7 @@ export default function GameOfLife({ p }: CoverProps) {
                 width="13"
                 height="13"
                 rx="2"
-                fill={p.fg}
-                opacity={isAlive ? 0.88 : 0.06}
+                fill={isAlive ? p.fg : p.bg}
               />,
             );
           }

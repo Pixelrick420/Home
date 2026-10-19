@@ -12,9 +12,8 @@ export default function Tetris({ p }: CoverProps) {
         height="240"
         rx="4"
         fill="none"
-        stroke={p.fg}
+        stroke={p.accent}
         strokeWidth="1.5"
-        opacity="0.3"
       />
 
       {[
@@ -33,8 +32,7 @@ export default function Tetris({ p }: CoverProps) {
               width="17"
               height="17"
               rx="2"
-              fill={p.fg}
-              opacity={0.15 + r * 0.12}
+              fill={p.accent}
             />
           ) : null,
         ),
@@ -54,7 +52,6 @@ export default function Tetris({ p }: CoverProps) {
           height="17"
           rx="2"
           fill={p.fg}
-          opacity="0.9"
         />
       ))}
 
@@ -72,9 +69,8 @@ export default function Tetris({ p }: CoverProps) {
           height="17"
           rx="2"
           fill="none"
-          stroke={p.fg}
+          stroke={p.accent}
           strokeWidth="1"
-          opacity="0.3"
         />
       ))}
 
@@ -83,8 +79,7 @@ export default function Tetris({ p }: CoverProps) {
         y="44"
         fontFamily="monospace"
         fontSize="8"
-        fill={p.fg}
-        opacity="0.4"
+        fill={p.accent}
         textAnchor="middle"
       >
         NEXT
@@ -102,8 +97,7 @@ export default function Tetris({ p }: CoverProps) {
           width="12"
           height="12"
           rx="2"
-          fill={p.fg}
-          opacity="0.6"
+          fill={p.accent}
         />
       ))}
       <text
@@ -111,8 +105,7 @@ export default function Tetris({ p }: CoverProps) {
         y="44"
         fontFamily="monospace"
         fontSize="8"
-        fill={p.fg}
-        opacity="0.4"
+        fill={p.accent}
       >
         SCORE
       </text>
@@ -122,7 +115,6 @@ export default function Tetris({ p }: CoverProps) {
         fontFamily="monospace"
         fontSize="10"
         fill={p.fg}
-        opacity="0.7"
       >
         01480
       </text>
@@ -131,8 +123,7 @@ export default function Tetris({ p }: CoverProps) {
         y="82"
         fontFamily="monospace"
         fontSize="8"
-        fill={p.fg}
-        opacity="0.4"
+        fill={p.accent}
       >
         LEVEL
       </text>
@@ -142,7 +133,6 @@ export default function Tetris({ p }: CoverProps) {
         fontFamily="monospace"
         fontSize="10"
         fill={p.fg}
-        opacity="0.7"
       >
         3
       </text>

@@ -24,8 +24,7 @@ export default function Sort({ p }: CoverProps) {
           width="18"
           height={h}
           rx="3"
-          fill={p.fg}
-          opacity={sorted ? 0.9 : 0.3}
+          fill={sorted ? p.fg : p.accent}
         />
       ))}
 
@@ -34,9 +33,8 @@ export default function Sort({ p }: CoverProps) {
         y1="255"
         x2="258"
         y2="255"
-        stroke={p.fg}
+        stroke={p.accent}
         strokeWidth="1"
-        opacity="0.2"
       />
     </svg>
   );

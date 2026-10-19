@@ -10,11 +10,9 @@ export default function Election({ p }: CoverProps) {
         width="220"
         height="212"
         rx="14"
-        fill={p.fg}
-        fillOpacity="0.03"
-        stroke={p.fg}
+        fill={p.bg}
+        stroke={p.accent}
         strokeWidth="1.5"
-        strokeOpacity="0.5"
       />
       <text
         x="140"
@@ -25,7 +23,6 @@ export default function Election({ p }: CoverProps) {
         textAnchor="middle"
         fontWeight="bold"
         letterSpacing="4"
-        opacity="0.9"
       >
         BALLOT
       </text>
@@ -34,9 +31,8 @@ export default function Election({ p }: CoverProps) {
         y1="80"
         x2="230"
         y2="80"
-        stroke={p.fg}
+        stroke={p.accent}
         strokeWidth="1"
-        opacity="0.15"
       />
       <rect
         x="44"
@@ -44,28 +40,25 @@ export default function Election({ p }: CoverProps) {
         width="192"
         height="28"
         rx="8"
-        fill={p.accent}
-        opacity="0.1"
+        fill={p.bg}
       />
-      <circle cx="58" cy="106" r="8" fill={p.accent} />
+      <circle cx="58" cy="106" r="8" fill={p.fg} />
       <circle cx="58" cy="106" r="3" fill={p.bg} />
       <circle
         cx="58"
         cy="142"
         r="8"
         fill="none"
-        stroke={p.fg}
+        stroke={p.accent}
         strokeWidth="2"
-        opacity="0.4"
       />
       <circle
         cx="58"
         cy="178"
         r="8"
         fill="none"
-        stroke={p.fg}
+        stroke={p.accent}
         strokeWidth="2"
-        opacity="0.4"
       />
       {(() => {
         const rows = [
@@ -81,8 +74,7 @@ export default function Election({ p }: CoverProps) {
                 cx={82 + i * 20}
                 cy={cy}
                 r="3"
-                fill={p.fg}
-                opacity={op}
+                fill={op >= 0.65 ? p.fg : p.accent}
               />
             ) : (
               <rect
@@ -92,8 +84,7 @@ export default function Election({ p }: CoverProps) {
                 width="12"
                 height="2.8"
                 rx="1.4"
-                fill={p.fg}
-                opacity={op}
+                fill={op >= 0.65 ? p.fg : p.accent}
               />
             ),
           ),

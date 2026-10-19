@@ -38,7 +38,7 @@ const covers: Record<string, ComponentType<CoverProps>> = {
 const fallbackPalette: CoverPalette = {
   bg: "#0A0A0A",
   fg: "#FF8C42",
-  accent: "#FF8C42",
+  accent: "#C2410C",
 };
 
 export function CoverArt({ id }: { id: string }) {

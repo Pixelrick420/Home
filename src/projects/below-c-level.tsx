@@ -12,9 +12,8 @@ export default function BelowCLevel({ p }: CoverProps) {
           y1={20 + i * 17}
           x2="260"
           y2={20 + i * 17}
-          stroke={p.fg}
+          stroke={p.bg}
           strokeWidth="0.5"
-          opacity="0.06"
         />
       ))}
       {Array.from({ length: 15 }, (_, i) => (
@@ -24,9 +23,8 @@ export default function BelowCLevel({ p }: CoverProps) {
           y1="20"
           x2={20 + i * 17}
           y2="260"
-          stroke={p.fg}
+          stroke={p.bg}
           strokeWidth="0.5"
-          opacity="0.06"
         />
       ))}
 
@@ -56,8 +54,11 @@ export default function BelowCLevel({ p }: CoverProps) {
           width="15"
           height="15"
           rx="3"
-          fill={p.fg}
-          opacity={i === 0 ? 0.95 : 0.35 + (i / arr.length) * 0.4}
+          fill={
+            (i === 0 ? 0.95 : 0.35 + (i / arr.length) * 0.4) >= 0.65
+              ? p.fg
+              : p.accent
+          }
         />
       ))}
 
@@ -68,7 +69,6 @@ export default function BelowCLevel({ p }: CoverProps) {
         height="15"
         rx="3"
         fill={p.fg}
-        opacity="0.95"
       />
 
       <circle cx={20 + 7 * 17 + 5} cy={20 + 8 * 17 + 5} r="2" fill={p.bg} />
@@ -80,8 +80,7 @@ export default function BelowCLevel({ p }: CoverProps) {
         width="15"
         height="15"
         rx="3"
-        fill={p.accent}
-        opacity="0.85"
+        fill={p.fg}
       />
     </svg>
   );

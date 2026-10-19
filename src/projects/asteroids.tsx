@@ -23,8 +23,7 @@ export default function Asteroids({ p }: CoverProps) {
           cx={cx}
           cy={cy}
           r={i % 3 === 0 ? 1.5 : 1}
-          fill={p.fg}
-          opacity={0.3 + 0.2 * (i % 3)}
+          fill={i % 3 === 2 ? p.fg : p.accent}
         />
       ))}
 
@@ -35,8 +34,6 @@ export default function Asteroids({ p }: CoverProps) {
         strokeWidth="2"
       />
 
-      <polygon points="134,120 140,138 146,120" fill={p.fg} opacity="0.5" />
-
       <rect
         x="139"
         y="60"
@@ -44,7 +41,6 @@ export default function Asteroids({ p }: CoverProps) {
         height="8"
         rx="1"
         fill={p.fg}
-        opacity="0.9"
       />
 
       <polygon
@@ -52,7 +48,6 @@ export default function Asteroids({ p }: CoverProps) {
         fill="none"
         stroke={p.fg}
         strokeWidth="2"
-        opacity="0.85"
       />
 
       <polygon
@@ -60,15 +55,13 @@ export default function Asteroids({ p }: CoverProps) {
         fill="none"
         stroke={p.fg}
         strokeWidth="1.5"
-        opacity="0.7"
       />
 
       <polygon
         points="200,190 210,184 218,190 215,200 205,202"
         fill="none"
-        stroke={p.fg}
+        stroke={p.accent}
         strokeWidth="1.5"
-        opacity="0.55"
       />
     </svg>
   );

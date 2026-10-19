@@ -9,39 +9,29 @@ export default function Fractal({ p }: CoverProps) {
         y="94"
         fontFamily="monospace"
         fontSize="14"
-        fill={p.accent}
+        fill={p.fg}
         fontWeight="bold"
       >
         !start
       </text>
       <text x="32" y="128" fontFamily="monospace" fontSize="14">
-        <tspan fill={p.accent} fontWeight="bold">
+        <tspan fill={p.fg} fontWeight="bold">
           :int{" "}
         </tspan>
-        <tspan fill={p.fg} opacity="0.85">
-          age ={" "}
-        </tspan>
-        <tspan fill={p.fg} opacity="0.7">
-          25;
-        </tspan>
+        <tspan fill={p.accent}>age = </tspan>
+        <tspan fill={p.accent}>25;</tspan>
       </text>
       <text x="32" y="162" fontFamily="monospace" fontSize="14">
-        <tspan fill={p.fg} opacity="0.85">
-          print(
-        </tspan>
-        <tspan fill={p.fg} opacity="0.95">
-          "Hello World!"
-        </tspan>
-        <tspan fill={p.fg} opacity="0.85">
-          );
-        </tspan>
+        <tspan fill={p.accent}>print(</tspan>
+        <tspan fill={p.fg}>"Hello World!"</tspan>
+        <tspan fill={p.accent}>);</tspan>
       </text>
       <text
         x="32"
         y="196"
         fontFamily="monospace"
         fontSize="14"
-        fill={p.accent}
+        fill={p.fg}
         fontWeight="bold"
       >
         !end

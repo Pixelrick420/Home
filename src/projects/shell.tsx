@@ -14,14 +14,6 @@ export default function Shell({ p }: CoverProps) {
         stroke={p.fg}
         strokeWidth="1.5"
       />
-      <rect
-        x="20"
-        y="40"
-        width="240"
-        height="28"
-        fill={p.fg}
-        opacity="0.08"
-      />
       <circle cx="38" cy="54" r="5" fill="#FF5F57" />
       <circle cx="56" cy="54" r="5" fill="#FEBC2E" />
       <circle cx="74" cy="54" r="5" fill="#28C840" />
@@ -30,8 +22,7 @@ export default function Shell({ p }: CoverProps) {
         y="92"
         fontFamily="monospace"
         fontSize="11"
-        fill={p.fg}
-        opacity="0.5"
+        fill={p.accent}
       >
         $
       </text>
@@ -41,7 +32,6 @@ export default function Shell({ p }: CoverProps) {
         fontFamily="monospace"
         fontSize="11"
         fill={p.fg}
-        opacity="0.9"
       >
         ls -la
       </text>
@@ -50,8 +40,7 @@ export default function Shell({ p }: CoverProps) {
         y="111"
         fontFamily="monospace"
         fontSize="10"
-        fill={p.fg}
-        opacity="0.55"
+        fill={p.accent}
       >
         drwxr-xr-x shell.py
       </text>
@@ -60,8 +49,7 @@ export default function Shell({ p }: CoverProps) {
         y="128"
         fontFamily="monospace"
         fontSize="10"
-        fill={p.fg}
-        opacity="0.55"
+        fill={p.accent}
       >
         drwxr-xr-x README.md
       </text>
@@ -70,8 +58,7 @@ export default function Shell({ p }: CoverProps) {
         y="148"
         fontFamily="monospace"
         fontSize="11"
-        fill={p.fg}
-        opacity="0.5"
+        fill={p.accent}
       >
         $
       </text>
@@ -81,7 +68,6 @@ export default function Shell({ p }: CoverProps) {
         fontFamily="monospace"
         fontSize="11"
         fill={p.fg}
-        opacity="0.9"
       >
         echo "hello"
       </text>
@@ -91,7 +77,6 @@ export default function Shell({ p }: CoverProps) {
         fontFamily="monospace"
         fontSize="11"
         fill={p.fg}
-        opacity="0.7"
       >
         hello
       </text>
@@ -100,8 +85,7 @@ export default function Shell({ p }: CoverProps) {
         y="187"
         fontFamily="monospace"
         fontSize="11"
-        fill={p.fg}
-        opacity="0.5"
+        fill={p.accent}
       >
         $
       </text>
@@ -111,7 +95,6 @@ export default function Shell({ p }: CoverProps) {
         fontFamily="monospace"
         fontSize="11"
         fill={p.fg}
-        opacity="0.9"
       >
         cd ~
       </text>
@@ -120,8 +103,7 @@ export default function Shell({ p }: CoverProps) {
         y="207"
         fontFamily="monospace"
         fontSize="11"
-        fill={p.fg}
-        opacity="0.5"
+        fill={p.accent}
       >
         $
       </text>
@@ -132,7 +114,6 @@ export default function Shell({ p }: CoverProps) {
         height="13"
         rx="1"
         fill={p.fg}
-        opacity="0.85"
       />
     </svg>
   );

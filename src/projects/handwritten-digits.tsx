@@ -136,8 +136,7 @@ export default function HandwrittenDigits({ p }: CoverProps) {
                 width={cellSize - 1}
                 height={cellSize - 1}
                 rx="1"
-                fill={p.fg}
-                opacity={on ? 0.85 : 0.05}
+                fill={on ? p.fg : p.bg}
               />,
             );
           }

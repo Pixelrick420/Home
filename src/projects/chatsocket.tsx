@@ -5,7 +5,7 @@ export default function ChatSocket({ p }: CoverProps) {
     <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
       <rect width="280" height="280" fill={p.bg} />
 
-      <circle cx="140" cy="140" r="24" fill={p.fg} opacity="0.85" />
+      <circle cx="140" cy="140" r="24" fill={p.fg} />
       <text
         x="140"
         y="145"
@@ -38,10 +38,10 @@ export default function ChatSocket({ p }: CoverProps) {
       ))}
 
       {[
-        [55, 65, 116, 120],
-        [225, 65, 164, 120],
-        [55, 215, 116, 160],
-        [225, 215, 164, 160],
+        [68.5, 76.9, 107, 110.9],
+        [211.5, 76.9, 173, 110.9],
+        [68.5, 203.1, 107, 169.1],
+        [211.5, 203.1, 173, 169.1],
       ].map(([x1, y1, x2, y2], i) => (
         <line
           key={i}
@@ -49,9 +49,8 @@ export default function ChatSocket({ p }: CoverProps) {
           y1={y1}
           x2={x2}
           y2={y2}
-          stroke={p.fg}
+          stroke={p.accent}
           strokeWidth="1.5"
-          opacity="0.5"
         />
       ))}
 
@@ -60,18 +59,16 @@ export default function ChatSocket({ p }: CoverProps) {
         cy="140"
         r="40"
         fill="none"
-        stroke={p.fg}
+        stroke={p.accent}
         strokeWidth="1"
-        opacity="0.2"
       />
       <circle
         cx="140"
         cy="140"
         r="60"
         fill="none"
-        stroke={p.fg}
+        stroke={p.bg}
         strokeWidth="1"
-        opacity="0.1"
       />
     </svg>
   );

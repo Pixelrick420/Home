@@ -20,7 +20,7 @@ export default function Ascii({ p }: CoverProps) {
         "..::==++**##%%@@@@@   ",
       ].map((row, r) =>
         row.split("").map((ch, c) => {
-          const bright = 0.15 + (r / 11) * 0.7 + (c / 21) * 0.15;
+          const level = 0.15 + (r / 11) * 0.7 + (c / 21) * 0.15;
           return (
             <text
               key={`${r}-${c}`}
@@ -28,8 +28,7 @@ export default function Ascii({ p }: CoverProps) {
               y={60 + r * 17}
               fontFamily="monospace"
               fontSize="12"
-              fill={p.fg}
-              opacity={Math.min(bright, 0.9) + 0.3}
+              fill={level >= 0.35 ? p.fg : p.accent}
             >
               {ch}
             </text>
