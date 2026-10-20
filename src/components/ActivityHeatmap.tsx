@@ -119,9 +119,12 @@ export default function ActivityHeatmap({
   useLayoutEffect(() => {
     const footer = footerRef.current;
     if (!footer) return;
-    const measure = () => setWidth(footer.getBoundingClientRect().width);
-    measure();
-    const observer = new ResizeObserver(measure);
+    const apply = (next: number) =>
+      setWidth((prev) => (Math.abs(prev - next) < 1 ? prev : Math.round(next)));
+    const observer = new ResizeObserver((entries) =>
+      apply(entries[0].contentRect.width),
+    );
+    apply(footer.getBoundingClientRect().width);
     observer.observe(footer);
     return () => observer.disconnect();
   }, []);
