@@ -19,7 +19,7 @@ export default function WaveBackground() {
 
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 2);
-    const gridSize = isMobile ? 30 : 12;
+    const gridSize = isMobile ? 30 : 10;
     const levels = [-1.2, -0.8, -0.2, 0.2, 0.8, 1.2];
 
     let animationId: number;
@@ -196,7 +196,7 @@ export default function WaveBackground() {
         ctx.stroke();
       }
 
-      time += 0.012 * dt;
+      time += 0.004 * dt;
     };
 
     const onVisibility = () => {
