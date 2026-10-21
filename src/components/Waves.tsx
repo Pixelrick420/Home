@@ -1,32 +1,47 @@
 import { useEffect, useRef } from "react";
 import { useTheme } from "../context/useTheme";
 
+const MAX_DPR = 1;
+const MOBILE_BREAKPOINT = 768;
+const GRID_SIZE = 10;
+const MOBILE_GRID_SIZE = 30;
+const FRAME_INTERVAL_MS = 20;
+const LEVELS = [-1.2, -0.8, -0.2, 0.2, 0.8, 1.2];
+
+function readThemeColors() {
+  const styles = getComputedStyle(document.documentElement);
+  return {
+    bg: styles.getPropertyValue("--bg").trim() || "#000000",
+    accent: styles.getPropertyValue("--accent").trim() || "#cccccc",
+  };
+}
+
 export default function WaveBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { mode } = useTheme();
-  const scrollYRef = useRef(0);
+  const colorsRef = useRef({ bg: "#000000", accent: "#cccccc" });
+  const timeRef = useRef(0);
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d", { alpha: false })!;
+    colorsRef.current = readThemeColors();
+  }, [mode]);
 
-    const styles = getComputedStyle(document.documentElement);
-    const bg = styles.getPropertyValue("--bg").trim() || "#000000";
-    const accent = styles.getPropertyValue("--accent").trim() || "#cccccc";
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d", { alpha: false });
+    if (!ctx) return;
+
+    const mobileQuery = window.matchMedia(
+      `(max-width: ${MOBILE_BREAKPOINT}px)`,
+    );
 
     let width = 0;
     let height = 0;
-
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 2);
-    const gridSize = isMobile ? 30 : 10;
-    const levels = [-1.2, -0.8, -0.2, 0.2, 0.8, 1.2];
-
-    let animationId: number;
-    let time = 0;
+    let gridSize = GRID_SIZE;
+    let isMobile = mobileQuery.matches;
     let cols = 0;
     let rows = 0;
-    let last = 0;
 
     let field: Float32Array;
     let xComp: Float32Array;
@@ -37,15 +52,35 @@ export default function WaveBackground() {
     let yBase1: Float32Array;
     let yBase2: Float32Array;
     let diagJ: Float32Array;
+    let sinA: Float32Array;
+    let cosA: Float32Array;
+    let sinB: Float32Array;
+    let cosB: Float32Array;
 
-    function resize() {
+    let appliedBg = "";
+    let appliedAccent = "";
+
+    const layout = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
+      isMobile = mobileQuery.matches;
+      gridSize = isMobile ? MOBILE_GRID_SIZE : GRID_SIZE;
+      const dpr = Math.min(
+        window.devicePixelRatio || 1,
+        isMobile ? 1 : MAX_DPR,
+      );
+
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.lineWidth = 2;
+      ctx.lineJoin = isMobile ? "miter" : "round";
+      ctx.lineCap = isMobile ? "butt" : "round";
+
+      appliedBg = "";
+      appliedAccent = "";
 
       cols = Math.ceil(width / gridSize) + 1;
       rows = Math.ceil(height / gridSize) + 1;
@@ -58,6 +93,11 @@ export default function WaveBackground() {
       yBase1 = new Float32Array(rows);
       yBase2 = new Float32Array(rows);
       diagJ = new Float32Array(rows);
+      sinA = new Float32Array(cols);
+      cosA = new Float32Array(cols);
+      sinB = new Float32Array(rows);
+      cosB = new Float32Array(rows);
+
       for (let i = 0; i < cols; i++) {
         const g = i * gridSize;
         xBase1[i] = g * 0.007;
@@ -69,24 +109,26 @@ export default function WaveBackground() {
         yBase1[j] = g * 0.011;
         yBase2[j] = g * 0.017;
         diagJ[j] = g * 0.008;
+        // The row term never changes, so its sine/cosine stay put.
+        sinB[j] = Math.sin(diagJ[j]);
+        cosB[j] = Math.cos(diagJ[j]);
       }
-    }
-
-    const handleScroll = () => {
-      scrollYRef.current = window.scrollY;
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", resize);
-    resize();
+
+    let animationId = 0;
+    let layoutFrame = 0;
+    let running = false;
+    let last = 0;
 
     const draw = (now: number) => {
+      if (!running) return;
       animationId = requestAnimationFrame(draw);
-      if (now - last < 20) return;
+      if (now - last < FRAME_INTERVAL_MS) return;
       const dt = Math.min(now - last, 50) / 16.666;
       last = now;
 
-      const scrollOffset = scrollYRef.current * 0.6;
-      const tf = time * 0.7;
+      const scrollOffset = window.scrollY * 0.6;
+      const tf = timeRef.current * 0.7;
       const tfA = tf * 0.01;
       const tfB = tf * 0.8;
       const s1 = scrollOffset * 0.011;
@@ -105,23 +147,34 @@ export default function WaveBackground() {
       }
 
       for (let i = 0; i < cols; i++) {
+        const a = diagI[i] + s3 + tfB;
+        sinA[i] = Math.sin(a);
+        cosA[i] = Math.cos(a);
+      }
+
+      for (let i = 0; i < cols; i++) {
         const offset = i * rows;
         const xc = xComp[i];
-        const di = diagI[i];
+        const si = sinA[i];
+        const ci = cosA[i];
         for (let j = 0; j < rows; j++) {
-          const diag = Math.sin(di + diagJ[j] + s3 + tfB);
-          field[offset + j] = (xc + yComp[j] + diag) * invRange;
+          field[offset + j] =
+            (xc + yComp[j] + si * cosB[j] + ci * sinB[j]) * invRange;
         }
       }
 
-      ctx.fillStyle = bg;
+      const colors = colorsRef.current;
+      if (colors.bg !== appliedBg) {
+        ctx.fillStyle = colors.bg;
+        appliedBg = colors.bg;
+      }
       ctx.fillRect(0, 0, width, height);
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = accent;
-      ctx.lineJoin = isMobile ? "miter" : "round";
-      ctx.lineCap = isMobile ? "butt" : "round";
+      if (colors.accent !== appliedAccent) {
+        ctx.strokeStyle = colors.accent;
+        appliedAccent = colors.accent;
+      }
 
-      for (const level of levels) {
+      for (const level of LEVELS) {
         ctx.beginPath();
         for (let i = 0; i < cols - 1; i++) {
           const iOff = i * rows;
@@ -196,29 +249,46 @@ export default function WaveBackground() {
         ctx.stroke();
       }
 
-      time += 0.004 * dt;
+      timeRef.current += 0.004 * dt;
     };
 
     const onVisibility = () => {
       if (document.hidden) {
+        running = false;
         cancelAnimationFrame(animationId);
-      } else {
-        last = 0;
+      } else if (!running) {
+        running = true;
+        last = performance.now();
         animationId = requestAnimationFrame(draw);
       }
     };
 
-    document.addEventListener("visibilitychange", onVisibility);
+    const onResize = () => {
+      if (layoutFrame) return;
+      layoutFrame = requestAnimationFrame(() => {
+        layoutFrame = 0;
+        layout();
+      });
+    };
 
+    layout();
+    running = true;
+    last = performance.now();
     animationId = requestAnimationFrame(draw);
 
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("resize", onResize);
+    mobileQuery.addEventListener("change", onResize);
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", resize);
-      document.removeEventListener("visibilitychange", onVisibility);
+      running = false;
       cancelAnimationFrame(animationId);
+      cancelAnimationFrame(layoutFrame);
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("resize", onResize);
+      mobileQuery.removeEventListener("change", onResize);
     };
-  }, [mode]);
+  }, []);
 
   return (
     <canvas
