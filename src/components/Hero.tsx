@@ -29,7 +29,7 @@ export default function Hero() {
       ref={containerRef}
       className="section-pad relative flex min-h-screen items-center overflow-hidden transition-colors duration-400"
     >
-      <div className="absolute inset-0 z-0 bg-bg-alt opacity-70 transition-colors duration-400" />
+      <div className="absolute inset-0 z-0 bg-bg-alt opacity-80 transition-colors duration-400" />
 
       <motion.div
         className="relative z-2 w-full max-w-250"

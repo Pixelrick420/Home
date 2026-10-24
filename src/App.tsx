@@ -9,11 +9,11 @@ import { sections } from "./lib/sections";
 
 function Layout() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden [scrollbar-width:none] [ms-overflow-style:none]">
+    <div className="relative min-h-screen overflow-x-hidden scrollbar-none [ms-overflow-style:none]">
       <Analytics />
       <SEO />
       <WaveBackground />
-      <div className="relative z-[1]">
+      <div className="relative z-1">
         <Navbar />
         <main>
           <Hero />
