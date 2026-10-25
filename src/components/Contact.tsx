@@ -1,5 +1,5 @@
 import { useScrollFade } from "../hooks/useScrollFade";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
@@ -22,6 +22,11 @@ const socials = [
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/harikrishnan-r-41b1a3291/",
     icon: FaLinkedin,
+  },
+  {
+    label: "Email",
+    href: "mailto:harikrishnanr0505@gmail.com",
+    icon: FaEnvelope,
   },
 ];
 
@@ -55,8 +60,9 @@ export default function Contact({ sectionNumber, title }: SectionProps) {
           <motion.a
             key={s.label}
             href={s.href}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(s.href.startsWith("mailto:")
+              ? {}
+              : { target: "_blank", rel: "noopener noreferrer" })}
             initial={{ opacity: 0, y: offset.ySmall }}
             animate={{
               opacity: visible ? 1 : 0,

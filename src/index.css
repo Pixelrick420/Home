@@ -9,7 +9,7 @@
 @theme {
     --breakpoint-xs: 440px;
     --font-sans: "Space Grotesk", system-ui, sans-serif;
-    --font-serif: "Playfair Display", Georgia, serif;
+    --font-serif: "Source Serif 4", Georgia, serif;
     --font-mono: "JetBrains Mono", "Courier New", monospace;
 
     --text-xxs: 11px;
@@ -178,7 +178,6 @@
         transition:
             border-color 0.3s,
             box-shadow 0.3s;
-        cursor: pointer;
     }
 
     .card-hover:hover {

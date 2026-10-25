@@ -33,7 +33,7 @@ export default function ProjectCard({
         delay: index * stagger,
         ease,
       }}
-      className="card-hover relative flex h-full flex-col overflow-hidden rounded-card border bg-bg-card"
+      className="card-hover relative flex h-full cursor-pointer flex-col overflow-hidden rounded-card border bg-bg-card"
       style={{ borderColor: hov ? "var(--accent)" : "var(--border)" }}
     >
       <button
