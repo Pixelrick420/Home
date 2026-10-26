@@ -362,6 +362,6 @@ export const rawContributions: Array<{ date: string; count: number }> = [
   { date: "2026-10-22", count: 9 },
   { date: "2026-10-23", count: 8 },
   { date: "2026-10-24", count: 5 },
-  { date: "2026-10-25", count: 18 },
-  { date: "2026-10-26", count: 0 },
+  { date: "2026-10-25", count: 19 },
+  { date: "2026-10-26", count: 1 },
 ];
