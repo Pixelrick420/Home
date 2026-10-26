@@ -4,6 +4,7 @@ import { FaBars, FaMoon, FaSun, FaTimes } from "react-icons/fa";
 import { duration, ease, offset, stagger } from "../constants";
 import { useTheme } from "../context/useTheme";
 import { cn } from "../lib/cn";
+import { PROJECTS_PATH, handleLinkClick, navigate, usePath } from "../lib/router";
 import { scrollToId } from "../lib/scroll";
 import { sections } from "../lib/sections";
 
@@ -44,6 +45,7 @@ function ThemeToggle() {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const onProjectsPage = usePath() === PROJECTS_PATH;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -53,7 +55,8 @@ export default function Navbar() {
 
   const go = (href: string) => {
     setMenuOpen(false);
-    scrollToId(href);
+    if (onProjectsPage) navigate(`/${href}`);
+    else scrollToId(href);
   };
 
   const showSolidBg = scrolled || menuOpen;
@@ -70,8 +73,12 @@ export default function Navbar() {
         )}
       >
         <motion.a
-          href="#"
+          href="/"
           onClick={(e) => {
+            if (onProjectsPage) {
+              handleLinkClick(e, "/");
+              return;
+            }
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}

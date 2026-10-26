@@ -109,7 +109,6 @@ export default function WaveBackground() {
         yBase1[j] = g * 0.011;
         yBase2[j] = g * 0.017;
         diagJ[j] = g * 0.008;
-        // The row term never changes, so its sine/cosine stay put.
         sinB[j] = Math.sin(diagJ[j]);
         cosB[j] = Math.cos(diagJ[j]);
       }

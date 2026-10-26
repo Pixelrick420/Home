@@ -16,6 +16,13 @@ import BelowCLevel from "./below-c-level";
 import Shell from "./shell";
 import Leaderboard from "./leaderboard";
 import HandwrittenDigits from "./handwritten-digits";
+import CharGPT from "./chargpt";
+import Gravity from "./gravity";
+import Automata from "./automata";
+import Paint from "./paint";
+import VirtualKeys from "./virtualkeys";
+import Blog from "./blog";
+import Masm from "./masm";
 
 const covers: Record<string, ComponentType<CoverProps>> = {
   fractal: Fractal,
@@ -33,6 +40,13 @@ const covers: Record<string, ComponentType<CoverProps>> = {
   shell: Shell,
   leaderboard: Leaderboard,
   "handwritten-digits": HandwrittenDigits,
+  chargpt: CharGPT,
+  gravity: Gravity,
+  automata: Automata,
+  paint: Paint,
+  virtualkeys: VirtualKeys,
+  blog: Blog,
+  masm: Masm,
 };
 
 const fallbackPalette: CoverPalette = {

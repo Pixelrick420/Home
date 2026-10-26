@@ -1,49 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
-import { projects } from "../data/projects";
+import { useColumns } from "../hooks/useColumns";
+import { featuredProjects } from "../data/projects";
+import type { Project } from "../types";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
 import { duration, offset } from "../constants";
+import { PROJECTS_PATH, handleLinkClick } from "../lib/router";
 import type { SectionProps } from "../lib/sections";
 
-function useColumns(): number {
-  const [columns, setColumns] = useState(3);
-
-  useEffect(() => {
-    const updateColumns = () => {
-      const width = window.innerWidth;
-      if (width < 640) setColumns(1);
-      else if (width < 1024) setColumns(2);
-      else setColumns(3);
-    };
-
-    updateColumns();
-    window.addEventListener("resize", updateColumns);
-    return () => window.removeEventListener("resize", updateColumns);
-  }, []);
-
-  return columns;
-}
-
 export default function Projects({ sectionNumber, title }: SectionProps) {
-  const [showAll, setShowAll] = useState(false);
-  const [selected, setSelected] = useState<(typeof projects)[number] | null>(
-    null,
-  );
+  const [selected, setSelected] = useState<Project | null>(null);
   const columns = useColumns();
 
   const [gridRef, gridVisible] = useScrollFade<HTMLDivElement>({
     threshold: 0.04,
   });
-
-  const displayLimit = columns * 3;
-  const displayedProjects = showAll
-    ? projects
-    : projects.slice(0, displayLimit);
-  const hasMoreProjects = projects.length > displayLimit;
 
   return (
     <Section id="work">
@@ -59,7 +35,7 @@ export default function Projects({ sectionNumber, title }: SectionProps) {
         className="grid w-full min-w-0 gap-7"
         style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
       >
-        {displayedProjects.map((p, i) => (
+        {featuredProjects.map((p, i) => (
           <ProjectCard
             key={p.id}
             project={p}
@@ -72,26 +48,26 @@ export default function Projects({ sectionNumber, title }: SectionProps) {
 
       <ProjectModal project={selected} onClose={() => setSelected(null)} />
 
-      {hasMoreProjects && (
-        <motion.div
-          initial={{ opacity: 0, y: offset.ySmall }}
-          animate={{
-            opacity: gridVisible ? 1 : 0,
-            y: gridVisible ? 0 : offset.ySmall,
-          }}
-          transition={{ duration: duration.medium, delay: 0.3 }}
-          className="mt-12 flex justify-center"
+      <motion.div
+        initial={{ opacity: 0, y: offset.ySmall }}
+        animate={{
+          opacity: gridVisible ? 1 : 0,
+          y: gridVisible ? 0 : offset.ySmall,
+        }}
+        transition={{ duration: duration.medium, delay: 0.3 }}
+        className="mt-12 flex justify-center"
+      >
+        <motion.a
+          href={PROJECTS_PATH}
+          onClick={(e) => handleLinkClick(e, PROJECTS_PATH)}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="inline-flex cursor-pointer items-center gap-2.5 rounded-pill-sm border border-accent bg-transparent px-7 py-3 font-sans text-body font-medium text-accent no-underline transition-all"
         >
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setShowAll(!showAll)}
-            className="cursor-pointer rounded-pill-sm border border-accent bg-transparent px-7 py-3 font-sans text-body font-medium text-accent transition-all"
-          >
-            {showAll ? "Show Less" : "Show All Projects"}
-          </motion.button>
-        </motion.div>
-      )}
+          View All Projects
+          <FaArrowRight size={13} aria-hidden="true" />
+        </motion.a>
+      </motion.div>
     </Section>
   );
 }

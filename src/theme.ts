@@ -1,5 +1,3 @@
-// Each palette is exactly 2 shades of one hue + black; fg is the bright
-// shade, accent the dim shade of the same hue. All values are opaque hex.
 const PALETTES = {
   p1: { bg: "#0A0A0A", fg: "#A3E635", accent: "#4D7C0F" },
   p2: { bg: "#0A0A0A", fg: "#38BDF8", accent: "#0284C7" },
@@ -8,19 +6,27 @@ const PALETTES = {
 
 const projectPaletteConfig: Record<string, { palette: keyof typeof PALETTES }> =
   {
-    chatsocket: { palette: "p1" },
-    mesh: { palette: "p1" },
-    gameoflife: { palette: "p2" },
-    sharewave: { palette: "p2" },
-    ascii: { palette: "p3" },
-    sort: { palette: "p1" },
-    tetris: { palette: "p1" },
-    "below-c-level": { palette: "p1" },
     fractal: { palette: "p3" },
-    election: { palette: "p2" },
-    papyrus: { palette: "p2" },
-    asteroids: { palette: "p3" },
+    gravity: { palette: "p1" },
+    chatsocket: { palette: "p2" },
+    chargpt: { palette: "p3" },
+    papyrus: { palette: "p1" },
+    automata: { palette: "p2" },
+    sharewave: { palette: "p3" },
+    election: { palette: "p1" },
+    mesh: { palette: "p2" },
+    blog: { palette: "p3" },
+    paint: { palette: "p1" },
+    asteroids: { palette: "p2" },
     shell: { palette: "p3" },
+    "below-c-level": { palette: "p1" },
+    masm: { palette: "p2" },
+    ascii: { palette: "p3" },
+    tetris: { palette: "p1" },
+    virtualkeys: { palette: "p2" },
+
+    gameoflife: { palette: "p2" },
+    sort: { palette: "p1" },
     leaderboard: { palette: "p2" },
     "handwritten-digits": { palette: "p3" },
   };
