@@ -60,7 +60,7 @@ export function CoverArt({ id }: { id: string }) {
   if (!Cover) return null;
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full" aria-hidden="true">
       <Cover p={projectPalettes[id] ?? fallbackPalette} />
     </div>
   );

@@ -4,15 +4,21 @@ interface UseScrollFadeOptions {
   threshold?: number;
 }
 
+function startsVisible(): boolean {
+  if (typeof IntersectionObserver === "undefined") return true;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function useScrollFade<T extends HTMLElement>(
   options: UseScrollFadeOptions = {},
 ): [React.RefObject<T>, boolean] {
   const ref = useRef<T>(null);
-  const [isVisible, setIsVisible] = useState(false);
+
+  const [isVisible, setIsVisible] = useState(startsVisible);
 
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element || typeof IntersectionObserver === "undefined") return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {

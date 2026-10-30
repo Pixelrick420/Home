@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Project } from "../types";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { duration, ease, offset, stagger } from "../constants";
 import { CoverArt } from "../projects";
 
@@ -18,19 +18,20 @@ export default function ProjectCard({
   onSelect,
 }: ProjectCardProps) {
   const [hov, setHov] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   return (
     <motion.article
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      initial={{ opacity: 0, y: offset.y }}
+      initial={reduceMotion ? false : { opacity: 0, y: offset.y }}
       animate={{
         opacity: visible ? 1 : 0,
         y: visible ? 0 : offset.y,
       }}
       transition={{
-        duration: duration.medium,
-        delay: index * stagger,
+        duration: reduceMotion ? 0 : duration.medium,
+        delay: reduceMotion ? 0 : index * stagger,
         ease,
       }}
       className="card-hover relative flex h-full cursor-pointer flex-col overflow-hidden rounded-card border bg-bg-card"
@@ -40,7 +41,7 @@ export default function ProjectCard({
         type="button"
         aria-label={`View details for ${project.title}`}
         onClick={onSelect}
-        className="absolute inset-0 z-1 cursor-pointer border-none bg-transparent p-0"
+        className="absolute inset-0 z-1 cursor-pointer border-none bg-transparent p-0 focus-visible:[outline-offset:-3px]"
       />
       <div className="relative project-cover w-full shrink-0 overflow-hidden">
         <div className="absolute inset-0">

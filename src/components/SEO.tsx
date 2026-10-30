@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { projects } from "../data/projects";
 import { PROJECTS_PATH } from "../lib/router";
@@ -23,10 +24,14 @@ export default function SEO({ path }: { path: string }) {
   const url = new URL(page.path, baseUrl).href;
   const ogImage = new URL("og-image.png", baseUrl).href;
 
+  useEffect(() => {
+    document.title = title;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", description);
+  }, [title, description]);
+
   return (
     <Helmet>
-      <title>{title}</title>
-      <meta name="description" content={description} />
       <link rel="canonical" href={url} />
 
       <meta property="og:type" content="website" />
