@@ -11,6 +11,12 @@
         <meta name="theme-color" content="#000000" />
         <script>
             (function () {
+                document.documentElement.classList.add("js");
+                setTimeout(function () {
+                    var app = document.getElementById("root");
+                    if (app) app.removeAttribute("data-prerendered");
+                }, 3000);
+
                 var stored = null;
                 try {
                     stored = localStorage.getItem("portfolio-theme");

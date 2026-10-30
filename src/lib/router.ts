@@ -5,6 +5,16 @@ export const PROJECTS_PATH = "/projects";
 
 const NAVIGATE_EVENT = "app:navigate";
 
+/**
+ * Set by the build-time prerender before each render, so `usePath` resolves the
+ * route being prerendered instead of always reporting the home page.
+ */
+let serverPath: string | null = null;
+
+export function setServerPath(path: string | null) {
+  serverPath = path;
+}
+
 export function normalizePath(pathname: string): string {
   const trimmed = pathname.replace(/\/+$/, "");
   return trimmed === "" ? "/" : trimmed;
@@ -23,7 +33,7 @@ export function usePath(): string {
   return useSyncExternalStore(
     subscribe,
     () => normalizePath(window.location.pathname),
-    () => "/",
+    () => serverPath ?? "/",
   );
 }
 

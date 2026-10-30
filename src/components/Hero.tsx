@@ -3,6 +3,7 @@ import { useTheme } from "../context/useTheme";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { duration, ease, offset } from "../constants";
 import { scrollToId } from "../lib/scroll";
+import { IS_SERVER } from "../lib/env";
 
 const heroButtonBase =
   "flex cursor-pointer items-center gap-2 rounded-pill border border-accent px-8 py-4 font-sans text-sm font-semibold tracking-[0.05em] ns:px-6 ns:py-3";
@@ -34,12 +35,12 @@ export default function Hero() {
       <motion.div
         className="relative z-2 w-full max-w-250"
         style={{ y }}
-        initial={{ opacity: 0 }}
+        initial={IS_SERVER ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: duration.slow }}
       >
         <motion.div
-          initial={{ opacity: 0, x: -60 }}
+          initial={IS_SERVER ? false : { opacity: 0, x: -60 }}
           animate={visible ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: duration.slow, delay: 0.2 }}
           className="mb-8"
@@ -56,7 +57,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: offset.yLg }}
+          initial={IS_SERVER ? false : { opacity: 0, y: offset.yLg }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: duration.slow, delay: 0.35, ease }}
           className="mb-4 overflow-hidden whitespace-nowrap font-serif text-5xl font-bold leading-[0.92] tracking-[-0.03em] text-text ns:text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
@@ -65,14 +66,14 @@ export default function Hero() {
         </motion.h1>
 
         <motion.div
-          initial={{ scaleX: 0 }}
+          initial={IS_SERVER ? false : { scaleX: 0 }}
           animate={visible ? { scaleX: 1 } : {}}
           transition={{ duration: duration.slow, delay: 0.5 }}
           className="mb-8 h-1 w-20 origin-left rounded-bar bg-accent"
         />
 
         <motion.p
-          initial={{ opacity: 0, y: offset.y }}
+          initial={IS_SERVER ? false : { opacity: 0, y: offset.y }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: duration.slow, delay: 0.6 }}
           className="mb-12 max-w-140 font-sans text-md-plus font-normal leading-[1.55] text-text-sub ns:text-body sm:text-lg md:text-xl lg:text-2xl"
@@ -81,17 +82,21 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: offset.y }}
+          initial={IS_SERVER ? false : { opacity: 0, y: offset.y }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: duration.slow, delay: 0.75 }}
           className="flex flex-wrap gap-4"
         >
-          <motion.button
-            onClick={() => scrollToId("#work")}
+          <motion.a
+            href="#work"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToId("#work");
+            }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: duration.fast }}
-            className={`${heroButtonBase} bg-accent text-bg transition-[background-color,box-shadow] duration-200`}
+            className={`${heroButtonBase} bg-accent text-bg no-underline transition-[background-color,box-shadow] duration-200`}
           >
             View Work
             <motion.span
@@ -104,7 +109,7 @@ export default function Hero() {
             >
               →
             </motion.span>
-          </motion.button>
+          </motion.a>
 
           <motion.a
             href="/resume.pdf"

@@ -6,6 +6,7 @@ import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import { duration, offset, stagger } from "../constants";
 import type { SectionProps } from "../lib/sections";
+import { IS_SERVER } from "../lib/env";
 
 const socials = [
   {
@@ -42,7 +43,7 @@ export default function Contact({ sectionNumber, title }: SectionProps) {
       </SectionHeader>
 
       <motion.p
-        initial={{ opacity: 0, y: 30 }}
+        initial={IS_SERVER ? false : { opacity: 0, y: 30 }}
         animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 30 }}
         transition={{ duration: duration.slow, delay: 0.2 }}
         className="mb-14 font-sans text-lg font-extrabold leading-[1.6] text-text-sub"
@@ -51,7 +52,7 @@ export default function Contact({ sectionNumber, title }: SectionProps) {
       </motion.p>
 
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={IS_SERVER ? false : { opacity: 0, y: 30 }}
         animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 30 }}
         transition={{ duration: duration.slow, delay: 0.35 }}
         className="flex flex-wrap gap-4"
@@ -63,7 +64,7 @@ export default function Contact({ sectionNumber, title }: SectionProps) {
             {...(s.href.startsWith("mailto:")
               ? {}
               : { target: "_blank", rel: "noopener noreferrer" })}
-            initial={{ opacity: 0, y: offset.ySmall }}
+            initial={IS_SERVER ? false : { opacity: 0, y: offset.ySmall }}
             animate={{
               opacity: visible ? 1 : 0,
               y: visible ? 0 : offset.ySmall,
@@ -82,7 +83,7 @@ export default function Contact({ sectionNumber, title }: SectionProps) {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={IS_SERVER ? false : { opacity: 0 }}
         animate={{ opacity: visible ? 0.5 : 0 }}
         transition={{ duration: duration.slow, delay: 0.6 }}
         className="mt-25 flex flex-wrap justify-end gap-4 pt-8"

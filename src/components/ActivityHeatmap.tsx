@@ -13,6 +13,7 @@ import { cn } from "../lib/cn";
 import type { SectionProps } from "../lib/sections";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
+import { IS_SERVER } from "../lib/env";
 
 const DAY_MS = 86_400_000;
 const TOTAL_DAYS = 365;
@@ -87,7 +88,7 @@ export default function ActivityHeatmap({
   const canvasRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
   const [tip, setTip] = useState<Tip | null>(null);
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(IS_SERVER ? 900 : 0);
 
   const days = useMemo(
     () => buildDays(new Map(githubActivity.map((day) => [day.date, day]))),
@@ -166,7 +167,7 @@ export default function ActivityHeatmap({
 
       <motion.div
         ref={contentRef}
-        initial={{ opacity: 0, y: offset.y }}
+        initial={IS_SERVER ? false : { opacity: 0, y: offset.y }}
         animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : offset.y }}
         transition={{ duration: duration.slow, ease }}
       >

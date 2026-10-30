@@ -8,6 +8,7 @@
     "dev": "vite",
     "prebuild": "node scripts/fetch-contributions.mjs",
     "build": "tsc -b && vite build",
+    "postbuild": "node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

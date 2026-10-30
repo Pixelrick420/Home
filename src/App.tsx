@@ -1,18 +1,41 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useLayoutEffect } from "react";
+import type { ComponentType } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import WaveBackground from "./components/Waves";
 import SEO from "./components/SEO";
-import { sections } from "./lib/sections";
+import { sections as defaultSections, type SectionItem } from "./lib/sections";
 import { PROJECTS_PATH, usePath, useRouterScroll } from "./lib/router";
 
-const AllProjects = lazy(() => import("./pages/AllProjects"));
+const LazyAllProjects = lazy(() => import("./pages/AllProjects"));
 
-function Layout() {
+export interface AppProps {
+  sections?: SectionItem[];
+  AllProjects?: ComponentType;
+}
+
+const useRevealAfterMount =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
+
+function Layout({
+  sections,
+  AllProjects,
+}: {
+  sections: SectionItem[];
+  AllProjects: ComponentType;
+}) {
   const path = usePath();
   useRouterScroll();
+
+  useRevealAfterMount(() => {
+    document.getElementById("root")?.removeAttribute("data-prerendered");
+
+    for (const tag of document.querySelectorAll("head [data-prerender]")) {
+      tag.remove();
+    }
+  });
 
   return (
     <div className="relative min-h-screen overflow-x-hidden scrollbar-none [ms-overflow-style:none]">
@@ -42,10 +65,13 @@ function Layout() {
   );
 }
 
-export default function App() {
+export default function App({
+  sections = defaultSections,
+  AllProjects = LazyAllProjects,
+}: AppProps = {}) {
   return (
     <ThemeProvider>
-      <Layout />
+      <Layout sections={sections} AllProjects={AllProjects} />
     </ThemeProvider>
   );
 }

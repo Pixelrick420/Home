@@ -11,6 +11,7 @@ import { useColumns } from "../hooks/useColumns";
 import { useScrollFade } from "../hooks/useScrollFade";
 import { handleLinkClick } from "../lib/router";
 import type { Project } from "../types";
+import { IS_SERVER } from "../lib/env";
 
 const HOME_WORK = "/#work";
 
@@ -57,10 +58,7 @@ export default function AllProjects() {
         Everything I've <span className="text-accent">Built</span>
       </SectionHeader>
 
-      <div
-        className="grid w-full min-w-0 gap-7"
-        style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
-      >
+      <div className="grid w-full min-w-0 grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p, i) => (
           <RevealCard
             key={p.id}
@@ -75,7 +73,7 @@ export default function AllProjects() {
 
       <motion.div
         ref={footerRef}
-        initial={{ opacity: 0, y: offset.ySmall }}
+        initial={IS_SERVER ? false : { opacity: 0, y: offset.ySmall }}
         animate={{
           opacity: footerVisible ? 1 : 0,
           y: footerVisible ? 0 : offset.ySmall,

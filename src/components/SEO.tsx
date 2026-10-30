@@ -1,28 +1,9 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { projects } from "../data/projects";
-import { PROJECTS_PATH } from "../lib/router";
-
-const baseUrl = "https://pixelrick.is-a.dev/";
-
-const home = {
-  title: "Hari Krishnan R | Portfolio",
-  description:
-    "Creative developer portfolio showcasing projects in web, algorithms, and interactive art.",
-  path: "/",
-};
-
-const projectsPage = {
-  title: "Projects | Hari Krishnan R",
-  description: `All ${projects.length} projects by Hari Krishnan R: compilers, systems programming, machine learning from scratch, and full-stack web and mobile apps.`,
-  path: PROJECTS_PATH,
-};
+import { pageMeta } from "../lib/seoMeta";
 
 export default function SEO({ path }: { path: string }) {
-  const page = path === PROJECTS_PATH ? projectsPage : home;
-  const { title, description } = page;
-  const url = new URL(page.path, baseUrl).href;
-  const ogImage = new URL("og-image.png", baseUrl).href;
+  const { title, description, url, ogImage } = pageMeta(path);
 
   useEffect(() => {
     document.title = title;

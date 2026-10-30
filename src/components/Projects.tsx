@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useScrollFade } from "../hooks/useScrollFade";
-import { useColumns } from "../hooks/useColumns";
 import { featuredProjects } from "../data/projects";
 import type { Project } from "../types";
 import ProjectCard from "./ProjectCard";
@@ -12,10 +11,10 @@ import { FaArrowRight } from "react-icons/fa";
 import { duration, offset } from "../constants";
 import { PROJECTS_PATH, handleLinkClick } from "../lib/router";
 import type { SectionProps } from "../lib/sections";
+import { IS_SERVER } from "../lib/env";
 
 export default function Projects({ sectionNumber, title }: SectionProps) {
   const [selected, setSelected] = useState<Project | null>(null);
-  const columns = useColumns();
 
   const [gridRef, gridVisible] = useScrollFade<HTMLDivElement>({
     threshold: 0.04,
@@ -29,11 +28,10 @@ export default function Projects({ sectionNumber, title }: SectionProps) {
 
       <motion.div
         ref={gridRef}
-        initial={{ opacity: 0 }}
+        initial={IS_SERVER ? false : { opacity: 0 }}
         animate={{ opacity: gridVisible ? 1 : 0 }}
         transition={{ duration: duration.medium }}
-        className="grid w-full min-w-0 gap-7"
-        style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
+        className="grid w-full min-w-0 grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3"
       >
         {featuredProjects.map((p, i) => (
           <ProjectCard
@@ -49,7 +47,7 @@ export default function Projects({ sectionNumber, title }: SectionProps) {
       <ProjectModal project={selected} onClose={() => setSelected(null)} />
 
       <motion.div
-        initial={{ opacity: 0, y: offset.ySmall }}
+        initial={IS_SERVER ? false : { opacity: 0, y: offset.ySmall }}
         animate={{
           opacity: gridVisible ? 1 : 0,
           y: gridVisible ? 0 : offset.ySmall,

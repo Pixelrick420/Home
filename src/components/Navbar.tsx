@@ -7,6 +7,7 @@ import { cn } from "../lib/cn";
 import { PROJECTS_PATH, handleLinkClick, navigate, usePath } from "../lib/router";
 import { scrollToId } from "../lib/scroll";
 import { sections } from "../lib/sections";
+import { IS_SERVER } from "../lib/env";
 
 const navLinks = sections.map(({ id }) => ({ label: id, href: `#${id}` }));
 
@@ -35,7 +36,7 @@ function ThemeToggle() {
       whileTap={{ scale: 0.9 }}
       title={label}
       aria-label={label}
-      className="flex size-9 cursor-pointer items-center justify-center border-none bg-transparent text-text transition-colors duration-200"
+      className="js-only flex size-9 cursor-pointer items-center justify-center border-none bg-transparent text-text transition-colors duration-200"
     >
       <ThemeIcon />
     </motion.button>
@@ -64,7 +65,7 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
+        initial={IS_SERVER ? false : { y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: duration.medium, ease }}
         className={cn(
@@ -90,11 +91,15 @@ export default function Navbar() {
 
         <div className="max-lg:hidden flex items-center gap-8">
           {navLinks.map((link) => (
-            <motion.button
+            <motion.a
               key={link.href}
-              onClick={() => go(link.href)}
+              href={onProjectsPage ? `/${link.href}` : link.href}
+              onClick={(e) => {
+                e.preventDefault();
+                go(link.href);
+              }}
               whileHover="hover"
-              className="relative cursor-pointer border-none bg-transparent p-0 py-1 font-sans text-sm font-medium uppercase tracking-[0.08em] text-text"
+              className="relative cursor-pointer border-none bg-transparent p-0 py-1 font-sans text-sm font-medium uppercase tracking-[0.08em] text-text no-underline"
             >
               {link.label}
               <motion.span
@@ -103,7 +108,7 @@ export default function Navbar() {
                 variants={{ hover: { scaleX: 1 } }}
                 transition={{ duration: duration.fast, ease }}
               />
-            </motion.button>
+            </motion.a>
           ))}
         </div>
 
@@ -114,7 +119,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Toggle menu"
-            className="hidden size-9 cursor-pointer items-center justify-center border-none bg-transparent text-text transition-colors duration-200 max-lg:flex"
+            className="js-only hidden size-9 cursor-pointer items-center justify-center border-none bg-transparent text-text transition-colors duration-200 max-lg:flex"
           >
             {menuOpen ? (
               <FaTimes

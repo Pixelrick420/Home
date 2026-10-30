@@ -4,6 +4,7 @@ import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import { duration, ease, stagger } from "../constants";
 import type { SectionProps } from "../lib/sections";
+import { IS_SERVER } from "../lib/env";
 
 const currently = [
   { label: "Studying", value: "B.Tech CSE @ GEC Thrissur" },
@@ -40,7 +41,7 @@ export default function About({ sectionNumber, title }: SectionProps) {
           <div className="absolute inset-y-0 left-0 w-2.5 bg-accent" />
 
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={IS_SERVER ? false : { opacity: 0, y: 50 }}
             animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
             transition={{ duration: duration.slow, delay: 0.15, ease }}
             className="flex w-full min-w-0 grow flex-col gap-3"
@@ -62,7 +63,7 @@ export default function About({ sectionNumber, title }: SectionProps) {
               {languages.map((lang, i) => (
                 <motion.span
                   key={lang}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={IS_SERVER ? false : { opacity: 0, scale: 0.8 }}
                   animate={{
                     opacity: visible ? 1 : 0,
                     scale: visible ? 1 : 0.8,
@@ -84,7 +85,7 @@ export default function About({ sectionNumber, title }: SectionProps) {
           <div className="absolute inset-y-0 left-0 w-2.5 bg-accent" />
 
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={IS_SERVER ? false : { opacity: 0, y: 50 }}
             animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 50 }}
             transition={{ duration: duration.slow, delay: 0.25, ease }}
             className="w-full min-w-0"
@@ -102,7 +103,7 @@ export default function About({ sectionNumber, title }: SectionProps) {
                 <motion.div
                   key={label}
                   className="flex w-full min-w-0 flex-col items-start gap-1 border-b border-border py-5"
-                  initial={{ opacity: 0, x: -30 }}
+                  initial={IS_SERVER ? false : { opacity: 0, x: -30 }}
                   animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : -30 }}
                   transition={{
                     duration: duration.medium,

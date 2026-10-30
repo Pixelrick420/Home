@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useScrollFade } from "../hooks/useScrollFade";
 import { duration, ease, offset } from "../constants";
+import { IS_SERVER } from "../lib/env";
 
 interface Props {
   sectionNumber?: number;
@@ -21,7 +22,7 @@ export default function SectionHeader({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: offset.y }}
+      initial={IS_SERVER ? false : { opacity: 0, y: offset.y }}
       animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : offset.y }}
       transition={{ duration: duration.slow, ease }}
       className="mb-16"

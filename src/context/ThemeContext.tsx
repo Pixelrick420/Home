@@ -3,6 +3,7 @@ import { ThemeContext, DEFAULT_MODE, type Mode } from "./useTheme";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<Mode>(() => {
+    if (typeof localStorage === "undefined") return DEFAULT_MODE;
     const saved = localStorage.getItem("portfolio-theme");
     if (saved === "dark" || saved === "light") return saved;
     return DEFAULT_MODE;

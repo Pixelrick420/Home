@@ -5,6 +5,7 @@ import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import { duration, ease, offset, stagger } from "../constants";
 import type { SectionProps } from "../lib/sections";
+import { IS_SERVER } from "../lib/env";
 
 export default function Skills({ sectionNumber, title }: SectionProps) {
   const [gridRef, gridVisible] = useScrollFade<HTMLDivElement>({
@@ -19,7 +20,7 @@ export default function Skills({ sectionNumber, title }: SectionProps) {
 
       <motion.div
         ref={gridRef}
-        initial={{ opacity: 0 }}
+        initial={IS_SERVER ? false : { opacity: 0 }}
         animate={{ opacity: gridVisible ? 1 : 0 }}
         transition={{ duration: duration.medium }}
         className="grid grid-cols-1 gap-5 xs:grid-cols-2 lg:grid-cols-3"
@@ -27,7 +28,7 @@ export default function Skills({ sectionNumber, title }: SectionProps) {
         {skills.map((group, i) => (
           <motion.div
             key={group.category}
-            initial={{ opacity: 0, y: offset.y }}
+            initial={IS_SERVER ? false : { opacity: 0, y: offset.y }}
             animate={{
               opacity: gridVisible ? 1 : 0,
               y: gridVisible ? 0 : offset.y,

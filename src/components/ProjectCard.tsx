@@ -3,6 +3,7 @@ import type { Project } from "../types";
 import { motion, useReducedMotion } from "framer-motion";
 import { duration, ease, offset, stagger } from "../constants";
 import { CoverArt } from "../projects";
+import { IS_SERVER } from "../lib/env";
 
 interface ProjectCardProps {
   project: Project;
@@ -24,7 +25,7 @@ export default function ProjectCard({
     <motion.article
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      initial={reduceMotion ? false : { opacity: 0, y: offset.y }}
+      initial={reduceMotion || IS_SERVER ? false : { opacity: 0, y: offset.y }}
       animate={{
         opacity: visible ? 1 : 0,
         y: visible ? 0 : offset.y,
@@ -41,7 +42,7 @@ export default function ProjectCard({
         type="button"
         aria-label={`View details for ${project.title}`}
         onClick={onSelect}
-        className="absolute inset-0 z-1 cursor-pointer border-none bg-transparent p-0 focus-visible:[outline-offset:-3px]"
+        className="js-only absolute inset-0 z-1 cursor-pointer border-none bg-transparent p-0 focus-visible:[outline-offset:-3px]"
       />
       <div className="relative project-cover w-full shrink-0 overflow-hidden">
         <div className="absolute inset-0">

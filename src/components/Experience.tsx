@@ -6,18 +6,20 @@ import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import { duration, offset, stagger } from "../constants";
 import type { SectionProps } from "../lib/sections";
+import { IS_SERVER } from "../lib/env";
 
 function ExperienceCard({ exp, i }: { exp: Experience; i: number }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, {
-    once: true,
-    margin: "-80px",
-  });
+  const isInView =
+    useInView(ref, {
+      once: true,
+      margin: "-80px",
+    }) || IS_SERVER;
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: offset.ySmall }}
+      initial={IS_SERVER ? false : { opacity: 0, y: offset.ySmall }}
       animate={
         isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: offset.ySmall }
       }

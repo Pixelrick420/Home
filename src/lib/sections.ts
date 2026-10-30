@@ -1,11 +1,17 @@
-import { lazy } from "react";
+import { lazy, type ComponentType } from "react";
 
 export type SectionProps = {
   sectionNumber: number;
   title: string;
 };
 
-export const sections = [
+export type SectionItem = {
+  id: string;
+  title: string;
+  Component: ComponentType<SectionProps>;
+};
+
+export const sections: SectionItem[] = [
   { id: "work", title: "Work", Component: lazy(() => import("../components/Projects")) },
   { id: "experience", title: "Experience", Component: lazy(() => import("../components/Experience")) },
   { id: "activity", title: "Activity", Component: lazy(() => import("../components/ActivityHeatmap")) },
