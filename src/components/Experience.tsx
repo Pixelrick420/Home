@@ -78,7 +78,7 @@ export default function Experience({ sectionNumber, title }: SectionProps) {
   return (
     <Section id="experience">
       <SectionHeader sectionNumber={sectionNumber} title={title}>
-        Where I've <span className="text-accent">Worked</span>
+        Work <span className="text-accent">Experience</span>
       </SectionHeader>
 
       <div className="two-col-grid">

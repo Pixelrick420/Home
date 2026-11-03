@@ -162,7 +162,7 @@ export default function ActivityHeatmap({
   return (
     <Section id="activity">
       <SectionHeader sectionNumber={sectionNumber} title={title}>
-        What I'm <span className="text-accent">Up To</span>
+        My <span className="text-accent">Contributions</span>
       </SectionHeader>
 
       <motion.div

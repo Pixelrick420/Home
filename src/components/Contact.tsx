@@ -38,7 +38,11 @@ export default function Contact({ sectionNumber, title }: SectionProps) {
 
   return (
     <Section id="contact" innerRef={contentRef}>
-      <SectionHeader sectionNumber={sectionNumber} title={title} threshold={0.08}>
+      <SectionHeader
+        sectionNumber={sectionNumber}
+        title={title}
+        threshold={0.08}
+      >
         Let's build <span className="text-accent">stuff</span>
       </SectionHeader>
 
@@ -75,7 +79,7 @@ export default function Contact({ sectionNumber, title }: SectionProps) {
             }}
             aria-label={s.label}
             title={s.label}
-            className="flex items-center gap-3 rounded-card border border-border bg-bg px-7 py-4.5 text-text no-underline transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_8px_40px_color-mix(in_srgb,var(--accent)_12.5%,transparent)]"
+            className="flex items-center gap-3 rounded-card border border-border bg-bg px-5 py-4 text-text no-underline transition-[border-color,box-shadow] duration-300 hover:border-accent"
           >
             <s.icon size={20} aria-hidden="true" />
           </motion.a>
