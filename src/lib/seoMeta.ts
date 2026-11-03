@@ -4,7 +4,7 @@ import { PROJECTS_PATH } from "./router";
 const baseUrl = "https://pixelrick.is-a.dev/";
 
 export const home = {
-  title: "Pixelrick",
+  title: "Harikrishnan R",
   description:
     "Creative developer portfolio showcasing projects in web, algorithms, and interactive art.",
   path: "/",
