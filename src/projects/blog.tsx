@@ -26,14 +26,6 @@ export default function Blog({ p }: CoverProps) {
       <rect x="36" y="186" width="4" height="26" fill={p.fg} />
       <rect x="50" y="190" width="140" height="5" rx="2.5" fill={p.fg} />
       <rect x="50" y="203" width="96" height="5" rx="2.5" fill={p.fg} />
-
-      <g transform="translate(50 242)">
-        <path
-          d="M0 9C-15 -2 -12 -15 -5 -15C-2 -15 0 -12 0 -10C0 -12 2 -15 5 -15C12 -15 15 -2 0 9Z"
-          fill={p.fg}
-        />
-      </g>
-      <rect x="70" y="239" width="34" height="6" rx="3" fill={p.accent} />
     </svg>
   );
 }

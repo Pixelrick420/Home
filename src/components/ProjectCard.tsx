@@ -8,6 +8,7 @@ import { IS_SERVER } from "../lib/env";
 interface ProjectCardProps {
   project: Project;
   index: number;
+  paletteIndex?: number;
   visible: boolean;
   onSelect: () => void;
 }
@@ -15,6 +16,7 @@ interface ProjectCardProps {
 export default function ProjectCard({
   project,
   index,
+  paletteIndex,
   visible,
   onSelect,
 }: ProjectCardProps) {
@@ -51,7 +53,7 @@ export default function ProjectCard({
             transition={{ duration: 0.6, ease: [0.65, 0.05, 0, 1] }}
             className="h-full w-full"
           >
-            <CoverArt id={project.id} />
+            <CoverArt id={project.id} index={paletteIndex ?? index} />
           </motion.div>
 
           <motion.div

@@ -18,10 +18,12 @@ const HOME_WORK = "/#work";
 function RevealCard({
   project,
   index,
+  paletteIndex,
   onSelect,
 }: {
   project: Project;
   index: number;
+  paletteIndex?: number;
   onSelect: () => void;
 }) {
   const [ref, visible] = useScrollFade<HTMLDivElement>({ threshold: 0.05 });
@@ -30,6 +32,7 @@ function RevealCard({
       <ProjectCard
         project={project}
         index={index}
+        paletteIndex={paletteIndex}
         visible={visible}
         onSelect={onSelect}
       />
@@ -54,7 +57,7 @@ export default function AllProjects() {
         Back to home
       </a>
 
-      <SectionHeader title={`All Work`}>
+      <SectionHeader title={`06 - All Work`}>
         Everything I've <span className="text-accent">Built</span>
       </SectionHeader>
 
@@ -64,6 +67,7 @@ export default function AllProjects() {
             key={p.id}
             project={p}
             index={i % columns}
+            paletteIndex={i}
             onSelect={() => setSelected(p)}
           />
         ))}

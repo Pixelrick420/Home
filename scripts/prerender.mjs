@@ -120,13 +120,13 @@ function assertPage(page, { path, appHtml, meta, projectCount, sectionIds }) {
 
 async function main() {
   if (!existsSync(shellPath)) {
-    fail(`no ${shellPath} — run the build first`);
+    fail(`no ${shellPath} - run the build first`);
   }
 
   const shell = readFileSync(shellPath, "utf8");
   if (!shell.includes(ROOT_MARKER)) {
     fail(
-      `${shellPath} has no exact ${ROOT_MARKER} marker — was it already prerendered, or did index.html change?`,
+      `${shellPath} has no exact ${ROOT_MARKER} marker - was it already prerendered, or did index.html change?`,
     );
   }
 
@@ -143,7 +143,9 @@ async function main() {
     const { eagerSections } = await server.ssrLoadModule(
       "/src/lib/eagerSections.ts",
     );
-    const { projects, featuredProjects } = await server.ssrLoadModule("/src/data/projects.ts");
+    const { projects, featuredProjects } = await server.ssrLoadModule(
+      "/src/data/projects.ts",
+    );
 
     const key = (section) => `${section.id}:${section.title}`;
     const lazyIds = sections.map(key).join(",");
@@ -159,7 +161,8 @@ async function main() {
     for (const [path, meta] of Object.entries(mod.routeMeta)) {
       const appHtml = mod.renderRoute(path);
       const detailsHtml = mod.renderStaticDetails(path);
-      const projectCount = path === "/" ? featuredProjects.length : projects.length;
+      const projectCount =
+        path === "/" ? featuredProjects.length : projects.length;
       const page = buildPage({ shell, appHtml, detailsHtml, meta });
       const hidden = assertPage(page, {
         path,

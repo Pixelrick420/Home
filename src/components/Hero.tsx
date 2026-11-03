@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { useTheme } from "../context/useTheme";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { duration, ease, offset } from "../constants";
 import { scrollToId } from "../lib/scroll";
@@ -9,7 +8,6 @@ const heroButtonBase =
   "flex cursor-pointer items-center gap-2 rounded-pill border border-accent px-8 py-4 font-sans text-sm font-semibold tracking-[0.05em] ns:px-6 ns:py-3";
 
 export default function Hero() {
-  const { mode } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -39,23 +37,6 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ duration: duration.slow }}
       >
-        <motion.div
-          initial={IS_SERVER ? false : { opacity: 0, x: -60 }}
-          animate={visible ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: duration.slow, delay: 0.2 }}
-          className="mb-8"
-        >
-          <span
-            className="inline-block max-w-full overflow-hidden whitespace-nowrap rounded-pill px-2.5 py-0.5 font-sans text-meta font-black uppercase tracking-[0.2em] text-accent text-ellipsis ns:text-xs ns:tracking-wider sm:px-3.5 sm:py-1 md:px-5 md:text-sm"
-            style={{
-              backgroundColor:
-                mode === "light" ? "var(--bg-alt)" : "var(--bg-card)",
-            }}
-          >
-            CS Undergrad · Programmer · Pixelrick
-          </span>
-        </motion.div>
-
         <motion.h1
           initial={IS_SERVER ? false : { opacity: 0, y: offset.yLg }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
@@ -76,9 +57,9 @@ export default function Hero() {
           initial={IS_SERVER ? false : { opacity: 0, y: offset.y }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: duration.slow, delay: 0.6 }}
-          className="mb-12 max-w-140 font-sans text-md-plus font-normal leading-[1.55] text-text-sub ns:text-body sm:text-lg md:text-xl lg:text-2xl"
+          className="mb-12 max-w-140 font-sans text-md-plus font-semibold leading-[1.55] text-text-sub ns:text-body sm:text-lg md:text-xl lg:text-2xl"
         >
-          Building things from the ground up.
+          Full Stack Developer based in Kerala, India.
         </motion.p>
 
         <motion.div

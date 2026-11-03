@@ -1,10 +1,6 @@
 import { projects } from "../data/projects";
 import { PROJECTS_PATH } from "./router";
 
-/**
- * Per-route page metadata. Kept out of the component file so the build-time
- * prerender can read the same values the app renders, without importing JSX.
- */
 const baseUrl = "https://pixelrick.is-a.dev/";
 
 export const home = {

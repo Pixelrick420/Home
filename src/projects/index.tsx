@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { projectPalettes } from "../theme";
+import { getPaletteByIndex } from "../theme";
 import type { CoverPalette, CoverProps } from "./types";
 import Fractal from "./fractal";
 import Ascii from "./ascii";
@@ -11,10 +11,8 @@ import Papyrus from "./papyrus";
 import Mesh from "./mesh";
 import Asteroids from "./asteroids";
 import Tetris from "./tetris";
-import GameOfLife from "./gameoflife";
 import BelowCLevel from "./below-c-level";
 import Shell from "./shell";
-import Leaderboard from "./leaderboard";
 import HandwrittenDigits from "./handwritten-digits";
 import CharGPT from "./chargpt";
 import Gravity from "./gravity";
@@ -35,10 +33,8 @@ const covers: Record<string, ComponentType<CoverProps>> = {
   mesh: Mesh,
   asteroids: Asteroids,
   tetris: Tetris,
-  gameoflife: GameOfLife,
   "below-c-level": BelowCLevel,
   shell: Shell,
-  leaderboard: Leaderboard,
   "handwritten-digits": HandwrittenDigits,
   chargpt: CharGPT,
   gravity: Gravity,
@@ -55,13 +51,15 @@ const fallbackPalette: CoverPalette = {
   accent: "#C2410C",
 };
 
-export function CoverArt({ id }: { id: string }) {
+export function CoverArt({ id, index }: { id: string; index?: number }) {
   const Cover = covers[id];
   if (!Cover) return null;
 
+  const palette = index !== undefined ? getPaletteByIndex(index) : fallbackPalette;
+
   return (
     <div className="h-full w-full" aria-hidden="true">
-      <Cover p={projectPalettes[id] ?? fallbackPalette} />
+      <Cover p={palette} />
     </div>
   );
 }

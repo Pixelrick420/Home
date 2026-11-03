@@ -155,18 +155,18 @@ export const projects: Project[] = [
       "It is written in C++23 on SDL3 and SDL3_ttf, split into app, drawing, and I/O modules and built with Make. A GitHub Actions workflow produces a static binary that runs on Linux systems without SDL3 installed.",
   },
   {
-    id: "asteroids",
-    title: "Asteroids",
+    id: "handwritten-digits",
+    title: "Handwritten Digits",
     description:
-      "The classic game of asteroids, running on my custom 2d graphics engine.",
-    tags: ["C++", "2d graphics"],
-    github: "https://github.com/Pixelrick420/Asteroids",
-    year: "2024",
-    what: "Asteroids is the classic arcade game, rebuilt from scratch. You fly a ship, rotate and thrust, and shoot asteroids that split into smaller ones as you destroy them.",
+      "Handwritten digit recognition using a neural network built from scratch with NumPy.",
+    tags: ["Python", "NumPy", "Neural Networks", "MNIST"],
+    github: "https://github.com/Pixelrick420/Handwritten-Digits",
+    year: "2025",
+    what: "Handwritten Digits implements a fully connected neural network trained on the MNIST dataset (60,000 training images, 10,000 test images) entirely from scratch using NumPy - no deep learning frameworks. The network has 784 input neurons, two hidden layers (1024 and 256 neurons with ReLU), and a 10-neuron softmax output. Training uses mini-batch gradient descent with momentum, decaying learning rate, and L2 regularization. A Tkinter GUI allows real-time digit drawing and prediction using the saved model parameters (~98.1% test accuracy).",
     problem:
-      "Implementing the game taught me a lot about real-time graphics and game loops. I also learnt a lot of cool maths.",
+      "Frameworks obscure the mathematics of how neural networks actually learn. This project implements every forward and backward pass by hand - from ReLU and softmax activations to cross-entropy loss and backpropagation gradients - so nothing is left to autograd.",
     stack:
-      "It is written in C++ using the SDL2 library for graphics and input, on a custom-built 2D engine with transformation matrices for movement and collision detection to end runs.",
+      "Written in Python with NumPy only. SciPy is used for image preprocessing (center of mass, denoising, normalization) and Tkinter for the drawing GUI. Model weights are saved as an .npz file for the GUI to load.",
   },
   {
     id: "shell",
@@ -196,6 +196,20 @@ export const projects: Project[] = [
     demo: "https://marketplace.visualstudio.com/items?itemName=Theerttha.below-c-level",
   },
   {
+    id: "asteroids",
+    title: "Asteroids",
+    description:
+      "The classic game of asteroids, running on my custom 2d graphics engine.",
+    tags: ["C++", "2d graphics"],
+    github: "https://github.com/Pixelrick420/Asteroids",
+    year: "2024",
+    what: "Asteroids is the classic arcade game, rebuilt from scratch. You fly a ship, rotate and thrust, and shoot asteroids that split into smaller ones as you destroy them.",
+    problem:
+      "Implementing the game taught me a lot about real-time graphics and game loops. I also learnt a lot of cool maths.",
+    stack:
+      "It is written in C++ using the SDL2 library for graphics and input, on a custom-built 2D engine with transformation matrices for movement and collision detection to end runs.",
+  },
+  {
     id: "masm",
     title: "MASM",
     description:
@@ -208,6 +222,34 @@ export const projects: Project[] = [
       "Trainer kits work with fixed memory addresses rather than labels and variable names, so MASM programs need every symbol resolved before they can be entered. The converter automates that translation.",
     stack:
       "The converter is written in Python and works in two passes. The first builds a symbol table with data at 0800h and code at 0300h, and the second resolves every label and variable to an absolute address, calculating instruction sizes along the way. Builds are automated with a batch script around MASM and LINK.",
+  },
+  {
+    id: "sort",
+    title: "Sort",
+    description: "Visualizations of different sorting algorithms.",
+    tags: ["JavaScript", "HTML", "CSS", "Algorithms"],
+    github: "https://github.com/Pixelrick420/Sort",
+    year: "2024",
+    what: "Sort is an interactive web visualization of 8 sorting algorithms: Bubble Sort, Insertion Sort, Quick Sort, Selection Sort, Bogo Sort, Gnome Sort, Shaker Sort, and Merge Sort. Users can select an algorithm, adjust the array size, and watch the sorting process step by step with animated bar charts. The visualizations run entirely in the browser with vanilla JavaScript, HTML, and CSS.",
+    problem:
+      "Sorting algorithms are often taught abstractly with pseudocode, making it hard to develop intuition for how they actually behave on real data. This tool makes the mechanics visible - comparisons, swaps, recursion, and partitioning - so learners can see the differences in performance and approach.",
+    stack:
+      "Built with vanilla JavaScript (ES6 modules), HTML, and CSS. Uses Fira Code for monospace display. Deployed to GitHub Pages with PostHog for analytics. No frameworks or build tools required.",
+    demo: "https://pixelrick420.github.io/Sort/",
+  },
+  {
+    id: "virtualkeys",
+    title: "VirtualKeys",
+    description:
+      "An on-screen keyboard with a built-in text editor for KDE Plasma.",
+    tags: ["Python", "PyQt5", "Linux"],
+    github: "https://github.com/Pixelrick420/VirtualKeys",
+    year: "2025",
+    what: "VirtualKeys is an on-screen keyboard for KDE Plasma on Kubuntu. It has a full QWERTY layout with working shift states and symbols, and a built-in text editor with copy, paste, and clear.",
+    problem:
+      "A setup without a physical keyboard needs one that stays out of the way and fits the screen. VirtualKeys sizes itself from the screen resolution and keeps focus handling clean between the keyboard and the editor.",
+    stack:
+      "It is written in Python with PyQt5, using signals and slots for input handling and a stylesheet for the dark theme. A setup script installs the dependencies into a virtual environment.",
   },
   {
     id: "blog",
@@ -236,20 +278,6 @@ export const projects: Project[] = [
       "Console games prove that a good game does not need fancy graphics, just responsive input and a tight loop.",
     stack:
       "It is written in C++ using the WinAPI for console input and output. A rotation matrix handles tetromino rotation, and the game loop runs on a fixed time step.",
-  },
-  {
-    id: "virtualkeys",
-    title: "VirtualKeys",
-    description:
-      "An on-screen keyboard with a built-in text editor for KDE Plasma.",
-    tags: ["Python", "PyQt5", "Linux"],
-    github: "https://github.com/Pixelrick420/VirtualKeys",
-    year: "2025",
-    what: "VirtualKeys is an on-screen keyboard for KDE Plasma on Kubuntu. It has a full QWERTY layout with working shift states and symbols, and a built-in text editor with copy, paste, and clear.",
-    problem:
-      "A setup without a physical keyboard needs one that stays out of the way and fits the screen. VirtualKeys sizes itself from the screen resolution and keeps focus handling clean between the keyboard and the editor.",
-    stack:
-      "It is written in Python with PyQt5, using signals and slots for input handling and a stylesheet for the dark theme. A setup script installs the dependencies into a virtual environment.",
   },
 ];
 
