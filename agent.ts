@@ -31,13 +31,13 @@ const PORTFOLIO_SKILL_DIGEST =
 export const aiCatalog = {
   specVersion: "1.0",
   host: {
-    displayName: "Hari Krishnan R",
+    displayName: "Harikrishnan R",
     identifier: "did:web:pixelrick.is-a.dev",
   },
   entries: [
     {
       identifier: "urn:air:pixelrick.is-a.dev:page:homepage",
-      displayName: "Hari Krishnan R - Portfolio Homepage",
+      displayName: "Harikrishnan R - Portfolio Homepage",
       type: "text/html",
       url: "https://pixelrick.is-a.dev/",
       representativeQueries: [
@@ -48,7 +48,7 @@ export const aiCatalog = {
     },
     {
       identifier: "urn:air:pixelrick.is-a.dev:resume:pdf",
-      displayName: "Hari Krishnan R - Resume (PDF)",
+      displayName: "Harikrishnan R - Resume (PDF)",
       type: "application/pdf",
       url: "https://pixelrick.is-a.dev/resume.pdf",
       representativeQueries: [
@@ -89,7 +89,7 @@ export const agentSkillsIndex = {
       name: "portfolio-overview",
       type: "skill-md",
       description:
-        "Guide for AI agents to navigate, summarize, and extract information from Hari Krishnan R's developer portfolio at pixelrick.is-a.dev - projects, experience, skills, and contact details.",
+        "Guide for AI agents to navigate, summarize, and extract information from Harikrishnan R's developer portfolio at pixelrick.is-a.dev - projects, experience, skills, and contact details.",
       url: "https://pixelrick.is-a.dev/.well-known/agent-skills/portfolio-overview/SKILL.md",
       digest: PORTFOLIO_SKILL_DIGEST,
     },
@@ -154,7 +154,7 @@ function projectsMarkdown(): string {
 
 export function renderMarkdownHome(): string {
   return [
-    "# Hari Krishnan R | Portfolio",
+    "# Harikrishnan R | Portfolio",
     "",
     "Creative developer portfolio showcasing projects in web, algorithms, and interactive art.",
     "",

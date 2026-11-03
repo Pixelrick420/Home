@@ -48,15 +48,6 @@ export default function AllProjects() {
 
   return (
     <Section id="all-projects">
-      <a
-        href={HOME_WORK}
-        onClick={(e) => handleLinkClick(e, HOME_WORK)}
-        className="mb-10 inline-flex items-center gap-2.5 font-sans text-sm font-medium uppercase tracking-[0.08em] text-text no-underline"
-      >
-        <FaArrowLeft size={12} aria-hidden="true" />
-        Back to home
-      </a>
-
       <SectionHeader title={`06 - All Work`}>
         Everything I've <span className="text-accent">Built</span>
       </SectionHeader>

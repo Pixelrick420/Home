@@ -16,19 +16,17 @@ export const projects: Project[] = [
     demo: "https://fractal-programming.vercel.app/demo",
   },
   {
-    id: "gravity",
-    title: "Gravity",
-    description:
-      "An N-body gravity sandbox with a Rust and WebAssembly engine and a WebGL2 renderer.",
-    tags: ["Rust", "WebAssembly", "WebGL2"],
-    github: "https://github.com/Pixelrick420/Gravity",
+    id: "papyrus",
+    title: "Papyrus",
+    description: "An offline document viewer for Android.",
+    tags: ["Kotlin", "Jetpack Compose", "Android"],
+    github: "https://github.com/Pixelrick420/Papyrus",
     year: "2026",
-    what: "Gravity is an N-body sandbox that simulates up to 2,000 particles pulling on each other in real time. You pick a starting layout, such as a spiral galaxy, two clusters, or a galaxy crash, and watch it evolve while adjusting particle count, size, and speed.",
+    what: "Papyrus is a document viewer for Android that opens PDFs, Markdown, plain text, code, and Office files, indexes them in a local library, and renders everything entirely on-device.",
     problem:
-      "Summing the pull between every pair of particles gets expensive very quickly. Gravity uses the Fast Multipole Method, which approximates the pull of distant groups of particles instead of computing every pair.",
+      "Most document viewers depend on the network or upload your files somewhere. Papyrus declares no permissions at all, so nothing ever leaves the phone.",
     stack:
-      "The physics engine is written in Rust as a quadtree-based FMM with unit tests, and compiled to WebAssembly. A web worker runs the engine and draws the particles with WebGL2, while the controls use Svelte 5 and Tailwind CSS 4. Every push to main runs the tests and deploys to GitHub Pages.",
-    demo: "https://pixelrick420.github.io/Gravity",
+      "It is written in Kotlin with Jetpack Compose, using Room for the library index, PdfRenderer for PDFs, and its own tokenizer for syntax highlighting. Documents open through the Storage Access Framework.",
   },
   {
     id: "chatsocket",
@@ -58,17 +56,19 @@ export const projects: Project[] = [
       "It is written in Python with NumPy only. Training uses AdamW with warmup, cosine decay, and gradient clipping, and reaches a validation loss of about 1.46. A second pass warm-starts from the baseline and widens the context from 64 to 128 tokens.",
   },
   {
-    id: "papyrus",
-    title: "Papyrus",
-    description: "An offline document viewer for Android.",
-    tags: ["Kotlin", "Jetpack Compose", "Android"],
-    github: "https://github.com/Pixelrick420/Papyrus",
+    id: "gravity",
+    title: "Gravity",
+    description:
+      "An N-body gravity sandbox with a Rust and WebAssembly engine and a WebGL2 renderer.",
+    tags: ["Rust", "WebAssembly", "WebGL2"],
+    github: "https://github.com/Pixelrick420/Gravity",
     year: "2026",
-    what: "Papyrus is a document viewer for Android that opens PDFs, Markdown, plain text, code, and Office files, indexes them in a local library, and renders everything entirely on-device.",
+    what: "Gravity is an N-body sandbox that simulates up to 2,000 particles pulling on each other in real time. You pick a starting layout, such as a spiral galaxy, two clusters, or a galaxy crash, and watch it evolve while adjusting particle count, size, and speed.",
     problem:
-      "Most document viewers depend on the network or upload your files somewhere. Papyrus declares no permissions at all, so nothing ever leaves the phone.",
+      "Summing the pull between every pair of particles gets expensive very quickly. Gravity uses the Fast Multipole Method, which approximates the pull of distant groups of particles instead of computing every pair.",
     stack:
-      "It is written in Kotlin with Jetpack Compose, using Room for the library index, PdfRenderer for PDFs, and its own tokenizer for syntax highlighting. Documents open through the Storage Access Framework.",
+      "The physics engine is written in Rust as a quadtree-based FMM with unit tests, and compiled to WebAssembly. A web worker runs the engine and draws the particles with WebGL2, while the controls use Svelte 5 and Tailwind CSS 4. Every push to main runs the tests and deploys to GitHub Pages.",
+    demo: "https://pixelrick420.github.io/Gravity",
   },
   {
     id: "automata",
@@ -158,15 +158,15 @@ export const projects: Project[] = [
     id: "handwritten-digits",
     title: "Handwritten Digits",
     description:
-      "Handwritten digit recognition using a neural network built from scratch with NumPy.",
-    tags: ["Python", "NumPy", "Neural Networks", "MNIST"],
+      "Neural net built from scratch for handwritten digit recognition on MNIST.",
+    tags: ["Python", "Neural Networks"],
     github: "https://github.com/Pixelrick420/Handwritten-Digits",
     year: "2025",
-    what: "Handwritten Digits implements a fully connected neural network trained on the MNIST dataset (60,000 training images, 10,000 test images) entirely from scratch using NumPy - no deep learning frameworks. The network has 784 input neurons, two hidden layers (1024 and 256 neurons with ReLU), and a 10-neuron softmax output. Training uses mini-batch gradient descent with momentum, decaying learning rate, and L2 regularization. A Tkinter GUI allows real-time digit drawing and prediction using the saved model parameters (~98.1% test accuracy).",
+    what: "Handwritten Digits is a neural network trained on the MNIST dataset to recognize handwritten digits. A small GUI lets you draw a digit and watch the model predict it in real time.",
     problem:
-      "Frameworks obscure the mathematics of how neural networks actually learn. This project implements every forward and backward pass by hand - from ReLU and softmax activations to cross-entropy loss and backpropagation gradients - so nothing is left to autograd.",
+      "Deep-learning frameworks hide how a neural network actually works. This project builds the whole model from scratch, so every step from training to prediction stays visible.",
     stack:
-      "Written in Python with NumPy only. SciPy is used for image preprocessing (center of mass, denoising, normalization) and Tkinter for the drawing GUI. Model weights are saved as an .npz file for the GUI to load.",
+      "It uses Python and NumPy for the network math, and Tkinter for the drawing interface. The trained model reaches about 98% accuracy on the test set.",
   },
   {
     id: "shell",
@@ -226,15 +226,16 @@ export const projects: Project[] = [
   {
     id: "sort",
     title: "Sort",
-    description: "Visualizations of different sorting algorithms.",
-    tags: ["JavaScript", "HTML", "CSS", "Algorithms"],
+    description:
+      "A sorting algorithm visualisation project. Built using plain Javscript",
+    tags: ["Algorithms", "Visualization", "JS"],
     github: "https://github.com/Pixelrick420/Sort",
-    year: "2024",
-    what: "Sort is an interactive web visualization of 8 sorting algorithms: Bubble Sort, Insertion Sort, Quick Sort, Selection Sort, Bogo Sort, Gnome Sort, Shaker Sort, and Merge Sort. Users can select an algorithm, adjust the array size, and watch the sorting process step by step with animated bar charts. The visualizations run entirely in the browser with vanilla JavaScript, HTML, and CSS.",
+    year: "2023",
+    what: "Sort is a visualizer for sorting algorithms, animating algorithms like bubble sort and merge sort so you can watch how they reorder data step by step.",
     problem:
-      "Sorting algorithms are often taught abstractly with pseudocode, making it hard to develop intuition for how they actually behave on real data. This tool makes the mechanics visible - comparisons, swaps, recursion, and partitioning - so learners can see the differences in performance and approach.",
+      "Sorting algorithms are abstract and easy to misread on paper. Watching each comparison and swap play out makes the difference between algorithms obvious.",
     stack:
-      "Built with vanilla JavaScript (ES6 modules), HTML, and CSS. Uses Fira Code for monospace display. Deployed to GitHub Pages with PostHog for analytics. No frameworks or build tools required.",
+      "It is built with plain JavaScript and runs in the browser. The live demo is hosted on GitHub Pages.",
     demo: "https://pixelrick420.github.io/Sort/",
   },
   {

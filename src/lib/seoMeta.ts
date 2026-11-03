@@ -4,15 +4,15 @@ import { PROJECTS_PATH } from "./router";
 const baseUrl = "https://pixelrick.is-a.dev/";
 
 export const home = {
-  title: "Hari Krishnan R | Portfolio",
+  title: "Pixelrick",
   description:
     "Creative developer portfolio showcasing projects in web, algorithms, and interactive art.",
   path: "/",
 };
 
 export const projectsPage = {
-  title: "Projects | Hari Krishnan R",
-  description: `All ${projects.length} projects by Hari Krishnan R: compilers, systems programming, machine learning from scratch, and full-stack web and mobile apps.`,
+  title: "Projects",
+  description: `All ${projects.length} projects by Harikrishnan R: compilers, systems programming, machine learning from scratch, and full-stack web and mobile apps.`,
   path: PROJECTS_PATH,
 };
 

@@ -1,11 +1,11 @@
 ---
 name: portfolio-overview
-description: Guide for AI agents to navigate, summarize, and extract information from Hari Krishnan R's developer portfolio at pixelrick.is-a.dev. Use when a user asks about this developer, their projects, experience, skills, or how to contact them.
+description: Guide for AI agents to navigate, summarize, and extract information from Harikrishnan R's developer portfolio at pixelrick.is-a.dev. Use when a user asks about this developer, their projects, experience, skills, or how to contact them.
 ---
 
 # Portfolio Overview
 
-This portfolio belongs to **Hari Krishnan R**, a Computer Science undergraduate
+This portfolio belongs to **Harikrishnan R**, a Computer Science undergraduate
 at Government Engineering College, Thrissur, based in Kerala, India.
 
 ## What is on this site

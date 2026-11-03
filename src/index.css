@@ -9,8 +9,8 @@
 @theme {
     --breakpoint-xs: 440px;
     --font-sans: "Space Grotesk", system-ui, sans-serif;
-    --font-serif: "Source Serif 4", Georgia, serif;
-    --font-mono: "JetBrains Mono", "Courier New", monospace;
+    --font-serif: "Literata", Georgia, serif;
+    --font-mono: "IBM Plex Mono", "Courier New", monospace;
     --text-xxs: 11px;
     --text-xs: 12px;
     --text-meta: 13px;
