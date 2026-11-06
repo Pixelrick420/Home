@@ -48,7 +48,7 @@ export default function AllProjects() {
 
   return (
     <Section id="all-projects">
-      <SectionHeader title={`06 - All Work`}>
+      <SectionHeader title={`06 - All Projects`}>
         Everything I've <span className="text-accent">Built</span>
       </SectionHeader>
 

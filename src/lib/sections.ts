@@ -14,7 +14,7 @@ export type SectionItem = {
 export const sections: SectionItem[] = [
   {
     id: "work",
-    title: "Work",
+    title: "Projects",
     Component: lazy(() => import("../components/Projects")),
   },
   {

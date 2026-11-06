@@ -8,7 +8,7 @@ import AllProjects from "../pages/AllProjects";
 import type { SectionItem } from "./sections";
 
 export const eagerSections: SectionItem[] = [
-  { id: "work", title: "Work", Component: Projects },
+  { id: "work", title: "Projects", Component: Projects },
   { id: "experience", title: "Experience", Component: Experience },
   { id: "activity", title: "Activity", Component: ActivityHeatmap },
   { id: "skills", title: "Skills", Component: Skills },

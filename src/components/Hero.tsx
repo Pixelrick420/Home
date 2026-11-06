@@ -79,7 +79,7 @@ export default function Hero() {
             transition={{ duration: duration.fast }}
             className={`${heroButtonBase} bg-accent text-bg no-underline transition-[background-color,box-shadow] duration-200`}
           >
-            View Work
+            Projects
             <motion.span
               animate={{ x: [0, 4, 0] }}
               transition={{
