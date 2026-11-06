@@ -129,13 +129,20 @@ function skillsMarkdown(): string {
 
 function experienceMarkdown(): string {
   const items = experiences
-    .map(
-      (e) =>
-        `### ${e.role} - ${e.company} (${e.type}, ${e.duration}, ${e.location})\n` +
-        `${e.description}\n` +
+    .map((e) => {
+      const end = e.endDate ?? (e.current ? "Present" : undefined);
+      const period = end ? `${e.startDate} - ${end}` : e.startDate;
+      const meta = [e.type, period, e.duration, e.location]
+        .filter(Boolean)
+        .join(", ");
+      return [
+        `### ${e.role} - ${e.company} (${meta})`,
+        e.description,
+        ...(e.highlights ?? []).map((h) => `- ${h}`),
         `Stack: ${e.stack.join(", ")}`,
-    )
-    .join("\n");
+      ].join("\n");
+    })
+    .join("\n\n");
   return ["## Experience", "", items, ""].join("\n");
 }
 

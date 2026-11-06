@@ -23,7 +23,7 @@ export default function Projects({ sectionNumber, title }: SectionProps) {
   return (
     <Section id="work">
       <SectionHeader sectionNumber={sectionNumber} title={title}>
-        My <span className="text-accent">Projects</span>
+        Things I've <span className="text-accent">Built</span>
       </SectionHeader>
 
       <motion.div
