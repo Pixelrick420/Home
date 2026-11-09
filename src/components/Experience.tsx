@@ -10,7 +10,7 @@ import { IS_SERVER } from "../lib/env";
 
 function CurrentRoleTag() {
   return (
-    <span className="inline-flex shrink-0 items-center gap-2 rounded-pill border border-accent bg-accent px-3 font-sans text-xxs font-semibold uppercase tracking-widest text-black">
+    <span className="inline-flex shrink-0 items-center gap-2 rounded-pill border border-accent bg-accent px-3 font-sans text-xxs font-semibold uppercase tracking-widest text-bg-alt">
       Current
     </span>
   );
